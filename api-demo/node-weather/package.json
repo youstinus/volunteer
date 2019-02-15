@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/bmorelli25/simple-nodejs-weather-app#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
-    "request": "^2.81.0"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
   }
 }
