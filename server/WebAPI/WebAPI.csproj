@@ -5,16 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
-    <Folder Include="Controllers\Interfaces\" />
     <Folder Include="Middleware\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\DTO\" />
-    <Folder Include="Configs\" />
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="Models\ViewModels\" />
-    <Folder Include="Services\Interfaces\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
