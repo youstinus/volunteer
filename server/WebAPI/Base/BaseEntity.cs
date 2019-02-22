@@ -2,7 +2,7 @@
 
 namespace WebAPI.Base
 {
-    public class BaseModel : IBaseModel
+    public abstract class BaseEntity : IBaseEntity
     {
         public int Id { get; set; }
     }

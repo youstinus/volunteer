@@ -18,13 +18,15 @@ namespace WebAPI.Configs
         public static IServiceCollection AddRepositoryDependencies(this IServiceCollection services)
         {
             return services
-                .AddScoped<ITestRepository, TestRepository>();
+                .AddScoped<ITestRepository, TestRepository>()
+                .AddScoped<ProjectsRepository>();
         }
         
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
         {
             return services
-                .AddScoped<ITestService, TestService>();
+                .AddScoped<ITestService, TestService>()
+                .AddScoped<ProjectsService>();
         }
     }
 }

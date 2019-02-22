@@ -2,7 +2,7 @@
 
 namespace WebAPI.Base
 {
-    public class BaseViewModel : IBaseViewModel
+    public abstract class BaseViewModel : IBaseViewModel
     {
         public int Id { get; set; }
     }

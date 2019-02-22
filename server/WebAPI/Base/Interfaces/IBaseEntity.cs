@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Base.Interfaces
 {
-    public interface IBaseModel
+    public interface IBaseEntity
     {
         int Id { get; set; }
     }

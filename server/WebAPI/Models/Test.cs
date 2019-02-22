@@ -2,7 +2,7 @@
 
 namespace WebAPI.Models
 {
-    public class Test : BaseModel
+    public class Test : BaseEntity
     {
     }
 }
