@@ -4,6 +4,6 @@ namespace WebAPI.Base
 {
     public abstract class BaseEntity : IBaseEntity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

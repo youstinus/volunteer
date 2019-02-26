@@ -9,11 +9,15 @@ namespace WebAPI.Models
     public class Organization : BaseEntity
     {
         public string Title { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string PictureUrl { get; set; }
+        public string Description { get; set; }
+        public string WebsiteUrl { get; set; }
+        public ICollection<string> PictureUrls { get; set; }
+        public User User { get; set; }
         public ICollection<Project> Projects { get; set; }
-        public Owner Owner { get; set; }
-        public int OwnerId { get; set; }
+        
+        public long? UserId { get; set; }
+        /*public Owner Owner { get; set; }
+
+        public int OwnerId { get; set; }*/
     }
 }
