@@ -11,5 +11,6 @@ namespace WebAPI.Base.Interfaces
         Task Update(long id, TView entityView);
         Task Patch(long id, TView entityView);
         Task Delete(long id);
+        bool ValidateViewModel(TView entity);
     }
 }

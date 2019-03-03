@@ -25,14 +25,12 @@ namespace WebAPI.Base
 
         public virtual async Task<ICollection<T>> GetAll()
         {
-            var items = await IncludeDependencies(ItemSet).ToArrayAsync();
-            return items;
+            return await IncludeDependencies(ItemSet).ToArrayAsync();
         }
 
         public virtual async Task<T> GetById(long id)
         {
-            var item = await IncludeDependencies(ItemSet).FirstOrDefaultAsync(x => x.Id == id);
-            return item;
+            return await IncludeDependencies(ItemSet).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public virtual async Task<T> Create(T entity)

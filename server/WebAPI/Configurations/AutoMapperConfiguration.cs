@@ -15,20 +15,7 @@ namespace WebAPI.Configurations
 
         protected AutoMapperConfiguration(string name) : base(name)
         {
-            //Participants
-            /*CreateMap<ParticipantDto, Participant>(MemberList.None);
-            CreateMap<Participant, ParticipantDto>(MemberList.Destination);*/
-            //Tournaments
-            CreateMap<Car, CarViewModel>(MemberList.None);
-            CreateMap<CarViewModel, Car>(MemberList.Destination);
-            //Teams
-            /*CreateMap<TeamDto, Team>(MemberList.None);
-            CreateMap<Team, TeamDto>(MemberList.Destination);
-            //Matches
-            CreateMap<MatchDto, Match>(MemberList.None);
-            CreateMap<Match, MatchDto>(MemberList.Destination)
-                .ForMember(dest => dest.MatchTeams, opt => opt.MapFrom(src => src.Teams.Select(x => x.Team)));*/
-
+            MapCar();
             MapOrganization();
             MapProject();
             MapPicture();
@@ -70,6 +57,12 @@ namespace WebAPI.Configurations
             CreateMap<Volunteer, VolunteerViewModel>(MemberList.None)
                 .ForMember(dest => dest.ProjectsIds, opt => opt.MapFrom(src => src.VolunteerProjects.Select(x => x.ProjectId)));
             CreateMap<VolunteerViewModel, Volunteer>(MemberList.Destination);
+        }
+
+        private void MapCar()
+        {
+            CreateMap<Car, CarViewModel>(MemberList.None);
+            CreateMap<CarViewModel, Car>(MemberList.Destination);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
 using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
@@ -15,17 +15,18 @@ namespace WebAPI.Services
         {
         }
 
-        public async Task<Project> GetById(int id)
+        public override bool ValidateViewModel(ProjectViewModel entity)
         {
-            var project = await _repository.GetById(id);
-            return project;
-        }
-
-        public async Task<Project> Create(Project item)
-        {
-            if (item == null) throw new ArgumentNullException(nameof(item));
-            var created = await _repository.Create(item);
-            return created;
+            return entity != null
+                   && entity.OrganizationId > 0
+                   && string.IsNullOrWhiteSpace(entity.Title)
+                   && string.IsNullOrWhiteSpace(entity.Description)
+                   && string.IsNullOrWhiteSpace(entity.Email)
+                   && Regex.IsMatch(entity.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase)
+                   && string.IsNullOrWhiteSpace(entity.Phone)
+                   && entity.Start > SqlDateTime.MinValue.Value
+                   && entity.End > SqlDateTime.MinValue.Value
+                   && entity.Start <= entity.End;
         }
     }
 }

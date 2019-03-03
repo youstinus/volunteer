@@ -12,5 +12,12 @@ namespace WebAPI.Services
         public OrganizationsService(IOrganizationsRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
+
+        public override bool ValidateViewModel(OrganizationViewModel entity)
+        {
+            return entity != null
+                && string.IsNullOrWhiteSpace(entity.Title)
+                && string.IsNullOrWhiteSpace(entity.Description);
+        }
     }
 }

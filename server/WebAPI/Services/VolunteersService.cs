@@ -12,5 +12,12 @@ namespace WebAPI.Services
         public VolunteersService(IVolunteersRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
+
+        public override bool ValidateViewModel(VolunteerViewModel entity)
+        {
+            return entity != null
+                   && string.IsNullOrWhiteSpace(entity.FirstName)
+                   && string.IsNullOrWhiteSpace(entity.LastName);
+        }
     }
 }

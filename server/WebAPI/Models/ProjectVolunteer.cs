@@ -1,6 +1,4 @@
-﻿using WebAPI.Base;
-
-namespace WebAPI.Models
+﻿namespace WebAPI.Models
 {
     public class ProjectVolunteer// : BaseEntity
     {

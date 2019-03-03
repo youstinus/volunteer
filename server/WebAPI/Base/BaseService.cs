@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using WebAPI.Base.Interfaces;
@@ -14,21 +15,25 @@ namespace WebAPI.Base
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<ICollection<TView>> GetAll()
+        public virtual async Task<ICollection<TView>> GetAll()
         {
             var entities = await _repository.GetAll();
             var mappedEntities = _mapper.Map<ICollection<TView>>(entities);
             return mappedEntities;
         }
 
-        public async Task<TView> GetById(long id)
+        public virtual async Task<TView> GetById(long id)
         {
             var entity = await _repository.GetById(id);
+
+            if(entity == null)
+                throw new InvalidOperationException($"Entity with id: {id} was not found");
+
             var mapped = _mapper.Map<TView>(entity);
             return mapped;
         }
 
-        public async Task<TView> Create(TView entityView)
+        public virtual async Task<TView> Create(TView entityView)
         {
             var entity = _mapper.Map<T>(entityView);
             var created = await _repository.Create(entity);
@@ -36,24 +41,29 @@ namespace WebAPI.Base
             return mappedCreated;
         }
         
-        public async Task Update(long id, TView entityView)
+        public virtual async Task Update(long id, TView entityView)
         {
             var entity = _mapper.Map<T>(entityView);
             entity.Id = id;
             await _repository.Update(entity);
         }
 
-        public async Task Patch(long id, TView entityView)
+        public virtual async Task Patch(long id, TView entityView)
         {
             var entity = _mapper.Map<T>(entityView);
             entity.Id = id;
             await _repository.Patch(entity);
         }
 
-        public async Task Delete(long id)
+        public virtual async Task Delete(long id)
         {
             var entity = await _repository.GetById(id);
             await _repository.Delete(entity);
+        }
+
+        public virtual bool ValidateViewModel(TView entity)
+        {
+            return entity != null;
         }
     }
 }

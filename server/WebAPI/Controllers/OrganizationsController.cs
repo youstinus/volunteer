@@ -1,5 +1,4 @@
 ﻿using WebAPI.Base;
-using WebAPI.Base.Interfaces;
 using WebAPI.Controllers.Interfaces;
 using WebAPI.Models;
 using WebAPI.Models.ViewModels;
