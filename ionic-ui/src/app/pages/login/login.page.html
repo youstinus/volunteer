@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Sign in page</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+  <ion-item lines="none">
+     <ion-label position="floating">Username</ion-label>
+     <ion-input placeholder="Enter your username"></ion-input>
+  </ion-item>
+
+  <ion-item lines="none">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input placeholder="Enter your password"></ion-input>
+
+  </ion-item>
+      <ion-button expand="block" fill="outline" shape="round" color="success" >
+        <ion-icon name="arrow-round-forward" slot="end"></ion-icon>
+        SING IN
+      </ion-button>
+
+  <ion-item lines="full"></ion-item>
+
+  <ion-item lines="none">
+      <ion-label>Other options</ion-label>
+      <ion-icon name="information-circle" slot="end"></ion-icon>
+  </ion-item>
+  
+  <ion-item lines="full">
+    <ion-button slot="start" color="dark">
+      <ion-icon name="arrow-round-forward" slot="end"></ion-icon>
+      Register
+    </ion-button >
+    <ion-button slot="end" color="dark">
+      <ion-icon name="help-circle" slot="end"></ion-icon>
+      Forgot password 
+    </ion-button>
+  </ion-item> 
 </ion-content>
