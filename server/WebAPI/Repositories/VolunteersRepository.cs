@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Base;
-using WebAPI.Configs;
+using WebAPI.Configurations;
 using WebAPI.Models;
+using WebAPI.Repositories.Interfaces;
 
 namespace WebAPI.Repositories
 {
-    public class VolunteersRepository : BaseRepository<Volunteer>
+    public class VolunteersRepository : BaseRepository<Volunteer>, IVolunteersRepository
     {
         protected override DbSet<Volunteer> ItemSet { get; }
         public VolunteersRepository(VolunteerDbContext context) : base(context)

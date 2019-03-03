@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebAPI.Base;
 
 namespace WebAPI.Models
@@ -15,9 +13,9 @@ namespace WebAPI.Models
         public string WebsiteUrl { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public ICollection<string> PictureUrls { get; set; }
         public Organization Organization { get; set; }
         public ICollection<ProjectVolunteer> ProjectVolunteers { get; set; }
+        public ICollection<Picture> Pictures { get; set; }
 
         public long OrganizationId { get; set; }
     }

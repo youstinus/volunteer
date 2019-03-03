@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Base.Interfaces;
-using WebAPI.Configs;
+using WebAPI.Configurations;
 
 namespace WebAPI.Base
 {
@@ -29,7 +29,7 @@ namespace WebAPI.Base
             return items;
         }
 
-        public virtual async Task<T> GetById(int id)
+        public virtual async Task<T> GetById(long id)
         {
             var item = await IncludeDependencies(ItemSet).FirstOrDefaultAsync(x => x.Id == id);
             return item;
@@ -42,18 +42,22 @@ namespace WebAPI.Base
             return entity;
         }
 
-        public virtual async Task<bool> Update(T entity)
+        public virtual async Task Update(T entity)
         {
-            ItemSet.Attach(entity);
-            var changes = await Context.SaveChangesAsync();
-            return changes > 0;
+            ItemSet.Update(entity);
+            await Context.SaveChangesAsync();
         }
 
-        public async Task<bool> Delete(T entity)
+        public virtual async Task Patch(T entity)
+        {
+            ItemSet.Attach(entity);
+            await Context.SaveChangesAsync();
+        }
+
+        public virtual async Task Delete(T entity)
         {
             ItemSet.Remove(entity);
-            var changes = await Context.SaveChangesAsync();
-            return changes > 0;
+            await Context.SaveChangesAsync();
         }
     }
 }

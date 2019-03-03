@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using WebAPI.Base;
 using WebAPI.Models;
-using WebAPI.Repositories;
+using WebAPI.Models.ViewModels;
+using WebAPI.Repositories.Interfaces;
+using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Services
 {
-    public class ProjectsService
+    public class ProjectsService : BaseService<Project, ProjectViewModel>, IProjectsService
     {
-        private readonly ProjectsRepository _repository;
-
-        public ProjectsService(ProjectsRepository repository)
+        public ProjectsService(IProjectsRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            _repository = repository;
         }
 
         public async Task<Project> GetById(int id)

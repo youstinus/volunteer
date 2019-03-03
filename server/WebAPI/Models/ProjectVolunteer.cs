@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using WebAPI.Base;
 
 namespace WebAPI.Models
 {
-    public class ProjectVolunteer
+    public class ProjectVolunteer// : BaseEntity
     {
         public Project Project { get; set; }
         public Volunteer Volunteer { get; set; }
