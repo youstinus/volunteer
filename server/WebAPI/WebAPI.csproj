@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Extentions\" />
-    <Folder Include="Middleware\" />
     <Folder Include="Utilities\Interfaces\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

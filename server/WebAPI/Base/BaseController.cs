@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base.Interfaces;
 
 namespace WebAPI.Base
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public abstract class BaseController<T, TView> : ControllerBase, IBaseController<T, TView> where T : IBaseEntity where TView : IBaseViewModel
+    public abstract class BaseController<T, TDto> : ControllerBase, IBaseController<T, TDto> where T : class, IBaseEntity where TDto : class, IBaseDto
     {
-        protected readonly IBaseService<T, TView> _service;
-        protected BaseController(IBaseService<T, TView> service)
+        protected readonly IBaseService<T, TDto> _service;
+
+        protected BaseController(IBaseService<T, TDto> service)
         {
             _service = service;
         }
         
         [HttpGet]
-        public virtual async Task<IActionResult> GetAll()
+        public virtual async Task<IActionResult> Get()
         {
             var entities = await _service.GetAll();
             return Ok(entities);
@@ -30,16 +34,16 @@ namespace WebAPI.Base
                 var entity = await _service.GetById(id);
                 return Ok(entity);
             }
-            catch (Exception e)
+            catch (InvalidOperationException e)
             {
-                return BadRequest(e.Message);
+                return NotFound(e.Message);
             }
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Create([FromBody] TView entity)
+        public virtual async Task<IActionResult> Post([FromBody] TDto entity)
         {
-            if (!ModelState.IsValid && !_service.ValidateViewModel(entity))
+            if (!ModelState.IsValid && !_service.ValidateDto(entity))
                 return BadRequest();
 
             try
@@ -48,16 +52,16 @@ namespace WebAPI.Base
                 var entityUri = CreateResourceUri(createdEntity.Id);
                 return Created(entityUri, createdEntity);
             }
-            catch (Exception e)
+            catch (ArgumentNullException e)
             {
                 return BadRequest(e.Message);
             }
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<IActionResult> Update([FromRoute] long id, [FromBody] TView entity)
+        public virtual async Task<IActionResult> Put([FromRoute] long id, [FromBody] TDto entity)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && !_service.ValidateDto(entity))
                 return BadRequest();
 
             try
@@ -65,21 +69,35 @@ namespace WebAPI.Base
                 await _service.Update(id, entity);
                 return NoContent();
             }
-            catch (Exception e)
+            catch (ArgumentNullException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
             }
         }
 
         [HttpPatch("{id}")]
-        public virtual async Task<IActionResult> Patch([FromRoute] long id, [FromBody] TView entity)
+        public virtual async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<TDto> patchDto)
         {
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest();
 
-            await _service.Patch(id, entity);
-            return NoContent();*/
-            return BadRequest("Patch is not working at this moment! Use PUT instead.");
+            try
+            {
+                await _service.Patch(id, patchDto);
+                return NoContent();
+            }
+            catch (ArgumentNullException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -90,9 +108,9 @@ namespace WebAPI.Base
                 await _service.Delete(id);
                 return NoContent();
             }
-            catch (Exception e)
+            catch (InvalidOperationException e)
             {
-                return BadRequest(e.Message);
+                return NotFound(e.Message);
             }
         }
 

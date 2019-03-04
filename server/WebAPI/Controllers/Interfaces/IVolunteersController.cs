@@ -1,10 +1,10 @@
 ﻿using WebAPI.Base.Interfaces;
 using WebAPI.Models;
-using WebAPI.Models.ViewModels;
+using WebAPI.Models.DTO;
 
 namespace WebAPI.Controllers.Interfaces
 {
-    public interface IVolunteersController : IBaseController<Volunteer, VolunteerViewModel>
+    public interface IVolunteersController : IBaseController<Volunteer, VolunteerDto>
     {
     }
 }

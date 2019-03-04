@@ -3,19 +3,22 @@ using System.Text.RegularExpressions;
 using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
-using WebAPI.Models.ViewModels;
+using WebAPI.Models.DTO;
 using WebAPI.Repositories.Interfaces;
 using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Services
 {
-    public class ProjectsService : BaseService<Project, ProjectViewModel>, IProjectsService
+    public class ProjectsService : BaseService<Project, ProjectDto>, IProjectsService
     {
-        public ProjectsService(IProjectsRepository repository, IMapper mapper) : base(repository, mapper)
+        public ProjectsService(
+            IProjectsRepository repository,
+            IMapper mapper,
+            ITimeService timeService) : base(repository, mapper, timeService)
         {
         }
 
-        public override bool ValidateViewModel(ProjectViewModel entity)
+        public override bool ValidateDto(ProjectDto entity)
         {
             return entity != null
                    && entity.OrganizationId > 0

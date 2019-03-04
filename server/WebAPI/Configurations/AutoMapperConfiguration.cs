@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using WebAPI.Models;
-using WebAPI.Models.ViewModels;
+using WebAPI.Models.DTO;
 using WebAPI.ViewModels;
 
 namespace WebAPI.Configurations
@@ -26,43 +26,43 @@ namespace WebAPI.Configurations
 
         private void MapOrganization()
         {
-            CreateMap<Organization, OrganizationViewModel>(MemberList.None)
+            CreateMap<Organization, OrganizationDto>(MemberList.None)
                 .ForMember(dest => dest.PicturesIds, opt => opt.MapFrom(src => src.Pictures.Select(x => x.Id)))
                 .ForMember(dest => dest.ProjectsIds, opt => opt.MapFrom(src => src.Projects.Select(x => x.Id)));
-            CreateMap<OrganizationViewModel, Organization>(MemberList.Destination);
+            CreateMap<OrganizationDto, Organization>(MemberList.Destination);
         }
 
         private void MapProject()
         {
-            CreateMap<Project, ProjectViewModel>(MemberList.None)
+            CreateMap<Project, ProjectDto>(MemberList.None)
                 .ForMember(dest => dest.PicturesIds, opt => opt.MapFrom(src => src.Pictures.Select(x => x.Id)))
                 .ForMember(dest => dest.VolunteersIds, opt => opt.MapFrom(src => src.ProjectVolunteers.Select(x => x.ProjectId)));
-            CreateMap<ProjectViewModel, Project>(MemberList.Destination);
+            CreateMap<ProjectDto, Project>(MemberList.Destination);
         }
 
         private void MapPicture()
         {
-            CreateMap<Picture, PictureViewModel>(MemberList.None);
-            CreateMap<PictureViewModel, Picture>(MemberList.Destination);
+            CreateMap<Picture, PictureDto>(MemberList.None);
+            CreateMap<PictureDto, Picture>(MemberList.Destination);
         }
 
         private void MapUser()
         {
-            CreateMap<User, UserViewModel>(MemberList.None);
-            CreateMap<UserViewModel, User>(MemberList.Destination);
+            CreateMap<User, UserDto>(MemberList.None);
+            CreateMap<UserDto, User>(MemberList.Destination);
         }
 
         private void MapVolunteer()
         {
-            CreateMap<Volunteer, VolunteerViewModel>(MemberList.None)
+            CreateMap<Volunteer, VolunteerDto>(MemberList.None)
                 .ForMember(dest => dest.ProjectsIds, opt => opt.MapFrom(src => src.VolunteerProjects.Select(x => x.ProjectId)));
-            CreateMap<VolunteerViewModel, Volunteer>(MemberList.Destination);
+            CreateMap<VolunteerDto, Volunteer>(MemberList.Destination);
         }
 
         private void MapCar()
         {
-            CreateMap<Car, CarViewModel>(MemberList.None);
-            CreateMap<CarViewModel, Car>(MemberList.Destination);
+            CreateMap<Car, CarDto>(MemberList.None);
+            CreateMap<CarDto, Car>(MemberList.Destination);
         }
     }
 }

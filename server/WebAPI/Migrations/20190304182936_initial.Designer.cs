@@ -10,8 +10,8 @@ using WebAPI.Configurations;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(VolunteerDbContext))]
-    [Migration("20190303142505_Initial")]
-    partial class Initial
+    [Migration("20190304182936_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,13 +111,13 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("LastName");
 
-                    b.Property<string>("Phone");
+                    b.Property<byte[]>("PasswordHash");
 
-                    b.Property<int>("Type");
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("Username");
 

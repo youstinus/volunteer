@@ -9,7 +9,7 @@ namespace WebAPI.Configurations
 {
     public static class DependencyConfigurations
     {
-        public static IServiceCollection AddDependencies(this IServiceCollection services)
+        public static IServiceCollection AddAllDependencies(this IServiceCollection services)
         {
             return services
                 .AddRepositoryDependencies()

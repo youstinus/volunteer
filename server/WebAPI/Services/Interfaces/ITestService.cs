@@ -1,10 +1,10 @@
 ﻿using WebAPI.Base.Interfaces;
 using WebAPI.Models;
-using WebAPI.Models.ViewModels;
+using WebAPI.Models.DTO;
 
 namespace WebAPI.Services.Interfaces
 {
-    public interface ITestService : IBaseService<Test, TestViewModel>
+    public interface ITestService : IBaseService<Test, TestDto>
     {
     }
 }

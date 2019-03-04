@@ -9,5 +9,9 @@ namespace WebAPI.Services
     public class TimeService : ITimeService
     {
         public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
+        public DateTime GetCurrentTime()
+        {
+            return DateTime.UtcNow;
+        }
     }
 }

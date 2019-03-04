@@ -1,19 +1,22 @@
 ﻿using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
-using WebAPI.Models.ViewModels;
+using WebAPI.Models.DTO;
 using WebAPI.Repositories.Interfaces;
 using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Services
 {
-    public class OrganizationsService : BaseService<Organization, OrganizationViewModel>, IOrganizationsService
+    public class OrganizationsService : BaseService<Organization, OrganizationDto>, IOrganizationsService
     {
-        public OrganizationsService(IOrganizationsRepository repository, IMapper mapper) : base(repository, mapper)
+        public OrganizationsService(
+            IOrganizationsRepository repository,
+            IMapper mapper,
+            ITimeService timeService) : base(repository, mapper, timeService)
         {
         }
 
-        public override bool ValidateViewModel(OrganizationViewModel entity)
+        public override bool ValidateDto(OrganizationDto entity)
         {
             return entity != null
                 && string.IsNullOrWhiteSpace(entity.Title)

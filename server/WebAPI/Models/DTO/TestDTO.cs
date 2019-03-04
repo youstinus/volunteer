@@ -1,6 +1,8 @@
-﻿namespace WebAPI.Models.DTO
+﻿using WebAPI.Base;
+
+namespace WebAPI.Models.DTO
 {
-    public class TestDto
+    public class TestDto : BaseDto
     {
     }
 }
