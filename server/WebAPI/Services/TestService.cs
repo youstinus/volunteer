@@ -7,7 +7,7 @@ using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Services
 {
-    public class TestService : BaseService<Test, TestDto1>, ITestService
+    public class TestService : BaseService<Test, TestDto>, ITestService
     {
         public TestService(ITestRepository repository,
             IMapper mapper,
