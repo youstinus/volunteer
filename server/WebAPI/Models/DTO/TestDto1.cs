@@ -2,7 +2,7 @@
 
 namespace WebAPI.Models.DTO
 {
-    public class TestDto : BaseDto
+    public class TestDto1 : BaseDto
     {
     }
 }

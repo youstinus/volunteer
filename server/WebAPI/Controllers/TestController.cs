@@ -18,17 +18,17 @@ namespace WebAPI.Controllers
             throw new System.NotImplementedException();
         }
 
-        public Task<IActionResult> Post(TestDto entityDto)
+        public Task<IActionResult> Post(TestDto1 entityDto)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IActionResult> Put(long id, TestDto entityDto)
+        public Task<IActionResult> Put(long id, TestDto1 entityDto)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IActionResult> Patch(long id, JsonPatchDocument<TestDto> patchDto)
+        public Task<IActionResult> Patch(long id, JsonPatchDocument<TestDto1> patchDto)
         {
             throw new System.NotImplementedException();
         }

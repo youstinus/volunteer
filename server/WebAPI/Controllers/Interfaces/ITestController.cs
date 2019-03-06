@@ -4,7 +4,7 @@ using WebAPI.Models.DTO;
 
 namespace WebAPI.Controllers.Interfaces
 {
-    public interface ITestController : IBaseController<Test, TestDto>
+    public interface ITestController : IBaseController<Test, TestDto1>
     {
     }
 }
