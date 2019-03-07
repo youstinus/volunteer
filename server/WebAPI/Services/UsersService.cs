@@ -32,27 +32,43 @@ namespace WebAPI.Services
         }
 
         // role based
-        public async Task<UserDto> Authenticate(string username, string password)
+        public async Task<UserDto> Authenticate(UserDto userGiven)
         {
-            var user = await _usersRepository.GetByCredentials(username, password); //_users.SingleOrDefault(x => x.Username == username && x.Password == password);
-            var userDto = _mapper.Map<UserDto>(user);
+            if (string.IsNullOrWhiteSpace(userGiven.Username) || string.IsNullOrWhiteSpace(userGiven.Password))
+                throw new InvalidOperationException($"Username or password wrongly typed");
+
+            var user = await _usersRepository.GetByUsername(userGiven.Username);
+
+            // check if username exists
+            if (user == null)
+                throw new InvalidOperationException($"User with username: {userGiven.Username} was not found");
+
+            // check if password is correct
+            if (!VerifyPasswordHash(userGiven.Password, user.PasswordHash, user.PasswordSalt))
+                throw new InvalidOperationException($"Incorrect password");
+
+            //var user = await _usersRepository.GetByCredentials(username, password); //_users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var userDto = CreateDto(user);
             // return null if user not found
             if (userDto == null)
-                return null;
+                throw new InvalidOperationException($"Mapping failed");
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var subject = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, userDto.Id.ToString()),
+                new Claim(ClaimTypes.Role, userDto.Role)
+            });
+            var sign = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, userDto.Id.ToString()),
-                    new Claim(ClaimTypes.Role, userDto.Role)
-                }),
+                Subject = subject,
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = sign
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             userDto.Token = tokenHandler.WriteToken(token);
 
@@ -61,72 +77,55 @@ namespace WebAPI.Services
 
             return userDto;
         }
-
-        // normal auth
-        public async Task<User> Authenticate2(string username, string password)
-        {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-                return null;
-
-            var user = await _usersRepository.GetByUsername(username);
-
-            // check if username exists
-            if (user == null)
-                return null;
-
-            // check if password is correct
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
-
-            // authentication successful
-            return user;
-        }
         
-        public async Task<User> Create(UserDto userDto, string password)
+        public override async Task<UserDto> Create(UserDto userDto)
         {
             // map dto to entity
-            var user = _mapper.Map<User>(userDto);
+            var user = CreatePoco(userDto);
 
             // validation
-            if (string.IsNullOrWhiteSpace(password))
-                throw new AppException("Password is required");
+            if (string.IsNullOrWhiteSpace(userDto.Password))
+                throw new ArgumentException("Password not entered");
 
             var userCheck = await _usersRepository.GetByUsername(user.Username);
             if (userCheck != null)
-                throw new AppException("Username \"" + user.Username + "\" is already taken");
+                throw new InvalidOperationException($"Username {user.Username} is already taken");
 
-            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
+            CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            
-            return await _repository.Create(user);
+            var created = await _repository.Create(user);
+            var createdDto = CreateDto(created);
+            createdDto.Password = null;
+            return createdDto;
         }
 
-        public async Task Update(User userParam, string password = null)
+        // is it possible to change username ?
+        public override async Task Update(long id, UserDto userDto)
         {
-            var user = await _repository.GetById(userParam.Id);
+            var user = await _repository.GetById(id);
 
             if (user == null)
-                throw new AppException("User not found");
+                throw new InvalidOperationException($"User with Id {id} was not found");
 
-            if (userParam.Username != user.Username)
+            if (userDto.Username != user.Username)
             {
                 // username has changed so check if the new username is already taken
-                var userCheck = await _usersRepository.GetByUsername(userParam.Username);
+                var userCheck = await _usersRepository.GetByUsername(userDto.Username);
                 if (userCheck != null)
-                    throw new AppException("Username " + userParam.Username + " is already taken");
+                    throw new InvalidOperationException("Username " + userDto.Username + " is already taken");
             }
 
             // update user properties
-            user.FirstName = userParam.FirstName;
-            user.LastName = userParam.LastName;
-            user.Username = userParam.Username;
+            /*user.FirstName = userParam.FirstName;
+            user.LastName = userParam.LastName;*/
+            user.Username = userDto.Username;
 
             // update password if it was entered
-            if (!string.IsNullOrWhiteSpace(password))
+            if (!string.IsNullOrWhiteSpace(userDto.Password))
             {
-                CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
+                CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
@@ -135,23 +134,14 @@ namespace WebAPI.Services
             await _repository.Update(user);
         }
 
-        public override Task<UserDto> Create(UserDto entityDto)
-        {
-            throw new InvalidOperationException("Not usable");
-        }
-
-        public override Task<bool> Update(long id, UserDto entityDto)
-        {
-            throw new InvalidOperationException("Not usable");
-        }
-
-
         #region Private helper methods
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            if (password == null) throw new ArgumentNullException(nameof(password));
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
+            if (password == null)
+                throw new InvalidOperationException(nameof(password));
+            if (string.IsNullOrWhiteSpace(password))
+                throw new InvalidOperationException("Value cannot be empty or whitespace only string.");
 
             using (var hmac = new HMACSHA512())
             {
@@ -162,10 +152,14 @@ namespace WebAPI.Services
 
         private static bool VerifyPasswordHash(string password, IReadOnlyList<byte> storedHash, byte[] storedSalt)
         {
-            if (password == null) throw new ArgumentNullException(nameof(password));
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
-            if (storedHash.Count != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", nameof(password));
-            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", nameof(password));
+            if (password == null)
+                throw new InvalidOperationException(nameof(password));
+            if (string.IsNullOrWhiteSpace(password))
+                throw new InvalidOperationException("Value cannot be empty or whitespace only string.");
+            if (storedHash.Count != 64)
+                throw new InvalidOperationException("Invalid length of password hash (64 bytes expected).");
+            if (storedSalt.Length != 128)
+                throw new InvalidOperationException("Invalid length of password salt (128 bytes expected).");
 
             using (var hmac = new HMACSHA512(storedSalt))
             {
@@ -184,12 +178,12 @@ namespace WebAPI.Services
         #region Validation
 
         public override bool ValidateDto(UserDto entity)
-        {
+        { // define user validations
             return entity != null
                    //&& string.IsNullOrWhiteSpace(entity.Email)
-                   && string.IsNullOrWhiteSpace(entity.Password)
-                   && string.IsNullOrWhiteSpace(entity.Username)
-                   && entity.Username.Length > 5
+                   && !string.IsNullOrWhiteSpace(entity.Password)
+                   && !string.IsNullOrWhiteSpace(entity.Username)
+                   && entity.Username.Length > 3
                    && entity.Username.Length < 40;
             //&& Regex.IsMatch(entity.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase); ;
         }

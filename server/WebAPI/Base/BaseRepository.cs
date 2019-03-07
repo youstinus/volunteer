@@ -40,18 +40,16 @@ namespace WebAPI.Base
             return entity;
         }
 
-        public virtual async Task<bool> Update(T entity)
+        public virtual async Task Update(T entity)
         {
             ItemSet.Attach(entity);
-            var changes = await Context.SaveChangesAsync();
-            return changes > 0;
+            await Context.SaveChangesAsync();
         }
 
-        public virtual async Task<bool> Delete(T entity)
+        public virtual async Task Delete(T entity)
         {
             ItemSet.Remove(entity);
-            var changes = await Context.SaveChangesAsync();
-            return changes > 0;
+            await Context.SaveChangesAsync();
         }
     }
 }

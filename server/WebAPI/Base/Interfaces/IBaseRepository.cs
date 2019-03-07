@@ -8,7 +8,7 @@ namespace WebAPI.Base.Interfaces
         Task<ICollection<T>> GetAll();
         Task<T> GetById(long id);
         Task<T> Create(T entity);
-        Task<bool> Update(T entity);
-        Task<bool> Delete(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
     }
 }
