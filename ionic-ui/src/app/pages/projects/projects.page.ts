@@ -91,7 +91,7 @@ export class ProjectsPage implements OnInit {
   ngOnInit() {
     // this.projectsService.getAll().subscribe(items => {
     //   this.projects = items;
-    //   console.log(this.projects, this.projects);
+    //   console.log(this.projects, this.projects2);
     // });
   }
 
