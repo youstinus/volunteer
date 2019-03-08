@@ -49,7 +49,7 @@ namespace WebAPI.Base
             try
             {
                 var createdEntity = await _service.Create(entity);
-                var entityUri = CreateResourceUri(createdEntity.Id);
+                var entityUri = _service.CreateResourceUri(createdEntity.Id);
                 return Created(entityUri, createdEntity);
             }
             catch (ArgumentNullException e)
@@ -112,11 +112,6 @@ namespace WebAPI.Base
             {
                 return NotFound(e.Message);
             }
-        }
-
-        private Uri CreateResourceUri(long id)
-        {
-            return new Uri($"{Request.Path}/{id}", UriKind.Relative);
         }
     }
 }

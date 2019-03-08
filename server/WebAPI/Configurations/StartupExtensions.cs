@@ -38,19 +38,19 @@ namespace WebAPI.Configurations
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Title = "My API",
+                    Title = "volunteer",
                     Version = "v1",
-                    Description = "A simple example ASP.NET Core Web API",
+                    Description = "ASP.NET Core Web API",
                     TermsOfService = "None",
                     Contact = new Contact
                     {
-                        Name = "Shayne Boyer",
+                        Name = "Platypus",
                         Email = string.Empty,
-                        Url = "https://twitter.com/spboyer"
+                        Url = ""
                     },
                     License = new License
                     {
-                        Name = "Use under LICX",
+                        Name = "Use under MIT",
                         Url = "https://example.com/license"
                     }
                 });
@@ -87,7 +87,16 @@ namespace WebAPI.Configurations
             })
                 .AddJwtBearer(x =>
                 {
-                    x.Events = new JwtBearerEvents
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                    /*x.Events = new JwtBearerEvents
                     {
                         OnTokenValidated = context =>
                         {
@@ -110,7 +119,7 @@ namespace WebAPI.Configurations
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
                         ValidateAudience = false
-                    };
+                    };*/
                 });
         }
     }

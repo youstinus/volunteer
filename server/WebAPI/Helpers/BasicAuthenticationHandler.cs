@@ -40,7 +40,7 @@ namespace WebAPI.Helpers
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                userDto = await _usersService.Authenticate(username, password);
+                userDto = await _usersService.Authenticate(new UserDto(){Username = username, Password = password});
             }
             catch
             {

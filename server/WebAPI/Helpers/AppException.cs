@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace WebAPI.Helpers
 {
-    public class AppException : Exception
+    /*public class AppException : Exception
     {
         public AppException() : base() { }
 
@@ -13,5 +13,5 @@ namespace WebAPI.Helpers
             : base(String.Format(CultureInfo.CurrentCulture, message, args))
         {
         }
-    }
+    }*/
 }

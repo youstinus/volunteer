@@ -1,15 +1,10 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+using WebAPI.Base;
+using WebAPI.Controllers.Interfaces;
 using WebAPI.Entities;
-using WebAPI.Helpers;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 using WebAPI.Services.Interfaces;
@@ -18,114 +13,104 @@ namespace WebAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    [Route("api/[controller]")]
+    public class UsersController : BaseController<User, UserDto>, IUsersController
     {
-        private IUsersService _usersService;
-        private IMapper _mapper;
-        private readonly AppSettings _appSettings;
+        private readonly IUsersService _usersService;
 
-        public UsersController(
-            IUsersService usersService,
-            IMapper mapper,
-            IOptions<AppSettings> appSettings)
+        public UsersController(IUsersService service) : base(service)
         {
-            _usersService = usersService;
-            _mapper = mapper;
-            _appSettings = appSettings.Value;
+            _usersService = service;
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody]UserDto userDto)
         {
-            var user = await _usersService.Authenticate(userDto.Username, userDto.Password);
+            if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
+                return BadRequest();
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            try
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-
-            // return basic user info (without password) and token to store client side
-            return Ok(new
+                var user = await _usersService.Authenticate(userDto);
+                return Ok(user);
+            }
+            catch (InvalidOperationException e)
             {
-                Id = user.Id,
-                Username = user.Username,
-                //FirstName = user.FirstName,
-                //LastName = user.LastName,
-                Token = tokenString
-            });
+                return BadRequest(e.Message);
+            }
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]UserDto userDto)
+        [HttpPost("register", Name = nameof(Post))]
+        public override async Task<IActionResult> Post([FromBody]UserDto userDto)
         {
+            if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
+                return BadRequest();
+
             try
             {
-                // save
-                await _usersService.Create(userDto, userDto.Password);
-                return Ok();
+                var created = await _usersService.Create(userDto);
+                //var uri = _usersService.CreateResourceUri(created.Id);
+                return CreatedAtRoute(nameof(Post), created);
             }
-            catch (AppException ex)
+            catch (InvalidOperationException e)
             {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(e.Message);
             }
         }
 
         [HttpGet]
         [Authorize(Roles = Role.Admin)]
-        public async Task<IActionResult> GetAll()
+        public override async Task<IActionResult> Get()
         {
             var users = await _usersService.GetAll();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public override async Task<IActionResult> GetById([FromRoute]long id)
         {
-            var user = await _usersService.GetById(id);
-            return Ok(user);
+            try
+            {
+                var user = await _usersService.GetById(id);
+                return Ok(user);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public override async Task<IActionResult> Put(long id, [FromBody]UserDto userDto)
         {
-            // map dto to entity and set id
-            var user = _mapper.Map<User>(userDto);
-            user.Id = id;
+            if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
+                return BadRequest();
 
             try
             {
-                // save 
-                _usersService.Update(user, userDto.Password);
-                return Ok();
+                await _usersService.Update(id, userDto);
+                return NoContent();
             }
-            catch (AppException ex)
+            catch (InvalidOperationException e)
             {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public override async Task<IActionResult> Delete(long id)
         {
-            _usersService.Delete(id);
-            return Ok();
+            try
+            {
+                await _usersService.Delete(id);
+                return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

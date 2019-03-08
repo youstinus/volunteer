@@ -1,8 +1,9 @@
-﻿namespace WebAPI.Constants
+﻿namespace WebAPI.Enums
 {
     public enum Routing
     {
         // products routes
         GetProject
+
     }
 }

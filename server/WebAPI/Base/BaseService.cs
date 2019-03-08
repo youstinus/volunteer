@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
@@ -51,7 +52,7 @@ namespace WebAPI.Base
             return mappedDto;
         }
         
-        public virtual async Task<bool> Update(long id, TDto entityDto)
+        public virtual async Task Update(long id, TDto entityDto)
         {
             if (entityDto == null)
                 throw new ArgumentNullException(nameof(entityDto));
@@ -61,11 +62,10 @@ namespace WebAPI.Base
                 throw new InvalidOperationException($"Entity {id} was not found");
 
             _mapper.Map(entityDto, itemToUpdate);
-            var updated = await _repository.Update(itemToUpdate);
-            return updated;
+            await _repository.Update(itemToUpdate);
         }
 
-        public virtual async Task<bool> Patch(long id, JsonPatchDocument<TDto> patchDto)
+        public virtual async Task Patch(long id, JsonPatchDocument<TDto> patchDto)
         {
             if (patchDto == null)
                 throw new ArgumentNullException(nameof(patchDto));
@@ -80,18 +80,16 @@ namespace WebAPI.Base
             patchDto.ApplyTo(updateData);
             _mapper.Map(updateData, itemToUpdate);
             // itemToUpdate.LastModified = modificationDate;
-            var updated = await _repository.Update(itemToUpdate);
-            return updated;
+            await _repository.Update(itemToUpdate);
         }
 
-        public virtual async Task<bool> Delete(long id)
+        public virtual async Task Delete(long id)
         {
             var entity = await _repository.GetById(id);
             if (entity == null)
                 throw new InvalidOperationException($"Entity {id} was not found");
 
-            var deleted = await _repository.Delete(entity);
-            return deleted;
+            await _repository.Delete(entity);
         }
 
         public T CreatePoco(TDto entityDto)
@@ -101,6 +99,20 @@ namespace WebAPI.Base
             /*product.LastModified = creationDate;
             product.Created = creationDate;*/
             return entity;
+        }
+
+        public TDto CreateDto(T entity)
+        {
+            //var creationDate = _timeService.GetCurrentTime();
+            var entityDto = _mapper.Map<TDto>(entity);
+            /*product.LastModified = creationDate;
+            product.Created = creationDate;*/
+            return entityDto;
+        }
+        
+        public Uri CreateResourceUri(long id)
+        {
+            return new Uri($"{id}", UriKind.Relative);
         }
 
         public virtual bool ValidateDto(TDto entityDto)
