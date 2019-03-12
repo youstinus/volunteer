@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using WebAPI.Configurations;
 
 namespace WebAPI
@@ -25,7 +27,7 @@ namespace WebAPI
             services.AddAllDependencies();
             services.SetUpDatabase(Configuration);
             //services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);//.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
             services.AddSwagger();
             // configure basic authentication FROM OTHER SOURCES
             /*services.AddAuthentication("BasicAuthentication")
