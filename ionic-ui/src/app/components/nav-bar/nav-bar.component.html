@@ -1,3 +1,74 @@
-<p>
-  nav-bar works!
-</p>
+<ion-menu side="start" menuId="first">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Start Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Main</ion-item>
+        <ion-item>Projects</ion-item>
+        <ion-item>Saved projects</ion-item>
+        <ion-item>Settings</ion-item>
+        <ion-item>Login</ion-item>
+        <ion-item>Register</ion-item>
+        <ion-item>Logout</ion-item>
+        <ion-item>Calendar</ion-item>
+        <ion-item>About us</ion-item>
+        <ion-item>Privacy policy</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-menu side="start" menuId="custom" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Custom Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-menu side="end" type="push">
+    <ion-header>
+      <ion-toolbar color="danger">
+        <ion-title>End Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-router-outlet main></ion-router-outlet>
+
+  <!------html>
+  <link href='nav-bar.components.scss' rel='stylesheet' >
+  <ul>
+    <li><a>Main</a></li>
+    <li><a>Projects</a></li>
+    <li><a>Organizations</a></li>
+    <li><a>Saved projects</a></li>
+    <li><a>Settings</a></li>
+    <li><a>Login</a></li>
+    <li><a>Register</a></li>
+    <li><a>Logout</a></li>
+    <li><a>Calendar</a></li>
+    <li><a>About us</a></li>     
+   <li>Privacy policy</a>
+  </ul>
+</html>
