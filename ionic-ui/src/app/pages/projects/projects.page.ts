@@ -10,7 +10,7 @@ import {NavController} from '@ionic/angular';
 })
 export class ProjectsPage implements OnInit {
   // private projects: Project[];
-  private projects: Project[] = [
+  private projects: Project[]; /*= [
     {
       id: 1,
       title: 'VšĮ Pagirk',
@@ -83,16 +83,16 @@ export class ProjectsPage implements OnInit {
       volunteersIds: [1],
       websiteUrl: 'https://volunteering.com'
     }
-  ];
+  ];*/
 
   constructor(private projectsService: ProjectsService, private navCtrl: NavController) {
   }
 
   ngOnInit() {
-    // this.projectsService.getAll().subscribe(items => {
-    //   this.projects = items;
-    //   console.log(this.projects, this.projects);
-    // });
+     this.projectsService.getAll().subscribe(items => {
+       this.projects = items;
+       //console.log(this.projects, this.projects2);
+     });
   }
 
   onProjectClicked(project: Project) {

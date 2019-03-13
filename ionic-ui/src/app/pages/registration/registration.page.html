@@ -4,45 +4,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <form (ngSubmit)="register()" #registerForm="ngForm">
-      <ion-row>
-        <ion-col>
-          <ion-list inset>
 
+<ion-content  color="primary">
+  <form  #form="ngForm" (ngSubmit)="onRegister(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Create your account!</h3>
+          </div>
+          <div padding>
             <ion-item>
-              <ion-input type="text" placeholder="Name" name="name" [(ngModel)]="registerCredentials.name" required></ion-input>
+              <ion-input  name="name" type="text" placeholder="Name" [(ngModel)]="user.Username" required></ion-input>
             </ion-item>
-
             <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+              <ion-input name="email" type="email" placeholder="your@email.com" required></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-label>User type</ion-label>
-              <ion-select placeholder="Select One">
-                <ion-select-option value="v">Volunteer</ion-select-option>
-                <ion-select-option value="o">Organization</ion-select-option>
+              <ion-select placeholder="Select One" name="role" [(ngModel)]="user.Role">
+                <ion-select-option value="Volunteer">Volunteer</ion-select-option>
+                <ion-select-option value="Organization">Organization</ion-select-option>
               </ion-select>
             </ion-item>
-
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+              <ion-input name="password" type="password" placeholder="Password" required></ion-input>
             </ion-item>
-
             <ion-item>
-              <ion-input type="password" placeholder="Confirm Password" name="confirmation_password" [(ngModel)]="registerCredentials.confirmation_password" required></ion-input>
+              <ion-input name="confirm" type="password" [(ngModel)]="user.Password" placeholder="Password again" required></ion-input>
             </ion-item>
-
-          </ion-list>
+          </div>
+          <div padding>
+            <ion-button type="submit" [disabled]="form.invalid" shape="round" size="large" expand="block">Register</ion-button>
+          </div>
         </ion-col>
       </ion-row>
-
-      <ion-row>
-        <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Register</button>
-        </ion-col>
-      </ion-row>
-
-    </form>
+    </ion-grid>
+  </form>
 </ion-content>
+<!--Button itraukti reikalingos savybes : type="submit" ir koreguotina [disabled]="form.invalid"-->

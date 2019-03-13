@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ProjectsService} from '../services/projects.service';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  constructor(private projectsService: ProjectsService, private navCtrl: NavController) {
+  }
+
+  onProjects(){
+    this.navCtrl.navigateForward('projects');
+  }
+
+  onLogin(){
+    this.navCtrl.navigateForward('login');
+  }
+
+  onRegister(){
+    this.navCtrl.navigateForward('registration');
+  }
 }
