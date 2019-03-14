@@ -10,7 +10,7 @@
           <ion-content>
             <ion-list>
               <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
-                <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPAth == p.url">
+                <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath == p.url">
                   {{p.title}}
                 </ion-item>
               </ion-menu-toggle>
@@ -19,4 +19,3 @@
         </ion-menu>
         <ion-router-outlet id="content" main></ion-router-outlet>
       </ion-split-pane>
-      

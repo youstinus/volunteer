@@ -10,11 +10,13 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ProjectComponent} from './components/project/project.component';
 import {HttpClientModule} from '@angular/common/http';
+import {NavMenuPage} from './pages/nav-menu/nav-menu.page';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ProjectComponent
+        ProjectComponent,
+        NavMenuPage
     ],
     entryComponents: [],
     imports: [

@@ -2,7 +2,7 @@
 using WebAPI.Models;
 
 namespace WebAPI.Configurations
-{
+{//Scaffold-DbContext "Server=(localdb)\MSSQLLocalDB;Database=Volunteer2;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DbModels2
     public class VolunteerDbContext : DbContext
     {
         public DbSet<Project> Projects { get; set; }

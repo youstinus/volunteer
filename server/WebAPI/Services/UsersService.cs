@@ -59,7 +59,7 @@ namespace WebAPI.Services
             var subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, userDto.Id.ToString()),
-                new Claim(ClaimTypes.Role, userDto.Role)
+                new Claim(ClaimTypes.Role, userDto.Type)
             });
             var sign = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor

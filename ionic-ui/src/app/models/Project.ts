@@ -4,9 +4,10 @@ export class Project {
     public description: string;
     public email: string;
     public phone: string;
-    public websiteUrl: string;
+    public website: string;
     public start: Date;
+    public end: Date;
+    public organizationId: number;
     public volunteersIds: number[];
     public picturesIds: number[];
-    public organizationId: number;
 }
