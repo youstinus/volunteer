@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { OrganizationPage } from './organization.page';
-
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +13,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+
     CommonModule,
     FormsModule,
     IonicModule,
@@ -24,3 +22,10 @@ const routes: Routes = [
   declarations: [OrganizationPage]
 })
 export class OrganizationPageModule {}
+
+
+
+
+
+
+

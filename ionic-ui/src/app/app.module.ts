@@ -11,12 +11,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {ProjectComponent} from './components/project/project.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NavMenuPage} from './pages/nav-menu/nav-menu.page';
+import { HeaderPage } from './pages/header/header.page';
 
 @NgModule({
     declarations: [
         AppComponent,
         ProjectComponent,
-        NavMenuPage
+        NavMenuPage, HeaderPage
     ],
     entryComponents: [],
     imports: [
