@@ -10,7 +10,7 @@ import { NavMenuPage } from './nav-menu.page';
 const routes: Routes = [
   {
     path: '',
-    ]  }
+    }
 ];
 
 @NgModule({
