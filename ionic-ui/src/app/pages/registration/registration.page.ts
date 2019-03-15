@@ -4,6 +4,8 @@ import {UsersService} from '../../services/users.service';
 import {User} from '../../models/User';
 import {RouterOutlet, Router} from '@angular/router';
 import {NavController, MenuController, LoadingController} from '@ionic/angular';
+import { PasswordValidator } from './password.validator';
+import { Services } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-registration',
@@ -15,13 +17,15 @@ export class RegistrationPage implements OnInit {
   user: User = new User();
 
   public onRegisterForm: FormGroup;
-
+  public matching_passwords_group: FormGroup;
 
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private usersService: UsersService
     ) { }
 
     ionViewWillEnter() {
@@ -29,6 +33,8 @@ export class RegistrationPage implements OnInit {
     }
 
   ngOnInit() {
+
+
     this.onRegisterForm = this.formBuilder.group({
       'fullName': [null, Validators.compose([
         Validators.required
@@ -39,7 +45,27 @@ export class RegistrationPage implements OnInit {
       ])],
       'password': [null, Validators.compose([
         Validators.required
+      ])],
+      'confirm_password': [null, Validators.compose([
+        Validators.required
+      ])],
+      'type': [null, Validators.compose([
+        Validators.required
+      ])],
+      'terms': [null, Validators.compose([
+        Validators.required
       ])]
+    });
+
+    this.matching_passwords_group = new FormGroup({
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+      ])),
+      confirm_password: new FormControl('', Validators.required)
+    }, (formGroup: FormGroup) => {
+      return PasswordValidator.areEqual(formGroup);
     });
 
   }
@@ -51,49 +77,28 @@ export class RegistrationPage implements OnInit {
 
     loader.present();
     loader.onWillDismiss().then(() => {
-      this.navCtrl.navigateRoot('/home-results');
+      this.navCtrl.navigateRoot('registration'); // navigate login, kol kas palikau ten pat
     });
   } 
-
-  validation_messages = { 
-    'name': [
-      { type: 'required', message: 'Name is required.' }
-    ],
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please wnter a valid email.' }
-    ],
-    'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
-    ],
-    'confirm_password': [
-      { type: 'required', message: 'Confirm password is required.' }
-    ],
-    'matching_passwords': [
-      { type: 'areEqual', message: 'Password mismatch.' }
-    ],
-    'terms': [
-      { type: 'pattern', message: 'You must accept terms and conditions.' }
-    ],
-  };
-
-  goToLogin() {
-    this.navCtrl.navigateRoot('/');
+  conditions(){
+    this.navCtrl.navigateRoot('home');
   }
 
-/*  onSubmit(values){
+  goToLogin() {
+    this.navCtrl.navigateForward('login');
+  }
+
+  /*onSubmit(values){
     console.log(values);
-    this.router.navigate(["/user"]);}
-*/
-  /*onRegister(form: NgForm) {
+   // this.router.navigate(["/user"]);
+  }*/
+
+  onRegister(form: NgForm) {
     console.log('submited');
     //form. kuri forma ir kaip naudoti ja duomenims apdoroti
     console.log(form.form);
     console.log(this.user);
     
-    // email validation
     // password match
     // password validation
     // default selection volunteer
@@ -104,6 +109,6 @@ export class RegistrationPage implements OnInit {
       console.log(user);
       this.navCtrl.navigateForward('login');
     });
-    }*/
+    }
 
 }

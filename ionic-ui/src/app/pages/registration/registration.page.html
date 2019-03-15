@@ -1,17 +1,17 @@
 <ion-content padding class="login auth-page" color="primary">
 
-  <div class="auth-content">
+  <div class="auth-content" >
     <!-- Logo -->
     <div padding-horizontal text-center>
       <div class="logo"></div>
       <h3 no-margin>
         <ion-text color="primary" class="fw700">
-          <ion-text color="secondary">Register to our page</ion-text>
+          <ion-text color="light">Register to our page</ion-text>
         </ion-text>
       </h3>
     </div>
     <!-- Register form -->
-    <form [formGroup]="onRegisterForm" class="list-form">
+    <form [formGroup]="onRegisterForm" class="list-form" (ngSubmit)="onRegister(onRegisterForm.value)" >
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="mail" item-start></ion-icon>
@@ -38,6 +38,14 @@
         </ion-text>
       </p>
 
+      <ion-item>
+        <ion-label position="floating">User type</ion-label>
+        <ion-select formControlName="type" cancelText="Cancel" okText="OK">
+          <ion-select-option value="volunteer">Volunteer</ion-select-option>
+          <ion-select-option value="organization">Organization</ion-select-option>        
+        </ion-select>
+      </ion-item>
+      
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="lock" item-start></ion-icon>
@@ -56,21 +64,43 @@
           <ion-icon name="lock" item-start></ion-icon>
           Confirm password
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+        <ion-input color="secondary" type="password" formControlName="confirm_password"></ion-input>
       </ion-item>
       <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">
         <ion-text color="warning">
           This field is required
         </ion-text>
+        <!--div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.confirm_password">
+            <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <ion-label >Passwords mismatch</ion-label>
+            </div>
+          </ng-container>
+        </div-->
       </p>
+      <!--div formGroupName="matching_passwords">Visas sitas turetu apskliaustis abu passwordus</div-->
+
+      <ion-item no-padding class="animated fadeInUp">
+      <ion-item>
+          <span (click)="conditions()" tappable>
+            <ion-text color="light">
+              <strong>I accept terms and conditions!</strong>
+            </ion-text>
+         </span>
+        </ion-item>
+        <ion-item>
+        <ion-checkbox color="primary" formControlName="terms"></ion-checkbox>
+      </ion-item>
+      </ion-item>
 
     </form>
 
     <div margin-top>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()" [disabled]="!onRegisterForm.valid"
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()"  [disabled]="!onRegisterForm.valid"
         tappable>
-        <ion-icon name="log-in"></ion-icon>
         Sign Up
+        <ion-icon name="log-in"></ion-icon>
       </ion-button>
 
     </div>
