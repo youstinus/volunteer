@@ -6,3 +6,17 @@ ion-item{
 ion-button{
     --background: #062f77;
 }
+
+.error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+:host {
+  ion-content {
+    --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary))
+  }
+}
