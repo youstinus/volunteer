@@ -12,7 +12,7 @@ describe('OrganizationPage', () => {
       declarations: [ OrganizationPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+        .compileComponents();
   }));
 
   beforeEach(() => {

@@ -11,10 +11,10 @@ const routes: Routes = [
   {
     path: '',
     component: NavMenuPage,
-    children: [
-      {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
-      {path: 'registration', loadChildren: './pages/registration/registration.module#RegistrationPageModule'}
-    ]
+    //children: [
+    //  {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
+      //{path: 'registration', loadChildren: './pages/registration/registration.module#RegistrationPageModule'}
+   // ]
   }
 ];
 
