@@ -10,11 +10,8 @@ import { NavMenuPage } from './nav-menu.page';
 const routes: Routes = [
   {
     path: '',
-    component: NavMenuPage,
-    children: [
-      {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
-      {path: 'registration', loadChildren: './pages/registration/registration.module#RegistrationPageModule'}
-    ]
+     component: NavMenuPage
+
   }
 ];
 

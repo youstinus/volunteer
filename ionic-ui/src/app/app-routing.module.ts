@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'volunteers-settings', loadChildren: './pages/volunteers-settings/volunteers-settings.module#VolunteersSettingsPageModule' },
   { path: 'organizations-settings', loadChildren: './pages/organizations-settings/organizations-settings.module#OrganizationsSettingsPageModule' },
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
-  { path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule' }
+  { path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule' },  { path: 'header', loadChildren: './pages/header/header.module#HeaderPageModule' }
+
 ];
 
 @NgModule({

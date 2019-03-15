@@ -8,15 +8,54 @@ import {RouterEvent, Router} from '@angular/router';
 })
 export class NavMenuPage implements OnInit {
 
-    pages = [
+    public pages = [
         {
             title: 'Login',
-            url: 'login'
+            url: '/login'
         },
         {
             title: 'Registration',
-            url: 'registration'
+            url: '/registration'
+        },
+        {
+            title: 'Main',
+            url: '/main'
+        },
+        {
+            title: 'Projects',
+            url: '/projects'
+        },
+        {
+            title: 'Organizations',
+            url: '/organizations'
+        },
+        
+        {
+            title: 'Calendar',
+            url: '/calendar'
+        },
+        {
+            title: 'About us',
+            url: '/abousus'
+        },
+        {
+            title: 'Privacy policy',
+            url: '/privacyPolicy'
+        },
+        {
+            title: 'Saved projects',
+            url: '/saved_projects'
+        },
+        {
+            title: 'Settings',
+            url: '/settings'
+        },
+        
+        {
+            title: 'Logout',
+            url: '/logout'
         }
+    
     ];
 
     selectedPath = '';
@@ -30,4 +69,7 @@ export class NavMenuPage implements OnInit {
     ngOnInit() {
     }
 
+    onClick(){
+        console.log("hhh");
+    }
 }
