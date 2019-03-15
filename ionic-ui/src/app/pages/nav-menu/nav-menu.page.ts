@@ -36,11 +36,11 @@ export class NavMenuPage implements OnInit {
         },
         {
             title: 'About us',
-            url: '/abousus'
+            url: '/about'
         },
         {
             title: 'Privacy policy',
-            url: '/privacyPolicy'
+            url: '/privacy'
         },
         {
             title: 'Saved projects',
