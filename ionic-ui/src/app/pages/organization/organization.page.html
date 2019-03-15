@@ -5,14 +5,16 @@
 </ion-header>
 
 
-
+<ion-content padding>
 
 
 <ion-card>
   <ion-card-header>
 
-
-
+    <ion-title lines="full">
+      {{organization.title}}
+    </ion-title>
+    <ion-row style="height:10px"></ion-row>
 
 
     <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
@@ -28,18 +30,18 @@
     <ion-row style="height:50px"></ion-row>
     <ion-row style="height:10px"></ion-row>
 
-    <ion-label> <ion-icon name="pin" style="width: 20px; height: 20px"></ion-icon> Address</ion-label>
+    <ion-label> <ion-icon name="pin" style="width: 20px; height: 20px"></ion-icon>    {{organization.address}}</ion-label>
     <ion-row style="height:10px"></ion-row>
-    <ion-label> <ion-icon name="at" style="width: 20px; height: 20px"></ion-icon> Email</ion-label>
+    <ion-label> <ion-icon name="at" style="width: 20px; height: 20px"></ion-icon>    {{organization.website}}</ion-label>
     <ion-row style="height:10px"></ion-row>
-    <ion-label> <ion-icon name="call" style="width: 20px; height: 20px"></ion-icon> Phone</ion-label>
+    <ion-label> <ion-icon name="call" style="width: 20px; height: 20px"></ion-icon> {{organization.phone}}</ion-label>
     <ion-row style="height:50px"></ion-row>
 
 
   </ion-card-header>
 
   <ion-card-content>
-    Your descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour descYour desc
+    {{organization.description}}
   </ion-card-content>
 
 
@@ -52,16 +54,17 @@
       <ion-label>Project 2</ion-label>
       <ion-button expand="full" shape ="round">Go to project page</ion-button>
     </ion-item>
+    <ion-item>
+      <ion-label>Project 3</ion-label>
+      <ion-button expand="full" shape ="round">Go to project page</ion-button>
+    </ion-item>
 
   </ion-list>
 
 
-
-</ion-card>
-
-
-<ion-card>
   <ion-card-content>
+    Your comments go here
+    <ion-row style="height:10px"></ion-row>
     <ion-input placeholder="Enter your comment here"></ion-input>
     <ion-button expand="full" shape ="round">Comment</ion-button>
   </ion-card-content>
@@ -71,6 +74,13 @@
 
 
 
+
+
+
+
+
+
+</ion-content>
 
 
 

@@ -21,6 +21,7 @@ const routes: Routes = [
         ]
     },
   { path: 'main', loadChildren: './pages/main/main.module#MainPageModule' },
+    { path: 'organization', loadChildren: './pages/organization/organization.module#OrganizationPageModule' },
   { path: 'volunteers', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
   { path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule' },
   { path: 'volunteers-settings', loadChildren: './pages/volunteers-settings/volunteers-settings.module#VolunteersSettingsPageModule' },

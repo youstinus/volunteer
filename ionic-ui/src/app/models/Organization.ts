@@ -5,5 +5,7 @@ export class Organization {
     public website: string;
     public userId: number;
     public picturesIds: number[];
+    public phone: string;
     public projectsIds: number[];
+    public address: string;
 }

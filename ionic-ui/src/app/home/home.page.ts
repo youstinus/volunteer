@@ -23,4 +23,10 @@ export class HomePage {
   onRegister(){
     this.navCtrl.navigateForward('registration');
   }
+  onOrganization(){
+    this.navCtrl.navigateForward('organization');
+  }
+  onOrganizations(){
+    this.navCtrl.navigateForward('organizations');
+  }
 }

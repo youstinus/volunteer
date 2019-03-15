@@ -24,4 +24,5 @@ describe('OrganizationsPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
