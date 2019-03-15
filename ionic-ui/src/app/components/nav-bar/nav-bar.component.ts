@@ -9,18 +9,27 @@ import {Router, RouterEvent} from  '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  pages = [
-    {
-      title: 'First Page',
-      url: 'login'
-    }
-  ]
-  selectedPath = '';
-  constructor(private router: Router) { 
-    this.router.events.subscribe((event : RouterEvent) =>{
-this.selectedPath = event.url;
-    });
-  }
+//   pages = [
+//     {
+//       title: 'Login',
+//       url: 'login'
+//     },
+//     {
+//       title: 'Projects',
+//       url: 'projects'
+//     },
+//     {
+//       title: 'Registration',
+//       url: 'registration'
+//     }
+
+//   ]
+//   selectedPath = '';
+//   constructor(private router: Router) { 
+//     this.router.events.subscribe((event : RouterEvent) =>{
+// this.selectedPath = event.url;
+//     });
+//   }
 
   ngOnInit() {}
 
