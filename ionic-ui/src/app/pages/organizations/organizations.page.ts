@@ -21,7 +21,8 @@ export class OrganizationsPage implements OnInit {
           userId: 5,
           phone: '866666666',
           picturesIds: [1],
-          address: 'test g. 696'
+          address: 'test g. 696',
+          email: 'test@gmail.com'
         },
         {
           id: 12,
@@ -32,7 +33,8 @@ export class OrganizationsPage implements OnInit {
           userId: 5,
           phone: '866666666',
           picturesIds: [1],
-          address: 'test g. 696'
+          address: 'test g. 696',
+          email: 'test@gmail.com'
         }
 
 

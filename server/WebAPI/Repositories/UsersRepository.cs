@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Base;
 using WebAPI.Configurations;
@@ -15,6 +16,14 @@ namespace WebAPI.Repositories
             ItemSet = context.Users;
         }
 
+        protected override IQueryable<User> IncludeDependencies(IQueryable<User> queryable)
+        {
+            var dependencies = queryable
+                .Include(x => x.Volunteer)
+                .Include(x => x.Organization);
+            return dependencies;
+        }
+
         public async Task<User> GetByUsername(string username)
         {
             return await ItemSet.FirstOrDefaultAsync(x => x.Username.Equals(username));
@@ -23,7 +32,7 @@ namespace WebAPI.Repositories
         public Task<User> GetByCredentials(string username, string password)
         {
             // verify password or get hashed password
-            return ItemSet.FirstOrDefaultAsync(x => x.Username.Equals(username) && x.PasswordHash.Equals(password));
+            return ItemSet.FirstOrDefaultAsync(x => x.Username.Equals(username) && x.Hash.Equals(password));
         }
     }
 }

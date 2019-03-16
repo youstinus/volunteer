@@ -10,6 +10,7 @@ namespace WebAPI.Configurations
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         public VolunteerDbContext(DbContextOptions<VolunteerDbContext> options) : base(options)
         {
@@ -24,6 +25,7 @@ namespace WebAPI.Configurations
             SetUsers(modelBuilder);
             SetProjectVolunteers(modelBuilder);
             SetPictures(modelBuilder);
+            SetReviews(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
 
@@ -33,8 +35,9 @@ namespace WebAPI.Configurations
             entities.HasKey(x => x.Id);
             entities.HasOne(x => x.Organization)
                 .WithMany(pt => pt.Projects)
-                .HasForeignKey(pt => pt.OrganizationId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(pt => pt.OrganizationId);
+
+            // does not need
             entities.HasMany(x => x.ProjectVolunteers)
                 .WithOne(pt => pt.Project)
                 .HasForeignKey(pt => pt.ProjectId)
@@ -48,6 +51,11 @@ namespace WebAPI.Configurations
         {
             var entities = modelBuilder.Entity<Organization>();
             entities.HasKey(x => x.Id);
+            entities.HasOne(x => x.User)
+                .WithOne(x => x.Organization)
+                .HasForeignKey<User>(x => x.OrganizationId);
+
+            // does not need
             entities.HasMany(x => x.Projects)
                 .WithOne(pt => pt.Organization)
                 .HasForeignKey(pt => pt.OrganizationId)
@@ -55,31 +63,60 @@ namespace WebAPI.Configurations
             entities.HasMany(x => x.Pictures)
                 .WithOne(x => x.Organization)
                 .HasForeignKey(x => x.OrganizationId);
+            entities.HasMany(x => x.Reviews)
+                .WithOne(x => x.Organization)
+                .HasForeignKey(x => x.OrganizationId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public void SetVolunteers(ModelBuilder modelBuilder)
         {
             var entities = modelBuilder.Entity<Volunteer>();
             entities.HasKey(x => x.Id);
+            entities.HasOne(x => x.User)
+                .WithOne(x => x.Volunteer)
+                .HasForeignKey<User>(x => x.VolunteerId);
+
+            // does not need
+            entities.HasOne(x => x.Picture)
+                .WithOne(x => x.Volunteer)
+                .HasForeignKey<Picture>(x => x.VolunteerId);
             entities.HasMany(x => x.VolunteerProjects)
                 .WithOne(x => x.Volunteer)
                 .HasForeignKey(x => x.VolunteerId)
                 .OnDelete(DeleteBehavior.Cascade);
-            entities.HasOne(x => x.Picture)
+            entities.HasMany(x => x.Reviews)
                 .WithOne(x => x.Volunteer)
-                .HasForeignKey<Picture>(x => x.VolunteerId);
+                .HasForeignKey(x => x.VolunteerId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public void SetUsers(ModelBuilder modelBuilder)
         {
             var entities = modelBuilder.Entity<User>();
             entities.HasKey(x => x.Id);
+            entities.HasOne(x => x.Volunteer)
+                .WithOne(x => x.User)
+                .HasForeignKey<Volunteer>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            entities.HasOne(x => x.Organization)
+                .WithOne(x => x.User)
+                .HasForeignKey<Organization>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public void SetProjectVolunteers(ModelBuilder modelBuilder)
         {
             var entities = modelBuilder.Entity<ProjectVolunteer>();
             entities.HasKey(x => new { x.ProjectId, x.VolunteerId });
+            entities.HasOne(x => x.Volunteer)
+                .WithMany(x => x.VolunteerProjects)
+                .HasForeignKey(x => x.VolunteerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entities.HasOne(x => x.Project)
+                .WithMany(x => x.ProjectVolunteers)
+                .HasForeignKey(x => x.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public void SetPictures(ModelBuilder modelBuilder)
@@ -95,6 +132,20 @@ namespace WebAPI.Configurations
             entities.HasOne(x => x.Volunteer)
                 .WithOne(x => x.Picture)
                 .HasForeignKey<Volunteer>(x => x.PictureId);
+        }
+
+        public void SetReviews(ModelBuilder modelBuilder)
+        {
+            var entities = modelBuilder.Entity<Review>();
+            entities.HasKey(x => x.Id);
+            entities.HasOne(x => x.Volunteer)
+                .WithMany(x => x.Reviews)
+                .HasForeignKey(x => x.VolunteerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entities.HasOne(x => x.Organization)
+                .WithMany(x => x.Reviews)
+                .HasForeignKey(x => x.OrganizationId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

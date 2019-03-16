@@ -1,26 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Routes, RouterModule} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { VolunteersSettingsPage } from './volunteers-settings.page';
+import {VolunteersSettingsPage} from './volunteers-settings.page';
+import {ComponentsModule} from '../../shared/components.module';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: VolunteersSettingsPage
-  }
+    {
+        path: '',
+        component: VolunteersSettingsPage
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [VolunteersSettingsPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ComponentsModule
+    ],
+    declarations: [VolunteersSettingsPage]
 })
-export class VolunteersSettingsPageModule {}
+export class VolunteersSettingsPageModule {
+}

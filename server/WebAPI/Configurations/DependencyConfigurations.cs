@@ -21,7 +21,6 @@ namespace WebAPI.Configurations
         public static IServiceCollection AddRepositoryDependencies(this IServiceCollection services)
         {
             return services
-                .AddScoped<ITestRepository, TestRepository>()
                 .AddScoped<IOrganizationsRepository, OrganizationsRepository>()
                 .AddScoped<IProjectsRepository, ProjectsRepository>()
                 .AddScoped<IUsersRepository, UsersRepository>()
@@ -31,7 +30,6 @@ namespace WebAPI.Configurations
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
         {
             return services
-                .AddScoped<ITestService, TestService>()
                 .AddScoped<IOrganizationsService, OrganizationsService>()
                 .AddScoped<IProjectsService, ProjectsService>()
                 .AddScoped<IUsersService, UsersService>()

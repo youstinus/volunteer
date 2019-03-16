@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {MenuPage} from './pages/menu/menu.page';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', loadChildren: './home/home.module#HomePageModule'},
-    {path: 'nav-menu', loadChildren: './pages/nav-menu/nav-menu.module#NavMenuPageModule'},
+    {path: '', redirectTo: 'main', pathMatch: 'full'},
+    {path: 'main', loadChildren: './pages/main/main.module#MainPageModule'},
     {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
     {
         path: 'organizations', children: [
@@ -20,16 +20,15 @@ const routes: Routes = [
             {path: ':id', loadChildren: './pages/project/project.module#ProjectPageModule'}
         ]
     },
-  { path: 'main', loadChildren: './pages/main/main.module#MainPageModule' },
-  { path: 'volunteers', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
-  { path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule' },
-  { path: 'volunteers-settings', loadChildren: './pages/volunteers-settings/volunteers-settings.module#VolunteersSettingsPageModule' },
-  { path: 'organizations-settings', loadChildren: './pages/organizations-settings/organizations-settings.module#OrganizationsSettingsPageModule' },
-  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
-  { path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule' },
-  { path: 'header', loadChildren: './pages/header/header.module#HeaderPageModule' },  { path: 'footer', loadChildren: './pages/footer/footer.module#FooterPageModule' }
-
-
+    {path: 'volunteers', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule'},
+    {path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule'},
+    {path: 'volunteers-settings', loadChildren: './pages/volunteers-settings/volunteers-settings.module#VolunteersSettingsPageModule'},
+    {
+        path: 'organizations-settings',
+        loadChildren: './pages/organizations-settings/organizations-settings.module#OrganizationsSettingsPageModule'
+    },
+    {path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule'},
+    {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'}
 ];
 
 @NgModule({

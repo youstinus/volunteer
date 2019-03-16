@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebAPI.DbModels
 {
-    public partial class Volunteer2Context : DbContext
+    /*public partial class Volunteer2Context : DbContext
     {
         public Volunteer2Context()
         {
@@ -199,5 +199,5 @@ namespace WebAPI.DbModels
                     .HasConstraintName("FK__Volunteer__UserI__3E52440B");
             });
         }
-    }
+    }*/
 }

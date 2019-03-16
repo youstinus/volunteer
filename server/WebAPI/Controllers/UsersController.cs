@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
 using WebAPI.Controllers.Interfaces;
 using WebAPI.Entities;
+using WebAPI.Enums;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 using WebAPI.Services.Interfaces;
@@ -61,7 +62,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = nameof(UserType.Admin))]
         public override async Task<IActionResult> Get()
         {
             var users = await _usersService.GetAll();
@@ -83,7 +84,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public override async Task<IActionResult> Put(long id, [FromBody]UserDto userDto)
+        public override async Task<IActionResult> Put([FromRoute]long id, [FromBody]UserDto userDto)
         {
             if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
                 return BadRequest();
@@ -100,7 +101,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public override async Task<IActionResult> Delete(long id)
+        public override async Task<IActionResult> Delete([FromRoute]long id)
         {
             try
             {

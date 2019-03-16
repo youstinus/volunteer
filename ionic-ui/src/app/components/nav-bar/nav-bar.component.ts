@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
-import {Router, RouterEvent} from  '@angular/router';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
 
@@ -25,12 +23,13 @@ export class NavBarComponent implements OnInit {
 
 //   ]
 //   selectedPath = '';
-//   constructor(private router: Router) { 
+//   constructor(private router: Router) {
 //     this.router.events.subscribe((event : RouterEvent) =>{
 // this.selectedPath = event.url;
 //     });
 //   }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
 }

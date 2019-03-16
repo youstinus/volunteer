@@ -8,16 +8,12 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ProjectComponent} from './components/project/project.component';
 import {HttpClientModule} from '@angular/common/http';
-import {NavMenuPage} from './pages/nav-menu/nav-menu.page';
-import { HeaderPage } from './pages/header/header.page';
+import {MenuPage} from './pages/menu/menu.page';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        ProjectComponent,
-        NavMenuPage, HeaderPage
+        AppComponent, MenuPage
     ],
     entryComponents: [],
     imports: [

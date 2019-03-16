@@ -21,6 +21,7 @@ namespace WebAPI.Services
     {
         private readonly IUsersRepository _usersRepository;
         private readonly AppSettings _appSettings;
+
         public UsersService(
             IUsersRepository repository,
             IMapper mapper,
@@ -44,7 +45,7 @@ namespace WebAPI.Services
                 throw new InvalidOperationException($"User with username: {userGiven.Username} was not found");
 
             // check if password is correct
-            if (!VerifyPasswordHash(userGiven.Password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(userGiven.Password, user.Hash, user.Salt))
                 throw new InvalidOperationException($"Incorrect password");
 
             //var user = await _usersRepository.GetByCredentials(username, password); //_users.SingleOrDefault(x => x.Username == username && x.Password == password);
@@ -59,7 +60,7 @@ namespace WebAPI.Services
             var subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, userDto.Id.ToString()),
-                new Claim(ClaimTypes.Role, userDto.Type)
+                new Claim(ClaimTypes.Role, nameof(userDto.Type))
             });
             var sign = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -93,8 +94,8 @@ namespace WebAPI.Services
 
             CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            user.Hash = passwordHash;
+            user.Salt = passwordSalt;
             var created = await _repository.Create(user);
             var createdDto = CreateDto(created);
             createdDto.Password = null;
@@ -127,8 +128,8 @@ namespace WebAPI.Services
             {
                 CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
 
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
+                user.Hash = passwordHash;
+                user.Salt = passwordSalt;
             }
 
             await _repository.Update(user);
