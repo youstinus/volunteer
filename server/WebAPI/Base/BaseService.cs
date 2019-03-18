@@ -61,6 +61,7 @@ namespace WebAPI.Base
             if (itemToUpdate == null)
                 throw new InvalidOperationException($"Entity {id} was not found");
 
+            entityDto.Id = id;
             _mapper.Map(entityDto, itemToUpdate);
             await _repository.Update(itemToUpdate);
         }
@@ -78,6 +79,7 @@ namespace WebAPI.Base
             //var modificationDate = _timeService.GetCurrentTime();
             var updateData = _mapper.Map<TDto>(itemToUpdate);
             patchDto.ApplyTo(updateData);
+            updateData.Id = id;
             _mapper.Map(updateData, itemToUpdate);
             // itemToUpdate.LastModified = modificationDate;
             await _repository.Update(itemToUpdate);
