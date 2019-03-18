@@ -6,12 +6,14 @@
     {{project.title}}
   </ion-title>
 
+  
   <ion-item lines="none">
-    <ion-button slot="end">
-      <ion-icon slot="start" name="star"></ion-icon>
+    <ion-button id="1" #first ion-button color="dark" (click)="btnActivate(first)" slot="end">
+      <ion-icon slot="start" name="star-outline"></ion-icon>
       Save
     </ion-button>
   </ion-item>
+
   <ion-card>
     <img src="http://environment.umn.edu/wp-content/uploads/2016/04/global_landscapes_initiative_directory_pages.jpg">
     <ion-card-content>
@@ -22,8 +24,8 @@
   <ion-card>
     <ion-item lines = "none" >
       <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label>Google loacation link: </ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-label>Google loacation link </ion-label>
+      <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
     </ion-item>
   </ion-card>
 
@@ -31,15 +33,47 @@
   <ion-card>
     <ion-item lines = "none" >
       <ion-icon name="link" slot="start"></ion-icon>
-      <ion-label>Google loacation link: {{project.websiteUrl}}</ion-label>
+      <ion-label >
+        {{project.website}}
+      </ion-label>
     </ion-item>
   </ion-card>
+  <ion-item lines="none"></ion-item>
 
-  <ion-item lines="full">
-    <ion-button slot="end" color="success">
-      I want to Volunteer
-    </ion-button>
-  </ion-item>
+
+  <!-- <ion-item lines="full"> -->
+      <ion-button id="2" #second ion-button color="dark" (click)="btnActivate(second)" expand="full" shape ="round">
+        I want to Volunteer {{project.volunteersIds}}/5
+      </ion-button>
+    <!-- </ion-item>  -->
+    <ion-item lines="none"></ion-item>
+  <ion-card>
+    <ion-item lines = "none" >
+      <ion-icon name="people" slot="start"></ion-icon>
+      <ion-label>
+          Phone: {{project.phone}} 
+        <ion-label>
+            Email: {{project.email}}
+        </ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+      <ion-item lines = "none" >
+         
+          <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label >
+          Project begins: {{project.start}}
+          <ion-label >
+              Project ends:  {{project.end}}
+            </ion-label>
+        </ion-label>
+        
+      </ion-item>
+    </ion-card>
+  
+
+  
 
   
 </ion-content>
