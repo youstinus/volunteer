@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Organization} from "../../models/Organization";
+import {ProjectsService} from '../../services/projects.service';
+import {ActivatedRoute} from '@angular/router';
+import {OrganizationsService} from '../../services/organizations.service';
 
 @Component({
   selector: 'app-organization',
@@ -8,10 +11,17 @@ import {Organization} from "../../models/Organization";
 })
 export class OrganizationPage implements OnInit {
 
-  constructor() { }
+  constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const id = this.route.snapshot.params['id'];
+    this.organizationsService.getById(id).subscribe(value => {
+      this.organization = value;
+    }, error1 => {
+      console.log(error1);
+    });
   }
+
   private organization: Organization = {
     id: 11,
     projectsIds: [1],

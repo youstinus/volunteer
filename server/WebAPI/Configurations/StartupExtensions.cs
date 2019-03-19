@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using WebAPI.Helpers;
-using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Configurations
 {
@@ -70,7 +68,7 @@ namespace WebAPI.Configurations
                 //c.RoutePrefix = "api";
             });
         }
-        
+
         public static void AddAuthorizationConfigs(this IServiceCollection services, IConfiguration configuration)
         {
             // configure strongly typed settings objects
@@ -87,15 +85,6 @@ namespace WebAPI.Configurations
             })
                 .AddJwtBearer(x =>
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
                     /*x.Events = new JwtBearerEvents
                     {
                         OnTokenValidated = context =>
@@ -110,7 +99,7 @@ namespace WebAPI.Configurations
                             }
                             return Task.CompletedTask;
                         }
-                    };
+                    };*/
                     x.RequireHttpsMetadata = false;
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters
@@ -119,7 +108,7 @@ namespace WebAPI.Configurations
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
                         ValidateAudience = false
-                    };*/
+                    };
                 });
         }
     }

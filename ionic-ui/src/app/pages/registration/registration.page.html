@@ -97,7 +97,7 @@
     </form>
 
     <div margin-top>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()"  [disabled]="!onRegisterForm.valid"
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp(onRegisterForm.value)"  [disabled]="!onRegisterForm.valid"
         tappable>
         Sign Up
         <ion-icon name="log-in"></ion-icon>

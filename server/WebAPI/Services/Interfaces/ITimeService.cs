@@ -8,5 +8,6 @@ namespace WebAPI.Services.Interfaces
     public interface ITimeService
     {
         DateTimeOffset UtcNow { get; }
+        DateTime GetCurrentTime();
     }
 }

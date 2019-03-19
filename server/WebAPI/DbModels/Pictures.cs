@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebAPI.DbModels
+﻿namespace WebAPI.DbModels
 {
     public partial class Pictures
     {

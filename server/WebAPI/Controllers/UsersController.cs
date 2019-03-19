@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
 using WebAPI.Controllers.Interfaces;
-using WebAPI.Entities;
 using WebAPI.Enums;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -24,8 +23,10 @@ namespace WebAPI.Controllers
             _usersService = service;
         }
 
+        [HttpPost]
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("authenticate", Name = nameof(Routing.Authenticate))] // remove after swagger
+        [Route("login")]
         public async Task<IActionResult> Authenticate([FromBody]UserDto userDto)
         {
             if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
@@ -42,8 +43,10 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost]
         [AllowAnonymous]
-        [HttpPost("register", Name = nameof(Post))]
+        [HttpPost("registration", Name = nameof(Routing.Register))] // remove after swagger
+        [Route("register")]
         public override async Task<IActionResult> Post([FromBody]UserDto userDto)
         {
             if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
@@ -52,8 +55,7 @@ namespace WebAPI.Controllers
             try
             {
                 var created = await _usersService.Create(userDto);
-                //var uri = _usersService.CreateResourceUri(created.Id);
-                return CreatedAtRoute(nameof(Post), created);
+                return CreatedAtRoute(nameof(Routing.Register), created);
             }
             catch (InvalidOperationException e)
             {
@@ -70,6 +72,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = nameof(UserType.Admin))]
         public override async Task<IActionResult> GetById([FromRoute]long id)
         {
             try
@@ -84,8 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
         public override async Task<IActionResult> Put([FromRoute]long id, [FromBody]UserDto userDto)
         {
+            if (!_usersService.ValidateUser(User, id))
+                return Forbid("Cannot update user");
+
             if (!ModelState.IsValid || !_usersService.ValidateDto(userDto))
                 return BadRequest();
 
@@ -101,8 +108,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
         public override async Task<IActionResult> Delete([FromRoute]long id)
         {
+            if (!_usersService.ValidateUser(User, id))
+                return Forbid("Cannot delete user");
+
             try
             {
                 await _usersService.Delete(id);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebAPI.Base;
+﻿using WebAPI.Base;
 using WebAPI.Enums;
 
 namespace WebAPI.Models.DTO

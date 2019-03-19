@@ -3,6 +3,8 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { RegistrationPage } from '../registration/registration.page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {UsersService} from '../../services/users.service';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class LoginPage implements OnInit {
 
   public onLoginForm: FormGroup;
+  private user: User; // populate values before pressing onSignUp()
 
   constructor(
     public navCtrl: NavController,
@@ -19,7 +22,8 @@ export class LoginPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private usersService: UsersService
   ) { }
 
   ionViewWillEnter() {
@@ -104,7 +108,14 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateRoot('/registration');
   }
 
-  goToHome() {
-    this.navCtrl.navigateRoot('home');
+  onSignIn() {
+    this.usersService.login(this.user).subscribe(user => {
+      // validate somehow
+      this.user = user;
+      // navigate to main page if user logged in. Should return User object with id, token and user type populated
+      if (this.user != null && this.user.token != null){
+        this.navCtrl.navigateRoot('home').catch(reason => console.log('Error while signing in'));
+      }
+    });
   }
 }

@@ -75,9 +75,22 @@ export class RegistrationPage implements OnInit {
       duration: 2000
     });
 
+
     loader.present();
     loader.onWillDismiss().then(() => {
-      this.navCtrl.navigateRoot('registration'); // navigate login, kol kas palikau ten pat
+      // this.navCtrl.navigateRoot('registration'); // navigate login, kol kas palikau ten pat
+      // iki čia ateina user == null
+      this.usersService.register(this.user).subscribe(user => {
+        this.user = user;
+        console.log(user);
+        if (this.user != null) {
+          this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
+        } else {
+          console.log('Registration failed');
+        }
+      }, error1 => {
+        console.log('User was not registered', error1);
+      });
     });
   } 
   conditions(){
@@ -93,6 +106,7 @@ export class RegistrationPage implements OnInit {
    // this.router.navigate(["/user"]);
   }*/
 
+  // metodas neiskvieciamas nuo HTML. Pritaikyti tik vieną signUp arba onRegister
   onRegister(form: NgForm) {
     console.log('submited');
     //form. kuri forma ir kaip naudoti ja duomenims apdoroti
@@ -107,7 +121,11 @@ export class RegistrationPage implements OnInit {
     this.usersService.register(this.user).subscribe(user => {
       this.user = user;
       console.log(user);
-      this.navCtrl.navigateForward('login');
+      if (this.user != null) {
+        this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
+      } else {
+        console.log('Registration failed');
+      }
     });
     }
 

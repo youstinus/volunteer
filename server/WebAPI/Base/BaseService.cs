@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
@@ -94,21 +94,15 @@ namespace WebAPI.Base
             await _repository.Delete(entity);
         }
 
-        public T CreatePoco(TDto entityDto)
+        public virtual T CreatePoco(TDto entityDto)
         {
-            //var creationDate = _timeService.GetCurrentTime();
             var entity = _mapper.Map<T>(entityDto);
-            /*product.LastModified = creationDate;
-            product.Created = creationDate;*/
             return entity;
         }
 
-        public TDto CreateDto(T entity)
+        public virtual TDto CreateDto(T entity)
         {
-            //var creationDate = _timeService.GetCurrentTime();
             var entityDto = _mapper.Map<TDto>(entity);
-            /*product.LastModified = creationDate;
-            product.Created = creationDate;*/
             return entityDto;
         }
         
@@ -120,6 +114,12 @@ namespace WebAPI.Base
         public virtual bool ValidateDto(TDto entityDto)
         {
             return entityDto != null;
+        }
+
+        public virtual bool ValidateUser(ClaimsPrincipal user, long id)
+        {
+            return user.Identity.IsAuthenticated
+                   && user.Identity.Name == id.ToString();
         }
     }
 }

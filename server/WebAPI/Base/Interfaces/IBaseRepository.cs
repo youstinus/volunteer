@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace WebAPI.Base.Interfaces
@@ -10,5 +12,7 @@ namespace WebAPI.Base.Interfaces
         Task<T> Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
+        Task<T> GetSingleByPredicate(Expression<Func<T, bool>> predicate);
+        Task<ICollection<T>> GetAllByPredicate(Expression<Func<T, bool>> predicate);
     }
 }

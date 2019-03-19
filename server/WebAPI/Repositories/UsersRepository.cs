@@ -29,6 +29,11 @@ namespace WebAPI.Repositories
             return await ItemSet.FirstOrDefaultAsync(x => x.Username.Equals(username));
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            return await ItemSet.FirstOrDefaultAsync(x => x.Email.Equals(email));
+        }
+
         public Task<User> GetByCredentials(string username, string password)
         {
             // verify password or get hashed password

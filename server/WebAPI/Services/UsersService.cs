@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Base;
+using WebAPI.Enums;
 using WebAPI.Helpers;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -21,6 +22,7 @@ namespace WebAPI.Services
     {
         private readonly IUsersRepository _usersRepository;
         private readonly AppSettings _appSettings;
+        private readonly ITimeService _timeService;
 
         public UsersService(
             IUsersRepository repository,
@@ -30,6 +32,7 @@ namespace WebAPI.Services
         {
             _usersRepository = repository;
             _appSettings = appSettings.Value;
+            _timeService = timeService;
         }
 
         // role based
@@ -60,7 +63,7 @@ namespace WebAPI.Services
             var subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, userDto.Id.ToString()),
-                new Claim(ClaimTypes.Role, nameof(userDto.Type))
+                new Claim(ClaimTypes.Role, Enum.GetName(typeof(UserType), userDto.Type))
             });
             var sign = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -78,11 +81,12 @@ namespace WebAPI.Services
 
             return userDto;
         }
-        
+
         public override async Task<UserDto> Create(UserDto userDto)
         {
             // map dto to entity
             var user = CreatePoco(userDto);
+            user.Created = _timeService.GetCurrentTime();
 
             // validation
             if (string.IsNullOrWhiteSpace(userDto.Password))
@@ -92,6 +96,10 @@ namespace WebAPI.Services
             if (userCheck != null)
                 throw new InvalidOperationException($"Username {user.Username} is already taken");
 
+            userCheck = await _usersRepository.GetByEmail(userDto.Email);
+            if (userCheck != null)
+                throw new InvalidOperationException("Email " + userDto.Email + " is already taken");
+            
             CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
 
             user.Hash = passwordHash;
@@ -118,10 +126,18 @@ namespace WebAPI.Services
                     throw new InvalidOperationException("Username " + userDto.Username + " is already taken");
             }
 
-            // update user properties
-            /*user.FirstName = userParam.FirstName;
-            user.LastName = userParam.LastName;*/
+            if (userDto.Email != user.Email)
+            {
+                // email has changed so check if the new email is already taken
+                var userCheck = await _usersRepository.GetByEmail(userDto.Email);
+                if (userCheck != null)
+                    throw new InvalidOperationException("Email " + userDto.Email + " is already taken");
+            }
+
+            // later implement mapper
             user.Username = userDto.Username;
+            user.Email = userDto.Email;
+            user.Updated = _timeService.GetCurrentTime();
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(userDto.Password))
@@ -133,6 +149,14 @@ namespace WebAPI.Services
             }
 
             await _repository.Update(user);
+        }
+
+        public override User CreatePoco(UserDto entityDto)
+        {
+            var updateTime = _timeService.GetCurrentTime();
+            var user = base.CreatePoco(entityDto);
+            user.Updated = updateTime;
+            return user;
         }
 
         #region Private helper methods

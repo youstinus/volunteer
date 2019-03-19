@@ -2,8 +2,12 @@
 {
     public enum Routing
     {
-        // products routes
-        GetProject
-
+        CreateProject,
+        CreateOrganization,
+        CreateVolunteer,
+        CreateImage,
+        CreateReview,
+        Register,
+        Authenticate
     }
 }

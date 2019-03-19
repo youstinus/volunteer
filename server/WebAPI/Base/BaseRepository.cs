@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Base.Interfaces;
@@ -50,6 +52,16 @@ namespace WebAPI.Base
         {
             ItemSet.Remove(entity);
             await Context.SaveChangesAsync();
+        }
+
+        public virtual async Task<T> GetSingleByPredicate(Expression<Func<T, bool>> predicate)
+        {
+            return await IncludeDependencies(ItemSet).SingleOrDefaultAsync(predicate);
+        }
+
+        public virtual async Task<ICollection<T>> GetAllByPredicate(Expression<Func<T, bool>> predicate)
+        {
+            return await IncludeDependencies(ItemSet).Where(predicate).ToListAsync();
         }
     }
 }

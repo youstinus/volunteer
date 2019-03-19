@@ -14,7 +14,7 @@ namespace WebAPI.Configurations
             return services
                 .AddRepositoryDependencies()
                 .AddServiceDependencies()
-                .AddMapperDependencies()
+                //.AddMapperDependencies()
                 .AddTestCarDependencies();
         }
         
@@ -24,6 +24,8 @@ namespace WebAPI.Configurations
                 .AddScoped<IOrganizationsRepository, OrganizationsRepository>()
                 .AddScoped<IProjectsRepository, ProjectsRepository>()
                 .AddScoped<IUsersRepository, UsersRepository>()
+                .AddScoped<IPicturesRepository, PicturesRepository>()
+                .AddScoped<IReviewsRepository, ReviewsRepository>()
                 .AddScoped<IVolunteersRepository, VolunteersRepository>();
         }
         
@@ -33,7 +35,10 @@ namespace WebAPI.Configurations
                 .AddScoped<IOrganizationsService, OrganizationsService>()
                 .AddScoped<IProjectsService, ProjectsService>()
                 .AddScoped<IUsersService, UsersService>()
-                .AddScoped<IVolunteersService, VolunteersService>();
+                .AddScoped<IPicturesService, PicturesService>()
+                .AddScoped<IReviewsService, ReviewsService>()
+                .AddScoped<IVolunteersService, VolunteersService>()
+                .AddSingleton<ITimeService, TimeService>();
         }
 
         private static IServiceCollection AddMapperDependencies(this IServiceCollection services)

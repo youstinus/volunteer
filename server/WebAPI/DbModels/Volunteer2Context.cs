@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-namespace WebAPI.DbModels
+﻿namespace WebAPI.DbModels
 {
     /*public partial class Volunteer2Context : DbContext
     {

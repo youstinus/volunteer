@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
 
@@ -15,5 +16,6 @@ namespace WebAPI.Base.Interfaces
         Task Delete(long id);
         Uri CreateResourceUri(long id);
         bool ValidateDto(TDto entityDto);
+        bool ValidateUser(ClaimsPrincipal user, long id);
     }
 }

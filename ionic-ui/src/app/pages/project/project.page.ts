@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from 'src/app/models/Project';
+import {ProjectsService} from '../../services/projects.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-project',
@@ -8,10 +10,17 @@ import {Project} from 'src/app/models/Project';
 })
 export class ProjectPage implements OnInit {
 
-    constructor() {
+    private project1: Project;
+    constructor(private projectsService: ProjectsService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        const id = this.route.snapshot.params['id'];
+        this.projectsService.getById(id).subscribe(value => {
+            this.project = value;
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
     private project: Project = {
@@ -27,4 +36,5 @@ export class ProjectPage implements OnInit {
         volunteersIds: [1],
         website: 'https://volunteering.com'
     };
+
 }
