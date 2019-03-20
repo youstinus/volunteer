@@ -1,0 +1,8 @@
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk my-key-alias -s torepass platypus
+C:\Users\youstinus\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign -v 4 app-release-unsigned.apk release.apk
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore your-release-key.keystore android-release-unsigned.apk alias -storepass password
+path-to-android-sdk/build-tools/version/zipalign -v 4 android-release-unsigned.apk android-prod-released-signed.apk
+path-to-android-sdk/build-tools/version/apksigner verify android-prod-released-signed.apk

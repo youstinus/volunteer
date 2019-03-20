@@ -36,17 +36,17 @@ export class RegistrationPage implements OnInit {
 
 
     this.onRegisterForm = this.formBuilder.group({
-      'fullName': [null, Validators.compose([
+      'username': [null, Validators.compose([
         Validators.required
       ])],
       'email': ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      'password': [null, Validators.compose([
+      'password1': [null, Validators.compose([
         Validators.required
       ])],
-      'confirm_password': [null, Validators.compose([
+      'password': [null, Validators.compose([
         Validators.required
       ])],
       'type': [null, Validators.compose([
@@ -71,16 +71,17 @@ export class RegistrationPage implements OnInit {
   }
 
   async signUp() {
+
+    console.log(this.onRegisterForm);
     const loader = await this.loadingCtrl.create({
       duration: 2000
     });
-
 
     loader.present();
     loader.onWillDismiss().then(() => {
       // this.navCtrl.navigateRoot('registration'); // navigate login, kol kas palikau ten pat
       // iki čia ateina user == null
-      this.usersService.register(this.user).subscribe(user => {
+      this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
         console.log(user);
         if (this.user != null) {

@@ -11,15 +11,16 @@
       </h3>
     </div>
     <!-- Register form -->
-    <form [formGroup]="onRegisterForm" class="list-form" (ngSubmit)="onRegister(onRegisterForm.value)" >
+    <!--(ngSubmit)="onRegister(onRegisterForm.value)" -->
+    <form [formGroup]="onRegisterForm" class="list-form">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="mail" item-start></ion-icon>
-          Name
+          Username
         </ion-label>
-        <ion-input color="secondary" type="text" formControlName="fullName"></ion-input>
+        <ion-input color="secondary" type="text" formControlName="username" value="{{user.username}}"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">
+      <p ion-text class="text08" *ngIf="onRegisterForm.get('username').touched && onRegisterForm.get('username').hasError('required')">
         <ion-text color="warning">
           This field is required
         </ion-text>
@@ -30,7 +31,7 @@
           <ion-icon name="mail" item-start></ion-icon>
           Email
         </ion-label>
-        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+        <ion-input color="secondary" type="email" formControlName="email" value="{{user.email}}"></ion-input>
       </ion-item>
       <p ion-text class="text08" *ngIf="onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')">
         <ion-text color="warning">
@@ -41,8 +42,8 @@
       <ion-item>
         <ion-label position="floating">User type</ion-label>
         <ion-select formControlName="type" cancelText="Cancel" okText="OK">
-          <ion-select-option value="volunteer">Volunteer</ion-select-option>
-          <ion-select-option value="organization">Organization</ion-select-option>        
+          <ion-select-option value=2>Volunteer</ion-select-option>
+          <ion-select-option value=3>Organization</ion-select-option>
         </ion-select>
       </ion-item>
       
@@ -51,9 +52,9 @@
           <ion-icon name="lock" item-start></ion-icon>
           Password
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+        <ion-input color="secondary" type="password" formControlName="password1"></ion-input>
       </ion-item>
-      <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">
+      <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password1').touched && onRegisterForm.get('password1').hasError('required')">
         <ion-text color="warning">
           This field is required
         </ion-text>
@@ -64,7 +65,7 @@
           <ion-icon name="lock" item-start></ion-icon>
           Confirm password
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="confirm_password"></ion-input>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
       </ion-item>
       <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">
         <ion-text color="warning">
@@ -97,7 +98,7 @@
     </form>
 
     <div margin-top>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp(onRegisterForm.value)"  [disabled]="!onRegisterForm.valid"
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()"  [disabled]="!onRegisterForm.valid"
         tappable>
         Sign Up
         <ion-icon name="log-in"></ion-icon>

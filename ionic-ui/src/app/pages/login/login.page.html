@@ -17,11 +17,11 @@
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="mail" item-start></ion-icon>
-          Email
+          Username
         </ion-label>
-        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+        <ion-input color="secondary" type="username" formControlName="username"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+      <p ion-text class="text08" *ngIf="onLoginForm.get('username').touched && onLoginForm.get('username').hasError('required')">
         <ion-text color="warning">
           Required Field
         </ion-text>

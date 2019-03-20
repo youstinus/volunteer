@@ -33,9 +33,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.onLoginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      'username': [null, Validators.compose([
+        Validators.required
+
+        //,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'password': [null, Validators.compose([
         Validators.required
@@ -109,12 +110,13 @@ export class LoginPage implements OnInit {
   }
 
   onSignIn() {
-    this.usersService.login(this.user).subscribe(user => {
+    this.usersService.login(this.onLoginForm.value).subscribe(user => {
       // validate somehow
       this.user = user;
+      console.log(user);
       // navigate to main page if user logged in. Should return User object with id, token and user type populated
       if (this.user != null && this.user.token != null){
-        this.navCtrl.navigateRoot('home').catch(reason => console.log('Error while signing in'));
+        this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
       }
     });
   }
