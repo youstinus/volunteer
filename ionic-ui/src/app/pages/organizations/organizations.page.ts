@@ -10,7 +10,7 @@ import {NavController} from "@ionic/angular";
   styleUrls: ['./organizations.page.scss'],
 })
 export class OrganizationsPage implements OnInit {
-  private organizations: Organization[] =
+  organizations: Organization[] =
       [
         {
           id: 11,

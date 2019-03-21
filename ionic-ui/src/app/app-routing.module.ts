@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {MenuPage} from './pages/menu/menu.page';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},

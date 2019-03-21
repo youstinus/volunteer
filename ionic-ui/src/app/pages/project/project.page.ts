@@ -14,6 +14,19 @@ import { Button } from 'protractor';
 
 export class ProjectPage implements OnInit {
 
+    project: Project = {
+        id: 1,
+        title: 'VšĮ Pagirk',
+        description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
+        email: 'email@test.com',
+        organizationId: 5,
+        phone: '866666666',
+        picturesIds: [1],
+        start: new Date('2019-05-01'),
+        end: new Date('2019-05-01'),
+        volunteersIds: [2],
+        website: 'https://volunteering.com'
+    };
 
     constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {
 
@@ -53,19 +66,7 @@ export class ProjectPage implements OnInit {
     {
 
     }
-    private project: Project = {
-        id: 1,
-        title: 'VšĮ Pagirk',
-        description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-        email: 'email@test.com',
-        organizationId: 5,
-        phone: '866666666',
-        picturesIds: [1],
-        start: new Date('2019-05-01'),
-        end: new Date('2019-05-01'),
-        volunteersIds: [2],
-        website: 'https://volunteering.com'
-    };
+
 
 }
 export class PopoverComponent {

@@ -10,7 +10,7 @@ import {NavController} from '@ionic/angular';
 })
 export class ProjectsPage implements OnInit {
 
-  private projects: Project[];
+  projects: Project[];
 
   constructor(private projectsService: ProjectsService, private navCtrl: NavController) {
   }

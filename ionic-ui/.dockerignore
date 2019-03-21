@@ -7,3 +7,7 @@
 */bin
 */obj
 **/.toolstarget
+Dockerfile
+docker-compose.yml
+node_modules/
+Resources
