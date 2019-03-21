@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,8 @@ namespace WebAPI.Controllers
         public VolunteersController(IVolunteersService service) : base(service)
         {
         }
+
+        #region CRUD
 
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
@@ -61,5 +64,7 @@ namespace WebAPI.Controllers
         {
             return base.Put(id, entity);
         }
+
+        #endregion
     }
 }

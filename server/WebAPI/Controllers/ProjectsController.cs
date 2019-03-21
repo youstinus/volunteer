@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,31 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class ProjectsController : BaseController<Project, ProjectDto>, IProjectsController
     {
+        private readonly IProjectsService _projectsService;
         public ProjectsController(IProjectsService service) : base(service)
         {
+            _projectsService = service;
         }
+        
+        [HttpGet("{id}/volunteers")]
+        [Authorize(Roles = nameof(UserType.Organization))]
+        public async Task<IActionResult> GetVolunteersByProjectId([FromRoute] long id)
+        {
+            if (!(await _projectsService.ValidateOrganizationByProjectId(User, id)))
+                return Forbid();
+
+            try
+            {
+                var entities = await _projectsService.GetVolunteersByProjectId(id);
+                return Ok(entities);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        #region CRUD
 
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
@@ -61,5 +84,7 @@ namespace WebAPI.Controllers
         {
             return base.Put(id, entity);
         }
+
+        #endregion
     }
 }

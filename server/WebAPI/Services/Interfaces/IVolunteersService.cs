@@ -1,4 +1,6 @@
-﻿using WebAPI.Base.Interfaces;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using WebAPI.Base.Interfaces;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 

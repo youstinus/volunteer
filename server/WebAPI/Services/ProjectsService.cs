@@ -1,5 +1,10 @@
-﻿using System.Data.SqlTypes;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
@@ -16,6 +21,26 @@ namespace WebAPI.Services
             IMapper mapper,
             ITimeService timeService) : base(repository, mapper, timeService)
         {
+        }
+
+        public async Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id)
+        {
+            var project = await _repository.GetById(id);
+            if (project == null)
+                throw new InvalidOperationException($"Project with id {id} was not found");
+
+            var volunteers = project.ProjectVolunteers.Select(x => x.Volunteer);
+            var mapped = _mapper.Map<ICollection<VolunteerDto>>(volunteers);
+            return mapped;
+        }
+
+        public async Task<bool> ValidateOrganizationByProjectId(ClaimsPrincipal user, long id)
+        {
+            if (string.IsNullOrWhiteSpace(user.Identity.Name))
+                return false;
+
+            var projects = await _repository.GetAllByPredicate(x => x.Organization.Id == Convert.ToInt32(user.Identity.Name));
+            return user.Identity.IsAuthenticated && projects.Count > 0 && projects.Select(x => x.Id).Contains(id);
         }
 
         public override bool ValidateDto(ProjectDto entity)
