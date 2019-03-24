@@ -1,5 +1,41 @@
 <app-header>New Project</app-header>
 
 <ion-content padding>
+    
+  <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
+    <ion-row style="height:10px"></ion-row>
 
+      <ion-item lines="none">
+        <ion-label color="primary" position="floating">Title</ion-label>
+        <ion-input type="text" ></ion-input>
+      </ion-item>    
+
+      <ion-item>
+        <ion-label color="primary" position="floating">Description</ion-label>
+        <ion-textarea autosize></ion-textarea>
+        <!-- <ion-input type="text" ></ion-input> -->
+      </ion-item>
+
+      <!-- <button class="btn btn-default" type="button" ngxClipboard [cbContent]="Text to be copied">copy</button> -->
+      
+      <!-- <ion-item lines="none"></ion-item> -->
+  
+      <ion-item>
+        <ion-label stacked>Start Date</ion-label>
+        <ion-datetime></ion-datetime>       
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Ends</ion-label>
+        <ion-datetime></ion-datetime>       
+      </ion-item>
+    <ion-item lines = "none" >
+      <ion-icon name="pin" slot="start" ></ion-icon>
+      <ion-label color="primary" position="floating">Google loacation link: </ion-label>
+      <ion-input type="text" ></ion-input>
+      <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+    </ion-item>
+  
+  <!-- <datepicker></datepicker> -->
+
+      <ion-button class="submit-btn" expand="block" type="submit" >Create</ion-button>
 </ion-content>
