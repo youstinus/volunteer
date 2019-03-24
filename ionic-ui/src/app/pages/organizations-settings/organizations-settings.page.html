@@ -2,4 +2,107 @@
 
 <ion-content padding>
 
-</ion-content>
+    <ion-card>
+        <ion-card-header>
+            <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
+            <ion-button shape ="round">Change picture </ion-button>
+
+
+        </ion-card-header>
+
+
+        <ion-list>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Title :</h1>
+                        </ion-text>
+                    </div>
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput value= {{organization.title}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                    <ion-text>
+                        <h1>Address :</h1>
+                    </ion-text>
+                    </div>
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput  value= {{organization.address}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Phone :</h1>
+
+                        </ion-text>
+
+                    </div>
+
+
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput value= {{organization.phone}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                    <ion-text>
+                        <h1>Website:</h1>
+
+                    </ion-text>
+                    </div>
+                </ion-label>
+                <div class = input>
+                    <ion-input clearInput value= {{organization.website}}></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-text>
+                        <h1>Description:</h1>
+
+                    </ion-text>
+
+                </ion-label>
+
+            </ion-item>
+
+            <div class = desc>
+                <ion-textarea value= {{organization.description}} ></ion-textarea>
+
+            </div>
+
+
+        </ion-list>
+
+
+        <ion-card-content>
+            <ion-button color="primary">Save changes</ion-button>
+        </ion-card-content>
+
+
+
+
+    </ion-card>
+
