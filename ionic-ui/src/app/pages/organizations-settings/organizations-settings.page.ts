@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Organization} from "../../models/Organization";
 import {OrganizationsService} from "../../services/organizations.service";
 import {ActivatedRoute} from "@angular/router";
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import {CameraOptions} from "@ionic-native/camera";
+//import { ImagePicker } from '@ionic-native/image-picker/ngx';
+//import {CameraOptions} from "@ionic-native/camera";
 
 @Component({
   selector: 'app-organizations-settings',
