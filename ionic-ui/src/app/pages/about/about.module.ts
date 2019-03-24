@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { AboutPage } from './about.page';
 import {ComponentsModule} from '../../shared/components.module';
-import {FooterPage} from '../footer/footer.page';
 
 const routes: Routes = [
   {
@@ -25,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [AboutPage, FooterPage]
+  declarations: [AboutPage]
 })
 export class AboutPageModule {}

@@ -46,7 +46,7 @@ export class OrganizationsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.organizationsService.get('organizations').subscribe(items => {
+    this.organizationsService.get().subscribe(items => {
       this.organizations = items;
     }, error1 => {
       console.log(error1);

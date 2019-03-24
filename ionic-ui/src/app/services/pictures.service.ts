@@ -3,17 +3,20 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Picture} from '../models/Picture';
 import {Observable} from 'rxjs';
+import {BaseService} from './base.service';
+import {UsersService} from './users.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PicturesService {
-  private picturesApi = `${environment.webApiUrl}/pictures`;
+export class PicturesService extends BaseService<Picture> {
+  public api = `${environment.webApiUrl}/pictures`;
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient, public usersService: UsersService) {
+    super(http, usersService);
   }
 
-  create(picture: Picture): Observable<Picture> {
+  /*create(picture: Picture): Observable<Picture> {
     return this.http.post<Picture>(this.picturesApi, picture);
   }
 
@@ -31,5 +34,5 @@ export class PicturesService {
 
   delete(id: number): Observable<any> {
     return this.http.delete<Picture>(this.picturesApi + '/' + id);
-  }
+  }*/
 }

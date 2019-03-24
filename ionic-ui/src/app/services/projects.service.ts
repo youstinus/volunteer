@@ -4,18 +4,21 @@ import {Project} from '../models/Project';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Review} from '../models/Review';
+import {UsersService} from './users.service';
+import {BaseService} from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProjectsService {
-    private projectsApi = `${environment.webApiUrl}/projects`;
+export class ProjectsService extends BaseService<Project> {
+    public api = `${environment.webApiUrl}/projects`;
 
-    constructor(private http: HttpClient) {
+    constructor(public http: HttpClient, public usersService: UsersService) {
+        super(http, usersService);
     }
 
-    getAll(): Observable<Project[]> {
-        const auth_token = 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJyb2xlIjoiT3JnYW5pemF0aW9uIiwibmJmIjoxNTUyMDU4OTA5LCJleHAiOjE1NTI2NjM3MDksImlhdCI6MTU1MjA1ODkwOX0.dfkr9qNyO5UJAW_pL0-Y8wQ_OyWp0mRnTWbOlUq8DZY';
+    /*getAll(): Observable<Project[]> {
+        const auth_token = 'Bearer ';
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': auth_token
@@ -24,7 +27,7 @@ export class ProjectsService {
     }
 
     getById(id: number): Observable<Project> {
-        const auth_token = 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJyb2xlIjoiT3JnYW5pemF0aW9uIiwibmJmIjoxNTUyMDU4OTA5LCJleHAiOjE1NTI2NjM3MDksImlhdCI6MTU1MjA1ODkwOX0.dfkr9qNyO5UJAW_pL0-Y8wQ_OyWp0mRnTWbOlUq8DZY';
+        const auth_token = 'Bearer ';
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': auth_token
@@ -42,5 +45,5 @@ export class ProjectsService {
 
     delete(id: number): Observable<any> {
         return this.http.delete<Review>(this.projectsApi + '/' + id);
-    }
+    }*/
 }

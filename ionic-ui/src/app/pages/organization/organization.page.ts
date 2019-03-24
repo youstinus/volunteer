@@ -31,7 +31,7 @@ export class OrganizationPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.organizationsService.getById(id, 'organizations').subscribe(value => {
+    this.organizationsService.getById(id).subscribe(value => {
       this.organization = value;
     }, error1 => {
       console.log(error1);

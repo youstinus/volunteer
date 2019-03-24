@@ -11,13 +11,13 @@ import {BaseService} from './base.service';
   providedIn: 'root'
 })
 export class OrganizationsService extends BaseService<Organization> {
-  private projectsApi = `${environment.webApiUrl}/organizations`;
+  public api = `${environment.webApiUrl}/organizations`;
 
   constructor(public http: HttpClient, public usersService: UsersService) {
     super(http, usersService);
   }
 
   getProjectsByOrganizationId(id: number): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectsApi + '/' + id + '/projects');
+    return this.http.get<Project[]>(this.api + '/' + id + '/projects');
   }
 }

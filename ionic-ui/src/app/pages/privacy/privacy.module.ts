@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { PrivacyPage } from './privacy.page';
 import {ComponentsModule} from '../../shared/components.module';
-import {FooterPage} from '../footer/footer.page';
 
 const routes: Routes = [
   {
@@ -24,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [PrivacyPage, FooterPage]
+  declarations: [PrivacyPage]
 })
 export class PrivacyPageModule {}

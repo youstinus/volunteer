@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterEvent} from '@angular/router';
+import {UsersService} from '../../services/users.service';
 
 @Component({
     selector: 'app-menu',
@@ -7,6 +8,8 @@ import {Router, RouterEvent} from '@angular/router';
     styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
+
+    private role: number;
 
     public pages = [
         {
@@ -60,17 +63,23 @@ export class MenuPage implements OnInit {
 
     selectedPath = '';
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private usersService: UsersService) {
         this.router.events.subscribe((event: RouterEvent) => {
             this.selectedPath = event.url;
         });
     }
 
     ngOnInit() {
+        this.getRole();
     }
 
     onClick() {
         console.log('hhh');
+    }
+
+    getRole() {
+        this.role = this.usersService.getRole();
+        console.log(this.role);
     }
 
 }
