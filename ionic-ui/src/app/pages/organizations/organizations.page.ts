@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Organization} from "../../models/Organization";
-import {OrganizationsService} from "../../services/organizations.service";
-import {NavController} from "@ionic/angular";
+import {Organization} from '../../models/Organization';
+import {OrganizationsService} from '../../services/organizations.service';
+import {NavController} from '@ionic/angular';
 
 
 @Component({
@@ -46,13 +46,14 @@ export class OrganizationsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.organizationsService.getAll().subscribe(items => {
+    this.organizationsService.get('organizations').subscribe(items => {
       this.organizations = items;
-      //console.log(this.projects, this.projects2);
+    }, error1 => {
+      console.log(error1);
     });
   }
 
   onOrganizationClicked(organization: Organization) {
-    this.navCtrl.navigateForward('organization/' + organization.id);
+    this.navCtrl.navigateForward('organizations/' + organization.id).catch(reason => console.log(reason));
   }
 }

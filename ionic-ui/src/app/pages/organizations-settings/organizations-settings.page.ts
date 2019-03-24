@@ -32,14 +32,22 @@ export class OrganizationsSettingsPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.organizationsService.getById(id).subscribe(value => {
+    this.organizationsService.getById(id, 'organizations').subscribe(value => {
       this.organization = value;
     }, error1 => {
       console.log(error1);
     });
   }
 
-
+  onSaveOrganization() {
+    const id = this.route.snapshot.params['id'];
+    console.log(this.organization);
+    this.organizationsService.update(id, this.organization, 'organizations').subscribe(value => {
+      console.log(value);
+    }, error1 => {
+      console.log(error1);
+    });
+  }
 
 
   }

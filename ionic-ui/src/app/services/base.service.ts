@@ -1,35 +1,55 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {UsersService} from './users.service';
+import {Project} from '../models/Project';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class BaseService<T> {
+export abstract class BaseService<T> {
 
-  private apiUrl = `${environment.webApiUrl}`;
+    private apiUrl = `${environment.webApiUrl}`;
 
-  constructor(private http: HttpClient) {
-  }
+    protected constructor(public http: HttpClient, public usersService: UsersService) {
+    }
 
-  create(item: T, url: string): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}/${url}`, item);
-  }
+    public create(item: T, url: string): Observable<T> {
+        const headers = this.getHeaders();
+        return this.http.post<T>(`${this.apiUrl}/${url}`, item, {headers: headers});
+    }
 
-  get(url: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.apiUrl}/${url}`);
-  }
+    public get(url: string): Observable<T[]> {
+        const headers = this.getHeaders();
+        return this.http.get<T[]>(`${this.apiUrl}/${url}`, {headers: headers});
+    }
 
-  getById(id: number, url: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${url}/${id}`);
-  }
+    public getById(id: number, url: string): Observable<T> {
+        const headers = this.getHeaders();
+        return this.http.get<T>(`${this.apiUrl}/${url}/${id}`, {headers: headers});
+    }
 
-  update(id: number, item: T, url: string): Observable<any> {
-    return this.http.put<T>(`${this.apiUrl}/${url}/${id}`, item);
-  }
+    public update(id: number, item: T, url: string): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.put<T>(`${this.apiUrl}/${url}/${id}`, item, {headers: headers});
+    }
 
-  delete(id: number, url: string): Observable<any> {
-    return this.http.delete<T>(`${this.apiUrl}/${url}/${id}`);
-  }
+    public delete(id: number, url: string): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.delete<T>(`${this.apiUrl}/${url}/${id}`, {headers: headers});
+    }
+
+    public getHeaders() {
+        let auth_token = 'Bearer ';
+        const token = this.usersService.getToken();
+        if (token != null) {
+            auth_token = auth_token + token;
+        }
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': auth_token
+        });
+        return headers;
+    }
 }

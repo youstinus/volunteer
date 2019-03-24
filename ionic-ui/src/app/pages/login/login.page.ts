@@ -116,6 +116,7 @@ export class LoginPage implements OnInit {
       console.log(user);
       // navigate to main page if user logged in. Should return User object with id, token and user type populated
       if (this.user != null && this.user.token != null){
+        this.usersService.setUser(user);
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
       }
     });

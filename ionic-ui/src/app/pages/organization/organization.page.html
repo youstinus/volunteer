@@ -40,19 +40,10 @@
 
 
   <ion-list>
-    <ion-item>
-      <ion-label>Project 1</ion-label>
+    <ion-item *ngFor="let project of projects; let i = index" (click)="onProjectClicked(i)">
+      <ion-label>{{ project.title }}</ion-label>
       <ion-button expand="full" shape ="round">Go to project page</ion-button>
     </ion-item>
-    <ion-item>
-      <ion-label>Project 2</ion-label>
-      <ion-button expand="full" shape ="round">Go to project page</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>Project 3</ion-label>
-      <ion-button expand="full" shape ="round">Go to project page</ion-button>
-    </ion-item>
-
   </ion-list>
 
 

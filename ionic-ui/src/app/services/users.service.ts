@@ -9,8 +9,25 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UsersService {
     private usersApi = `${environment.webApiUrl}/users`;
+    private user: User;
 
     constructor(private http: HttpClient) {
+    }
+
+    public getToken() {
+        if (this.user != null) {
+            return this.user.token;
+        } else {
+            return null;
+        }
+    }
+
+    public getUser() {
+        return this.user;
+    }
+
+    public setUser(user: User) {
+        this.user = user;
     }
 
     register(user: User): Observable<User> {
