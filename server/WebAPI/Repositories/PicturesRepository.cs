@@ -13,6 +13,7 @@ namespace WebAPI.Repositories
 
         public PicturesRepository(VolunteerDbContext context) : base(context)
         {
+            ItemSet = context.Pictures;
         }
 
         protected override IQueryable<Picture> IncludeDependencies(IQueryable<Picture> queryable)

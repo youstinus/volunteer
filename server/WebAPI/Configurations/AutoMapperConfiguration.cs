@@ -2,7 +2,6 @@
 using AutoMapper;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
-using WebAPI.ViewModels;
 
 namespace WebAPI.Configurations
 {
@@ -15,7 +14,6 @@ namespace WebAPI.Configurations
 
         protected AutoMapperConfiguration(string name) : base(name)
         {
-            MapCar();
             MapOrganization();
             MapProject();
             MapPicture();
@@ -70,12 +68,6 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.Id))
                 .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id));
             CreateMap<ReviewDto, Review>();
-        }
-
-        private void MapCar()
-        {
-            CreateMap<Car, CarDto>(MemberList.None);
-            CreateMap<CarDto, Car>(MemberList.Destination);
         }
     }
 }

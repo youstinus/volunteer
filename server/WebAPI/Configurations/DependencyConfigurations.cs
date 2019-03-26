@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using WebAPI.Commands;
 using WebAPI.Repositories;
 using WebAPI.Repositories.Interfaces;
 using WebAPI.Services;
@@ -13,9 +12,7 @@ namespace WebAPI.Configurations
         {
             return services
                 .AddRepositoryDependencies()
-                .AddServiceDependencies()
-                //.AddMapperDependencies()
-                .AddTestCarDependencies();
+                .AddServiceDependencies();
         }
         
         public static IServiceCollection AddRepositoryDependencies(this IServiceCollection services)
@@ -38,33 +35,6 @@ namespace WebAPI.Configurations
                 .AddScoped<IPicturesService, PicturesService>()
                 .AddScoped<IReviewsService, ReviewsService>()
                 .AddScoped<IVolunteersService, VolunteersService>()
-                .AddSingleton<ITimeService, TimeService>();
-        }
-
-        private static IServiceCollection AddMapperDependencies(this IServiceCollection services)
-        {
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperConfiguration());
-            });
-            var mapper = config.CreateMapper();
-
-            return services.AddSingleton(mapper);
-        }
-
-        public static IServiceCollection AddTestCarDependencies(this IServiceCollection services)
-        {
-            return services
-                .AddSingleton<IDeleteCarCommand, DeleteCarCommand>()
-                .AddSingleton<IGetCarCommand, GetCarCommand>()
-                .AddSingleton<IGetCarPageCommand, GetCarPageCommand>()
-                .AddSingleton<IPatchCarCommand, PatchCarCommand>()
-                .AddSingleton<IPostCarCommand, PostCarCommand>()
-                .AddSingleton<IPutCarCommand, PutCarCommand>()
-                /*.AddSingleton<IMapper<Models.Car, Car>, CarToCarMapper>()
-                .AddSingleton<IMapper<Models.Car, SaveCar>, CarToSaveCarMapper>()
-                .AddSingleton<IMapper<SaveCar, Models.Car>, CarToSaveCarMapper>()*/
-                .AddSingleton<ICarRepository, CarRepository>()
                 .AddSingleton<ITimeService, TimeService>();
         }
     }
