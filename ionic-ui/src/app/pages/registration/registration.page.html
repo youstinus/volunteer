@@ -1,5 +1,5 @@
 <app-header>Register</app-header>
-<ion-content padding class="login auth-page" color="primary">
+<ion-content padding class="login auth-page" class="animated fadeIn login auth-page">
 
   <div class="auth-content" >
     <!-- Logo -->
@@ -16,7 +16,7 @@
     <form [formGroup]="onRegisterForm" class="list-form">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
-          <ion-icon name="mail" item-start></ion-icon>
+          <ion-icon name="person" item-start></ion-icon>
           Username
         </ion-label>
         <ion-input color="secondary" type="text" formControlName="username" value="{{user.username}}"></ion-input>
@@ -41,7 +41,9 @@
       </p>
 
       <ion-item>
-        <ion-label position="floating">User type</ion-label>
+        <ion-label position="floating">
+          <ion-icon name="people" item-start></ion-icon>
+          User type</ion-label>
         <ion-select formControlName="type" cancelText="Cancel" okText="OK">
           <ion-select-option value=2>Volunteer</ion-select-option>
           <ion-select-option value=3>Organization</ion-select-option>
@@ -86,7 +88,7 @@
       <ion-item no-padding class="animated fadeInUp">
       <ion-item>
           <span (click)="conditions()" tappable>
-            <ion-text color="light">
+            <ion-text color="black">
               <strong>I accept terms and conditions!</strong>
             </ion-text>
          </span>
