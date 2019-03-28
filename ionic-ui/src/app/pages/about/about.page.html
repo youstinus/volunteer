@@ -54,7 +54,7 @@
             <ion-icon name="happy" item-start></ion-icon>
             Feel free to contact us
           </ion-label>
-          <ion-textarea rows="4" [(ngModel)]="message" type="text" placeholder="Comment .... " formControlName="text"></ion-textarea>
+          <ion-textarea rows="4" type="text" placeholder="Comment .... " formControlName="text"></ion-textarea>
         </ion-item>
         <p ion-text color="warning" class="text08" *ngIf="commentForm.get('text').touched && commentForm.get('text').hasError('required')">
           <ion-text color="warning">

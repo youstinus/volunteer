@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 
 import { NavController, IonButton } from '@ionic/angular';
 import { Button } from 'protractor';
+import {Strings} from '../../constants/Strings';
 // import { Clipboard } from '@ionic-native/clipboard/ngx';
 @Component({
     selector: 'app-project',
@@ -25,7 +26,8 @@ export class ProjectPage implements OnInit {
         start: new Date('2019-05-01'),
         end: new Date('2019-05-01'),
         volunteersIds: [2],
-        website: 'https://volunteering.com'
+        website: 'https://volunteering.com',
+        pictureUrl: Strings.Default_Image_Url
     };
 
     constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {

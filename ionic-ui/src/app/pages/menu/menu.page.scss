@@ -12,3 +12,6 @@ ion-menu {
   max-width: 200px;
 }
 
+ion-header.header-md ion-toolbar:first-child {
+  padding-top: 0;
+}

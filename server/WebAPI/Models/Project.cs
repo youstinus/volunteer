@@ -11,6 +11,7 @@ namespace WebAPI.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Website { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 

@@ -11,6 +11,7 @@ namespace WebAPI.Models
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+        public string ImageUrl { get; set; }
 
         public User User { get; set; }
         public ICollection<Picture> Pictures { get; set; }
