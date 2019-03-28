@@ -24,8 +24,8 @@ export class OrganizationsSettingsPage implements OnInit {
     phone: '866666666',
     picturesIds: [1],
     address : 'test g. 696',
-    email: 'test@gmail.com'
-
+    email: 'test@gmail.com',
+    imageUrl: ''
   };
 
   constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute) { }

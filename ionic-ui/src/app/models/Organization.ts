@@ -9,4 +9,5 @@ export class Organization {
     public userId: number;
     public picturesIds: number[];
     public projectsIds: number[];
+    public imageUrl: string;
 }

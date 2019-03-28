@@ -10,5 +10,5 @@ export class Project {
     public organizationId: number;
     public volunteersIds: number[];
     public picturesIds: number[];
-    public pictureUrl: string;
+    public imageUrl: string;
 }

@@ -17,7 +17,7 @@
     </ion-grid>
 
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
-        <img src="{{ project.pictureUrl }}">
+        <ion-img src="{{ project.imageUrl }}"></ion-img>
         <ion-card-header>
             <ion-card-title>{{project.title}}</ion-card-title>
         </ion-card-header>

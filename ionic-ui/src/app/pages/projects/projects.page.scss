@@ -1,5 +1,4 @@
 ion-card {
-  //height: 266px;
   max-height: 300px;
   max-width: 310px;
   min-width: 310px;
@@ -19,8 +18,7 @@ ion-content {
   }
 }
 
-img {
-  height: 140px;
+ion-img {
   max-height: 140px;
   width: 100%;
 }
@@ -34,14 +32,6 @@ ion-button {
   float: right;
 }
 
-ion-grid {
-  padding: 0px;
-}
-
-ion-col {
-  padding: 0px;
-}
-
-ion-row {
+ion-grid, ion-col, ion-row {
   padding: 0px;
 }

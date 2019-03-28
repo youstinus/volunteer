@@ -27,7 +27,7 @@ export class ProjectPage implements OnInit {
         end: new Date('2019-05-01'),
         volunteersIds: [2],
         website: 'https://volunteering.com',
-        pictureUrl: Strings.Default_Image_Url
+        imageUrl: Strings.Default_Image_Url
     };
 
     constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {

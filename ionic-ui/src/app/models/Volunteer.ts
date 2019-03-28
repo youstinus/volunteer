@@ -7,4 +7,5 @@ export class Volunteer {
     public userId: number;
     public projectsIds: number[];
     public reviewsIds: number[];
+    public imageUrl: string;
 }

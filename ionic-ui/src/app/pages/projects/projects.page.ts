@@ -34,7 +34,13 @@ export class ProjectsPage implements OnInit {
     }
 
     filterNewItems() {
-        this.projectsFiltered = this.projects.filter(value => {
+        this.projectsFiltered = this.projects.sort((n1, n2) => {
+            if (n1.start > n2.start) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }).filter(value => {
             const now = new Date(Date.now());
             if (this.archive) {
                 return value.end < now;
@@ -61,7 +67,6 @@ export class ProjectsPage implements OnInit {
         return this.projectsFiltered.filter(item => {
             const byTitle = item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
             if (byTitle === false) {
-                // processing dates takes long time
                 return item.start.toLocaleDateString('lt-lt').indexOf(searchTerm.toLowerCase()) > -1;
             }
             return byTitle;
