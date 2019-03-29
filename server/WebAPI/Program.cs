@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using WebAPI.Configurations;
 
 namespace WebAPI
 {
@@ -9,7 +8,7 @@ namespace WebAPI
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-            host.MigrateDatabase();
+            //host.MigrateDatabase();
             host.Run();
         }
 

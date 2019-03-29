@@ -1,8 +1,8 @@
 <app-header>Volunteering system</app-header>
 <ion-content padding>
-    <!--src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg"-->
+    <!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"-->
     <ion-img class="image"
-             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"
+             src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg"
     ></ion-img>
 
     <ion-toolbar>
@@ -13,13 +13,13 @@
         <ion-item-group>
             <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
                 <ion-img src="{{ project.imageUrl }}"></ion-img>
-                <ion-card-header>
-                    <ion-card-title>{{project.title}}</ion-card-title>
-                </ion-card-header>
                 <ion-item>
                     <ion-icon name="calendar" slot="start"></ion-icon>
                     <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
                 </ion-item>
+                <ion-card-header>
+                    <ion-card-title>{{project.title}}</ion-card-title>
+                </ion-card-header>
             </ion-card>
         </ion-item-group>
     </ion-item-divider>

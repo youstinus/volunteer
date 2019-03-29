@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
-using WebAPI.Base.Interfaces;
 using WebAPI.Controllers.Interfaces;
 using WebAPI.Enums;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
+using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Controllers
 {
@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class ReviewsController : BaseController<Review, ReviewDto>, IReviewsController
     {
-        public ReviewsController(IBaseService<Review, ReviewDto> service) : base(service)
+        public ReviewsController(IReviewsService service) : base(service)
         {
         }
 

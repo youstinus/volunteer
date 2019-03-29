@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
-using WebAPI.Base.Interfaces;
 using WebAPI.Controllers.Interfaces;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
+using WebAPI.Services.Interfaces;
 
 namespace WebAPI.Controllers
 {
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class PicturesController : BaseController<Picture, PictureDto>, IPicturesController
     {
-        public PicturesController(IBaseService<Picture, PictureDto> service) : base(service)
+        public PicturesController(IPicturesService service) : base(service)
         {
         }
         

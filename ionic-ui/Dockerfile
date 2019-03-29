@@ -5,4 +5,10 @@ ENV IONIC_VERSION 4.10.4
 RUN apt-get update && apt-get install -y git bzip2 openssh-client && \
     npm i -g --unsafe-perm ionic@${IONIC_VERSION} && \
     ionic --no-interactive config set -g daemon.updates false && \
-    rm -rf /var/lib/apt/lists/* && apt-get clean
+    rm -rf /var/lib/apt/lists/* && apt-get clean && npm i -D -E @angular/cli
+
+
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["ionic", "serve", "-b", "-p", "8100", "--address", "0.0.0.0"]

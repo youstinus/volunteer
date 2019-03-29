@@ -24,6 +24,7 @@ namespace WebAPI.Configurations
             SetVolunteers(modelBuilder);
             SetUsers(modelBuilder);
             SetProjectVolunteers(modelBuilder);
+            SetSavedProjectsVolunteers(modelBuilder);
             SetPictures(modelBuilder);
             SetReviews(modelBuilder);
             base.OnModelCreating(modelBuilder);
@@ -39,6 +40,10 @@ namespace WebAPI.Configurations
 
             // does not need
             entities.HasMany(x => x.ProjectVolunteers)
+                .WithOne(pt => pt.Project)
+                .HasForeignKey(pt => pt.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entities.HasMany(x => x.SavedVolunteers)
                 .WithOne(pt => pt.Project)
                 .HasForeignKey(pt => pt.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
@@ -85,6 +90,10 @@ namespace WebAPI.Configurations
                 .WithOne(x => x.Volunteer)
                 .HasForeignKey(x => x.VolunteerId)
                 .OnDelete(DeleteBehavior.Cascade);
+            entities.HasMany(x => x.SavedProjects)
+                .WithOne(x => x.Volunteer)
+                .HasForeignKey(x => x.VolunteerId)
+                .OnDelete(DeleteBehavior.Cascade);
             entities.HasMany(x => x.Reviews)
                 .WithOne(x => x.Volunteer)
                 .HasForeignKey(x => x.VolunteerId)
@@ -115,6 +124,20 @@ namespace WebAPI.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
             entities.HasOne(x => x.Project)
                 .WithMany(x => x.ProjectVolunteers)
+                .HasForeignKey(x => x.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
+        public void SetSavedProjectsVolunteers(ModelBuilder modelBuilder)
+        {
+            var entities = modelBuilder.Entity<SavedProject>();
+            entities.HasKey(x => new { x.ProjectId, x.VolunteerId });
+            entities.HasOne(x => x.Volunteer)
+                .WithMany(x => x.SavedProjects)
+                .HasForeignKey(x => x.VolunteerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entities.HasOne(x => x.Project)
+                .WithMany(x => x.SavedVolunteers)
                 .HasForeignKey(x => x.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

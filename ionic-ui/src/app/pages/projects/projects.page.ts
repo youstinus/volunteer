@@ -3,6 +3,7 @@ import {Project} from '../../models/Project';
 import {ProjectsService} from '../../services/projects.service';
 import {NavController} from '@ionic/angular';
 import {Objects} from '../../constants/Objects';
+import {Strings} from '../../constants/Strings';
 
 @Component({
     selector: 'app-projects',
@@ -15,7 +16,7 @@ export class ProjectsPage implements OnInit {
     public archive = false;
     projects: Project[] = Objects.Test_Projects;
     projectsFiltered: Project[] = this.projects;
-    private dateNow = new Date(Date.now());
+    private dateNow = new Date();
 
     constructor(private projectsService: ProjectsService, private navCtrl: NavController) {
     }
@@ -27,7 +28,15 @@ export class ProjectsPage implements OnInit {
 
     getItems() {
         this.projectsService.get().subscribe(items => {
-            this.projects = items;
+            this.projects = items.map(value => {
+                if (value.imageUrl === null) {
+                    value.imageUrl = Strings.Default_Image_Url;
+                    return value;
+                }
+
+                return value;
+            });
+            this.filterNewItems();
         }, error1 => {
             console.log(error1);
         });
@@ -43,11 +52,12 @@ export class ProjectsPage implements OnInit {
         }).filter(value => {
             const now = new Date(Date.now());
             if (this.archive) {
-                return value.end < now;
+                return new Date(value.end) < now;
             } else {
-                return value.end >= now;
+                return new Date(value.end) >= now;
             }
         });
+        console.log(this.projectsFiltered);
     }
 
     onProjectClicked(project: Project) {

@@ -11,6 +11,7 @@ namespace WebAPI.Models.DTO
         public string ImageUrl { get; set; }
 
         public ICollection<long> ProjectsIds { get; set; }
+        public ICollection<long> SavedProjectsIds { get; set; }
         public ICollection<long> ReviewsIds { get; set; }
 
         public long UserId { get; set; }

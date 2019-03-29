@@ -14,7 +14,7 @@ namespace WebAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,6 +29,8 @@ namespace WebAPI.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Email");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("Phone");
 
@@ -82,6 +84,8 @@ namespace WebAPI.Migrations
                     b.Property<string>("Email");
 
                     b.Property<DateTime>("End");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<long>("OrganizationId");
 
@@ -142,6 +146,19 @@ namespace WebAPI.Migrations
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("WebAPI.Models.SavedProject", b =>
+                {
+                    b.Property<long>("ProjectId");
+
+                    b.Property<long>("VolunteerId");
+
+                    b.HasKey("ProjectId", "VolunteerId");
+
+                    b.HasIndex("VolunteerId");
+
+                    b.ToTable("SavedProject");
+                });
+
             modelBuilder.Entity("WebAPI.Models.User", b =>
                 {
                     b.Property<long>("Id")
@@ -180,6 +197,8 @@ namespace WebAPI.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("LastName");
 
@@ -248,6 +267,19 @@ namespace WebAPI.Migrations
 
                     b.HasOne("WebAPI.Models.Volunteer", "Volunteer")
                         .WithMany("Reviews")
+                        .HasForeignKey("VolunteerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebAPI.Models.SavedProject", b =>
+                {
+                    b.HasOne("WebAPI.Models.Project", "Project")
+                        .WithMany("SavedVolunteers")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WebAPI.Models.Volunteer", "Volunteer")
+                        .WithMany("SavedProjects")
                         .HasForeignKey("VolunteerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

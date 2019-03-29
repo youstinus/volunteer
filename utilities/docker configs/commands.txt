@@ -1,0 +1,28 @@
+# How to use docker
+Install docker and docker-compose
+## Build docker images and runs docker container using settings in Dockerfiles and docker-compose.yml
+Docker composing many projects:
+`docker-compose build`
+Run docker compose:
+`docker-compose up`
+
+# Run separate docker projects
+## Build WebApi from path /WebAPI/
+`docker build`
+Run docker image:
+`docker run -p 80:80 <imageid>`
+
+## Build Ionic 4 Framework from path /ionic-ui/
+`docker build`
+Run docker image:
+`docker run -p 8100:8100 <imageid>`
+
+# Docker commands
+Check running containers:
+`docker ps`
+Check all containers:
+`docker ps -a`
+Stop docker container:
+`docker stop <containerid>`
+Start existing docker container which was stopped:
+`docker start <containerid>`

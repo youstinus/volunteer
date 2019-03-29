@@ -18,12 +18,12 @@
 
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
         <ion-img src="{{ project.imageUrl }}"></ion-img>
-        <ion-card-header>
-            <ion-card-title>{{project.title}}</ion-card-title>
-        </ion-card-header>
         <ion-item [color]="checkDate(project) ? 'secondary' : ''">
             <ion-icon name="calendar" slot="start"></ion-icon>
             <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
         </ion-item>
+        <ion-card-header>
+            <ion-card-title text-wrap>{{project.title}}</ion-card-title>
+        </ion-card-header>
     </ion-card>
 </ion-content>

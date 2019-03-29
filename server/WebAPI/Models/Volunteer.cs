@@ -14,6 +14,7 @@ namespace WebAPI.Models
         public User User { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<ProjectVolunteer> VolunteerProjects { get; set; }
+        public ICollection<SavedProject> SavedProjects { get; set; }
 
         public long? PictureId { get; set; }
         public long UserId { get; set; }

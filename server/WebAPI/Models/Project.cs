@@ -17,6 +17,7 @@ namespace WebAPI.Models
 
         public Organization Organization { get; set; }
         public ICollection<ProjectVolunteer> ProjectVolunteers { get; set; }
+        public ICollection<SavedProject> SavedVolunteers { get; set; }
         public ICollection<Picture> Pictures { get; set; }
 
         public long OrganizationId { get; set; }
