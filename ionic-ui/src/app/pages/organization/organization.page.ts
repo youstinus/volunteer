@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Organization} from '../../models/Organization';
 import {ActivatedRoute} from '@angular/router';
 import {OrganizationsService} from '../../services/organizations.service';
+import {Project} from '../../models/Project';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-organization',
@@ -20,11 +22,13 @@ export class OrganizationPage implements OnInit {
     phone: '866666666',
     picturesIds: [1],
     address : 'test g. 696',
-    email: 'test@gmail.com'
-
+    email: 'test@gmail.com',
+    imageUrl: ''
   };
-  
-  constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute) { }
+
+  projects: Project[];
+
+  constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute, private navCtrl: NavController) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
@@ -33,9 +37,18 @@ export class OrganizationPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+
+    this.organizationsService.getProjectsByOrganizationId(id).subscribe(value => {
+      this.projects = value;
+    }, error1 => {
+      console.log(error1);
+    });
   }
 
-  
+  // consider transfering whole object to project page to reduce time
+  onProjectClicked(id: number) {
+    this.navCtrl.navigateForward('projects/' + id).catch(reason => console.log(reason));
+  }
 }
 
 

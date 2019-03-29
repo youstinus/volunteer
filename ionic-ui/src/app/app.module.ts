@@ -10,17 +10,20 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {MenuPage} from './pages/menu/menu.page';
+import {ComponentsModule} from './shared/components.module';
+import {FooterPage} from './pages/footer/footer.page';
 
 @NgModule({
     declarations: [
-        AppComponent, MenuPage
+        AppComponent, MenuPage, FooterPage
     ],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        ComponentsModule
     ],
     providers: [
         StatusBar,

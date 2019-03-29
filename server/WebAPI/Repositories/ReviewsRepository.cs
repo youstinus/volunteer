@@ -13,6 +13,7 @@ namespace WebAPI.Repositories
 
         public ReviewsRepository(VolunteerDbContext context) : base(context)
         {
+            ItemSet = context.Reviews;
         }
 
         protected override IQueryable<Review> IncludeDependencies(IQueryable<Review> queryable)

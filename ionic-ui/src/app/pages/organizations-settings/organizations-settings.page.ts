@@ -24,8 +24,8 @@ export class OrganizationsSettingsPage implements OnInit {
     phone: '866666666',
     picturesIds: [1],
     address : 'test g. 696',
-    email: 'test@gmail.com'
-
+    email: 'test@gmail.com',
+    imageUrl: ''
   };
 
   constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute) { }
@@ -39,7 +39,15 @@ export class OrganizationsSettingsPage implements OnInit {
     });
   }
 
-
+  onSaveOrganization() {
+    const id = this.route.snapshot.params['id'];
+    console.log(this.organization);
+    this.organizationsService.update(id, this.organization).subscribe(value => {
+      console.log(value);
+    }, error1 => {
+      console.log(error1);
+    });
+  }
 
 
   }

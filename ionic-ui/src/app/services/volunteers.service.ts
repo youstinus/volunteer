@@ -4,17 +4,21 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Volunteer} from '../models/Volunteer';
+import {UsersService} from './users.service';
+import {BaseService} from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VolunteersService {
-  private volunteersApi = `${environment.webApiUrl}/volunteers`;
+export class VolunteersService extends BaseService<Volunteer> {
 
-  constructor(private http: HttpClient) {
+  public api = `${environment.webApiUrl}/volunteers`;
+
+  constructor(public http: HttpClient, public usersService: UsersService) {
+    super(http, usersService);
   }
 
-  create(volunteer: Volunteer): Observable<Volunteer> {
+  /*create(volunteer: Volunteer): Observable<Volunteer> {
     return this.http.post<Volunteer>(this.volunteersApi, volunteer);
   }
 
@@ -32,5 +36,5 @@ export class VolunteersService {
 
   delete(id: number): Observable<any> {
     return this.http.delete<Volunteer>(this.volunteersApi + '/' + id);
-  }
+  }*/
 }

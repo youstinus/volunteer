@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
+import {Project} from '../../models/Project';
+import {Organization} from '../../models/Organization';
+import {Objects} from '../../constants/Objects';
 
 @Component({
     selector: 'app-main',
@@ -8,29 +11,20 @@ import {NavController} from '@ionic/angular';
 })
 export class MainPage implements OnInit {
 
+    public threeProjects: Project[] = Objects.Three_Test_Projects;
+    public threeOrganizations: Organization[] = Objects.Three_Test_Organizations;
+
     constructor(private navCtrl: NavController) {
     }
 
     ngOnInit() {
     }
 
-    onProjects() {
-        this.navCtrl.navigateForward('projects');
+    onProjectClicked(project: Project) {
+        this.navCtrl.navigateForward('projects/' + project.id).catch(reason => console.log(reason));
     }
 
-    onLogin() {
-        this.navCtrl.navigateForward('login');
-    }
-
-    onRegister() {
-        this.navCtrl.navigateForward('registration');
-    }
-
-    onOrganization() {
-        this.navCtrl.navigateForward('organizations/1');
-    }
-
-    onOrganizations() {
-        this.navCtrl.navigateForward('organizations');
+    onOrganizationClicked(organization: Organization) {
+        this.navCtrl.navigateForward('organizations/' + organization.id).catch(reason => console.log(reason));
     }
 }

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule, NavController, AlertController } from '@ionic/angular';
 
 import { RegistrationPage } from './registration.page';
+import {ComponentsModule} from '../../shared/components.module';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+      ComponentsModule
   ],
   declarations: [RegistrationPage]
 })

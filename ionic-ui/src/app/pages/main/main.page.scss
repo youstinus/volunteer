@@ -1,0 +1,39 @@
+ion-card {
+  max-height: 300px;
+  max-width: 310px;
+  min-width: 310px;
+  float: left;
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+ion-content {
+  display: inline-block;
+  --background: linear-gradient(40deg, rgba(255, 230, 232, 1) 0%, rgba(218, 251, 255, 1) 100%);
+
+  ion-card {
+    --background: linear-gradient(220deg, rgba(255, 227, 215, 1) 0%, rgba(208, 251, 255, 1) 100%);
+  }
+}
+
+ion-card {
+  ion-img{
+    max-height: 140px;
+    width: 100%;
+  }
+}
+
+ion-toolbar {
+  text-align: center;
+}
+
+.image {
+  max-width: 1310px;
+}
+
+ion-item-divider {
+  padding: 0px;
+  --background: linear-gradient(45deg, rgba(255,183,183,1) 0%, rgba(138,164,255,1) 100%);
+}
