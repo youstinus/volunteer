@@ -1,5 +1,107 @@
-<app-header>Volunteers Settings</app-header>
+<app-header>Volunteer Settings</app-header>
 
 <ion-content padding>
 
-</ion-content>
+    <ion-card>
+        <ion-card-header>
+            <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTUzMzQzOTkxMDAwMDgxNzA2/jason-statham-attends-the-press-conference-of-director-f-gary-grays-film-the-fate-of-the-furious-on-march-23-2017-in-beijing-china-photo-by-vcg_vcg-via-getty-images-square.jpg" style="height: 200px; width: 200px"/>
+            <ion-button shape ="round">Change picture </ion-button>
+
+
+        </ion-card-header>
+
+
+        <ion-list>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Name:</h1>
+                        </ion-text>
+                    </div>
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput value= {{volunteer.firstName}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Last Name:</h1>
+                        </ion-text>
+                    </div>
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput  value= {{volunteer.lastName}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Phone:</h1>
+
+                        </ion-text>
+
+                    </div>
+
+
+                </ion-label>
+
+                <div class = input>
+                    <ion-input clearInput value= {{volunteer.phone}} ></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <div class = txt>
+                        <ion-text>
+                            <h1>Email:</h1>
+
+                        </ion-text>
+                    </div>
+                </ion-label>
+                <div class = input>
+                    <ion-input clearInput value= {{volunteer.email}}></ion-input>
+
+                </div>
+
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-text>
+                        <h1>Description:</h1>
+
+                    </ion-text>
+
+                </ion-label>
+
+
+
+            <div class = desc>
+                <ion-textarea value= {{volunteer.description}} ></ion-textarea>
+
+            </div>
+            </ion-item>
+        </ion-list>
+
+
+        <ion-card-content>
+            <ion-button color="primary">Save changes</ion-button>
+        </ion-card-content>
+
+
+
+
+    </ion-card>
+

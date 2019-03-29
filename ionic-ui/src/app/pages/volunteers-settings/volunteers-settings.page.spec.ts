@@ -7,6 +7,11 @@ describe('VolunteersSettingsPage', () => {
   let component: VolunteersSettingsPage;
   let fixture: ComponentFixture<VolunteersSettingsPage>;
 
+
+
+
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ VolunteersSettingsPage ],

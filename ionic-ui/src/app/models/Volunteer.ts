@@ -1,5 +1,7 @@
 export class Volunteer {
     public id: number;
+    public phone: string;
+    public email: string;
     public firstName: string;
     public lastName: string;
     public description: string;
