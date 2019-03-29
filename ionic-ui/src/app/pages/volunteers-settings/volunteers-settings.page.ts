@@ -19,7 +19,10 @@ export class VolunteersSettingsPage implements OnInit {
     pictureId: 21,
     userId: 11,
     projectsIds: [1],
+    imageUrl:'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTUzMzQzOTkxMDAwMDgxNzA2/jason-statham-attends-the-press-conference-of-director-f-gary-grays-film-the-fate-of-the-furious-on-march-23-2017-in-beijing-china-photo-by-vcg_vcg-via-getty-images-square.jpg',
     reviewsIds: [2],
+
+
 
   };
 
