@@ -1,5 +1,25 @@
-<app-header>Volunteer</app-header>
+<app-header>Volunteers page</app-header>
+<ion-content>
+<div padding-horizontal text-center class="animated fadeInDown">
+        <div class="logo"></div>
+        <h1 no-margin>
+          <ion-text color="black" class="fw700" >
+            Your project volunteers!
+          </ion-text>
+        </h1>
+        <!--ion-label value={{project.title}}></ion-label-->
+      </div>
 
 <ion-content padding>
+    <ion-card *ngFor="let volunteer of volunteers" (click)="onVolunteerClicked(volunteer)">
+            <ion-card-header>
+                <ion-card-title>{{volunteer.firstName}} {{volunteer.lastName}}</ion-card-title>
+                <ion-card-subtitle>{{volunteer.phone}}</ion-card-subtitle>
+            </ion-card-header>
+        
+                <ion-card-content>
+                    {{volunteer.description}}
+                </ion-card-content>   
+</ion-card>
 
 </ion-content>

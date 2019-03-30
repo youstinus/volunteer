@@ -23,7 +23,7 @@
       </ion-item>
       <p ion-text class="text08" *ngIf="onRegisterForm.get('username').touched && onRegisterForm.get('username').hasError('required')">
         <ion-text color="warning">
-          This field is required
+          This field is required and must contain at least 5 characters 
         </ion-text>
       </p>
 
@@ -59,8 +59,8 @@
       </ion-item>
       <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password1').touched && onRegisterForm.get('password1').hasError('required')">
         <ion-text color="warning">
-          This field is required
-        </ion-text>
+            This field is required and must contain at least 5 characters 
+          </ion-text>
       </p>
 
       <ion-item no-padding class="animated fadeInUp">
@@ -74,16 +74,14 @@
         <ion-text color="warning">
           This field is required
         </ion-text>
-        <!--div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.confirm_password">
-            <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
-              <ion-icon name="information-circle-outline"></ion-icon>
-              <ion-label >Passwords mismatch</ion-label>
-            </div>
-          </ng-container>
-        </div-->
+
+      </p>    
+      <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').errors && onRegisterForm.get('password').errors.ConfirmPassword">
+          <ion-text color="warning">
+        Passsword and ConfirmPassword do not match.
+      </ion-text>
       </p>
-      <!--div formGroupName="matching_passwords">Visas sitas turetu apskliaustis abu passwordus</div-->
+
 
       <ion-item no-padding class="animated fadeInUp">
       <ion-item>

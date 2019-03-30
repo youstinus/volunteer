@@ -34,31 +34,17 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.onLoginForm = this.formBuilder.group({
       'username': [null, Validators.compose([
+        Validators.minLength(5),
         Validators.required
-
-        //,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'password': [null, Validators.compose([
+        Validators.minLength(5),
         Validators.required
       ])]
     });
   }
-  loadRegistrationPage(){
-    //href="../registration/registration.page" routerDirection="forward"
-    /*this.navCtrl.push(RegistrationPage).then(
-      response => {
-        console.log('Response ' + response);
-      },
-      error => {
-        console.log('Error: ' + error);
-      }
-    ).catch(exception => {
-      console.log('Exception ' + exception);
-    });;*/
-    this.navCtrl.navigateForward('registration');
-    //this.navCtrl.
-    // turetu but push komanda is NavController pereiti i registration page?
-  }
+
+
   async forgotPass() {
     const alert = await this.alertCtrl.create({
       header: 'Forgot Password?',
@@ -104,7 +90,6 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  // // //
   goToRegister() {
     this.navCtrl.navigateRoot('/registration');
   }

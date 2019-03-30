@@ -27,7 +27,8 @@ export class AboutPage implements OnInit {
     this.sources=
     [
       'https://www.gvi.co.uk/blog/17-excellent-reasons-to-volunteer/',
-      'https://buildabroad.org/2017/10/13/why-is-volunteering-important/'
+      'https://buildabroad.org/2017/10/13/why-is-volunteering-important/',
+      'https://www.thebalancesmb.com/unexpected-benefits-of-volunteering-4132453'
     ];
 
     this.commentForm = this.formBuilder.group({
@@ -71,8 +72,7 @@ export class AboutPage implements OnInit {
   }
 
   onSourceClicked(source: string){
-    console.log('Gal pavyktu kaip nors cia nauja page atidaryt? ');
-    //this.navCtrl.navigateForward(source);
+    window.open(source, '_system')
   }
 
 }

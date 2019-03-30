@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Form, FormBuilder, NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
+import {Form, FormBuilder, NgForm, FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
 import {UsersService} from '../../services/users.service';
 import {User} from '../../models/User';
 import {RouterOutlet, Router} from '@angular/router';
@@ -34,9 +34,12 @@ export class RegistrationPage implements OnInit {
 
   ngOnInit() {
 
-
+//https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
+// https://github.com/yuyang041060120/ng2-validation#notequalto-1
+//https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
     this.onRegisterForm = this.formBuilder.group({
       'username': [null, Validators.compose([
+        Validators.minLength(5),
         Validators.required
       ])],
       'email': ['', Validators.compose([
@@ -44,9 +47,11 @@ export class RegistrationPage implements OnInit {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'password1': [null, Validators.compose([
+        Validators.minLength(5),
         Validators.required
       ])],
       'password': [null, Validators.compose([
+        Validators.minLength(5),
         Validators.required
       ])],
       'type': [null, Validators.compose([
@@ -55,20 +60,11 @@ export class RegistrationPage implements OnInit {
       'terms': [null, Validators.compose([
         Validators.required
       ])]
+    },{
+      validator: PasswordValidator.MatchPassword
     });
-
-    this.matching_passwords_group = new FormGroup({
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      ])),
-      confirm_password: new FormControl('', Validators.required)
-    }, (formGroup: FormGroup) => {
-      return PasswordValidator.areEqual(formGroup);
-    });
-
   }
+
 
   async signUp() {
 
@@ -116,8 +112,6 @@ export class RegistrationPage implements OnInit {
     
     // password match
     // password validation
-    // default selection volunteer
-    // checkbox for terms and conditions
 
     this.usersService.register(this.user).subscribe(user => {
       this.user = user;
