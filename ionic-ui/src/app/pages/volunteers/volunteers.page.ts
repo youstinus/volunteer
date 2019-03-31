@@ -33,7 +33,7 @@ export class VolunteersPage implements OnInit {
     id: 1,
     firstName: 'Petriuke',
     lastName: 'Pavarde1',
-    phone : '860298***',
+    phone : '860298123',
     email: 'susieikti@gmail.com',
     description: 'Dirba ir labai gerai',
     pictureId: 21,
@@ -45,7 +45,7 @@ export class VolunteersPage implements OnInit {
   id: 2,
   firstName: 'Petras',
   lastName: 'Pavarde2',
-  phone : '860298***',
+  phone : '860298321',
   email: 'susieikti@gmail.com',
   description: 'Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes',
   pictureId: 21,
@@ -57,7 +57,7 @@ export class VolunteersPage implements OnInit {
   id: 3,
   firstName: 'Petraitien',
   lastName: 'Pavarde3',
-  phone : '860298***',
+  phone : '860298132',
   email: 'susieikti@gmail.com',
   description: 'Nedirba ir tikrai nelabai gerai',
   pictureId: 21,
@@ -78,6 +78,7 @@ export class VolunteersPage implements OnInit {
   ngOnInit() {
 
   }
+  //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   onVolunteerClicked(volunteer:Volunteer){
     console.log('paspaude');
     console.log(volunteer.firstName);
