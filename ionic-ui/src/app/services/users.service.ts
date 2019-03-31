@@ -2,14 +2,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../models/User';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {BaseService} from './base.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelper} from '../utilities/JwtHelper';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UsersService extends BaseService<User> {
+export class UsersService {
     public api = `${environment.webApiUrl}/users`;
     private user: User;
     private token: string;
@@ -17,7 +16,6 @@ export class UsersService extends BaseService<User> {
     private id: number;
 
     constructor(public http: HttpClient, public usersService: UsersService) {
-        super(http, usersService);
     }
 
     public getUserToken() {
@@ -61,7 +59,36 @@ export class UsersService extends BaseService<User> {
         return this.http.post<User>(this.api + '/authenticate', user);
     }
 
-    create(item: User): Observable<User> {
-        return null; // super.create(item, url);
+    public get(): Observable<User[]> {
+        const headers = this.getHeaders();
+        return this.http.get<User[]>(`${this.api}`, {headers: headers});
+    }
+
+    public getById(id: number): Observable<User> {
+        const headers = this.getHeaders();
+        return this.http.get<User>(`${this.api}/${id}`, {headers: headers});
+    }
+
+    public update(id: number, item: User): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.put<User>(`${this.api}/${id}`, item, {headers: headers});
+    }
+
+    public delete(id: number): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.delete<User>(`${this.api}/${id}`, {headers: headers});
+    }
+
+    public getHeaders() {
+        let auth_token = 'Bearer ';
+        const token = this.usersService.getToken();
+        if (token != null) {
+            auth_token = auth_token + token;
+        }
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': auth_token
+        });
+        return headers;
     }
 }
