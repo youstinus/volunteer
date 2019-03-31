@@ -76,7 +76,7 @@
         </ion-text>
 
       </p>    
-      <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').errors && onRegisterForm.get('password').errors.ConfirmPassword">
+      <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').errors && onRegisterForm.get('password').errors.ConfirmPassword">
           <ion-text color="warning">
         Passsword and ConfirmPassword do not match.
       </ion-text>

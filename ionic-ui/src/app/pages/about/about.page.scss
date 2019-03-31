@@ -3,7 +3,8 @@
     font-weight: bold;
     display: block;
     text-align: center;
-    font-size: large;
+    font-size:larger;
+    font-weight: 900;
     }
 
 .myCard{
@@ -15,4 +16,7 @@ ion-content{
 ion-card{
     --ion-background-color:white;
     background-color: rgba(42, 193, 204, 0.884);
+}
+ion-textarea{
+    font-size: large;
 }

@@ -4,6 +4,7 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/Project';
 import { Strings } from 'src/app/constants/Strings';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-volunteers',
@@ -14,7 +15,7 @@ export class VolunteersPage implements OnInit {
 
   project: Project = {
     id: 1,
-    title: 'VšĮ Pagirk',
+    title: 'VSI projektas',
     description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
     email: 'email@test.com',
     organizationId: 5,
@@ -30,7 +31,7 @@ export class VolunteersPage implements OnInit {
   volunteers: Volunteer[]= [
     {
     id: 1,
-    firstName: 'Petriukas',
+    firstName: 'Petriuke',
     lastName: 'Pavarde1',
     phone : '860298***',
     email: 'susieikti@gmail.com',
@@ -38,7 +39,7 @@ export class VolunteersPage implements OnInit {
     pictureId: 21,
     userId: 11,
     projectsIds: [1],
-    imageUrl:'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTUzMzQzOTkxMDAwMDgxNzA2/jason-statham-attends-the-press-conference-of-director-f-gary-grays-film-the-fate-of-the-furious-on-march-23-2017-in-beijing-china-photo-by-vcg_vcg-via-getty-images-square.jpg',
+    imageUrl:'https://www.ableto.com/wp-content/uploads/2018/02/7-Mental-Health-Benefits-of-Volunteering-664x443px.jpg',
     reviewsIds: [2],
 },   {
   id: 2,
@@ -46,15 +47,15 @@ export class VolunteersPage implements OnInit {
   lastName: 'Pavarde2',
   phone : '860298***',
   email: 'susieikti@gmail.com',
-  description: 'Dirba bet nelabai gerai',
+  description: 'Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes',
   pictureId: 21,
   userId: 11,
   projectsIds: [1],
-  imageUrl:'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTUzMzQzOTkxMDAwMDgxNzA2/jason-statham-attends-the-press-conference-of-director-f-gary-grays-film-the-fate-of-the-furious-on-march-23-2017-in-beijing-china-photo-by-vcg_vcg-via-getty-images-square.jpg',
+  imageUrl:'https://qph.fs.quoracdn.net/main-qimg-73f94b1a6a02e2f70be80489a8526ad1.webp',
   reviewsIds: [2],
 },   {
   id: 3,
-  firstName: 'Petraitis',
+  firstName: 'Petraitien',
   lastName: 'Pavarde3',
   phone : '860298***',
   email: 'susieikti@gmail.com',
@@ -62,16 +63,52 @@ export class VolunteersPage implements OnInit {
   pictureId: 21,
   userId: 11,
   projectsIds: [1],
-  imageUrl:'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTUzMzQzOTkxMDAwMDgxNzA2/jason-statham-attends-the-press-conference-of-director-f-gary-grays-film-the-fate-of-the-furious-on-march-23-2017-in-beijing-china-photo-by-vcg_vcg-via-getty-images-square.jpg',
+  imageUrl:'https://kbsei3h2g2poy8x12ia6346k-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/smiling-fountain-of-youth-1024x935.jpg',
   reviewsIds: [2],
 }];
 
-  constructor(private organizationsService: VolunteersService, private route: ActivatedRoute) { }
+  constructor(
+    private organizationsService: VolunteersService, 
+    private route: ActivatedRoute,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    ) { }
 
   ngOnInit() {
 
   }
-  onVolunteerClicked(Volunteer:Volunteer){
+  onVolunteerClicked(volunteer:Volunteer){
     console.log('paspaude');
+    console.log(volunteer.firstName);
+    this.showVolunteerInfo(volunteer);
+  }
+  async showVolunteerInfo(volunteer:Volunteer) {
+    const alert = await this.alertCtrl.create({
+      header: 'More about '+volunteer.firstName,
+      subHeader: 'Contact: '+volunteer.phone +' or '+ volunteer.email,
+      message: volunteer.description,
+      buttons: [
+        /*{
+          //https://www.freakyjolly.com/ionic-4-how-to-call-a-number-directly-from-ionic-4-native-application/
+          text: 'Go to users page',
+         //'Tokio lyg ir neturim, tai nezinau ar ir reika'
+          handler: async () => {
+            const loader = await this.loadingCtrl.create({
+              duration: 2000
+            });
+        */
+        {
+          text: 'Close',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

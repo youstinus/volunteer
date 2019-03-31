@@ -75,7 +75,7 @@ export class RegistrationPage implements OnInit {
 
     loader.present();
     loader.onWillDismiss().then(() => {
-      // this.navCtrl.navigateRoot('registration'); // navigate login, kol kas palikau ten pat
+      // this.navCtrl.navigateRoot('registration'); 
       // iki čia ateina user == null
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
@@ -91,19 +91,15 @@ export class RegistrationPage implements OnInit {
     });
   } 
   conditions(){
-    this.navCtrl.navigateRoot('home');
+    window.open('privacy', '_system')
+    // cia pasirinktinai ko norim, ar kad naujas langas ar naviguot i puslapi
+    //this.navCtrl.navigateForward('privacy');
   }
 
   goToLogin() {
     this.navCtrl.navigateForward('login');
   }
 
-  /*onSubmit(values){
-    console.log(values);
-   // this.router.navigate(["/user"]);
-  }*/
-
-  // metodas neiskvieciamas nuo HTML. Pritaikyti tik vieną signUp arba onRegister
   onRegister(form: NgForm) {
     console.log('submited');
     //form. kuri forma ir kaip naudoti ja duomenims apdoroti
