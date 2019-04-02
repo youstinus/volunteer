@@ -27,7 +27,8 @@ const routes: Routes = [
         loadChildren: './pages/organizations-settings/organizations-settings.module#OrganizationsSettingsPageModule'
     },
     {path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule'},
-    {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'}
+    {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'},  { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
+
 ];
 
 @NgModule({
