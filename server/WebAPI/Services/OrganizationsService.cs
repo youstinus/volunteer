@@ -19,8 +19,9 @@ namespace WebAPI.Services
         public override bool ValidateDto(OrganizationDto entity)
         {
             return entity != null
-                && string.IsNullOrWhiteSpace(entity.Title)
-                && string.IsNullOrWhiteSpace(entity.Description);
+                   && entity.UserId > 0;
+            //&& string.IsNullOrWhiteSpace(entity.Title)
+            //&& string.IsNullOrWhiteSpace(entity.Description);
         }
     }
 }

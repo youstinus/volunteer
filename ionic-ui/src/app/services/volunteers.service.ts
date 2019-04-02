@@ -18,6 +18,11 @@ export class VolunteersService extends BaseService<Volunteer> {
     super(http, usersService);
   }
 
+  getByUsersId(id: number): Observable<Volunteer> {
+    const headers = this.getHeaders();
+    return this.http.get<Volunteer>(this.api + '/users/' + id, {headers: headers});
+  }
+
   /*create(volunteer: Volunteer): Observable<Volunteer> {
     return this.http.post<Volunteer>(this.volunteersApi, volunteer);
   }

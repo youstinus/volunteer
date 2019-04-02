@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -16,11 +17,19 @@ namespace WebAPI.Services
         {
         }
 
+        public async Task<VolunteerDto> GetByUsersId(long id)
+        {
+            var volunteer = await _repository.GetSingleByPredicate(x => x.User.Id == id);
+            var mapped = _mapper.Map<VolunteerDto>(volunteer);
+            return mapped;
+        }
+
         public override bool ValidateDto(VolunteerDto entity)
         {
             return entity != null
-                   && string.IsNullOrWhiteSpace(entity.FirstName)
-                   && string.IsNullOrWhiteSpace(entity.LastName);
+                   && entity.UserId > 0;
+            //&& string.IsNullOrWhiteSpace(entity.FirstName)
+            //&& string.IsNullOrWhiteSpace(entity.LastName);
         }
     }
 }

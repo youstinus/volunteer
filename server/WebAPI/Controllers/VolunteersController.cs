@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,10 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class VolunteersController : BaseController<Volunteer, VolunteerDto>, IVolunteersController
     {
+        private readonly IVolunteersService _volunteersService;
         public VolunteersController(IVolunteersService service) : base(service)
         {
+            _volunteersService = service;
         }
 
         #region CRUD
@@ -41,6 +44,21 @@ namespace WebAPI.Controllers
         public override Task<IActionResult> GetById([FromRoute] long id)
         {
             return base.GetById(id);
+        }
+
+        [HttpGet("users/{id}")]
+        [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
+        public async Task<IActionResult> GetByUsersId([FromRoute] long id)
+        {
+            try
+            {
+                var entity = await _volunteersService.GetByUsersId(id);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPatch("{id}")]

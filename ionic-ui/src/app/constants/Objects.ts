@@ -4,6 +4,34 @@ import {Project} from '../models/Project';
 import {Organization} from '../models/Organization';
 
 export class Objects {
+    public static Empty_Organization = {
+        userId: null,
+        description: null,
+        email: null,
+        imageUrl: null,
+        phone: null,
+        projectsIds: [],
+        id: null,
+        address: null,
+        picturesIds: [],
+        title: null,
+        website: null
+    };
+
+    public static Empty_Volunteer = {
+        userId: null,
+        description: null,
+        email: null,
+        firstName: null,
+        imageUrl: null,
+        lastName: null,
+        phone: null,
+        pictureId: null,
+        projectsIds: [],
+        reviewsIds: [],
+        id: null
+    };
+
     public static Default_Picture: Picture = {
         volunteerId: 0,
         url: Strings.Default_Image_Url,

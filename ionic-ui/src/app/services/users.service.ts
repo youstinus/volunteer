@@ -87,6 +87,7 @@ export class UsersService {
         }
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
+            //'Access-Control-Allow-Origin': '*',
             'Authorization': auth_token
         });
         return headers;

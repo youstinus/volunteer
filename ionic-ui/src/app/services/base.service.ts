@@ -48,6 +48,7 @@ export abstract class BaseService<T> {
         }
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
+            //'Access-Control-Allow-Origin': 'origin',
             'Authorization': auth_token
         });
         return headers;
