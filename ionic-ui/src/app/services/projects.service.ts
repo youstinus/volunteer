@@ -17,6 +17,16 @@ export class ProjectsService extends BaseService<Project> {
         super(http, usersService);
     }
 
+    public getSavedItems(): Observable<Project[]> {
+        const headers = this.getHeaders();
+        return this.http.get<Project[]>(`${this.api}`, {headers: headers});
+    }
+
+    public getSelectedItems(): Observable<Project[]> {
+        const headers = this.getHeaders();
+        return this.http.get<Project[]>(`${this.api}`, {headers: headers});
+    }
+
     /*getAll(): Observable<Project[]> {
         const auth_token = 'Bearer ';
         const headers = new HttpHeaders({
