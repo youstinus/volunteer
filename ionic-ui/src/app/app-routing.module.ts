@@ -16,6 +16,7 @@ const routes: Routes = [
     {
         path: 'projects', children: [
             {path: '', loadChildren: './pages/projects/projects.module#ProjectsPageModule'},
+            {path: ':type', loadChildren: './pages/projects/projects.module#ProjectsPageModule'},
             {path: ':id', loadChildren: './pages/project/project.module#ProjectPageModule'}
         ]
     },
@@ -27,7 +28,8 @@ const routes: Routes = [
         loadChildren: './pages/organizations-settings/organizations-settings.module#OrganizationsSettingsPageModule'
     },
     {path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule'},
-    {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'},  { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
+    {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'},
+  { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
 
 ];
 

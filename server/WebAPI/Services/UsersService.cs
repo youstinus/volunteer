@@ -101,9 +101,9 @@ namespace WebAPI.Services
                 throw new InvalidOperationException("Email " + userDto.Email + " is already taken");
             
             CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
-
             user.Hash = passwordHash;
             user.Salt = passwordSalt;
+            user.Volunteer = new Volunteer(); // create empty volunteer
             var created = await _repository.Create(user);
             var createdDto = CreateDto(created);
             createdDto.Password = null;

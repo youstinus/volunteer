@@ -4,6 +4,7 @@ import {ProjectsService} from '../../services/projects.service';
 import {NavController} from '@ionic/angular';
 import {Objects} from '../../constants/Objects';
 import {Strings} from '../../constants/Strings';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-projects',
@@ -17,13 +18,61 @@ export class ProjectsPage implements OnInit {
     projects: Project[] = Objects.Test_Projects;
     projectsFiltered: Project[] = this.projects;
     private dateNow = new Date();
+    private type: String;
 
-    constructor(private projectsService: ProjectsService, private navCtrl: NavController) {
+    constructor(private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.getItems();
+        this.type = this.route.snapshot.params['type'];
+        this.loadItemsByType();
         this.filterNewItems();
+    }
+
+    loadItemsByType() {
+        switch (this.type) {
+            case 'saved':
+            this.getSavedItems();
+            break;
+            case 'selected':
+            this.getSelectedItems();
+            break;
+            default:
+            this.getItems();
+            break;
+        }
+    }
+
+    getSavedItems() {
+        this.projectsService.getSavedItems().subscribe(items => {
+            this.projects = items.map(value => {
+                if (value.imageUrl === null) {
+                    value.imageUrl = Strings.Default_Image_Url;
+                    return value;
+                }
+
+                return value;
+            });
+            this.filterNewItems();
+        }, error1 => {
+            console.log(error1);
+        });
+    }
+
+    getSelectedItems() {
+        this.projectsService.getSelectedItems().subscribe(items => {
+            this.projects = items.map(value => {
+                if (value.imageUrl === null) {
+                    value.imageUrl = Strings.Default_Image_Url;
+                    return value;
+                }
+
+                return value;
+            });
+            this.filterNewItems();
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
     getItems() {
