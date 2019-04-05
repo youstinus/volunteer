@@ -4,7 +4,9 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/Project';
 import { Strings } from 'src/app/constants/Strings';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController, NavController, ModalController } from '@ionic/angular';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
 
 @Component({
   selector: 'app-volunteers',
@@ -73,43 +75,38 @@ export class VolunteersPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
+    private projectsService: ProjectsService,
+     private navCtrl: NavController,
+     private modal: ModalController
     ) { }
 
   ngOnInit() {
 
-  }
-  //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
-  onVolunteerClicked(volunteer:Volunteer){
-    console.log('paspaude');
-    console.log(volunteer.firstName);
-    this.showVolunteerInfo(volunteer);
-  }
-  async showVolunteerInfo(volunteer:Volunteer) {
-    const alert = await this.alertCtrl.create({
-      header: 'More about '+volunteer.firstName,
-      subHeader: 'Contact: '+volunteer.phone +' or '+ volunteer.email,
-      message: volunteer.description,
-      buttons: [
-        /*{
-          //https://www.freakyjolly.com/ionic-4-how-to-call-a-number-directly-from-ionic-4-native-application/
-          text: 'Go to users page',
-         //'Tokio lyg ir neturim, tai nezinau ar ir reika'
-          handler: async () => {
-            const loader = await this.loadingCtrl.create({
-              duration: 2000
-            });
-        */
-        {
-          text: 'Close',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }
-      ]
+    //const id = this.route.snapshot.params['id'];
+    const id=1;
+    this.projectsService.getById(id).subscribe(value => {
+        this.project = value;
+        console.log(this.project.title);
+        console.log(this.project.organizationId);
+        console.log(this.project.description);
+    }, error1 => {
+        console.log(error1);
     });
 
-    await alert.present();
   }
+  //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
+  async onVolunteerClicked(volunteer:Volunteer){
+    console.log('paspaude');
+    console.log(volunteer.firstName);
+    const myModal = await this.modal.create({
+      component: ModalVolunteerPage,
+      componentProps: {volname: volunteer.firstName+" "+ volunteer.lastName,
+      volphone: volunteer.phone,
+      volemail: volunteer.email,
+      voldescrip:  volunteer.description,
+    volPic:volunteer.imageUrl}});//      componentProps: {value:123}}
+
+    await myModal.present();
+  }
+  
 }

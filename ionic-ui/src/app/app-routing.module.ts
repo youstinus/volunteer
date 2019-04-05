@@ -29,7 +29,9 @@ const routes: Routes = [
     },
     {path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule'},
     {path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule'},
-  { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
+  { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' },
+  { path: 'modal-volunteer', loadChildren: './pages/modal-volunteer.module#ModalVolunteerPageModule' }
+
 
 ];
 
