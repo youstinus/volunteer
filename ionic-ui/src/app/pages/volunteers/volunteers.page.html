@@ -18,9 +18,9 @@
         </ion-card-title>
     </ion-card-header>
 
-  <ion-list *ngFor="let volunteer of volunteers">
+  <ion-list *ngFor="let volunteer of volunteers" (click)="onVolunteerClicked(volunteer)" >
   
-    <ion-item lines="none" (click)="onVolunteerClicked(volunteer)" >
+    <ion-item lines="none">
       <ion-avatar slot="start">
           <img src="{{ volunteer.imageUrl }}">
         </ion-avatar>
