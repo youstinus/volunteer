@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{volname}}
+      <ion-button (click)="closeModal()" >Close </ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <img src="{{volPic }}">
+      <ion-card-header>
+          <ion-card-title class="label">Contact information:           
+          </ion-card-title>
+      </ion-card-header>
+      <ion-item lines="none">
+          <h4>
+            <ion-icon name="phone-portrait"></ion-icon>
+            {{volphone}}
+          </h4>
+      </ion-item>
+      
+      <ion-item>
+          <h4>
+            <ion-icon name="mail-open"></ion-icon>
+            {{volemail}}
+          </h4>
+      </ion-item>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title class="label">Description about activities:           
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{voldescrip}}
+        </ion-card-content>
+    </ion-card>
+  
+  </ion-card>
+</ion-content>

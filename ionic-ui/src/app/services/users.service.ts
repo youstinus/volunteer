@@ -59,6 +59,14 @@ export class UsersService {
         return this.http.post<User>(this.api + '/authenticate', user);
     }
 
+    logout(): Observable<any> {
+        this.token = null;
+        this.user = null;
+        this.role = null;
+        this.id = null;
+        return;
+    }
+
     public get(): Observable<User[]> {
         const headers = this.getHeaders();
         return this.http.get<User[]>(`${this.api}`, {headers: headers});

@@ -12,23 +12,41 @@
   </ion-text>
  </h1>
 
-
 <ion-card>
-      <ion-card-header>
-          <ion-card-title class="label">All registered users:            
-          </ion-card-title>
-      </ion-card-header>
-    <ion-card class="myCard" *ngFor="let volunteer of volunteers" (click)="onVolunteerClicked(volunteer)">
-            <ion-card-header class="myCardHeader">
-                <ion-img size=small src="{{ volunteer.imageUrl }}"></ion-img>
-                <ion-card-title font-weight=large>{{volunteer.firstName}} {{volunteer.lastName}}</ion-card-title>
-            </ion-card-header>
-            
-            <ion-card-content>
-              {{volunteer.phone}}
-            </ion-card-content>
+    <ion-card-header>
+        <ion-card-title class="label">All registered users:            
+        </ion-card-title>
+    </ion-card-header>
 
-    </ion-card>
+  <ion-list *ngFor="let volunteer of volunteers" (click)="onVolunteerClicked(volunteer)" >
+  
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+          <img src="{{ volunteer.imageUrl }}">
+        </ion-avatar>
+      <ion-list-header size=large>
+          <ion-label>
+              {{volunteer.firstName}} {{volunteer.lastName}}
+          </ion-label>
+        </ion-list-header>
+    </ion-item>
+
+    <ion-item lines="none">
+        <h4>
+          <ion-icon name="phone-portrait"></ion-icon>
+          {{volunteer.phone}}
+        </h4>
+    </ion-item>
+    
+    <ion-item>
+        <h4>
+          <ion-icon name="mail-open"></ion-icon>
+          {{volunteer.email}}
+        </h4>
+    </ion-item>
+
+  </ion-list>
+
 </ion-card>
 
 </ion-content>

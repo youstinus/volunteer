@@ -15,9 +15,19 @@ ion-card{
     background-color: rgba(37, 164, 173, 0.884);
 }
 
+h4{
+    font-size: medium;
+}
+ion-label{
+    font-weight: bold;
+}
 ion-img{
-    height: 35%;
-    width: 35%
+    height: 30%;
+    width: 30%
        // height:150px;
         //width: 150px;
+}
+
+ion-list {
+    cursor: pointer;
 }

@@ -7,6 +7,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {VolunteersPage} from './volunteers.page';
 import {ComponentsModule} from '../../shared/components.module';
+import { ModalVolunteerPageModule } from '../modal-volunteer/modal-volunteer.module';
+import { homedir } from 'os';
 
 const routes: Routes = [
     {
@@ -21,7 +23,9 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        ComponentsModule
+        ComponentsModule, 
+        ModalVolunteerPageModule,
+        RouterModule.forChild([{path: '', component: VolunteersPage}])
     ],
     declarations: [VolunteersPage]
 })

@@ -31,7 +31,6 @@ export class LoginPage implements OnInit {
         // this.menuCtrl.enable(false);
     }
 
-
     ngOnInit() {
         this.onLoginForm = this.formBuilder.group({
             'username': [null, Validators.compose([
@@ -45,6 +44,52 @@ export class LoginPage implements OnInit {
         });
     }
 
+    onSignIn() {
+        this.usersService.login(this.onLoginForm.value).subscribe(user => {
+            // validate somehow
+            this.user = user;
+
+            // navigate to main page if user logged in. Should return User object with id, token and user type populated
+            if (this.user != null && this.user.token != null) {
+                this.usersService.setUser(user);
+
+                //this.navigateToSettings(user);
+                this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
+            } else {
+                console.log('User not validated');
+            }
+        }, error1 => {
+            console.log('Server is not reachable while loging in');
+            console.log('Using offline credentials')
+            //TODO remove this peace of code
+            if(this.onLoginForm.value.username == 'offline' && this.onLoginForm.value.password == 'offline') {
+                this.usersService.setUser(
+                    {
+                        id: 0,
+                        email: 'offline@gmail.com',
+                        organizationId: null,
+                        password: 'offline',
+                        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NTMwMTc0NjQsImV4cCI6MTY2MzYyMjI2NCwiaWF0IjoxNTUzMDE3NDY0fQ.RFBxpPSerZMoqXsiw4oh8NMWwoSG4Gd1XqO3nSNAPB8',
+                        type: 0,
+                        username: 'offline',
+                        volunteerId: null
+                    }
+                );
+                this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
+            }
+        });
+    }
+
+    // not usable at the moment
+    navigateToSettings(user: User) {
+        if (user.type === UserType.Volunteer && user.volunteerId === null) {
+            this.navCtrl.navigateForward('volunteers-settings').catch(reason => console.log('Error while signing in'));
+        } else if (user.type === UserType.Organization && user.organizationId === null) {
+            this.navCtrl.navigateForward('organizations-settings').catch(reason => console.log('Error while signing in'));
+        } else {
+            this.navCtrl.navigateForward('main').catch(reason => console.log('Error while signing in'));
+        }
+    }
 
     async forgotPass() {
         const alert = await this.alertCtrl.create({
@@ -93,32 +138,5 @@ export class LoginPage implements OnInit {
 
     goToRegister() {
         this.navCtrl.navigateRoot('/registration');
-    }
-
-    onSignIn() {
-        this.usersService.login(this.onLoginForm.value).subscribe(user => {
-            // validate somehow
-            this.user = user;
-
-            // navigate to main page if user logged in. Should return User object with id, token and user type populated
-            if (this.user != null && this.user.token != null) {
-                this.usersService.setUser(user);
-
-                this.navigateToSettings(user);
-                //this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
-            } else {
-                console.log('User not validated');
-            }
-        });
-    }
-
-    navigateToSettings(user: User) {
-        if (user.type === UserType.Volunteer && user.volunteerId === null) {
-            this.navCtrl.navigateForward('volunteers-settings').catch(reason => console.log('Error while signing in'));
-        } else if (user.type === UserType.Organization && user.organizationId === null) {
-            this.navCtrl.navigateForward('organizations-settings').catch(reason => console.log('Error while signing in'));
-        } else {
-            this.navCtrl.navigateForward('main').catch(reason => console.log('Error while signing in'));
-        }
     }
 }
