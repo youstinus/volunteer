@@ -20,4 +20,9 @@ export class OrganizationsService extends BaseService<Organization> {
   getProjectsByOrganizationId(id: number): Observable<Project[]> {
     return this.http.get<Project[]>(this.api + '/' + id + '/projects');
   }
+
+  getByOrganizationId(id: number): Observable<Organization> {
+    const headers = this.getHeaders();
+    return this.http.get<Organization>(this.api + '/Organizations/' + id, {headers: headers});
+  }
 }

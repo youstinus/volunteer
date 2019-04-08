@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Organization} from "../../models/Organization";
 import {OrganizationsService} from "../../services/organizations.service";
 import {ActivatedRoute} from "@angular/router";
-//import { ImagePicker } from '@ionic-native/image-picker/ngx';
-//import {CameraOptions} from "@ionic-native/camera";
+import {UsersService} from '../../services/users.service';
+import {NavController} from "@ionic/angular";
+import {User} from "../../models/User";
 
 @Component({
   selector: 'app-organizations-settings',
@@ -13,7 +14,7 @@ import {ActivatedRoute} from "@angular/router";
 
 
 export class OrganizationsSettingsPage implements OnInit {
-
+  user: User;
   organization: Organization = {
     id: 11,
     projectsIds: [1],
@@ -28,24 +29,34 @@ export class OrganizationsSettingsPage implements OnInit {
     imageUrl: ''
   };
 
-  constructor(private organizationsService: OrganizationsService, private route: ActivatedRoute) { }
+  constructor(private organizationsService: OrganizationsService,
+              private route: ActivatedRoute,
+              private usersService: UsersService,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.organizationsService.getById(id).subscribe(value => {
-      this.organization = value;
+    this.user = this.usersService.getUser();
+    if (this.organization === null) {
+      this.navCtrl.navigateRoot('main').catch(e => console.log(e));
+    }
+
+    this.loadOrganization();
+  }
+  saveOrganization() {
+    this.organizationsService.update(this.organization.id, this.organization).subscribe(value => {
+      console.log('Organization was updated successfully');
+      console.log(value);
+
     }, error1 => {
-      console.log(error1);
+      console.log('Organization was not updated', error1);
     });
   }
 
-  onSaveOrganization() {
-    const id = this.route.snapshot.params['id'];
-    console.log(this.organization);
-    this.organizationsService.update(id, this.organization).subscribe(value => {
-      console.log(value);
+  loadOrganization() {
+    this.organizationsService.getByOrganizationId(this.organization.id).subscribe(value => {
+      this.organization = value;
     }, error1 => {
-      console.log(error1);
+      console.log('Cannot get organization from database', error1);
     });
   }
 
