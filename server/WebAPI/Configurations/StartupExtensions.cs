@@ -27,6 +27,8 @@ namespace WebAPI.Configurations
         {
             var connectionString = configuration["Database:ConnectionString"];
             service.AddDbContext<VolunteerDbContext>(options => options.UseSqlServer(connectionString));
+            /*var mySqlConnection = "server=localhost;port=3306;user=root;database=Volunteer1;";
+            service.AddDbContext<VolunteerDbContext>(options => options.UseMySql(mySqlConnection));*/
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)

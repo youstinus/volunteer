@@ -11,5 +11,7 @@ namespace WebAPI.Services.Interfaces
     {
         Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id);
         Task<bool> ValidateOrganizationByProjectId(ClaimsPrincipal user, long id);
+        Task<ICollection<ProjectDto>> GetSavedItems(ClaimsPrincipal user);
+        Task<ICollection<ProjectDto>> GetSelectedItems(ClaimsPrincipal user);
     }
 }

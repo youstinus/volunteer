@@ -22,6 +22,21 @@ namespace WebAPI.Controllers
         {
             _volunteersService = service;
         }
+        
+        [HttpGet("users/{id}")]
+        [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
+        public async Task<IActionResult> GetByUsersId([FromRoute] long id)
+        {
+            try
+            {
+                var entity = await _volunteersService.GetByUsersId(id);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
 
         #region CRUD
 
@@ -44,21 +59,6 @@ namespace WebAPI.Controllers
         public override Task<IActionResult> GetById([FromRoute] long id)
         {
             return base.GetById(id);
-        }
-
-        [HttpGet("users/{id}")]
-        [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
-        public async Task<IActionResult> GetByUsersId([FromRoute] long id)
-        {
-            try
-            {
-                var entity = await _volunteersService.GetByUsersId(id);
-                return Ok(entity);
-            }
-            catch (InvalidOperationException e)
-            {
-                return NotFound(e.Message);
-            }
         }
 
         [HttpPatch("{id}")]

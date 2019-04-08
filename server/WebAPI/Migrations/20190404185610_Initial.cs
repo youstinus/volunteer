@@ -20,9 +20,7 @@ namespace WebAPI.Migrations
                     Hash = table.Column<byte[]>(nullable: true),
                     Salt = table.Column<byte[]>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: false),
-                    VolunteerId = table.Column<long>(nullable: true),
-                    OrganizationId = table.Column<long>(nullable: true)
+                    Updated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

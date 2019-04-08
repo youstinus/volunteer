@@ -17,7 +17,7 @@ namespace WebAPI.Models
         public Volunteer Volunteer { get; set; }
         public Organization Organization { get; set; }
 
-        public long? VolunteerId { get; set; }
-        public long? OrganizationId { get; set; }
+        /*public long? VolunteerId { get; set; }
+        public long? OrganizationId { get; set; }*/
     }
 }

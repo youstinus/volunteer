@@ -16,11 +16,15 @@ namespace WebAPI.Services
 {
     public class ProjectsService : BaseService<Project, ProjectDto>, IProjectsService
     {
+        private readonly IUsersService _usersService;
+
         public ProjectsService(
             IProjectsRepository repository,
             IMapper mapper,
-            ITimeService timeService) : base(repository, mapper, timeService)
+            ITimeService timeService,
+            IUsersService usersService) : base(repository, mapper, timeService)
         {
+            _usersService = usersService;
         }
 
         public async Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id)
@@ -39,8 +43,28 @@ namespace WebAPI.Services
             if (string.IsNullOrWhiteSpace(user.Identity.Name))
                 return false;
 
-            var projects = await _repository.GetAllByPredicate(x => x.Organization.Id == Convert.ToInt32(user.Identity.Name));
+            var parsed = int.TryParse(user.Identity.Name, out var userId);
+            if (!parsed)
+                return false;
+
+            var projects = await _repository.GetAllByPredicate(x => x.Organization.Id == userId);
             return user.Identity.IsAuthenticated && projects.Count > 0 && projects.Select(x => x.Id).Contains(id);
+        }
+
+        public async Task<ICollection<ProjectDto>> GetSavedItems(ClaimsPrincipal user)
+        {
+            var id = await _usersService.GetUsersRoleId(user);
+            var items = await _repository.GetAllByPredicate(x => x.SavedVolunteers.Select(y => y.Volunteer.Id).Contains(id));
+            var mapped = _mapper.Map<ICollection<ProjectDto>>(items);
+            return mapped;
+        }
+
+        public async Task<ICollection<ProjectDto>> GetSelectedItems(ClaimsPrincipal user)
+        {
+            var id = await _usersService.GetUsersRoleId(user);
+            var items = await _repository.GetAllByPredicate(x => x.ProjectVolunteers.Select(y => y.Volunteer.Id).Contains(id));
+            var mapped = _mapper.Map<ICollection<ProjectDto>>(items);
+            return mapped;
         }
 
         public override bool ValidateDto(ProjectDto entity)

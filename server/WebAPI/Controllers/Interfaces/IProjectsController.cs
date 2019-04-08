@@ -8,6 +8,8 @@ namespace WebAPI.Controllers.Interfaces
 {
     public interface IProjectsController : IBaseController<Project, ProjectDto>
     {
-        Task<IActionResult> GetVolunteersByProjectId([FromRoute] long id);
+        Task<IActionResult> GetVolunteersByProjectId([FromRoute]long id);
+        Task<IActionResult> GetSavedItems();
+        Task<IActionResult> GetSelectedItems();
     }
 }

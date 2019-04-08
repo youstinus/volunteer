@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Configurations;
 
 namespace WebAPI.Migrations
@@ -171,8 +172,6 @@ namespace WebAPI.Migrations
 
                     b.Property<byte[]>("Hash");
 
-                    b.Property<long?>("OrganizationId");
-
                     b.Property<byte[]>("Salt");
 
                     b.Property<int>("Type");
@@ -180,8 +179,6 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Updated");
 
                     b.Property<string>("Username");
-
-                    b.Property<long?>("VolunteerId");
 
                     b.HasKey("Id");
 

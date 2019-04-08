@@ -103,7 +103,8 @@ namespace WebAPI.Services
             CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
             user.Hash = passwordHash;
             user.Salt = passwordSalt;
-            user.Volunteer = new Volunteer(); // create empty volunteer
+            CreateProfileByType(user); // create empty volunteer
+            
             var created = await _repository.Create(user);
             var createdDto = CreateDto(created);
             createdDto.Password = null;
@@ -198,6 +199,25 @@ namespace WebAPI.Services
             return true;
         }
 
+        private void CreateProfileByType(User user)
+        {
+            switch (user.Type)
+            {
+                case UserType.Organization:
+                    user.Organization = new Organization();
+                    break;
+                case UserType.Volunteer:
+                    user.Volunteer = new Volunteer();
+                    break;
+                case UserType.Admin:
+                    break;
+                case UserType.Moderator:
+                    break;
+                default:
+                    throw new InvalidOperationException("User type is not valid while registering");
+            }
+        }
+
         #endregion
 
         #region Validation
@@ -211,6 +231,29 @@ namespace WebAPI.Services
                    && entity.Username.Length > 3
                    && entity.Username.Length < 40;
             //&& Regex.IsMatch(entity.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase); ;
+        }
+        
+        public virtual async Task<long> GetUsersRoleId(ClaimsPrincipal user)
+        {
+            var parsed = int.TryParse(user.Identity.Name, out var id);
+            if (!parsed || !user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name))
+                throw new InvalidOperationException($"User is not authenticated");
+
+            var item = await _repository.GetById(id);
+            if(item == null)
+                throw new InvalidOperationException($"User was not found");
+
+            if (item.Volunteer != null)
+            {
+                return item.Volunteer.Id;
+            }
+
+            if (item.Organization != null)
+            {
+                return item.Organization.Id;
+            }
+
+            throw new InvalidOperationException($"Get profile id failed");
         }
 
         #endregion

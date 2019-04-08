@@ -58,7 +58,8 @@ namespace WebAPI.Configurations
             entities.HasKey(x => x.Id);
             entities.HasOne(x => x.User)
                 .WithOne(x => x.Organization)
-                .HasForeignKey<User>(x => x.OrganizationId);
+                .HasForeignKey<Organization>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // does not need
             entities.HasMany(x => x.Projects)
@@ -80,7 +81,8 @@ namespace WebAPI.Configurations
             entities.HasKey(x => x.Id);
             entities.HasOne(x => x.User)
                 .WithOne(x => x.Volunteer)
-                .HasForeignKey<User>(x => x.VolunteerId);
+                .HasForeignKey<Volunteer>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // does not need
             entities.HasOne(x => x.Picture)
@@ -104,14 +106,14 @@ namespace WebAPI.Configurations
         {
             var entities = modelBuilder.Entity<User>();
             entities.HasKey(x => x.Id);
-            entities.HasOne(x => x.Volunteer)
+            /*entities.HasOne(x => x.Volunteer)
                 .WithOne(x => x.User)
                 .HasForeignKey<Volunteer>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
             entities.HasOne(x => x.Organization)
                 .WithOne(x => x.User)
                 .HasForeignKey<Organization>(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
         }
 
         public void SetProjectVolunteers(ModelBuilder modelBuilder)

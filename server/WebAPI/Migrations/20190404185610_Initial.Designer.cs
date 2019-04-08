@@ -10,7 +10,7 @@ using WebAPI.Configurations;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(VolunteerDbContext))]
-    [Migration("20190329153730_Initial")]
+    [Migration("20190404185610_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,8 +174,6 @@ namespace WebAPI.Migrations
 
                     b.Property<byte[]>("Hash");
 
-                    b.Property<long?>("OrganizationId");
-
                     b.Property<byte[]>("Salt");
 
                     b.Property<int>("Type");
@@ -183,8 +181,6 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Updated");
 
                     b.Property<string>("Username");
-
-                    b.Property<long?>("VolunteerId");
 
                     b.HasKey("Id");
 

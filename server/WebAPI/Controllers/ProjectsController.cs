@@ -41,6 +41,36 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("saved")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> GetSavedItems()
+        {
+            try
+            {
+                var entity = await _projectsService.GetSavedItems(User);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet("selected")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> GetSelectedItems()
+        {
+            try
+            {
+                var entity = await _projectsService.GetSelectedItems(User);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         #region CRUD
 
         [HttpDelete("{id}")]
