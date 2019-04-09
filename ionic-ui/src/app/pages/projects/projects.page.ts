@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Project} from '../../models/Project';
 import {ProjectsService} from '../../services/projects.service';
 import {NavController} from '@ionic/angular';
 import {Objects} from '../../constants/Objects';
 import {Strings} from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { strict } from 'assert';
 
 @Component({
     selector: 'app-projects',
     templateUrl: './projects.page.html',
     styleUrls: ['./projects.page.scss'],
 })
-export class ProjectsPage implements OnInit {
+export class ProjectsPage implements OnInit, OnDestroy {
 
     public searchTerm = '';
     public archive = false;
@@ -19,6 +21,7 @@ export class ProjectsPage implements OnInit {
     projectsFiltered: Project[] = this.projects;
     private dateNow = new Date();
     private type: String;
+    private subscription: Subscription;
 
     constructor(private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
     }
@@ -29,60 +32,33 @@ export class ProjectsPage implements OnInit {
         this.filterNewItems();
     }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
     loadItemsByType() {
+        let observable: Observable<Project[]>;
         switch (this.type) {
             case 'saved':
-            this.getSavedItems();
+            observable = this.projectsService.getSavedItems();
             break;
             case 'selected':
-            this.getSelectedItems();
+            observable = this.projectsService.getSelectedItems();
             break;
             default:
-            this.getItems();
+            observable = this.projectsService.get();
             break;
         }
+        this.subscription = this.subscribeProjects(observable);
     }
 
-    getSavedItems() {
-        this.projectsService.getSavedItems().subscribe(items => {
+    subscribeProjects(observable: Observable<Project[]>) {
+        return observable.subscribe(items => {
             this.projects = items.map(value => {
-                if (value.imageUrl === null) {
+                if (value.imageUrl === null || value.imageUrl === '') {
                     value.imageUrl = Strings.Default_Image_Url;
                     return value;
                 }
-
-                return value;
-            });
-            this.filterNewItems();
-        }, error1 => {
-            console.log(error1);
-        });
-    }
-
-    getSelectedItems() {
-        this.projectsService.getSelectedItems().subscribe(items => {
-            this.projects = items.map(value => {
-                if (value.imageUrl === null) {
-                    value.imageUrl = Strings.Default_Image_Url;
-                    return value;
-                }
-
-                return value;
-            });
-            this.filterNewItems();
-        }, error1 => {
-            console.log(error1);
-        });
-    }
-
-    getItems() {
-        this.projectsService.get().subscribe(items => {
-            this.projects = items.map(value => {
-                if (value.imageUrl === null) {
-                    value.imageUrl = Strings.Default_Image_Url;
-                    return value;
-                }
-
                 return value;
             });
             this.filterNewItems();

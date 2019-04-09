@@ -47,7 +47,11 @@ export class MenuPage implements OnInit {
         },
         {
             title: 'Saved projects',
-            url: '/projects'
+            url: '/projects/saved'
+        },
+        {
+            title: 'Selected projects',
+            url: '/projects/selected'
         },
         {
             title: 'Settings',

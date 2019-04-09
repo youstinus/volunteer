@@ -11,7 +11,10 @@ export abstract class BaseService<T> {
 
     public api = `${environment.webApiUrl}`;
 
-    protected constructor(public http: HttpClient, public usersService: UsersService) {
+    protected constructor(
+        protected http: HttpClient,
+        protected usersService: UsersService
+        ) {
     }
 
     public create(item: T): Observable<T> {
@@ -40,16 +43,16 @@ export abstract class BaseService<T> {
     }
 
     public getHeaders() {
-        let auth_token = 'Bearer ';
+        let authToken = 'Bearer ';
         const token = this.usersService.getToken();
         console.log(token);
         if (token != null) {
-            auth_token = auth_token + token;
+            authToken = authToken + token;
         }
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'origin',
-            'Authorization': auth_token
+            'Authorization': authToken
         });
         return headers;
     }

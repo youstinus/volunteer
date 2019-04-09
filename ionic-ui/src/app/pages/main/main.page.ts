@@ -35,7 +35,7 @@ export class MainPage implements OnInit {
     getProjects() {
         this.projectsService.get().subscribe(items => {
             this.projects = items.map(value => {
-                if (value.imageUrl === null) {
+                if (value.imageUrl === null || value.imageUrl === '') {
                     value.imageUrl = Strings.Default_Image_Url;
                     return value;
                 }
@@ -50,7 +50,7 @@ export class MainPage implements OnInit {
     getOrganizations() {
         this.organizationsService.get().subscribe(items => {
             this.organizations = items.map(value => {
-                if (value.imageUrl === null) {
+                if (value.imageUrl === null || value.imageUrl === '') {
                     value.imageUrl = Strings.Default_Image_Url;
                     return value;
                 }
