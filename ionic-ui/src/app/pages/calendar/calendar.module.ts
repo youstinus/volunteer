@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { CalendarPage } from './calendar.page';
 import {ComponentsModule} from '../../shared/components.module';
 
+
+import { NgCalendarModule  } from 'ionic2-calendar';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,8 +24,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    NgCalendarModule,
     ComponentsModule
   ],
-  declarations: [CalendarPage]
+  declarations: [CalendarPage],
+  
 })
 export class CalendarPageModule {}

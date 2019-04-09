@@ -29,6 +29,10 @@ export class MenuPage implements OnInit {
             url: '/projects'
         },
         {
+            title: 'Calendar',
+            url: '/calendar'
+        },
+        {
             title: 'Organizations',
             url: '/organizations'
         },
