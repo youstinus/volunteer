@@ -23,11 +23,6 @@ export class ModalVolunteerPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('pateko');
-    console.log(this.volname);
-    console.log(this.volphone);
-    console.log(this.volemail);
-    console.log(this.voldescrip);
 
   }
 
