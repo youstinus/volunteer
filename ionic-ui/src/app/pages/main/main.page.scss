@@ -27,15 +27,18 @@ ion-card {
 
 ion-toolbar {
   text-align: center;
+  max-width: 1320px;
 }
 
 .image {
-  max-width: 1310px;
+  max-width: 1320px;
 }
 
 ion-item-divider {
   padding: 0px;
   --background: linear-gradient(45deg, rgba(255,183,183,1) 0%, rgba(138,164,255,1) 100%);
+  display: inline-block;
+  max-width: 1320px;
 }
 
 ion-card-title {
