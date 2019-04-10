@@ -47,7 +47,7 @@ namespace WebAPI.Services
             if (!parsed)
                 return false;
 
-            var projects = await _repository.GetAllByPredicate(x => x.Organization.Id == userId);
+            var projects = await _repository.GetAllByPredicate(x => x.Organization.User.Id == userId);
             return user.Identity.IsAuthenticated && projects.Count > 0 && projects.Select(x => x.Id).Contains(id);
         }
 
