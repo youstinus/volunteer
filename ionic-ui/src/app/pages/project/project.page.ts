@@ -69,6 +69,9 @@ export class ProjectPage implements OnInit {
 
     }
 
+    onVolunteersNavigate() {
+      this.navCtrl.navigateForward('volunteers/project/'+this.project.id).catch(reason => console.log(reason));
+    }
 
 }
 export class PopoverComponent {

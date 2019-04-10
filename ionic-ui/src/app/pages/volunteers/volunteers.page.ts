@@ -28,85 +28,93 @@ export class VolunteersPage implements OnInit {
     volunteersIds: [2],
     website: 'https://volunteering.com',
     imageUrl: Strings.Default_Image_Url
-};
+  };
 
-  volunteers: Volunteer[]= [
+  volunteers: Volunteer[] = [
     {
-    id: 1,
-    firstName: 'Petriuke',
-    lastName: 'Pavarde1',
-    phone : '860298123',
-    email: 'susieikti@gmail.com',
-    description: 'Dirba ir labai gerai',
-    pictureId: 21,
-    userId: 11,
-    projectsIds: [1],
-    imageUrl:'https://www.ableto.com/wp-content/uploads/2018/02/7-Mental-Health-Benefits-of-Volunteering-664x443px.jpg',
-    reviewsIds: [2],
-},   {
-  id: 2,
-  firstName: 'Petras',
-  lastName: 'Pavarde2',
-  phone : '860298321',
-  email: 'susieikti@gmail.com',
-  description: 'Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes',
-  pictureId: 21,
-  userId: 11,
-  projectsIds: [1],
-  imageUrl:'https://qph.fs.quoracdn.net/main-qimg-73f94b1a6a02e2f70be80489a8526ad1.webp',
-  reviewsIds: [2],
-},   {
-  id: 3,
-  firstName: 'Petraitien',
-  lastName: 'Pavarde3',
-  phone : '860298132',
-  email: 'susieikti@gmail.com',
-  description: 'Nedirba ir tikrai nelabai gerai',
-  pictureId: 21,
-  userId: 11,
-  projectsIds: [1],
-  imageUrl:'https://kbsei3h2g2poy8x12ia6346k-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/smiling-fountain-of-youth-1024x935.jpg',
-  reviewsIds: [2],
-}];
+      id: 1,
+      firstName: 'Petriuke',
+      lastName: 'Pavarde1',
+      phone: '860298123',
+      email: 'susieikti@gmail.com',
+      description: 'Dirba ir labai gerai',
+      pictureId: 21,
+      userId: 11,
+      projectsIds: [1],
+      imageUrl: 'https://www.ableto.com/wp-content/uploads/2018/02/7-Mental-Health-Benefits-of-Volunteering-664x443px.jpg',
+      reviewsIds: [2],
+    }, {
+      id: 2,
+      firstName: 'Petras',
+      lastName: 'Pavarde2',
+      phone: '860298321',
+      email: 'susieikti@gmail.com',
+      description: 'Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes',
+      pictureId: 21,
+      userId: 11,
+      projectsIds: [1],
+      imageUrl: 'https://qph.fs.quoracdn.net/main-qimg-73f94b1a6a02e2f70be80489a8526ad1.webp',
+      reviewsIds: [2],
+    }, {
+      id: 3,
+      firstName: 'Petraitien',
+      lastName: 'Pavarde3',
+      phone: '860298132',
+      email: 'susieikti@gmail.com',
+      description: 'Nedirba ir tikrai nelabai gerai',
+      pictureId: 21,
+      userId: 11,
+      projectsIds: [1],
+      imageUrl: 'https://kbsei3h2g2poy8x12ia6346k-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/smiling-fountain-of-youth-1024x935.jpg',
+      reviewsIds: [2],
+    }];
 
   constructor(
-    private organizationsService: VolunteersService, 
+    private organizationsService: VolunteersService,
     private route: ActivatedRoute,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private projectsService: ProjectsService,
-     private navCtrl: NavController,
-     private modal: ModalController
-    ) { }
+    private navCtrl: NavController,
+    private modal: ModalController
+  ) { }
 
   ngOnInit() {
 
-    //const id = this.route.snapshot.params['id'];
-    const id=1;
+    const id = this.route.snapshot.params['id'];
+    //const id = 1;
     this.projectsService.getById(id).subscribe(value => {
-        this.project = value;
-        console.log(this.project.title);
-        console.log(this.project.organizationId);
-        console.log(this.project.description);
+      this.project = value;
+      console.log(this.project.title);
+      console.log(this.project.organizationId);
+      console.log(this.project.description);
     }, error1 => {
-        console.log(error1);
+      console.log(error1);
     });
 
+    this.projectsService.getVolunteers(id).subscribe(value => {
+      this.volunteers = value;
+    }, error1 => {
+      console.log(error1);
+    })
   }
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
-  async onVolunteerClicked(volunteer:Volunteer){
+  async onVolunteerClicked(volunteer: Volunteer) {
     console.log('paspaude');
     console.log(volunteer.firstName);
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
-      componentProps: {volname: volunteer.firstName+" "+ volunteer.lastName,
-      volphone: volunteer.phone,
-      volemail: volunteer.email,
-      voldescrip:  volunteer.description,
-    volPic:volunteer.imageUrl}});//      componentProps: {value:123}}
+      componentProps: {
+        volname: volunteer.firstName + " " + volunteer.lastName,
+        volphone: volunteer.phone,
+        volemail: volunteer.email,
+        voldescrip: volunteer.description,
+        volPic: volunteer.imageUrl
+      }
+    });//      componentProps: {value:123}}
 
     await myModal.present();
   }
-  
+
 }

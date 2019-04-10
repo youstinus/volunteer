@@ -65,6 +65,11 @@ export class MenuPage implements OnInit {
         {
             title: 'Logout',
             url: '/main'
+        },
+        
+        {
+            title:'Volunteers',
+            url:'/volunteers/project/1'
         }
 
     ];
