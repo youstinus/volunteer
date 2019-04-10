@@ -20,7 +20,11 @@ const routes: Routes = [
             { path: ':id', loadChildren: './pages/project/project.module#ProjectPageModule' }
         ]
     },
-    { path: 'volunteers', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
+    {
+        path: 'volunteers', children: [
+           // { path: '', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
+            { path: 'project/:id', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' }]
+    },
     { path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule' },
     { path: 'volunteers-settings', loadChildren: './pages/volunteers-settings/volunteers-settings.module#VolunteersSettingsPageModule' },
     {

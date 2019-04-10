@@ -13,14 +13,15 @@
  </h1>
 
 <ion-card>
+
     <ion-card-header>
         <ion-card-title class="label">All registered users:            
         </ion-card-title>
     </ion-card-header>
 
-  <ion-list *ngFor="let volunteer of volunteers" (click)="onVolunteerClicked(volunteer)" >
+  <ion-list *ngFor="let volunteer of volunteers">
   
-    <ion-item lines="none">
+    <ion-item lines="none" (click)="onVolunteerClicked(volunteer)" >
       <ion-avatar slot="start">
           <img src="{{ volunteer.imageUrl }}">
         </ion-avatar>
