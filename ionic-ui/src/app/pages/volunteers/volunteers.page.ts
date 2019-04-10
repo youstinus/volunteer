@@ -7,6 +7,8 @@ import { Strings } from 'src/app/constants/Strings';
 import { AlertController, LoadingController, ToastController, NavController, ModalController } from '@ionic/angular';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
+import { Objects } from 'src/app/constants/Objects';
+import { projection } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-volunteers',
@@ -15,59 +17,8 @@ import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
 })
 export class VolunteersPage implements OnInit {
 
-  project: Project = {
-    id: 1,
-    title: 'VSI projektas',
-    description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-    email: 'email@test.com',
-    organizationId: 5,
-    phone: '866666666',
-    picturesIds: [1],
-    start: new Date('2019-05-01'),
-    end: new Date('2019-05-01'),
-    volunteersIds: [2],
-    website: 'https://volunteering.com',
-    imageUrl: Strings.Default_Image_Url
-  };
-
-  volunteers: Volunteer[] = [
-    {
-      id: 1,
-      firstName: 'Petriuke',
-      lastName: 'Pavarde1',
-      phone: '860298123',
-      email: 'susieikti@gmail.com',
-      description: 'Dirba ir labai gerai',
-      pictureId: 21,
-      userId: 11,
-      projectsIds: [1],
-      imageUrl: 'https://www.ableto.com/wp-content/uploads/2018/02/7-Mental-Health-Benefits-of-Volunteering-664x443px.jpg',
-      reviewsIds: [2],
-    }, {
-      id: 2,
-      firstName: 'Petras',
-      lastName: 'Pavarde2',
-      phone: '860298321',
-      email: 'susieikti@gmail.com',
-      description: 'Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes.Dirba bet nelabai gerai, daugiau informacijos net negu mes tikimes',
-      pictureId: 21,
-      userId: 11,
-      projectsIds: [1],
-      imageUrl: 'https://qph.fs.quoracdn.net/main-qimg-73f94b1a6a02e2f70be80489a8526ad1.webp',
-      reviewsIds: [2],
-    }, {
-      id: 3,
-      firstName: 'Petraitien',
-      lastName: 'Pavarde3',
-      phone: '860298132',
-      email: 'susieikti@gmail.com',
-      description: 'Nedirba ir tikrai nelabai gerai',
-      pictureId: 21,
-      userId: 11,
-      projectsIds: [1],
-      imageUrl: 'https://kbsei3h2g2poy8x12ia6346k-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/smiling-fountain-of-youth-1024x935.jpg',
-      reviewsIds: [2],
-    }];
+  project: Project = Objects.Empty_Project;
+  volunteers: Volunteer[] = Objects.Empty_Volunteer_Arr;
 
   constructor(
     private organizationsService: VolunteersService,
@@ -83,11 +34,8 @@ export class VolunteersPage implements OnInit {
   ngOnInit() {
 
     const id = this.route.snapshot.params['id'];
-    //const id = 1;
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
-      console.log(this.project.title);
-      console.log(this.project.organizationId);
       console.log(this.project.description);
     }, error1 => {
       console.log(error1);
@@ -99,10 +47,9 @@ export class VolunteersPage implements OnInit {
       console.log(error1);
     })
   }
+
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   async onVolunteerClicked(volunteer: Volunteer) {
-    console.log('paspaude');
-    console.log(volunteer.firstName);
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
       componentProps: {
@@ -112,8 +59,7 @@ export class VolunteersPage implements OnInit {
         voldescrip: volunteer.description,
         volPic: volunteer.imageUrl
       }
-    });//      componentProps: {value:123}}
-
+    });
     await myModal.present();
   }
 

@@ -1,10 +1,15 @@
 ion-item{
-    --background:white;
+    --background:rgba(150, 218, 136, 0);
     --color: black;
 }
 
 ion-button{
     --background: #062f77;
+}
+
+ion-content{
+ // --ion-background-color:rgb(149, 248, 165);
+  --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165))
 }
 
 .error-message
@@ -15,10 +20,8 @@ ion-button{
   margin-top: 10px;
 }
 
-:host {
-  ion-content {
-    --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary))
-  }
+ion-input{
+  --color: black;
 }
 
 .auth-content {

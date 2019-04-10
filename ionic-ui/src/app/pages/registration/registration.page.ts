@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Form, FormBuilder, NgForm, FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
-import {UsersService} from '../../services/users.service';
-import {User} from '../../models/User';
-import {RouterOutlet, Router} from '@angular/router';
-import {NavController, MenuController, LoadingController} from '@ionic/angular';
+import { Form, FormBuilder, NgForm, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
+import { User } from '../../models/User';
+import { RouterOutlet, Router } from '@angular/router';
+import { NavController, MenuController, LoadingController } from '@ionic/angular';
 import { PasswordValidator } from './password.validator';
 import { Services } from '@angular/core/src/view';
 
@@ -26,17 +26,16 @@ export class RegistrationPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private usersService: UsersService
-    ) { }
+  ) { }
 
-    ionViewWillEnter() {
-      // this.menuCtrl.enable(false);
-    }
+  ionViewWillEnter() {
+    // this.menuCtrl.enable(false);
+  }
 
   ngOnInit() {
-
-//https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
-// https://github.com/yuyang041060120/ng2-validation#notequalto-1
-//https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
+    //https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
+    // https://github.com/yuyang041060120/ng2-validation#notequalto-1
+    //https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
     this.onRegisterForm = this.formBuilder.group({
       'username': [null, Validators.compose([
         Validators.minLength(5),
@@ -57,14 +56,21 @@ export class RegistrationPage implements OnInit {
       'type': [null, Validators.compose([
         Validators.required
       ])],
-      'terms': [null, Validators.compose([
-        Validators.required
+      'terms': [false, Validators.compose([
+        RegistrationPage.mustBeTruthy
       ])]
-    },{
-      validator: PasswordValidator.MatchPassword
-    });
+    }, {
+        validator: PasswordValidator.MatchPassword
+      });
   }
 
+  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
+    let rv: { [key: string]: boolean } = {};
+    if (!c.value) {
+      rv['notChecked'] = true;
+    }
+    return rv;
+  }
 
   async signUp() {
 
@@ -75,8 +81,6 @@ export class RegistrationPage implements OnInit {
 
     loader.present();
     loader.onWillDismiss().then(() => {
-      // this.navCtrl.navigateRoot('registration'); 
-      // iki čia ateina user == null
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
         console.log(user);
@@ -89,11 +93,10 @@ export class RegistrationPage implements OnInit {
         console.log('User was not registered', error1);
       });
     });
-  } 
-  conditions(){
+  }
+
+  conditions() {
     window.open('privacy', '_system')
-    // cia pasirinktinai ko norim, ar kad naujas langas ar naviguot i puslapi
-    //this.navCtrl.navigateForward('privacy');
   }
 
   goToLogin() {
@@ -101,14 +104,6 @@ export class RegistrationPage implements OnInit {
   }
 
   onRegister(form: NgForm) {
-    console.log('submited');
-    //form. kuri forma ir kaip naudoti ja duomenims apdoroti
-    console.log(form.form);
-    console.log(this.user);
-    
-    // password match
-    // password validation
-
     this.usersService.register(this.user).subscribe(user => {
       this.user = user;
       console.log(user);
@@ -118,6 +113,6 @@ export class RegistrationPage implements OnInit {
         console.log('Registration failed');
       }
     });
-    }
+  }
 
 }

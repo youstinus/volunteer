@@ -2,6 +2,7 @@ import {Picture} from '../models/Picture';
 import {Strings} from './Strings';
 import {Project} from '../models/Project';
 import {Organization} from '../models/Organization';
+import { Volunteer } from '../models/Volunteer';
 
 export class Objects {
     public static Empty_Organization = {
@@ -31,6 +32,35 @@ export class Objects {
         reviewsIds: [],
         id: null
     };
+
+    public static Empty_Project = {
+        id: null,
+        title: null,
+        description: null,
+        email: null,
+        organizationId: null,
+        phone: null,
+        picturesIds: null,
+        start: null,
+        end: null,
+        volunteersIds: null,
+        website: null,
+        imageUrl: null
+      };
+
+      public static Empty_Volunteer_Arr : Volunteer[] = [{
+        userId: null,
+        description: null,
+        email: null,
+        firstName: null,
+        imageUrl: null,
+        lastName: null,
+        phone: null,
+        pictureId: null,
+        projectsIds: [],
+        reviewsIds: [],
+        id: null
+      }];
 
     public static Default_Picture: Picture = {
         volunteerId: 0,
