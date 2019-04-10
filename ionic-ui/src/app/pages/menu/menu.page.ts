@@ -51,11 +51,11 @@ export class MenuPage implements OnInit {
         },
         {
             title: 'Saved projects',
-            url: '/projects/saved'
+            url: '/projects/type/saved'
         },
         {
             title: 'Selected projects',
-            url: '/projects/selected'
+            url: '/projects/type/selected'
         },
         {
             title: 'Settings',
