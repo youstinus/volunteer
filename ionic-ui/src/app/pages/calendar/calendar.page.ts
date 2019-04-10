@@ -28,7 +28,7 @@ export class CalendarPage implements OnInit{
   eventSource = [];
 
   calendar = {
-    mode: 'week',
+    mode: 'month',
     currentDate: new Date()
   }
 
