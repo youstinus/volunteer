@@ -4,6 +4,15 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>273b2068-608d-4dd1-b189-b2fd5d880248</UserSecretsId>
+    <Authors>Platypus</Authors>
+    <Company>Platypus</Company>
+    <Product>Platypus</Product>
+    <Copyright>Platypus</Copyright>
+    <PackageLicenseUrl>https://github.com/youstinus/volunteer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/youstinus/volunteer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/youstinus/volunteer</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Description>Volunteering platform webapi</Description>
   </PropertyGroup>
 
   <ItemGroup>

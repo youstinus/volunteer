@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlTypes;
 
 namespace WebAPI.Services.Interfaces
 {
@@ -9,5 +10,6 @@ namespace WebAPI.Services.Interfaces
     {
         DateTimeOffset UtcNow { get; }
         DateTime GetCurrentTime();
+        SqlDateTime MinSqlDateTime();
     }
 }
