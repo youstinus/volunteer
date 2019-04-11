@@ -193,11 +193,15 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("Email");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("ImageUrl");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("Phone");
 
                     b.Property<long?>("PictureId");
 
