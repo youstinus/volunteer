@@ -26,13 +26,16 @@ export class ProjectPage implements OnInit {
         start: new Date('2019-05-01'),
         end: new Date('2019-05-01'),
         volunteersIds: [2],
-        website: 'https://volunteering.com',
+        website: 'https://www.vdu.lt/en/studies/international-student-handbook/volunteering/',
         imageUrl: Strings.Default_Image_Url
     };
 
     constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {
 
         
+    }
+    onSourceClicked(source: string){
+      window.open(source, '_system')
     }
     btnActivate(ionicButton) {
         if(ionicButton.color === 'dark')
