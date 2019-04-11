@@ -12,6 +12,10 @@ ion-content{
   --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165))
 }
 
+ion-text{
+  --color: black;
+}
+
 .error-message
 {
   color: red;
