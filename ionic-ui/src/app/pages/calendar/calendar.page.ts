@@ -1,6 +1,6 @@
 //import {Component, OnInit} from '@angular/core';
-import {NavController, Platform} from '@ionic/angular';
 //import {Calendar} from '@ionic-native/calendar/ngx';
+import {NavController, Platform} from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
