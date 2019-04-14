@@ -119,6 +119,8 @@ namespace WebAPI.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     PictureId = table.Column<long>(nullable: true),
                     UserId = table.Column<long>(nullable: false)
                 },

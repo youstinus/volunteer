@@ -1,21 +1,22 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {User} from '../models/User';
-import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {JwtHelper} from '../utilities/JwtHelper';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../models/User';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelper } from '../utilities/JwtHelper';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersService {
-    public api = `${environment.webApiUrl}/users`;
+    private api = `${environment.webApiUrl}/users`;
     private user: User;
     private token: string;
     private role: number;
     private id: number;
 
-    constructor(public http: HttpClient, public usersService: UsersService) {
+    constructor(private http: HttpClient, private usersService: UsersService, private cookieService: CookieService) {
     }
 
     public getUserToken() {
@@ -45,6 +46,7 @@ export class UsersService {
         const data = helper.decodeToken(this.token);
         this.role = data.role;
         this.id = data.id;
+        this.cookieService.set('Bearer', this.token);
     }
 
     public getToken() {
@@ -64,32 +66,35 @@ export class UsersService {
         this.user = null;
         this.role = null;
         this.id = null;
+        this.cookieService.delete('Bearer');
         return;
     }
 
     public get(): Observable<User[]> {
         const headers = this.getHeaders();
-        return this.http.get<User[]>(`${this.api}`, {headers: headers});
+        return this.http.get<User[]>(`${this.api}`, { headers: headers });
     }
 
     public getById(id: number): Observable<User> {
         const headers = this.getHeaders();
-        return this.http.get<User>(`${this.api}/${id}`, {headers: headers});
+        return this.http.get<User>(`${this.api}/${id}`, { headers: headers });
     }
 
     public update(id: number, item: User): Observable<any> {
         const headers = this.getHeaders();
-        return this.http.put<User>(`${this.api}/${id}`, item, {headers: headers});
+        return this.http.put<User>(`${this.api}/${id}`, item, { headers: headers });
     }
 
     public delete(id: number): Observable<any> {
         const headers = this.getHeaders();
-        return this.http.delete<User>(`${this.api}/${id}`, {headers: headers});
+        return this.http.delete<User>(`${this.api}/${id}`, { headers: headers });
     }
 
     public getHeaders() {
         let auth_token = 'Bearer ';
-        const token = this.usersService.getToken();
+        let token = this.usersService.getToken();
+        const cookieValue = this.cookieService.get('Bearer');
+        token = cookieValue;
         if (token != null) {
             auth_token = auth_token + token;
         }
