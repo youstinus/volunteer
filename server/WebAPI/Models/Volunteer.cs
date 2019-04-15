@@ -9,7 +9,8 @@ namespace WebAPI.Models
         public string LastName { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public Picture Picture { get; set; }
         public User User { get; set; }
         public ICollection<Review> Reviews { get; set; }
