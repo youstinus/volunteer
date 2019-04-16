@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {Project} from '../models/Project';
 import {UsersService} from './users.service';
 import {BaseService} from './base.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ import {BaseService} from './base.service';
 export class OrganizationsService extends BaseService<Organization> {
   public api = `${environment.webApiUrl}/organizations`;
 
-  constructor(public http: HttpClient, public usersService: UsersService) {
-    super(http, usersService);
+  constructor(public http: HttpClient, public usersService: UsersService, public cookieService: CookieService) {
+    super(http, usersService, cookieService);
   }
 
   getProjectsByOrganizationId(id: number): Observable<Project[]> {

@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Volunteer} from '../models/Volunteer';
 import {UsersService} from './users.service';
 import {BaseService} from './base.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class VolunteersService extends BaseService<Volunteer> {
 
   public api = `${environment.webApiUrl}/volunteers`;
 
-  constructor(public http: HttpClient, public usersService: UsersService) {
-    super(http, usersService);
+  constructor(public http: HttpClient, public usersService: UsersService, public cookieService: CookieService) {
+    super(http, usersService, cookieService);
   }
 
   getByUsersId(id: number): Observable<Volunteer> {
