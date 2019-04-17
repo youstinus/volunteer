@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Npgsql;
 using Swashbuckle.AspNetCore.Swagger;
 using WebAPI.Helpers;
 using WebAPI.Utilities;
@@ -30,34 +29,6 @@ namespace WebAPI.Configurations
 
         public static void SetUpDatabase(this IServiceCollection service, IConfiguration configuration)
         {
-            /*var connectionString = configuration["Database:ConnectionString"];
-            service.AddDbContext<VolunteerDbContext>(options => options.UseSqlServer(connectionString));*/
-            /*var mySqlConnection = "server=localhost;port=3306;user=root;database=Volunteer1;";
-            service.AddDbContext<VolunteerDbContext>(options => options.UseMySql(mySqlConnection));*/
-            //Environment.GetEnvironmentVariable("DATABASE_URL");//"server=localhost;port=3306;user=root;database=Volunteer1;";
-            /*var conn = new NpgsqlConnection("postgres://pcigxbfhhjwcbt:af49c9895b95e5fe925199f0f5632a67a843632cb963fbd5316bd76617b711cd@ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d8cf73p3n5cald");
-            if (string.IsNullOrWhiteSpace(postgresql))
-            {
-                //throw new InvalidOperationException("Connection string was not found from environmental variable");
-                postgresql = configuration["Database:ConnectionString"];
-            }
-
-            if (string.IsNullOrWhiteSpace(postgresql))
-            {
-                throw new InvalidOperationException("Connection string was not found from environmental variable");
-                //postgresql = configuration["Database:ConnectionString"];
-            }*/
-
-            // Add SQL DB Service
-            /*var connectionString = configuration["Database:ConnectionString"];
-
-            if (connectionString == "")
-            {
-                //Get $DATABASE_URL (Database Connection) 
-                var dbConfig = new DbConfig(Environment.GetEnvironmentVariable("DATABASE_URL"));
-                connectionString = dbConfig.GetConnectionString();
-            }*/
-
             var postgresql = StringTranslator.GetConnectionString();
             service.AddDbContext<VolunteerDbContext>(options => options.UseNpgsql(postgresql));
         }
@@ -115,13 +86,11 @@ namespace WebAPI.Configurations
 
         public static void AddAuthorizationConfigs(this IServiceCollection services, IConfiguration configuration)
         {
-            // configure strongly typed settings objects
-            var appSettingsSection = configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            var secret = Environment.GetEnvironmentVariable("APP_SECRET");
+            if(string.IsNullOrWhiteSpace(secret))
+                throw new InvalidOperationException("Secret was not found for authorization initialization");
 
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -129,21 +98,6 @@ namespace WebAPI.Configurations
             })
                 .AddJwtBearer(x =>
                 {
-                    /*x.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = context =>
-                        {
-                            var userService = context.HttpContext.RequestServices.GetRequiredService<IUsersService>();
-                            var userId = int.Parse(context.Principal.Identity.Name);
-                            var user = userService.GetById(userId);
-                            if (user == null)
-                            {
-                                // return unauthorized if user no longer exists
-                                context.Fail("Unauthorized");
-                            }
-                            return Task.CompletedTask;
-                        }
-                    };*/
                     x.RequireHttpsMetadata = false;
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters

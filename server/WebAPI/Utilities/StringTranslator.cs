@@ -8,6 +8,7 @@ namespace WebAPI.Utilities
         public static string GetConnectionString()
         {
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
             if (string.IsNullOrWhiteSpace(databaseUrl))
                 return null;
 

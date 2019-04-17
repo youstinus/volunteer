@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  webApiUrl: 'https://localhost:44300/api'
+  //webApiUrl: 'https://localhost:44300/api'
+  webApiUrl: 'https://volunteer-webapi.herokuapp.com/api'
 };
 
 /*
