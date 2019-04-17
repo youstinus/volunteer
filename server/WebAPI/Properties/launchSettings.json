@@ -14,6 +14,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "DATABASE_URL": "postgres://pcigxbfhhjwcbt:af49c9895b95e5fe925199f0f5632a67a843632cb963fbd5316bd76617b711cd@ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d8cf73p3n5cald",
+        "APP_SECRET": "qBHgVxE2L2s7SdL3lLmdD3FWvewNs53dc5DrGPeQMomocMaYordjQ4hQGDp",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

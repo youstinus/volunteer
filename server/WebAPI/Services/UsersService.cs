@@ -6,11 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Base;
 using WebAPI.Enums;
-using WebAPI.Helpers;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 using WebAPI.Repositories.Interfaces;
@@ -21,17 +19,14 @@ namespace WebAPI.Services
     public class UsersService : BaseService<User, UserDto>, IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly AppSettings _appSettings;
         private readonly ITimeService _timeService;
 
         public UsersService(
             IUsersRepository repository,
             IMapper mapper,
-            IOptions<AppSettings> appSettings,
             ITimeService timeService) : base(repository, mapper, timeService)
         {
             _usersRepository = repository;
-            _appSettings = appSettings.Value;
             _timeService = timeService;
         }
 
@@ -59,7 +54,12 @@ namespace WebAPI.Services
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var secret = Environment.GetEnvironmentVariable("APP_SECRET");
+            if (string.IsNullOrWhiteSpace(secret))
+                throw new InvalidOperationException("Secret was null in the environment variables");
+
+            var key = Encoding.ASCII.GetBytes(secret);//_appSettings.Secret);
+            
             var subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, userDto.Id.ToString()),
