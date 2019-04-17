@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,8 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using Swashbuckle.AspNetCore.Swagger;
 using WebAPI.Helpers;
+using WebAPI.Utilities;
 
 namespace WebAPI.Configurations
 {
@@ -27,10 +30,36 @@ namespace WebAPI.Configurations
 
         public static void SetUpDatabase(this IServiceCollection service, IConfiguration configuration)
         {
-            var connectionString = configuration["Database:ConnectionString"];
-            service.AddDbContext<VolunteerDbContext>(options => options.UseSqlServer(connectionString));
+            /*var connectionString = configuration["Database:ConnectionString"];
+            service.AddDbContext<VolunteerDbContext>(options => options.UseSqlServer(connectionString));*/
             /*var mySqlConnection = "server=localhost;port=3306;user=root;database=Volunteer1;";
             service.AddDbContext<VolunteerDbContext>(options => options.UseMySql(mySqlConnection));*/
+            //Environment.GetEnvironmentVariable("DATABASE_URL");//"server=localhost;port=3306;user=root;database=Volunteer1;";
+            /*var conn = new NpgsqlConnection("postgres://pcigxbfhhjwcbt:af49c9895b95e5fe925199f0f5632a67a843632cb963fbd5316bd76617b711cd@ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d8cf73p3n5cald");
+            if (string.IsNullOrWhiteSpace(postgresql))
+            {
+                //throw new InvalidOperationException("Connection string was not found from environmental variable");
+                postgresql = configuration["Database:ConnectionString"];
+            }
+
+            if (string.IsNullOrWhiteSpace(postgresql))
+            {
+                throw new InvalidOperationException("Connection string was not found from environmental variable");
+                //postgresql = configuration["Database:ConnectionString"];
+            }*/
+
+            // Add SQL DB Service
+            /*var connectionString = configuration["Database:ConnectionString"];
+
+            if (connectionString == "")
+            {
+                //Get $DATABASE_URL (Database Connection) 
+                var dbConfig = new DbConfig(Environment.GetEnvironmentVariable("DATABASE_URL"));
+                connectionString = dbConfig.GetConnectionString();
+            }*/
+
+            var postgresql = StringTranslator.GetConnectionString();
+            service.AddDbContext<VolunteerDbContext>(options => options.UseNpgsql(postgresql));
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
