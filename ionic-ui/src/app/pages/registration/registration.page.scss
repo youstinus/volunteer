@@ -1,6 +1,8 @@
 ion-item{
-    --background:rgba(150, 218, 136, 0);
-    --color: black;
+  --background:rgba(142, 167, 137, 0);
+  --color: black;
+  --border-radius: 10px;
+  --border-spacing: 100px;
 }
 
 ion-button{
@@ -31,4 +33,25 @@ ion-input{
 .auth-content {
   margin: auto;
   max-width: 300px;
+}
+
+.fieldset {
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 13px solid;
+  border-radius: 25px;
+  border-color: rgba(34, 224, 65, 0.315);
+}
+.forLegend{
+  font-size: 125%;
+} 
+.h2{
+  font-size: 180%;
+  font-weight: bold;
+  font-variant: small-caps;
 }

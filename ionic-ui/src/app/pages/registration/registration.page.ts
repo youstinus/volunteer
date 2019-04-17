@@ -15,7 +15,7 @@ import { Services } from '@angular/core/src/view';
 export class RegistrationPage implements OnInit {
 
   user: User = new User();
-
+  public roleSelector = '2';
   public onRegisterForm: FormGroup;
   public matching_passwords_group: FormGroup;
 
@@ -33,6 +33,7 @@ export class RegistrationPage implements OnInit {
   }
 
   ngOnInit() {
+    
     //https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
     // https://github.com/yuyang041060120/ng2-validation#notequalto-1
     //https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
@@ -62,6 +63,8 @@ export class RegistrationPage implements OnInit {
     }, {
         validator: PasswordValidator.MatchPassword
       });
+      
+    //this.onRegisterForm.get('type').setValue(2);
   }
 
   static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
@@ -78,6 +81,7 @@ export class RegistrationPage implements OnInit {
     const loader = await this.loadingCtrl.create({
       duration: 2000
     });
+    console.log(this.onRegisterForm.value);
 
     loader.present();
     loader.onWillDismiss().then(() => {

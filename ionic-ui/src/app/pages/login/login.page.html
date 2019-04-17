@@ -1,18 +1,20 @@
 <app-header>Login</app-header>
-<ion-content padding class="animated fadeIn login auth-page">
+<ion-content padding>
   <div class="theme-bg"></div>
   <div class="auth-content">
 
     <!-- Logo -->
     <div padding-horizontal text-center class="animated fadeInDown">
       <div class="logo"></div>
-      <h4 no-margin>
-        <ion-text color="light" class="fw700">
-          Log in
-        </ion-text>
-      </h4>
+      <h2 no-margin class="h2">
+          Welcome!
+      </h2>
     </div>
-
+    &nbsp;
+<fieldset class="fieldset">
+    <legend class="forLegend">
+       <strong> Log in </strong>
+    </legend>
     <!-- Login form -->
     <form [formGroup]="onLoginForm" class="list-form">
       <ion-item no-padding class="animated fadeInUp">
@@ -20,33 +22,36 @@
           <ion-icon name="person" item-start></ion-icon>
           Username
         </ion-label>
-        <ion-input color="secondary" type="username" formControlName="username"></ion-input>
+        <ion-input type="username" formControlName="username"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onLoginForm.get('username').touched && onLoginForm.get('username').hasError('required')">
-        <ion-text color="warning">
-          Required Field
+      <p ion-text *ngIf="onLoginForm.get('username').touched && onLoginForm.get('username').errors">
+        <ion-text class="error-message">
+          Required field, must contain at least 5 letters
         </ion-text>
       </p>
-
+      &nbsp;
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="lock" item-start></ion-icon>
           Password
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+        <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
-      <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
-        <ion-text color="warning">
-          Required Field
+      <p ion-text *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').errors">
+        <ion-text class="error-message">
+          Required field, must contain at least 5 letters
         </ion-text>
         </p>
     </form>
 
     <p text-right tappable (click)="forgotPass()" class="paz">
-      <ion-text color="light">
+      <ion-text >
         <strong>Forgot your password?</strong>
       </ion-text>
     </p>
+  </fieldset>
+
+  &nbsp;
 
     <div>
       <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="onSignIn()" [disabled]="!onLoginForm.valid" tappable>
@@ -55,10 +60,12 @@
       </ion-button>
     </div>
 
+    &nbsp;
+
     <!-- Other links -->
     <div text-center margin-top>
       <span (click)="goToRegister()" class="paz" tappable>
-        <ion-text color="light">
+        <ion-text >
           New here? <strong>Sign Up</strong>
         </ion-text>
       </span>

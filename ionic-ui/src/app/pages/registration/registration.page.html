@@ -6,12 +6,17 @@
     <!-- Logo -->
     <div padding-horizontal text-center>
       <div class="logo"></div>
-      <h2 no-margin>
+      <h2 no-margin class="h2">
           <ion-text><strong>Register to our page</strong></ion-text>
       </h2>
     </div>
     &nbsp;
     
+    <fieldset class="fieldset">
+      <legend class="forLegend">
+         <strong> Your information: </strong>
+      </legend>
+
     <!-- Register form -->
     <form [formGroup]="onRegisterForm" class="list-form">
       <ion-item no-padding class="animated fadeInUp">
@@ -46,7 +51,7 @@
         <ion-label position="floating">
           <ion-icon name="people" item-start></ion-icon> User type
         </ion-label>
-        <ion-select formControlName="type" cancelText="Cancel" okText="OK">
+        <ion-select [(ngModel)]="roleSelector" formControlName="type" cancelText="Cancel" okText="OK">
           <ion-select-option value=2>Volunteer</ion-select-option>
           <ion-select-option value=3>Organization</ion-select-option>
         </ion-select>
@@ -103,6 +108,7 @@
       </ion-item>
 
     </form>
+  </fieldset>
 
     <div margin-top>
       <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()"

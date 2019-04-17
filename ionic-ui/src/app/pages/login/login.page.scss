@@ -1,20 +1,69 @@
-btn-theme {
-    background-color: greenyellow;
-    border-color: green;
-    border-style: double; 
-}
-:host {
+
+/*:host {
     ion-content {
         --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
     }
-}
+}*/
+.fieldset {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 13px solid;
+    border-radius: 25px;
+    border-color: rgba(34, 224, 65, 0.315);
+ }
+ .forLegend{
+    font-size: 150%;
+ } 
+ 
+ .h2{
+    font-size: 200%;
+    font-weight: bold;
+    font-variant: small-caps;
+ }
 
-.paz {
+ .paz {
     position: relative;
     z-index: 10;
 }
 
+ion-item{
+    --background:rgba(142, 167, 137, 0.11);
+    --color: black;
+    --border-radius: 10px;
+    --border-spacing: 100px;
+}
+
+ion-button{
+    --background: #062f77;
+}
+
+ion-content{
+ // --ion-background-color:rgb(149, 248, 165);
+  --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165))
+}
+
+ion-text{
+  --color: black;
+}
+
+.error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+ion-input{
+  --color: black;
+}
+
 .auth-content {
-    margin: auto;
-    max-width: 300px;
+  margin: auto;
+  max-width: 300px;
 }
