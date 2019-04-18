@@ -10,8 +10,12 @@ import {UsersService} from '../../services/users.service';
 export class MenuPage implements OnInit {
 
     private role: number;
-
-    public pages = [
+   
+    public pages = [        
+        {
+            title: 'Main',
+            url: '/main'
+        },
         {
             title: 'Login',
             url: '/login'
@@ -19,24 +23,51 @@ export class MenuPage implements OnInit {
         {
             title: 'Registration',
             url: '/registration'
+        },        
+        {
+            title: 'Volunteers settings',
+            url: '/volunteers-settings'
+        },        
+        {
+            title: 'Organizations settings',
+            url: '/organizations-settings'
         },
         {
-            title: 'Main',
-            url: '/main'
+            title: 'Organizations',
+            url: '/organizations'
         },
         {
             title: 'Projects',
             url: '/projects'
         },
         {
-            title: 'Calendar',
-            url: '/calendar'
+            title: 'Saved projects',
+            url: '/projects/type/saved'
         },
         {
-            title: 'Organizations',
-            url: '/organizations'
+            title: 'Selected projects',
+            url: '/projects/type/selected'
         },
-
+        {
+            title: 'New project',
+            url: '/new-project'
+        },
+        {
+            title: 'Project edit',
+            url: '/project-edit'
+        },        
+        {
+            title:'Volunteers 1',
+            url:'/volunteers/project/1'
+        },
+        {
+            title:'Volunteers 2',
+            url:'/volunteers/project/2'
+        },
+        {
+            title:'Volunteers 3',
+            url:'/volunteers/project/3'
+        },
         {
             title: 'Calendar',
             url: '/calendar'
@@ -48,30 +79,7 @@ export class MenuPage implements OnInit {
         {
             title: 'Privacy policy',
             url: '/privacy'
-        },
-        {
-            title: 'Saved projects',
-            url: '/projects/type/saved'
-        },
-        {
-            title: 'Selected projects',
-            url: '/projects/type/selected'
-        },
-        {
-            title: 'Settings',
-            url: '/volunteers-settings'
-        },
-
-        {
-            title: 'Logout',
-            url: '/main'
-        },
-        
-        {
-            title:'Volunteers',
-            url:'/volunteers/project/1'
         }
-
     ];
 
     selectedPath = '';

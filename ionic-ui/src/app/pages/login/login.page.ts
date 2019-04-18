@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AlertController, LoadingController, MenuController, NavController, ToastController} from '@ionic/angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UsersService} from '../../services/users.service';
-import {User} from '../../models/User';
-import {UserType} from '../../enums/UserType';
-import {Volunteer} from '../../models/Volunteer';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
+import { User } from '../../models/User';
+import { UserType } from '../../enums/UserType';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +13,7 @@ import {Volunteer} from '../../models/Volunteer';
 export class LoginPage implements OnInit {
 
     public onLoginForm: FormGroup;
-    private user: User; // populate values before pressing onSignUp()
+    private user: User;
 
     constructor(
         public navCtrl: NavController,
@@ -25,10 +24,6 @@ export class LoginPage implements OnInit {
         private formBuilder: FormBuilder,
         private usersService: UsersService
     ) {
-    }
-
-    ionViewWillEnter() {
-        // this.menuCtrl.enable(false);
     }
 
     ngOnInit() {
@@ -56,39 +51,11 @@ export class LoginPage implements OnInit {
                 //this.navigateToSettings(user);
                 this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
             } else {
-                console.log('User not validated');
+                console.log('User was not validated');
             }
         }, error1 => {
-            console.log('Server is not reachable while loging in');
-            console.log('Using offline credentials')
-            //TODO remove this peace of code
-            if(this.onLoginForm.value.username == 'offline' && this.onLoginForm.value.password == 'offline') {
-                this.usersService.setUser(
-                    {
-                        id: 0,
-                        email: 'offline@gmail.com',
-                        organizationId: null,
-                        password: 'offline',
-                        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NTMwMTc0NjQsImV4cCI6MTY2MzYyMjI2NCwiaWF0IjoxNTUzMDE3NDY0fQ.RFBxpPSerZMoqXsiw4oh8NMWwoSG4Gd1XqO3nSNAPB8',
-                        type: 0,
-                        username: 'offline',
-                        volunteerId: null
-                    }
-                );
-                this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
-            }
+            console.log('Bad credentials', error1)
         });
-    }
-
-    // not usable at the moment
-    navigateToSettings(user: User) {
-        if (user.type === UserType.Volunteer && user.volunteerId === null) {
-            this.navCtrl.navigateForward('volunteers-settings').catch(reason => console.log('Error while signing in'));
-        } else if (user.type === UserType.Organization && user.organizationId === null) {
-            this.navCtrl.navigateForward('organizations-settings').catch(reason => console.log('Error while signing in'));
-        } else {
-            this.navCtrl.navigateForward('main').catch(reason => console.log('Error while signing in'));
-        }
     }
 
     async forgotPass() {

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, NgForm, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/User';
-import { RouterOutlet, Router } from '@angular/router';
 import { NavController, MenuController, LoadingController, AlertController } from '@ionic/angular';
 import { PasswordValidator } from './password.validator';
-import { Services } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-registration',
@@ -24,17 +22,12 @@ export class RegistrationPage implements OnInit {
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private router: Router,
     private usersService: UsersService,
     public alertController: AlertController
   ) { }
 
-  ionViewWillEnter() {
-    // this.menuCtrl.enable(false);
-  }
-
   ngOnInit() {
-    
+
     //https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
     // https://github.com/yuyang041060120/ng2-validation#notequalto-1
     //https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
@@ -64,8 +57,6 @@ export class RegistrationPage implements OnInit {
     }, {
         validator: PasswordValidator.MatchPassword
       });
-      
-    //this.onRegisterForm.get('type').setValue(2);
   }
 
   static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
@@ -78,7 +69,6 @@ export class RegistrationPage implements OnInit {
 
   async signUp() {
 
-    console.log(this.onRegisterForm);
     const loader = await this.loadingCtrl.create({
       duration: 2000
     });
@@ -87,15 +77,14 @@ export class RegistrationPage implements OnInit {
     loader.onWillDismiss().then(() => {
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
-        console.log(user);
         if (this.user != null) {
           this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
         } else {
-          console.log('Registration failed');
+          this.presentNotRegistered();
         }
       }, error1 => {
-        console.log('User was not registered', error1);
         this.presentNotRegistered();
+        console.log(error1);
       });
     });
   }
@@ -106,18 +95,6 @@ export class RegistrationPage implements OnInit {
 
   goToLogin() {
     this.navCtrl.navigateForward('login');
-  }
-
-  onRegister(form: NgForm) {
-    this.usersService.register(this.user).subscribe(user => {
-      this.user = user;
-      console.log(user);
-      if (this.user != null) {
-        this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
-      } else {
-        console.log('Registration failed');
-      }
-    });
   }
 
   async presentNotRegistered() {

@@ -1,12 +1,10 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Project} from '../../models/Project';
-import {ProjectsService} from '../../services/projects.service';
-import {NavController} from '@ionic/angular';
-import {Objects} from '../../constants/Objects';
-import {Strings} from '../../constants/Strings';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Project } from '../../models/Project';
+import { ProjectsService } from '../../services/projects.service';
+import { NavController } from '@ionic/angular';
+import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { strict } from 'assert';
 
 @Component({
     selector: 'app-projects',
@@ -17,7 +15,7 @@ export class ProjectsPage implements OnInit, OnDestroy {
 
     public searchTerm = '';
     public archive = false;
-    projects: Project[] = Objects.Test_Projects;
+    projects: Project[];
     projectsFiltered: Project[] = this.projects;
     private dateNow = new Date();
     private type: String;
@@ -40,14 +38,14 @@ export class ProjectsPage implements OnInit, OnDestroy {
         let observable: Observable<Project[]>;
         switch (this.type) {
             case 'saved':
-            observable = this.projectsService.getSavedItems();
-            break;
+                observable = this.projectsService.getSavedItems();
+                break;
             case 'selected':
-            observable = this.projectsService.getSelectedItems();
-            break;
+                observable = this.projectsService.getSelectedItems();
+                break;
             default:
-            observable = this.projectsService.get();
-            break;
+                observable = this.projectsService.get();
+                break;
         }
         this.subscription = this.subscribeProjects(observable);
     }
@@ -82,7 +80,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
                 return new Date(value.end) >= now;
             }
         });
-        console.log(this.projectsFiltered);
     }
 
     onProjectClicked(project: Project) {

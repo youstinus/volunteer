@@ -14,8 +14,8 @@ import {OrganizationsService} from '../../services/organizations.service';
 })
 export class MainPage implements OnInit {
 
-    private projects: Project[] = Objects.Four_Test_Projects;
-    private organizations: Organization[] = Objects.Four_Test_Organizations;
+    private projects: Project[];
+    private organizations: Organization[];
     public threeProjects: Project[];
     public threeOrganizations: Organization[];
 
