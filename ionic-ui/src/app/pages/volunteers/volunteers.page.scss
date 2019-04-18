@@ -1,33 +1,63 @@
 ion-content{
-    --ion-background-color:rgba(164, 244, 250, 0.884);
+    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
 }
 
-ion-card{
-    --ion-background-color:white;
-    background-color: rgba(42, 193, 204, 0.884);
+ion-item {
+    //padding:20px;
+    --ion-background-color: rgba(107, 167, 127, 0.062);
+    background:  rgba(107, 167, 127, 0.062);
+  }
+  
+.ruondItem{
+    border-radius: 15px;
 }
 
-.myCard{
-    background-color:white;
+ion-list{
+    --ion-background-color: rgba(252, 252, 252, 0);
+    background:  rgba(255, 255, 255, 0);
 }
 
-.myCardHeader{
-    background-color: rgba(37, 164, 173, 0.884);
+div.a{
+    font-size: 20px; 
+    font-weight: 500;
 }
 
-h4{
-    font-size: medium;
-}
 ion-label{
     font-weight: bold;
 }
 ion-img{
     height: 30%;
-    width: 30%
-       // height:150px;
-        //width: 150px;
+    width: 30%;
 }
 
 ion-list {
     cursor: pointer;
 }
+
+.fieldset {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 13px solid;
+    border-radius: 25px;
+    border-color: rgba(130, 185, 139, 0.315);
+ }
+ .forLegend{
+    font-size: 150%;
+ } 
+ 
+ .h2{
+    font-size: 200%;
+    font-weight: bold;
+    font-variant: all-petite-caps;
+ }
+
+ .h1{
+    font-size: 200%;
+    font-weight: bold;
+    font-variant-caps: titling-caps;
+ }

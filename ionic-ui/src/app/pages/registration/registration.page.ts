@@ -3,7 +3,7 @@ import { Form, FormBuilder, NgForm, FormGroup, FormControl, Validators, Abstract
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/User';
 import { RouterOutlet, Router } from '@angular/router';
-import { NavController, MenuController, LoadingController } from '@ionic/angular';
+import { NavController, MenuController, LoadingController, AlertController } from '@ionic/angular';
 import { PasswordValidator } from './password.validator';
 import { Services } from '@angular/core/src/view';
 
@@ -25,7 +25,8 @@ export class RegistrationPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private router: Router,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public alertController: AlertController
   ) { }
 
   ionViewWillEnter() {
@@ -81,7 +82,6 @@ export class RegistrationPage implements OnInit {
     const loader = await this.loadingCtrl.create({
       duration: 2000
     });
-    console.log(this.onRegisterForm.value);
 
     loader.present();
     loader.onWillDismiss().then(() => {
@@ -95,6 +95,7 @@ export class RegistrationPage implements OnInit {
         }
       }, error1 => {
         console.log('User was not registered', error1);
+        this.presentNotRegistered();
       });
     });
   }
@@ -119,4 +120,13 @@ export class RegistrationPage implements OnInit {
     });
   }
 
+  async presentNotRegistered() {
+    const alert = await this.alertController.create({
+      header: 'User was not registered',
+      message: 'Please, check your information ant try again',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }

@@ -3,20 +3,52 @@
     font-weight: bold;
     display: block;
     text-align: center;
-    font-size:larger;
-    font-weight: 900;
+    font-size: 150%;
     }
 
 .myCard{
-    background-color:white;
+    background-color: rgba(123, 172, 137, 0.24);
+    border-radius: 50px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.185);
 }
 ion-content{
-    --ion-background-color:rgba(164, 244, 250, 0.884);
+    //--background: radial-gradient(ellipse at top, rgb(95, 226, 95), transparent), radial-gradient(ellipse at bottom, #65c7ca,transparent);
+    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
 }
 ion-card{
-    --ion-background-color:white;
-    background-color: rgba(42, 193, 204, 0.884);
+    background-color: rgba(82, 226, 106, 0.171);
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.185);
 }
 ion-textarea{
     font-size: large;
+}
+
+.h2{
+    font-size: 200%;
+    font-weight: bold;
+    font-variant: small-caps;
+ }
+
+ ion-item{
+    --border-radius: 10px;
+    --background-color: rgba(184, 236, 192, 0.767); 
+ }
+ 
+ .error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.img {
+    max-width: 85%;
+    max-height: 85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

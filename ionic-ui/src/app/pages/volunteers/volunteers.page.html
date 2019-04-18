@@ -1,53 +1,51 @@
 <app-header>Volunteers page</app-header>
-<ion-content padding class="animated fadeIn login auth-page">
+<ion-content padding>
 
-  <h2></h2> 
-  <h1 padding-horizontal text-center>{{project.title}}</h1>
-  <div>{{project.description}}</div>
-  
-  <h2></h2> 
-<h1 no-margin padding-horizontal text-center>
-  <ion-text color="black" class="fw700" >
-       Your project volunteers!
+ 
+  <h1 class="h1" padding-horizontal text-center>{{project.title}}</h1>
+  <div class="a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{project.description}}<div>
+
+  &nbsp;
+  <h2 class="h2" no-margin padding-horizontal text-center>
+  <ion-text color="black">
+       Your project volunteers:
   </ion-text>
- </h1>
+</h2> 
 
-<ion-card>
+<fieldset class="fieldset">
+    <legend class="forLegend">
+       <strong>&nbsp; All registered users &nbsp;</strong>
+    </legend>
 
-    <ion-card-header>
-        <ion-card-title class="label">All registered users:            
-        </ion-card-title>
-    </ion-card-header>
+      <ion-list *ngFor="let volunteer of volunteers">
+      
+        <ion-item lines="none" (click)="onVolunteerClicked(volunteer)" >
+          <ion-avatar slot="start">
+              <img src="{{ volunteer.imageUrl }}">
+            </ion-avatar>
+          <ion-list-header size=large>
+              <ion-label>
+                  {{volunteer.firstName}} {{volunteer.lastName}}
+              </ion-label>
+            </ion-list-header>
+        </ion-item>
 
-  <ion-list *ngFor="let volunteer of volunteers">
-  
-    <ion-item lines="none" (click)="onVolunteerClicked(volunteer)" >
-      <ion-avatar slot="start">
-          <img src="{{ volunteer.imageUrl }}">
-        </ion-avatar>
-      <ion-list-header size=large>
-          <ion-label>
-              {{volunteer.firstName}} {{volunteer.lastName}}
-          </ion-label>
-        </ion-list-header>
-    </ion-item>
+        <ion-item lines="none">
+            <h4>
+              <ion-icon name="phone-portrait"></ion-icon>
+              {{volunteer.phone}}
+            </h4>
+        </ion-item>
+        
+        <ion-item>
+            <h4>
+              <ion-icon name="mail-open"></ion-icon>
+              {{volunteer.email}}
+            </h4>
+        </ion-item>
 
-    <ion-item lines="none">
-        <h4>
-          <ion-icon name="phone-portrait"></ion-icon>
-          {{volunteer.phone}}
-        </h4>
-    </ion-item>
-    
-    <ion-item>
-        <h4>
-          <ion-icon name="mail-open"></ion-icon>
-          {{volunteer.email}}
-        </h4>
-    </ion-item>
+      </ion-list>
 
-  </ion-list>
+</fieldset>
 
-</ion-card>
-
-</ion-content>
+<!--/ion-content-->

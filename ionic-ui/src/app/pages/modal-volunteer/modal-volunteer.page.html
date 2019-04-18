@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{volname}}
-      <ion-button (click)="closeModal()" >Close </ion-button>
+    <ion-title><strong>{{volname}}</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +8,7 @@
 
 <ion-content>
   <ion-card>
-    <img src="{{volPic }}">
+    <img class="img" src="{{volPic }}">
       <ion-card-header>
           <ion-card-title class="label">Contact information:           
           </ion-card-title>
@@ -40,3 +39,4 @@
   
   </ion-card>
 </ion-content>
+<footer><ion-button (click)="closeModal()" >Close </ion-button></footer>

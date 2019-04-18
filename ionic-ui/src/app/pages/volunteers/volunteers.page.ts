@@ -17,9 +17,9 @@ import { projection } from '@angular/core/src/render3';
 })
 export class VolunteersPage implements OnInit {
 
-  project: Project = Objects.Empty_Project;
-  volunteers: Volunteer[] = Objects.Empty_Volunteer_Arr;
-
+  project: Project =Objects.Empty_Project; // Objects.Four_Test_Projects[1];
+  //volunteers: Volunteer[] = [];//Objects.Empty_Volunteer_Arr;
+  volunteers: Volunteer[] = [];
   constructor(
     private organizationsService: VolunteersService,
     private route: ActivatedRoute,
