@@ -22,3 +22,12 @@ To build android:
 `ionic cordova build android`   
 To release signed apk file type:   
 `ionic cordova build android --prod --release`   
+
+## Deploy server  
+`cd ./server/WebAPI`  
+`dotnet publish -c Release`  
+`cd bin/release/netcoreapp2.1/publish`  
+`docker build -t registry.heroku.com/<app-name>/web .`  
+`heroku create`  
+`heroku container:push web -a <app-name>`  
+`heroku container:release web -a <app-name>`  

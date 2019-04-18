@@ -1,7 +1,0 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
-
-WORKDIR /app
-
-COPY ./bin/release/netcoreapp2.1/publish/ .
-
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebAPI.dll
