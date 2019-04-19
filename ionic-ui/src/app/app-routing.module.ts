@@ -22,7 +22,7 @@ const routes: Routes = [
     },
     {
         path: 'volunteers', children: [
-           // { path: '', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
+            // { path: '', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
             { path: 'project/:id', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' }]
     },
     { path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule' },
@@ -33,7 +33,13 @@ const routes: Routes = [
     },
     { path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule' },
     { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' },
-    { path: 'project-edit', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
+    {
+        path: 'project-edit',
+        children: [
+            { path: ':id', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' /*'./pages/project/project.module#ProjectPageModule'*/ }
+        ]
+    }
+
 ];
 
 @NgModule({
