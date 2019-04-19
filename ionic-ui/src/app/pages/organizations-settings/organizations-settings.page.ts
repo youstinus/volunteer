@@ -3,8 +3,9 @@ import {Organization} from "../../models/Organization";
 import {OrganizationsService} from "../../services/organizations.service";
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from '../../services/users.service';
-import {NavController} from "@ionic/angular";
+import {AlertController, NavController} from '@ionic/angular';
 import {User} from "../../models/User";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-organizations-settings',
@@ -32,7 +33,8 @@ export class OrganizationsSettingsPage implements OnInit {
   constructor(private organizationsService: OrganizationsService,
               private route: ActivatedRoute,
               private usersService: UsersService,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              public alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.user = this.usersService.getUser();
@@ -59,27 +61,44 @@ export class OrganizationsSettingsPage implements OnInit {
       console.log('Cannot get organization from database', error1);
     });
   }
+  onChangePic() {
+    console.log();
+  this.changePic();
+  }
+  async changePic() {
+    const alert = await this.alertCtrl.create({
+      header: 'Please enter the url of your image',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            console.log('Confirm');
+          }
+        }
+      ],
+      inputs : [
+        {
+          name: 'Image url',
+          type: 'text',
+          placeholder: ''
+        }
+       ]
+    });
 
+    await alert.present();
+  }
 
   }
 
 
-// getImage()
-// {
-//   const options : CameraOptions = {
-//     quality: 100,
-//     destinationType : this.camera.DestinationType.DATA_URL,
-//     encodingType: this.camera.EncodingType.JPEG,
-//     mediaType: this.camera.MediaType.PICTURE,
-//     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-//   }
-//
-//   this.camera.getImage(options).then((imageData) => {
-//     this.base64Image = 'data:image/jpeg;base64,' + imageData;
-//   }, (err) => {
-//   });
 
-//}
 
 
 
