@@ -15,28 +15,33 @@ import { Strings } from '../../constants/Strings';
 
 export class ProjectPage implements OnInit {
 
-  project: Project = {
-    id: 1,
-    title: 'Všz Į Pagirk',
-    description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-    email: 'email@test.com',
-    organizationId: 5,
-    phone: '866666666',
-    picturesIds: [1],
-    start: new Date('2019-05-01'),
-    end: new Date('2019-05-02'),
-    volunteersIds: [2],
-    website: 'https://www.vdu.lt/en/studies/international-student-handbook/volunteering/',
-    imageUrl: Strings.Default_Image_Url
-  };
+  project: Project = new Project();
+  public newUrl: String;
+  
 
   constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {
+  
 
-
+  }
+  stringparse(source: string)
+  {
+    let newurl: string = '';
+    newurl += 'https://maps.google.com/maps?q=';
+    newurl += source;
+    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+    this.newUrl = newurl; 
   }
   onSourceClicked(source: string) {
-    window.open(source, '_system')
+
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(source)) {
+      url += 'http://';
+    }
+
+    url += source;
+    window.open(url, '_blank');
   }
+
   btnActivate(ionicButton) {
     if (ionicButton.color === 'dark')
       ionicButton.color = 'success';

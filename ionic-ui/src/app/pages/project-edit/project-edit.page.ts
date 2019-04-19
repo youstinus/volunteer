@@ -23,23 +23,10 @@ export class ProjectEditPage implements OnInit {
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder
-    ) {
+  ) {
   }
   project: Project = new Project();
-  // project: Project = {
-  //   id: 1,
-  //   title: 'VšĮ Pagirk',
-  //   description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-  //   email: 'email@test.com',
-  //   organizationId: 5,
-  //   phone: '866666666',
-  //   picturesIds: [1],
-  //   start: new Date('2019-05-01'),
-  //   end: new Date('2019-05-02'),
-  //   volunteersIds: [2],
-  //   website: 'https://www.vdu.lt/en/studies/international-student-handbook/volunteering/',
-  //   imageUrl: Strings.Default_Image_Url
-  // };
+
   ngOnInit() {
 
     this.id = this.route.snapshot.params['id'];
@@ -51,32 +38,41 @@ export class ProjectEditPage implements OnInit {
 
     this.onEditForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
+        Validators.minLength(5),
+        Validators.required
       ])],
       'title': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
+        Validators.minLength(5),
+        Validators.required
       ])],
       'description': [null, Validators.compose([
-            Validators.minLength(5),
-            Validators.required
-          ])],
-          'start': [null, Validators.compose([
-                Validators.minLength(5),
-                Validators.required
-              ])],
-              'end': [null, Validators.compose([
-                Validators.required
-              ])],
-              'organizationId': [null, Validators.compose([
-                Validators.required
-              ])],
-              
-              'location': [null, Validators.compose([
-                Validators.required
-              ])]
-  });
+        Validators.minLength(5),
+        Validators.required
+      ])],
+      'start': [null, Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])],
+      'end': [null, Validators.compose([
+        Validators.required
+      ])],
+      'organizationId': [null, Validators.compose([
+        Validators.required
+      ])],
+
+      'location': [null, Validators.compose([
+        Validators.required
+      ])],
+      'website': [null, Validators.compose([
+        Validators.required
+      ])],
+      'email': [null, Validators.compose([
+        Validators.required
+      ])],
+      'phone': [null, Validators.compose([
+        Validators.required
+      ])]
+    });
 
     // this.onEditForm = this.formBuilder.group({
     //   'imageUrl': [null, Validators.compose([
@@ -109,5 +105,6 @@ export class ProjectEditPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    this.navCtrl.navigateForward('../project/' + this.onEditForm.value.id).catch(reason => console.log(reason));
   }
 }

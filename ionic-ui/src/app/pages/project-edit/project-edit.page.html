@@ -14,39 +14,57 @@
 
     <ion-item lines="none">
       <ion-label color="primary" position="floating">Edit Title</ion-label>
-
       <ion-input type="text" formControlName="title" value={{project.title}}></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
+      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email" value={{project.email}}></ion-input>
+    </ion-item>
 
+    <ion-item lines="none">
+      <ion-label color="primary" position="floating">Phone</ion-label>
+      <ion-input type="text" formControlName="phone" value={{project.phone}}></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label color="primary" position="floating">Website</ion-label>
+      <ion-input type="text" formControlName="website" value={{project.website}}></ion-input>
+    </ion-item>
+   
+    <ion-item>
       <ion-label color="primary" position="floating">Edit Description</ion-label>
+
+      <ion-input type="text" formControlName="imageUrl" value={{project.imageUrl}} [hidden]="true"> </ion-input>
       <ion-textarea autosize style=" height: 300px" formControlName="description" value={{project.description}}>
       </ion-textarea>
     </ion-item>
+      
+      <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label stacked>Change Start Date</ion-label>
+        <ion-datetime formControlName="start" value={{project.start}}></ion-datetime>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Change Start Date</ion-label>
-      <ion-datetime formControlName="start" value={{project.start}}></ion-datetime>
-    </ion-item>
+      <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label stacked>Change End date</ion-label>
 
-    <ion-item>
-      <ion-label stacked>Change End date</ion-label>
-      <ion-datetime formControlName="end" value={{project.end}}></ion-datetime>
-    </ion-item>
-
+        <ion-datetime formControlName="end" value={{project.end}}></ion-datetime>
+      </ion-item>
     <ion-item lines="none">
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label color="primary" position="floating">Change loacation link: </ion-label>
       <ion-input formControlName="location" type="text" value={{project.location}}></ion-input>
     </ion-item>
 
+
+
     <!-- organizationId [hidden]="true"> -->
-    <ion-item lines="none">
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label color="primary" position="floating">organizationId </ion-label>
-        <ion-input formControlName="organizationId" type="text" value={{project.organizationId}}></ion-input>
-      </ion-item>
+    <ion-item lines="none" [hidden]="true">
+      <!-- <ion-label color="primary" position="floating">organizationId </ion-label> -->
+      <ion-input formControlName="organizationId" type="text" value={{project.organizationId}}></ion-input>
+    </ion-item>
   </form>
 
 
