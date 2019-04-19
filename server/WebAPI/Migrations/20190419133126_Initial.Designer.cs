@@ -10,7 +10,7 @@ using WebAPI.Configurations;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(VolunteerDbContext))]
-    [Migration("20190417113028_Initial")]
+    [Migration("20190419133126_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,8 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("End");
 
                     b.Property<string>("ImageUrl");
+
+                    b.Property<string>("Location");
 
                     b.Property<long>("OrganizationId");
 

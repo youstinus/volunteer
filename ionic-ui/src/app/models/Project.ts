@@ -5,6 +5,7 @@ export class Project {
     public email: string;
     public phone: string;
     public website: string;
+    public location: string;
     public start: Date;
     public end: Date;
     public organizationId: number;

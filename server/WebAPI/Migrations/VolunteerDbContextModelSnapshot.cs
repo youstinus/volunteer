@@ -85,6 +85,8 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("ImageUrl");
 
+                    b.Property<string>("Location");
+
                     b.Property<long>("OrganizationId");
 
                     b.Property<string>("Phone");

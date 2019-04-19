@@ -27,7 +27,8 @@ export class ProjectPage implements OnInit {
         end: new Date('2019-05-01'),
         volunteersIds: [2],
         website: 'https://www.vdu.lt/en/studies/international-student-handbook/volunteering/',
-        imageUrl: Strings.Default_Image_Url
+        imageUrl: Strings.Default_Image_Url,
+        location: 'lietuva, kaunas'
     };
 
     constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {

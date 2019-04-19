@@ -65,6 +65,7 @@ namespace WebAPI.Migrations
                     Phone = table.Column<string>(nullable: true),
                     Website = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
                     OrganizationId = table.Column<long>(nullable: false)
