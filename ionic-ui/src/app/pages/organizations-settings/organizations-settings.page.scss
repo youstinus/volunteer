@@ -1,12 +1,14 @@
 .input
 {position: absolute;
-max-width: 100%;
-background-color : #C6C5C5;
-left : 150px;
+  max-width: 100%;
+  left : 150px;
   color: black;
   font-size: 17px;
- word-break: break-all;
-
+  word-break: break-all;
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 2px;
+  border-color: #c6abff
 }
 
 .txt
@@ -14,14 +16,41 @@ left : 150px;
   width: 100px;
 }
 
-.desc
+ion-textarea
 {
-  height: auto;
-  background-color :  #C6C5C5;
-  left : 150px;
-  position: absolute;
+
+  width: auto;
   color: black;
   font-size: 17px;
-  word-break: break-all;
-  width: 91%;
+  height: 200px;
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 2px;
+
+  border-color: #c6abff;
+  --background: linear-gradient(0deg, rgba(255, 247, 235, 1) 0%, rgba(228, 251, 255, 1) 100%);
+}
+
+
+
+ion-card {
+  --background: linear-gradient(0deg, rgba(255, 247, 235, 1) 0%, rgba(228, 251, 255, 1) 100%);
+  height: auto;
+}
+
+ion-item
+{
+
+  --background: linear-gradient(45deg, rgba(239,255,212,1) 0%, rgba(226,210,255,1) 100%);
+  height: auto;
+}
+ion-list
+{
+  --background: linear-gradient(45deg, rgba(239,255,212,1) 0%, rgba(226,210,255,1) 100%);
+  height:auto;
+}
+ion-card-content
+{
+  --background: linear-gradient(45deg, rgba(239,255,212,1) 0%, rgba(226,210,255,1) 100%);
+ height: 80px;
 }

@@ -11,4 +11,9 @@ ion-card {
 
 ion-content {
   display: inline-block;
+  --background: linear-gradient(180deg, rgba(255, 247, 240, 1) 0%, rgba(238, 251, 255, 1) 100%);
+
+  ion-card {
+    --background: linear-gradient(0deg, rgba(255, 247, 235, 1) 0%, rgba(228, 251, 255, 1) 100%);
+  }
 }
