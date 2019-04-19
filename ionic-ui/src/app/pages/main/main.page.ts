@@ -28,8 +28,6 @@ export class MainPage implements OnInit {
     ngOnInit() {
         this.getProjects();
         this.getOrganizations();
-        this.filterNewProjects();
-        this.filterNewOrganizations();
     }
 
     getProjects() {

@@ -87,8 +87,8 @@ namespace WebAPI.Configurations
         public static void AddAuthorizationConfigs(this IServiceCollection services, IConfiguration configuration)
         {
             var secret = Environment.GetEnvironmentVariable("APP_SECRET");
-            if(string.IsNullOrWhiteSpace(secret))
-                throw new InvalidOperationException("Secret was not found for authorization initialization");
+            if (string.IsNullOrWhiteSpace(secret))
+                secret = "qBHgVxE2L2s7SdL3lLmdD3FWvewNs53dc5DrGPeQMomocMaYordjQ4hQGDp";//throw new InvalidOperationException("Secret was not found for authorization initialization");
 
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>

@@ -45,7 +45,8 @@ export class Objects {
         end: null,
         volunteersIds: null,
         website: null,
-        imageUrl: null
+        imageUrl: null,
+        location: null
       };
 
       public static Empty_Volunteer_Arr : Volunteer[] = [{
@@ -84,7 +85,8 @@ export class Objects {
             title: 'Conservation Work in the Himalayas in Nepal',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 2,
             description: 'Volunteer description',
@@ -97,7 +99,8 @@ export class Objects {
             title: 'Shark Conservation Volunteering in Fiji',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 3,
             description: 'Volunteer description',
@@ -110,7 +113,8 @@ export class Objects {
             title: 'Marine Conservation Volunteering in Thailand',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 4,
             description: 'Volunteer description',
@@ -123,7 +127,8 @@ export class Objects {
             title: 'Conservation Volunteering in the Galapagos Islands',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }
     ];
 
@@ -192,7 +197,8 @@ export class Objects {
             title: 'Volunteer Conservation Work in the Himalayas in Nepal',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 2,
             description: 'Volunteer description',
@@ -205,7 +211,8 @@ export class Objects {
             title: 'Shark Conservation Volunteering in Fiji',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 3,
             description: 'Volunteer description',
@@ -218,7 +225,8 @@ export class Objects {
             title: 'Marine Conservation Volunteering in Thailand',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 4,
             description: 'Volunteer description',
@@ -231,7 +239,8 @@ export class Objects {
             title: 'Conservation Volunteering in the Galapagos Islands',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 5,
             description: 'Volunteer description',
@@ -244,7 +253,8 @@ export class Objects {
             title: 'Volunteer with Children in Ghana',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 6,
             description: 'Volunteer description',
@@ -257,7 +267,8 @@ export class Objects {
             title: 'Volunteer Teaching English in Costa Rica',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 7,
             description: 'Volunteer description',
@@ -270,7 +281,8 @@ export class Objects {
             title: 'Volunteer with Children in Nepal as a Teenager',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 8,
             description: 'Volunteer description',
@@ -283,7 +295,8 @@ export class Objects {
             title: 'Volunteer in the Amazon Rainforest in Peru',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 9,
             description: 'Volunteer description',
@@ -296,7 +309,8 @@ export class Objects {
             title: 'Incan and Wari Archaeology Volunteering in Peru',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 10,
             description: 'Volunteer description',
@@ -309,7 +323,8 @@ export class Objects {
             title: 'Conservation Volunteering in the Galapagos Islands',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 11,
             description: 'Volunteer description',
@@ -322,7 +337,8 @@ export class Objects {
             title: 'Volunteer with Children in Ghana',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 12,
             description: 'Volunteer description',
@@ -335,7 +351,8 @@ export class Objects {
             title: 'Volunteer Teaching English in Costa Rica',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 13,
             description: 'Volunteer description',
@@ -348,7 +365,8 @@ export class Objects {
             title: 'Medical Internships in Ghana for Teenagers',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 14,
             description: 'Volunteer description',
@@ -361,7 +379,8 @@ export class Objects {
             title: 'Medicine Internship in Tanzania',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 15,
             description: 'Volunteer description',
@@ -374,7 +393,8 @@ export class Objects {
             title: 'Law and Human Rights Internship in South Africa',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 16,
             description: 'Volunteer description',
@@ -387,7 +407,8 @@ export class Objects {
             title: 'Medical Internships in Vietnam',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 17,
             description: 'Volunteer description',
@@ -400,7 +421,8 @@ export class Objects {
             title: 'Volunteer with Children in Nepal as a Teenager',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 18,
             description: 'Volunteer description',
@@ -413,7 +435,8 @@ export class Objects {
             title: 'Medicine Internship in Sri Lanka',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 19,
             description: 'Volunteer description',
@@ -426,7 +449,8 @@ export class Objects {
             title: 'Incan and Wari Archaeology Volunteering in Peru',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 20,
             description: 'Volunteer description',
@@ -439,7 +463,8 @@ export class Objects {
             title: 'Public Health Internship in Belize',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 21,
             description: 'Volunteer description',
@@ -452,7 +477,8 @@ export class Objects {
             title: 'Volunteer in the Amazon Rainforest in Peru',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 22,
             description: 'Volunteer description',
@@ -465,7 +491,8 @@ export class Objects {
             title: 'Physiotherapy Internship in Nepal',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 23,
             description: 'Volunteer description',
@@ -478,7 +505,8 @@ export class Objects {
             title: 'Nutrition Internships in Fiji',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 24,
             description: 'Volunteer description',
@@ -491,7 +519,8 @@ export class Objects {
             title: 'Medical Internship for High School Students in Tanzania',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 25,
             description: 'Volunteer description',
@@ -504,7 +533,8 @@ export class Objects {
             title: 'Live and Work with Nomads in Mongolia',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 26,
             description: 'Volunteer description',
@@ -517,7 +547,8 @@ export class Objects {
             title: 'Medical Internship in Peru',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }, {
             id: 27,
             description: 'Volunteer description',
@@ -530,7 +561,8 @@ export class Objects {
             title: 'Volunteering with Children in Argentina',
             volunteersIds: [],
             website: 'Volunteer.com',
-            imageUrl: Strings.Default_Image_Url
+            imageUrl: Strings.Default_Image_Url,
+            location: 'lietuva, kaunas'
         }
     ];
 }

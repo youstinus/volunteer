@@ -1,5 +1,15 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
+
+ion-card {
+  --background: linear-gradient(220deg, rgba(255, 227, 215, 1) 0%, rgba(208, 251, 255, 1) 100%);
+}
+
+
+ion-card {
+  height: auto;
+}
+
 .rating {
   border: none;
   float : left;

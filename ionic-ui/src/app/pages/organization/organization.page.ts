@@ -3,7 +3,7 @@ import {Organization} from '../../models/Organization';
 import {ActivatedRoute} from '@angular/router';
 import {OrganizationsService} from '../../services/organizations.service';
 import {Project} from '../../models/Project';
-import {NavController} from '@ionic/angular';
+import {NavController, AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-organization',
@@ -17,11 +17,11 @@ export class OrganizationPage implements OnInit {
     projectsIds: [1],
     title: 'VšĮ Pagirk',
     description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-    website: 'google.com',
+    website: 'www.google.com',
     userId: 5,
     phone: '866666666',
     picturesIds: [1],
-    address : 'test g. 696',
+    address : 'Aukstaiciu 3',
     email: 'test@gmail.com',
     imageUrl: ''
   };
@@ -49,6 +49,13 @@ export class OrganizationPage implements OnInit {
   onProjectClicked(id: number) {
     this.navCtrl.navigateForward('projects/' + id).catch(reason => console.log(reason));
   }
+  onWebClicked(website: string) {
+    window.open('//' + website, '_blank');
+  }
+
+
+
+
 }
 
 
