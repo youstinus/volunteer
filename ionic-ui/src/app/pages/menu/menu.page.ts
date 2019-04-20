@@ -14,71 +14,89 @@ export class MenuPage implements OnInit {
     public pages = [        
         {
             title: 'Main',
-            url: '/main'
+            url: '/main',
+            icon: 'home',
+
         },
         {
             title: 'Login',
-            url: '/login'
+            url: '/login',
+            icon: 'log-in'
         },
         {
             title: 'Registration',
-            url: '/registration'
+            url: '/registration',
+            icon: 'finger-print' //list-box
         },        
         {
             title: 'Volunteers settings',
-            url: '/volunteers-settings'
+            url: '/volunteers-settings',
+            icon: 'settings'
         },        
         {
             title: 'Organizations settings',
-            url: '/organizations-settings'
+            url: '/organizations-settings',
+            icon: 'settings'
         },
         {
             title: 'Organizations',
-            url: '/organizations'
+            url: '/organizations',
+            icon: 'briefcase'
         },
         {
             title: 'Projects',
-            url: '/projects'
+            url: '/projects',
+            icon: 'filing'
         },
         {
             title: 'Saved projects',
-            url: '/projects/type/saved'
+            url: '/projects/type/saved',
+            icon: 'bookmarks'
         },
         {
             title: 'Selected projects',
-            url: '/projects/type/selected'
+            url: '/projects/type/selected',
+            icon: 'checkmark-circle-outline'
         },
         {
             title: 'New project',
-            url: '/new-project'
+            url: '/new-project',
+            icon: 'hand'
         },
         {
             title: 'Project edit',
-            url: '/project-edit'
+            url: '/project-edit',
+            icon: 'create'
         },        
         {
             title:'Volunteers 1',
-            url:'/volunteers/project/1'
+            url:'/volunteers/project/1',
+            icon: 'star'
         },
         {
             title:'Volunteers 2',
-            url:'/volunteers/project/2'
+            url:'/volunteers/project/2',
+            icon: 'star'
         },
         {
             title:'Volunteers 3',
-            url:'/volunteers/project/3'
+            url:'/volunteers/project/3',
+            icon: 'star'
         },
         {
             title: 'Calendar',
-            url: '/calendar'
+            url: '/calendar',
+            icon: 'calendar'
         },
         {
             title: 'About us',
-            url: '/about'
+            url: '/about',
+            icon: 'help'
         },
         {
             title: 'Privacy policy',
-            url: '/privacy'
+            url: '/privacy',
+            icon: 'at'
         }
     ];
 
