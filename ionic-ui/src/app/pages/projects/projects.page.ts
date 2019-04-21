@@ -28,7 +28,7 @@ export class ProjectsPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.type = this.route.snapshot.params['type'];
         this.loadItemsByType();
-        this.filterNewItems();
+        //this.filterNewItems();
     }
 
     ngOnDestroy(): void {

@@ -13,6 +13,4 @@ FROM microsoft/dotnet-nightly:2.1-runtime-alpine
 
 WORKDIR /root/
 COPY --from=builder /root/src/app/WebAPI/published .
-ENV ASPNETCORE_URLS=http://+:5000
-EXPOSE 5000/tcp
-CMD ["dotnet", "./WebAPI.dll"]  
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebAPI.dll
