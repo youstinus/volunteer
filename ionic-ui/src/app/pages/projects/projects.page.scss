@@ -40,3 +40,11 @@ ion-grid, ion-col, ion-row {
 ion-card-title {
   height: 80px;
 }
+
+.spin {
+  margin: auto;
+  top: 50%;
+  left: 47%;
+  position: absolute;
+  transform: scale(6, 6);
+}

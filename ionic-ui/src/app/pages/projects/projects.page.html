@@ -16,6 +16,7 @@
         </ion-row>
     </ion-grid>
 
+
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
         <ion-img src="{{ project.imageUrl }}"></ion-img>
         <ion-item [color]="checkDate(project) ? 'secondary' : ''">
@@ -27,3 +28,5 @@
         </ion-card-header>
     </ion-card>
 </ion-content>
+
+<ion-spinner name="bubbles" class="spin" *ngIf="spin" color="secondary"></ion-spinner>

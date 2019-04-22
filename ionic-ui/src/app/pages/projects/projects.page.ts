@@ -13,6 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProjectsPage implements OnInit, OnDestroy {
 
+    public spin = true;
     public searchTerm = '';
     public archive = false;
     projects: Project[];
@@ -27,7 +28,7 @@ export class ProjectsPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.type = this.route.snapshot.params['type'];
         this.loadItemsByType();
-        this.filterNewItems();
+        //this.filterNewItems();
     }
 
     ngOnDestroy(): void {
@@ -60,8 +61,10 @@ export class ProjectsPage implements OnInit, OnDestroy {
                 return value;
             });
             this.filterNewItems();
+            this.spin = false;
         }, error1 => {
             console.log(error1);
+            this.spin = false;
         });
     }
 
