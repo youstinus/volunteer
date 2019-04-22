@@ -75,9 +75,12 @@ namespace WebAPI.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Delete([FromRoute] long id)
+        public override async Task<IActionResult> Delete([FromRoute] long id)
         {
-            return base.Delete(id);
+            if (!(await _projectsService.ValidateOrganizationByProjectId(User, id)))
+                return Forbid();
+
+            return await base.Delete(id);
         }
 
         [HttpGet]
@@ -96,9 +99,12 @@ namespace WebAPI.Controllers
 
         [HttpPatch("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<ProjectDto> patchDto)
+        public override async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<ProjectDto> patchDto)
         {
-            return base.Patch(id, patchDto);
+            if (!(await _projectsService.ValidateOrganizationByProjectId(User, id)))
+                return Forbid();
+
+            return await base.Patch(id, patchDto);
         }
 
         [HttpPost]
@@ -110,9 +116,12 @@ namespace WebAPI.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Put([FromRoute] long id, [FromBody] ProjectDto entity)
+        public override async Task<IActionResult> Put([FromRoute] long id, [FromBody] ProjectDto entity)
         {
-            return base.Put(id, entity);
+            if (!(await _projectsService.ValidateOrganizationByProjectId(User, id)))
+                return Forbid();
+
+            return await base.Put(id, entity);
         }
 
         #endregion

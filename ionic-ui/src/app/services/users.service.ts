@@ -46,6 +46,7 @@ export class UsersService {
         const data = helper.decodeToken(this.token);
         this.role = data.role;
         this.id = data.id;
+        this.cookieService.delete('Bearer');
         this.cookieService.set('Bearer', this.token);
     }
 

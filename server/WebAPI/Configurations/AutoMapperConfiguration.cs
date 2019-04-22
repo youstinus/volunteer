@@ -20,6 +20,7 @@ namespace WebAPI.Configurations
             MapUser();
             MapVolunteer();
             MapReview();
+            MapToken();
         }
 
         private void MapOrganization()
@@ -76,6 +77,12 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.Id))
                 .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id));
             CreateMap<ReviewDto, Review>();
+        }
+
+        private void MapToken()
+        {
+            CreateMap<Token, TokenDto>();
+            CreateMap<TokenDto, Token>();
         }
     }
 }

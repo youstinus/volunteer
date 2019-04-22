@@ -82,6 +82,15 @@ namespace WebAPI.Services
             return userDto;
         }
 
+        public async Task Logout(ClaimsPrincipal user)
+        {
+            if (!user.Identity.IsAuthenticated)
+                throw new InvalidOperationException("User not logged in");
+
+            var client = await _usersRepository.GetById(int.Parse(user.Identity.Name));
+
+        }
+
         public override async Task<UserDto> Create(UserDto userDto)
         {
             // map dto to entity

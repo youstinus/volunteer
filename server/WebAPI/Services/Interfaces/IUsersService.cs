@@ -9,9 +9,7 @@ namespace WebAPI.Services.Interfaces
     public interface IUsersService : IBaseService<User, UserDto>
     {
         Task<UserDto> Authenticate(UserDto userDto);
-        //Task<User> Authenticate2(string username, string password);
-        //Task<User> Create(UserDto user, string password);
-        //Task Update(UserDto user);
+        Task Logout(ClaimsPrincipal user);
         Task<long> GetUsersRoleId(ClaimsPrincipal user);
     }
 }

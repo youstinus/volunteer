@@ -23,7 +23,8 @@ namespace WebAPI.Configurations
                 .AddScoped<IUsersRepository, UsersRepository>()
                 .AddScoped<IPicturesRepository, PicturesRepository>()
                 .AddScoped<IReviewsRepository, ReviewsRepository>()
-                .AddScoped<IVolunteersRepository, VolunteersRepository>();
+                .AddScoped<IVolunteersRepository, VolunteersRepository>()
+                .AddScoped<ITokensRepository, TokensRepository>();
         }
         
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
@@ -35,7 +36,8 @@ namespace WebAPI.Configurations
                 .AddScoped<IPicturesService, PicturesService>()
                 .AddScoped<IReviewsService, ReviewsService>()
                 .AddScoped<IVolunteersService, VolunteersService>()
-                .AddSingleton<ITimeService, TimeService>();
+                .AddSingleton<ITimeService, TimeService>()
+                .AddSingleton<ITokensService, TokensService>();
         }
     }
 }

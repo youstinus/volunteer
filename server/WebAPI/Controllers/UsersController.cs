@@ -44,6 +44,23 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
+        [HttpPost("deauthenticate", Name = nameof(Routing.Logout))] // remove after swagger
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            try
+            {
+                await _usersService.Logout(User);
+                return Ok();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost]
         [AllowAnonymous]
         [HttpPost("registration", Name = nameof(Routing.Register))] // remove after swagger
         [Route("register")]

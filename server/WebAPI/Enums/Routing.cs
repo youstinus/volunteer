@@ -8,6 +8,7 @@
         CreateImage,
         CreateReview,
         Register,
-        Authenticate
+        Authenticate,
+        Logout
     }
 }

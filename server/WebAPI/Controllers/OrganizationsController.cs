@@ -16,15 +16,18 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class OrganizationsController : BaseController<Organization, OrganizationDto>, IOrganizationsController
     {
+        private readonly IOrganizationsService _organizationsService;
+
         public OrganizationsController(IOrganizationsService service) : base(service)
         {
+            _organizationsService = service;
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Delete([FromRoute] long id)
+        public override async Task<IActionResult> Delete([FromRoute] long id)
         {
-            return base.Delete(id);
+            return BadRequest("Endpoint not supported");//base.Delete(id));
         }
 
         [HttpGet]
@@ -43,23 +46,29 @@ namespace WebAPI.Controllers
 
         [HttpPatch("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<OrganizationDto> patchDto)
+        public override async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<OrganizationDto> patchDto)
         {
-            return base.Patch(id, patchDto);
+            if (!ModelState.IsValid || !await _organizationsService.ValidateUserByOrganizationsId(User, id))
+                return Forbid();
+
+            return await base.Patch(id, patchDto);
         }
 
         [HttpPost]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Post([FromBody] OrganizationDto entity)
+        public override async Task<IActionResult> Post([FromBody] OrganizationDto entity)
         {
-            return base.Post(entity);
+            return BadRequest("Endpoint not supported");//base.Post(entity);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Put([FromRoute] long id, [FromBody] OrganizationDto entity)
+        public override async Task<IActionResult> Put([FromRoute] long id, [FromBody] OrganizationDto entity)
         {
-            return base.Put(id, entity);
+            if (!ModelState.IsValid || !await _organizationsService.ValidateUserByOrganizationsId(User, id))
+                return Forbid();
+
+            return await base.Put(id, entity);
         }
     }
 }

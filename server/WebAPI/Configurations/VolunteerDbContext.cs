@@ -11,6 +11,7 @@ namespace WebAPI.Configurations
         public DbSet<User> Users { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Token> Tokens { get; set; }
 
         public VolunteerDbContext(DbContextOptions<VolunteerDbContext> options) : base(options)
         {
@@ -27,6 +28,7 @@ namespace WebAPI.Configurations
             SetSavedProjectsVolunteers(modelBuilder);
             SetPictures(modelBuilder);
             SetReviews(modelBuilder);
+            SetTokens(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
 
@@ -171,6 +173,12 @@ namespace WebAPI.Configurations
                 .WithMany(x => x.Reviews)
                 .HasForeignKey(x => x.OrganizationId)
                 .OnDelete(DeleteBehavior.Cascade);
+        }
+
+        public void SetTokens(ModelBuilder modelBuilder)
+        {
+            var entities = modelBuilder.Entity<Token>();
+            entities.HasKey(x => x.Id);
         }
     }
 }

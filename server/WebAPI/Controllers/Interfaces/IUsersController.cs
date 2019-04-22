@@ -9,5 +9,6 @@ namespace WebAPI.Controllers.Interfaces
     public interface IUsersController : IBaseController<User, UserDto>
     {
         Task<IActionResult> Authenticate([FromBody] UserDto user);
+        Task<IActionResult> Logout();
     }
 }

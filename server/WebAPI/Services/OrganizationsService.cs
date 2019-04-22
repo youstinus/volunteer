@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using AutoMapper;
 using WebAPI.Base;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -14,6 +17,22 @@ namespace WebAPI.Services
             IMapper mapper,
             ITimeService timeService) : base(repository, mapper, timeService)
         {
+        }
+
+        public async Task<bool> ValidateUserByOrganizationsId(ClaimsPrincipal user, long id)
+        {
+            if (string.IsNullOrWhiteSpace(user.Identity.Name))
+                return false;
+
+            var parsed = int.TryParse(user.Identity.Name, out var userId);
+            if (!parsed)
+                return false;
+
+            var organization = await _repository.GetSingleByPredicate(x => x.User.Id == userId);
+            if (organization == null)
+                return false;
+
+            return organization.Id == id;
         }
 
         public override bool ValidateDto(OrganizationDto entity)
