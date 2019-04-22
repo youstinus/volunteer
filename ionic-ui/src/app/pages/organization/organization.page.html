@@ -7,22 +7,15 @@
 
       <ion-title lines="full">
         {{organization.title}}
+
+        <ion-row style="height:20px">
+        </ion-row>
+
       </ion-title>
-      <ion-row style="height:10px"></ion-row>
-
-
       <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
-      <ion-row style="height:10px"></ion-row>
 
-      <fieldset class="rating"  >
-        <input type="radio"   id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
-        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
-        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" t></label>
-        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
-      </fieldset>
-      <ion-row style="height:50px"></ion-row>
-      <ion-row style="height:10px"></ion-row>
+      <ion-row style="height:20px">
+      </ion-row>
 
       <ion-label>
         <ion-icon name="pin" style="width: 20px; height: 20px"></ion-icon>
@@ -60,14 +53,26 @@
 
 
     <ion-card-content>
-      Your comments go here
-      <ion-row style="height:10px"></ion-row>
-      <ion-input placeholder="Enter your comment here"></ion-input>
-      <ion-button expand="50%" shape ="round">Comment</ion-button>
+
+      <ion-input type="Title" placeholder="Title"></ion-input>
+
+      <ion-row style="height:20px">
+      </ion-row>
+
+      <ion-textarea rows="4" type="text" placeholder="Comment .... "></ion-textarea>
+      <ion-row style="height:20px">
+      </ion-row>
+      <ion-button expand="50%" shape ="round" style="float: left">Comment</ion-button>
+      <fieldset class="rating"  >
+        <input type="radio"   id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
+        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
+        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" t></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
+      </fieldset>
+
+
     </ion-card-content>
-
-
-
 
 
 

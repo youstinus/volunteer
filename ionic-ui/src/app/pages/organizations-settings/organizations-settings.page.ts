@@ -15,6 +15,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 export class OrganizationsSettingsPage implements OnInit {
+  public imgForm: FormGroup;
   user: User;
   organization: Organization = {
     id: 11,
@@ -27,16 +28,18 @@ export class OrganizationsSettingsPage implements OnInit {
     picturesIds: [1],
     address : 'test g. 696',
     email: 'test@gmail.com',
-    imageUrl: ''
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq1Qu_U_0Phe8tE6ffGJ9Zc7SmnWq8mO3DgL3rpmwV57D7iAUjMQ'
   };
 
   constructor(private organizationsService: OrganizationsService,
               private route: ActivatedRoute,
               private usersService: UsersService,
               private navCtrl: NavController,
-              public alertCtrl: AlertController) { }
+              public alertCtrl: AlertController,
+              ) { }
 
   ngOnInit() {
+
     this.user = this.usersService.getUser();
     if (this.organization === null) {
       this.navCtrl.navigateRoot('main').catch(e => console.log(e));
@@ -73,19 +76,19 @@ export class OrganizationsSettingsPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+          handler: () => {
           }
         }, {
           text: 'Confirm',
-          handler: () => {
+          handler: data => {
             console.log('Confirm');
+            this.organization.imageUrl = data.URL;
           }
         }
       ],
       inputs : [
         {
-          name: 'Image url',
+          name: 'URL',
           type: 'text',
           placeholder: ''
         }

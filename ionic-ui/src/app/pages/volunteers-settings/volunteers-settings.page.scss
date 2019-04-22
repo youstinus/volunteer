@@ -1,7 +1,7 @@
 .input
 {position: absolute;
   max-width: 100%;
-  left : 150px;
+  left : 120px;
   color: black;
   font-size: 17px;
   word-break: break-all;
@@ -12,9 +12,10 @@
 
 }
 
-.txt
+h1
 {
-  width: 120px;
+  width: 100px;
+  font-size: 20px;
 
 }
 
@@ -23,7 +24,7 @@ ion-textarea
 
   width: auto;
   color: black;
-  font-size: 17px;
+  font-size: 15px;
   height: 200px;
   border-style: solid;
   border-radius: 15px;

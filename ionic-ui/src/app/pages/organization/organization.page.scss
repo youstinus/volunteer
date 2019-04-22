@@ -4,7 +4,21 @@
 ion-card {
   --background: linear-gradient(220deg, rgba(255, 227, 215, 1) 0%, rgba(208, 251, 255, 1) 100%);
 }
+ion-input{
+  border-radius: 15px;
+  border-width: 2px;
+  border-color: #c6abff;
+  border-style: solid;
 
+}
+
+ion-textarea
+{
+  border-radius: 15px;
+  border-width: 2px;
+  border-color: #c6abff;
+  border-style: solid;
+}
 
 ion-card {
   height: auto;

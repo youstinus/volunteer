@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {User} from '../../models/User';
 import {UsersService} from '../../services/users.service';
 import {NavController} from '@ionic/angular';
+import {AlertController} from '@ionic/angular';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -32,7 +33,8 @@ export class VolunteersSettingsPage implements OnInit {
         private volunteersService: VolunteersService,
         private route: ActivatedRoute,
         private usersService: UsersService,
-        private navCtrl: NavController) {
+        private navCtrl: NavController,
+        public alertCtrl: AlertController) {
     }
 
     ngOnInit() {
@@ -60,5 +62,39 @@ export class VolunteersSettingsPage implements OnInit {
         }, error1 => {
             console.log('Volunteer was not updated', error1);
         });
+    }
+
+    onChangePic() {
+        console.log();
+        this.changePic();
+    }
+    async changePic() {
+        const alert = await this.alertCtrl.create({
+            header: 'Please enter the url of your image',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                    }
+                }, {
+                    text: 'Confirm',
+                    handler: data => {
+                        console.log('Confirm');
+                        this.volunteer.imageUrl = data.URL;
+                    }
+                }
+            ],
+            inputs : [
+                {
+                    name: 'URL',
+                    type: 'text',
+                    placeholder: ''
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }
