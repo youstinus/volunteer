@@ -50,7 +50,7 @@
       <ion-label>
         {{project.website}}
       </ion-label>
-      
+
     </ion-item>
   </ion-card>
 
@@ -67,8 +67,9 @@
   <ion-card>
     <div class="mapouter">
       <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas"
-        src="{{newUrl}}" frameborder="0" scrolling="no"
-          marginheight="0" marginwidth="0"></iframe>Werbung: <a href="https://www.pureblack.de">pureblack.de</a></div>
+          [src]="newUrl | safe" frameborder="0"
+          scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.emojilib.com">emojilib.com</a>
+      </div>
       <style>
         .mapouter {
           position: relative;
@@ -85,7 +86,6 @@
         }
       </style>
     </div>
-    <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q={{project.location}}&t=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>Google Maps Generator by <a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div> -->
   </ion-card>
   <ion-card>
     <ion-item lines="none">
@@ -111,9 +111,9 @@
 
       <ion-icon name="calendar" slot="start"></ion-icon>
       <ion-label>
-        Project begins: {{project.start}} 
+        Project begins: {{project.start}}
         <ion-label>
-            Project ends: {{project.end}} 
+          Project ends: {{project.end}}
         </ion-label>
       </ion-label>
 

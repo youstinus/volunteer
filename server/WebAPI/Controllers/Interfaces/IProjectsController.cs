@@ -11,5 +11,6 @@ namespace WebAPI.Controllers.Interfaces
         Task<IActionResult> GetVolunteersByProjectId([FromRoute]long id);
         Task<IActionResult> GetSavedItems();
         Task<IActionResult> GetSelectedItems();
+        Task<IActionResult> GetCreatedItems();
     }
 }

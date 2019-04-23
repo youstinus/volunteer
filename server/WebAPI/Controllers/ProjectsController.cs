@@ -18,9 +18,13 @@ namespace WebAPI.Controllers
     public class ProjectsController : BaseController<Project, ProjectDto>, IProjectsController
     {
         private readonly IProjectsService _projectsService;
-        public ProjectsController(IProjectsService service) : base(service)
+        private readonly IOrganizationsService _organizationsService;
+
+
+        public ProjectsController(IProjectsService service, IOrganizationsService organizationsService) : base(service)
         {
             _projectsService = service;
+            _organizationsService = organizationsService;
         }
         
         [HttpGet("{id}/volunteers")]
@@ -71,6 +75,21 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("created")]
+        [Authorize(Roles = nameof(UserType.Organization))]
+        public async Task<IActionResult> GetCreatedItems()
+        {
+            try
+            {
+                var entity = await _projectsService.GetCreatedItems(User);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         #region CRUD
 
         [HttpDelete("{id}")]
@@ -109,9 +128,12 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(UserType.Organization))]
-        public override Task<IActionResult> Post([FromBody] ProjectDto entity)
+        public override async Task<IActionResult> Post([FromBody] ProjectDto entity)
         {
-            return base.Post(entity);
+            if (!ModelState.IsValid || !(await _organizationsService.OrganizationExists(entity)))
+                return BadRequest();
+
+            return await base.Post(entity);
         }
 
         [HttpPut("{id}")]

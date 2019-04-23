@@ -102,9 +102,10 @@ export class ProjectEditPage implements OnInit {
     //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       console.log(value);
+      this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
-    this.navCtrl.navigateForward('../project/' + this.onEditForm.value.id).catch(reason => console.log(reason));
+    
   }
 }

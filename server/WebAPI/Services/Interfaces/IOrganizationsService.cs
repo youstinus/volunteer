@@ -9,5 +9,6 @@ namespace WebAPI.Services.Interfaces
     public interface IOrganizationsService : IBaseService<Organization, OrganizationDto>
     {
         Task<bool> ValidateUserByOrganizationsId(ClaimsPrincipal user, long id);
+        Task<bool> OrganizationExists(ProjectDto entity);
     }
 }

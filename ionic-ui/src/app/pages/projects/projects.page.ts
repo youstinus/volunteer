@@ -44,6 +44,9 @@ export class ProjectsPage implements OnInit, OnDestroy {
             case 'selected':
                 observable = this.projectsService.getSelectedItems();
                 break;
+            case 'created':
+                observable = this.projectsService.getCreatedItems();
+                break;
             default:
                 observable = this.projectsService.get();
                 break;

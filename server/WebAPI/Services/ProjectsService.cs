@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -63,6 +64,14 @@ namespace WebAPI.Services
         {
             var id = await _usersService.GetUsersRoleId(user);
             var items = await _repository.GetAllByPredicate(x => x.ProjectVolunteers.Select(y => y.Volunteer.Id).Contains(id));
+            var mapped = _mapper.Map<ICollection<ProjectDto>>(items);
+            return mapped;
+        }
+
+        public async Task<ICollection<ProjectDto>> GetCreatedItems(ClaimsPrincipal user)
+        {
+            var id = await _usersService.GetUsersRoleId(user);
+            var items = await _repository.GetAllByPredicate(x => x.Organization.Id == id);
             var mapped = _mapper.Map<ICollection<ProjectDto>>(items);
             return mapped;
         }

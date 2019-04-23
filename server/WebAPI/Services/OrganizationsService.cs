@@ -34,6 +34,15 @@ namespace WebAPI.Services
 
             return organization.Id == id;
         }
+        
+        public async Task<bool> OrganizationExists(ProjectDto entity)
+        {
+            if (entity == null || entity.OrganizationId < 0)
+                return false;
+
+            var organization = await _repository.GetById(entity.OrganizationId);
+            return organization != null;
+        }
 
         public override bool ValidateDto(OrganizationDto entity)
         {

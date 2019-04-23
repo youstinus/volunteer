@@ -28,6 +28,11 @@ export class ProjectsService extends BaseService<Project> {
         return this.http.get<Project[]>(`${this.api}/selected`, { headers: headers });
     }
 
+    public getCreatedItems(): Observable<Project[]> {
+        const headers = this.getHeaders();
+        return this.http.get<Project[]>(`${this.api}/created`, { headers: headers });
+    }
+
     public getVolunteers(id: number): Observable<Volunteer[]> {
         const headers = this.getHeaders();
         return this.http.get<Volunteer[]>(`${this.api}/` + id + `/volunteers`, { headers: headers });

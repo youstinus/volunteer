@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-
 import { NavController, IonButton } from '@ionic/angular';
 import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
@@ -16,20 +15,20 @@ import { Strings } from '../../constants/Strings';
 export class ProjectPage implements OnInit {
 
   project: Project = new Project();
-  public newUrl: String;
-  
+  newUrl = '';
 
   constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {
-  
+
 
   }
-  stringparse(source: string)
-  {
+  stringparse() {
     let newurl: string = '';
     newurl += 'https://maps.google.com/maps?q=';
-    newurl += source;
+    if (this.project !== null && this.project.location !== null && this.project.location !== '') {
+      newurl += this.project.location.replace(' ', '%20').replace(',', '%2C');
+    }
     newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
-    this.newUrl = newurl; 
+    this.newUrl = newurl;
   }
   onSourceClicked(source: string) {
 
@@ -66,6 +65,7 @@ export class ProjectPage implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
+      this.stringparse();
     }, error1 => {
       console.log(error1);
     });

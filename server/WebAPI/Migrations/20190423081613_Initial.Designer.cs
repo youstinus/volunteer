@@ -10,7 +10,7 @@ using WebAPI.Configurations;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(VolunteerDbContext))]
-    [Migration("20190419133126_Initial")]
+    [Migration("20190423081613_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,18 @@ namespace WebAPI.Migrations
                     b.HasIndex("VolunteerId");
 
                     b.ToTable("SavedProject");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Token", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bearer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("WebAPI.Models.User", b =>

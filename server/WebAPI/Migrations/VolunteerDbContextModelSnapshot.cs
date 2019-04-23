@@ -158,6 +158,18 @@ namespace WebAPI.Migrations
                     b.ToTable("SavedProject");
                 });
 
+            modelBuilder.Entity("WebAPI.Models.Token", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bearer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tokens");
+                });
+
             modelBuilder.Entity("WebAPI.Models.User", b =>
                 {
                     b.Property<long>("Id")

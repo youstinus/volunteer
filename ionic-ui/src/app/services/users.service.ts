@@ -15,6 +15,7 @@ export class UsersService {
     private token: string;
     private role: number;
     private id: number;
+    private helper = new JwtHelper();
 
     constructor(private http: HttpClient, private usersService: UsersService, private cookieService: CookieService) {
     }
@@ -31,6 +32,12 @@ export class UsersService {
         return this.role;
     }
 
+    public getTokenRole() {
+        const cookieValue = this.cookieService.get('Bearer');
+        const decoded = this.helper.decodeToken(cookieValue);
+        return decoded.role;
+    }
+
     public getId() {
         return this.id;
     }
@@ -42,8 +49,7 @@ export class UsersService {
     public setUser(user: User) {
         this.user = user;
         this.token = user.token;
-        const helper = new JwtHelper();
-        const data = helper.decodeToken(this.token);
+        const data = this.helper.decodeToken(this.token);
         this.role = data.role;
         this.id = data.id;
         this.cookieService.delete('Bearer');
