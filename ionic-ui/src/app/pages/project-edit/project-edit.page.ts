@@ -67,7 +67,8 @@ export class ProjectEditPage implements OnInit {
         Validators.required
       ])],
       'email': [null, Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'phone': [null, Validators.compose([
         Validators.required

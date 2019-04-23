@@ -5,7 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, IonButton } from '@ionic/angular';
 import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
-// import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { UsersService } from 'src/app/services/users.service';
+//import { Clipboard } from '@ionic-native/clipboard/ngx';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.page.html',
@@ -16,11 +18,18 @@ export class ProjectPage implements OnInit {
 
   project: Project = new Project();
   newUrl = '';
+  private role: number = 4;
+  defaulUrl: string='https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+  owner: boolean = false;
 
-  constructor(private projectsService: ProjectsService, private route: ActivatedRoute, public navCtrl: NavController) {
+  constructor(
+    private projectsService: ProjectsService, 
+    private route: ActivatedRoute, 
+    public navCtrl: NavController,
+    private usersService: UsersService
+ //   private clipboard: Clipboard
+    ) {}
 
-
-  }
   stringparse() {
     let newurl: string = '';
     newurl += 'https://maps.google.com/maps?q=';
@@ -30,35 +39,14 @@ export class ProjectPage implements OnInit {
     newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
     this.newUrl = newurl;
   }
-  onSourceClicked(source: string) {
 
+  onSourceClicked(source: string) {
     let url: string = '';
     if (!/^http[s]?:\/\//.test(source)) {
       url += 'http://';
     }
-
     url += source;
     window.open(url, '_blank');
-  }
-
-  btnActivate(ionicButton) {
-    if (ionicButton.color === 'dark')
-      ionicButton.color = 'success';
-    else if (ionicButton.color == 'success')
-      ionicButton.color = 'dark';
-    else
-      ionicButton.color = "success";
-
-    console.log(ionicButton);
-  }
-
-  isSelected(event) {
-    console.log(event);
-    return 'primary';
-    // event.target.getAttribute('selected') ? 'primary' : '';
-  }
-  btnClicked() {
-    alert("This page successfully saved");
   }
 
   ngOnInit() {
@@ -69,20 +57,74 @@ export class ProjectPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    this.getRole();
+    console.log(this.role);
+    //turim patikrinti ar projekta ziuri organizacija savininke
+    //ar user id yra lygus organizacijai ar ne
+    if(this.project.organizationId==this.usersService.getId())
+    {
+      this.owner=true;
+    }
   }
-  labClick() {
 
+  btnActivate(ionicButton) {
+    if (ionicButton.color === 'dark')
+      ionicButton.color = 'success';
+    else if (ionicButton.color == 'success')
+      ionicButton.color = 'dark';
+    else
+      ionicButton.color = "success";
+    //console.log(ionicButton);
   }
-  onEditNavigate() {
+
+  //kas cia daryta?
+  isSelected(event) {
+    console.log(event);
+    return 'primary';
+    // event.target.getAttribute('selected') ? 'primary' : '';
+  }
+  
+  navigateToEdit() {
     this.navCtrl.navigateForward('project-edit/' + this.project.id).catch(reason => console.log(reason));
   }
-  onVolunteersNavigate() {
+  navigateToVolunteers() {
     this.navCtrl.navigateForward('volunteers/project/' + this.project.id).catch(reason => console.log(reason));
   }
+  
+  getRole() {
+    const role = this.usersService.getTokenRole();
+    if (role == 'Volunteer') {
+        this.role = 2;
+    } else if (role == 'Organization') {
+        this.role = 3;
+    } else if (role == 'Moderator') {
+        this.role = 1;            
+    } else if (role == 'Admin') {
+        this.role = 0;        
+    } else {
+        this.role = 4;
+    }
+  }
 
+  onPhoneClicked( phone:string){
+    console.log(this.project.phone);
+  }
+
+  // kodel grazina undefined jei prisiloginus kaip volunteer
+  addToSaveList(){
+    const userId=this.usersService.getId();
+    console.log('User id '+userId+' update to save list');
+  }
+
+  addToSelecteDProjectS(){
+    const userId=this.usersService.getId();
+    console.log('User id '+userId+' update to selected list');
+  }
 }
-export class PopoverComponent {
 
+
+
+export class PopoverComponent {
 
   public ionicNamedColor: string = 'primary';
   color: any;
@@ -110,5 +152,4 @@ export class PopoverComponent {
       this.ionicNamedColor = 'primary'
     }
   }
-
 }

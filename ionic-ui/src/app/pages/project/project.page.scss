@@ -8,18 +8,54 @@ ion-card2 {
     margin-left: auto;
     margin-right: auto;
   }
+
+  ion-card{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(163, 233, 175, 0.603);
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.185);
+  }
+
   ion-label {
     float: middle;
   }
-  .myCard{
-    background-color:white;
-}
+
+  ion-content{
+    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+ }
+
   ion-item  {
     //Some propertives
     icon: "star-outline";
     save: false;
+    --ion-background-color: rgba(107, 167, 127, 0);
+    background:  rgba(107, 167, 127, 0);
   }
 
   ion-content {
     display: inline-block;
   }
+
+  .img {
+    max-width: 75%;
+    max-height: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  .h1{
+    font-size: 200%;
+    font-weight: bold;
+    font-variant-caps: titling-caps;
+    text-align: center;
+ }
+
+ .myCard{
+  background-color: rgba(75, 224, 118, 0.24);
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.185);
+}
