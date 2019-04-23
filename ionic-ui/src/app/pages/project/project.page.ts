@@ -6,6 +6,8 @@ import { NavController, IonButton } from '@ionic/angular';
 import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
 import { UsersService } from 'src/app/services/users.service';
+import { VolunteersService } from 'src/app/services/volunteers.service';
+import { Volunteer } from 'src/app/models/Volunteer';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -21,12 +23,14 @@ export class ProjectPage implements OnInit {
   private role: number = 4;
   defaulUrl: string='https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   owner: boolean = false;
+  volunteer: Volunteer=new Volunteer();
 
   constructor(
+    private usersService: UsersService,
+    private volunteersService: VolunteersService,
     private projectsService: ProjectsService, 
     private route: ActivatedRoute, 
-    public navCtrl: NavController,
-    private usersService: UsersService
+    public navCtrl: NavController
  //   private clipboard: Clipboard
     ) {}
 
@@ -58,7 +62,7 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
     this.getRole();
-    console.log(this.role);
+    
     //turim patikrinti ar projekta ziuri organizacija savininke
     //ar user id yra lygus organizacijai ar ne
     if(this.project.organizationId==this.usersService.getId())
@@ -112,13 +116,20 @@ export class ProjectPage implements OnInit {
 
   // kodel grazina undefined jei prisiloginus kaip volunteer
   addToSaveList(){
-    const userId=this.usersService.getId();
+    const userId=this.usersService.getTokenId();
     console.log('User id '+userId+' update to save list');
   }
 
   addToSelecteDProjectS(){
-    const userId=this.usersService.getId();
+    const userId=this.usersService.getTokenId();
     console.log('User id '+userId+' update to selected list');
+    
+    this.volunteersService.getByUsersId(userId).subscribe(value => {
+      this.volunteer = value;
+    }, error1 => {
+      console.log(error1);
+    });
+    console.log(this.volunteer.id);
   }
 }
 

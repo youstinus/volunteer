@@ -38,6 +38,12 @@ export class UsersService {
         return decoded.role;
     }
 
+    public getTokenId() {
+        const cookieValue = this.cookieService.get('Bearer');
+        const decoded = this.helper.decodeToken(cookieValue);
+        return decoded.unique_name;
+    }
+
     public getId() {
         return this.id;
     }
