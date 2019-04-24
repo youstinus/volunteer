@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { projects } from 'src/app/pages/projects';
 @Component({
   selector: 'app-project-edit',
   templateUrl: './project-edit.page.html',
@@ -24,7 +24,7 @@ export class ProjectEditPage implements OnInit {
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    
+
     public alertCtrl: AlertController
   ) {
   }
@@ -106,15 +106,28 @@ export class ProjectEditPage implements OnInit {
     //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       console.log(value);
-      this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
+      //this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
-    
+    this.navCtrl.navigateForward('../main').catch(reason => console.log(reason));
+
+  }
+  Delete() {
+    this.projectsService.delete(this.id).subscribe(value => {
+      console.log(value);
+
+      this.navCtrl.back();
+      this.navCtrl.back();
+      //this.navCtrl.navigateForward('../main').catch(reason => console.log(reason));
+    }, error1 => {
+      console.log(error1);
+    });
+
   }
   onChangePic() {
     console.log();
-  this.changePic();
+    this.changePic();
   }
   async changePic() {
     const alert = await this.alertCtrl.create({
@@ -134,13 +147,13 @@ export class ProjectEditPage implements OnInit {
           }
         }
       ],
-      inputs : [
+      inputs: [
         {
           name: 'URL',
           type: 'text',
           placeholder: ''
         }
-       ]
+      ]
     });
 
     await alert.present();
