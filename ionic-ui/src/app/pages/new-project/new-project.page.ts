@@ -28,7 +28,7 @@ export class NewProjectPage implements OnInit {
   createProject: Project = new Project();
 
   ngOnInit() {
-    
+    this.role = this.usersService.getRole();
     console.log(this.usersService.getRole());
     this.id = this.usersService.getId();
     // this.id = this.route.snapshot.params['id'];
@@ -58,7 +58,7 @@ export class NewProjectPage implements OnInit {
       'end': [null, Validators.compose([
         Validators.required
       ])],
-      'organizationId': [this.id , Validators.compose([
+      'organizationId': [this.role , Validators.compose([
         Validators.required
       ])],
 
