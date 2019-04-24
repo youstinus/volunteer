@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton } from '@ionic/angular';
+import { NavController, IonButton, AlertController } from '@ionic/angular';
 import { Strings } from '../../constants/Strings';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -18,11 +18,14 @@ export class ProjectEditPage implements OnInit {
 
   id: number;
   public onEditForm: FormGroup;
+  public imgForm: FormGroup;
 
   constructor(private projectsService: ProjectsService,
     private route: ActivatedRoute,
     public navCtrl: NavController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    
+    public alertCtrl: AlertController
   ) {
   }
   project: Project = new Project();
@@ -109,4 +112,38 @@ export class ProjectEditPage implements OnInit {
     });
     
   }
+  onChangePic() {
+    console.log();
+  this.changePic();
+  }
+  async changePic() {
+    const alert = await this.alertCtrl.create({
+      header: 'Please enter the url of your image',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: data => {
+            console.log('Confirm');
+            this.project.imageUrl = data.URL;
+          }
+        }
+      ],
+      inputs : [
+        {
+          name: 'URL',
+          type: 'text',
+          placeholder: ''
+        }
+       ]
+    });
+
+    await alert.present();
+  }
+
 }
