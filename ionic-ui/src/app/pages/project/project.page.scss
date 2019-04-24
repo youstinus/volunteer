@@ -12,7 +12,7 @@ ion-card2 {
   ion-card{
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(163, 233, 175, 0.603);
+    background-color: rgba(163, 233, 175, 0.473);
     border-radius: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -24,7 +24,7 @@ ion-card2 {
   }
 
   ion-content{
-    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.952),rgb(149, 248, 165),rgba(40, 192, 159, 0.897));
  }
 
   ion-item  {
@@ -55,7 +55,7 @@ ion-card2 {
  }
 
  .myCard{
-  background-color: rgba(75, 224, 118, 0.24);
+  background-color: rgba(75, 224, 117, 0.137);
   border-radius: 50px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.185);
 }

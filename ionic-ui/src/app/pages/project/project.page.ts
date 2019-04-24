@@ -8,6 +8,8 @@ import { Strings } from '../../constants/Strings';
 import { UsersService } from 'src/app/services/users.service';
 import { VolunteersService } from 'src/app/services/volunteers.service';
 import { Volunteer } from 'src/app/models/Volunteer';
+import { Organization } from 'src/app/models/Organization';
+import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-utils';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -19,20 +21,23 @@ import { Volunteer } from 'src/app/models/Volunteer';
 export class ProjectPage implements OnInit {
 
   project: Project = new Project();
+  volunteer: Volunteer = new Volunteer();
+  organization: Organization = new Organization();
   newUrl = '';
   private role: number = 4;
-  defaulUrl: string='https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   owner: boolean = false;
-  volunteer: Volunteer=new Volunteer();
+  saved: boolean = false;
+  selected: boolean = false;
 
   constructor(
     private usersService: UsersService,
     private volunteersService: VolunteersService,
-    private projectsService: ProjectsService, 
-    private route: ActivatedRoute, 
+    private projectsService: ProjectsService,
+    private route: ActivatedRoute,
     public navCtrl: NavController
- //   private clipboard: Clipboard
-    ) {}
+    //   private clipboard: Clipboard
+  ) { }
 
   stringparse() {
     let newurl: string = '';
@@ -62,13 +67,24 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
     this.getRole();
-    
-    //turim patikrinti ar projekta ziuri organizacija savininke
-    //ar user id yra lygus organizacijai ar ne
-    if(this.project.organizationId==this.usersService.getId())
-    {
-      this.owner=true;
+
+    if (this.role == 2) {
+      this.setVolunteer();
+      this.checkForProjects();
     }
+    //turim patikrinti ar projekta ziuri organizacija savininke
+    if (this.role == 3) {
+      this.setOrganization();
+      if (this.project.organizationId == this.organization.id) {
+        this.owner = true;
+      }
+    }
+  }
+
+  checkForProjects(){
+    //turetu patikrint ar jau pasirinkes projekta ar pridejes prie saved, kad matytusi lange
+    this.saved=false;
+    this.selected=false;
   }
 
   btnActivate(ionicButton) {
@@ -87,49 +103,71 @@ export class ProjectPage implements OnInit {
     return 'primary';
     // event.target.getAttribute('selected') ? 'primary' : '';
   }
-  
+
   navigateToEdit() {
     this.navCtrl.navigateForward('project-edit/' + this.project.id).catch(reason => console.log(reason));
   }
   navigateToVolunteers() {
     this.navCtrl.navigateForward('volunteers/project/' + this.project.id).catch(reason => console.log(reason));
   }
-  
+
   getRole() {
     const role = this.usersService.getTokenRole();
     if (role == 'Volunteer') {
-        this.role = 2;
+      this.role = 2;
     } else if (role == 'Organization') {
-        this.role = 3;
+      this.role = 3;
     } else if (role == 'Moderator') {
-        this.role = 1;            
+      this.role = 1;
     } else if (role == 'Admin') {
-        this.role = 0;        
+      this.role = 0;
     } else {
-        this.role = 4;
+      this.role = 4;
     }
   }
 
-  onPhoneClicked( phone:string){
+  //reiktu metodo cia to clipboard copy
+  onPhoneClicked(phone: string) {
     console.log(this.project.phone);
   }
 
   // kodel grazina undefined jei prisiloginus kaip volunteer
-  addToSaveList(){
-    const userId=this.usersService.getTokenId();
-    console.log('User id '+userId+' update to save list');
+  addToSaveList() {
+    const userId = this.usersService.getTokenId();
+    this.saved=true;
+    console.log('User id ' + userId + ' update to save list');
+    console.log('Volunteer id '+this.volunteer.id);
   }
 
-  addToSelecteDProjectS(){
-    const userId=this.usersService.getTokenId();
-    console.log('User id '+userId+' update to selected list');
-    
+  removeFromSaveList(){
+    this.saved=false;
+    console.log('Volunteer id ' + this.volunteer.id + ' remove from save list');
+  }
+
+  addToSelecteDProjectS() {
+    const userId = this.usersService.getTokenId();
+    this.selected=true;
+    console.log('User id ' + userId + ' update to selected list');
+    console.log('Volunteer id '+this.volunteer.id);
+  }
+
+  removeFromSelectedProjectS(){
+    this.selected=false;
+    console.log('Volunteer id ' + this.volunteer.id + ' remove from selected list');
+  }
+
+  setVolunteer() {
+    const userId = this.usersService.getTokenId();
     this.volunteersService.getByUsersId(userId).subscribe(value => {
       this.volunteer = value;
     }, error1 => {
       console.log(error1);
     });
-    console.log(this.volunteer.id);
+  }
+
+  setOrganization(){
+    const userId = this.usersService.getTokenId();
+    console.log('User id= '+userId+' ir sitoj vietoj man norisi gauti organizacija is backend');
   }
 }
 

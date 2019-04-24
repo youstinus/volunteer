@@ -5,11 +5,20 @@
     <h1 class="h1" padding-horizontal text-center>{{project.title}}</h1>
 
 
-  <div *ngIf="role=='2'">
+  <div *ngIf="role=='2' && !saved">
     <ion-item lines="none">
       <ion-button id="1" #first ion-button color="dark" (click)="btnActivate(first)" (click)="addToSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
         Save
+      </ion-button>
+    </ion-item>
+  </div>
+
+  <div *ngIf="role=='2' && saved">
+    <ion-item lines="none">
+      <ion-button id="1" #first ion-button color="success" (click)="btnActivate(first)" (click)="removeFromSaveList()" slot="end">
+        <ion-icon slot="start" name="star-outline"></ion-icon>
+        Saved
       </ion-button>
     </ion-item>
   </div>
@@ -93,11 +102,18 @@
 
   &nbsp;
 
-  <div *ngIf="role=='2'">
+  <div *ngIf="role=='2' && !selected">
       <ion-button id="2" #second ion-button color="dark" (click)="btnActivate(second)" (click)="addToSelecteDProjectS()" expand="full" shape="round">
         I want to Volunteer
       </ion-button>
       &nbsp;
+  </div>
+
+  <div *ngIf="role=='2' && selected">
+    <ion-button id="2" #second ion-button color="success" (click)="btnActivate(second)" (click)="removeFromSelectedProjectS()" expand="full" shape="round">
+      You volunteer in this project
+    </ion-button>
+    &nbsp;
   </div>
 
   <ion-card>
