@@ -22,7 +22,8 @@ export class LoginPage implements OnInit {
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         private formBuilder: FormBuilder,
-        private usersService: UsersService
+        private usersService: UsersService,
+        public alertController: AlertController
     ) {
     }
 
@@ -47,16 +48,25 @@ export class LoginPage implements OnInit {
             // navigate to main page if user logged in. Should return User object with id, token and user type populated
             if (this.user != null && this.user.token != null) {
                 this.usersService.setUser(user);
-
-                //this.navigateToSettings(user);
                 this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
             } else {
+                this.presentNotLoggedIn();
                 console.log('User was not validated');
             }
         }, error1 => {
+            this.presentNotLoggedIn();
             console.log('Bad credentials', error1)
         });
     }
+
+    async presentNotLoggedIn() {
+        const alert = await this.alertController.create({
+          header: 'Something went wron',
+          message: 'Please, check your information ant try again or sing up if you are new here!',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
 
     async forgotPass() {
         const alert = await this.alertCtrl.create({
