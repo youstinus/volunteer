@@ -10,6 +10,7 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 import { Volunteer } from 'src/app/models/Volunteer';
 import { Organization } from 'src/app/models/Organization';
 import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-utils';
+import { User } from 'src/app/models/User';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -23,6 +24,7 @@ export class ProjectPage implements OnInit {
   project: Project = new Project();
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
+  user: User=new User();
   newUrl = '';
   private role: number = 4;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
@@ -34,6 +36,7 @@ export class ProjectPage implements OnInit {
     private usersService: UsersService,
     private volunteersService: VolunteersService,
     private projectsService: ProjectsService,
+    private userService: UsersService,
     private route: ActivatedRoute,
     public navCtrl: NavController
     //   private clipboard: Clipboard
@@ -66,6 +69,7 @@ export class ProjectPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    
     this.getRole();
 
     if (this.role == 2) {
@@ -73,7 +77,7 @@ export class ProjectPage implements OnInit {
       this.checkForProjects();
     }
     //turim patikrinti ar projekta ziuri organizacija savininke
-    if (this.role == 3) {
+    else if (this.role == 3) {
       this.setOrganization();
       if (this.project.organizationId == this.organization.id) {
         this.owner = true;
@@ -167,7 +171,13 @@ export class ProjectPage implements OnInit {
 
   setOrganization(){
     const userId = this.usersService.getTokenId();
+    /*this.userService.getById(userId).subscribe(value => {
+      this.user = value;
+    }, error1 => {
+      console.log(error1);
+    });*/
     console.log('User id= '+userId+' ir sitoj vietoj man norisi gauti organizacija is backend');
+    //console.log(this.user);
   }
 }
 
