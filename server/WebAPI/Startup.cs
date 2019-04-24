@@ -55,6 +55,7 @@ namespace WebAPI
             }
 
             // add middleware here TODO
+            //app.UseMiddleware<AuthorizationMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseConfigureSwagger();

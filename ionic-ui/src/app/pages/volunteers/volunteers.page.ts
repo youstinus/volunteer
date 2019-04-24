@@ -43,6 +43,7 @@ export class VolunteersPage implements OnInit {
 
     this.projectsService.getVolunteers(id).subscribe(value => {
       this.volunteers = value;
+      console.log(value)
     }, error1 => {
       console.log(error1);
     })
@@ -50,6 +51,7 @@ export class VolunteersPage implements OnInit {
 
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   async onVolunteerClicked(volunteer: Volunteer) {
+    console.log(volunteer)
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
       componentProps: {

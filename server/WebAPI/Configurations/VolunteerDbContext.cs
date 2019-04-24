@@ -12,8 +12,8 @@ namespace WebAPI.Configurations
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Token> Tokens { get; set; }
-
-        public VolunteerDbContext(DbContextOptions<VolunteerDbContext> options) : base(options)
+        
+        public VolunteerDbContext(DbContextOptions options) : base(options)
         {
 
         }

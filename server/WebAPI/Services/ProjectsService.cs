@@ -6,8 +6,8 @@ using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using WebAPI.Base;
+using WebAPI.Enums;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 using WebAPI.Repositories.Interfaces;
@@ -18,14 +18,17 @@ namespace WebAPI.Services
     public class ProjectsService : BaseService<Project, ProjectDto>, IProjectsService
     {
         private readonly IUsersService _usersService;
+        private readonly IVolunteersRepository _volunteersRepository;
 
         public ProjectsService(
             IProjectsRepository repository,
             IMapper mapper,
             ITimeService timeService,
-            IUsersService usersService) : base(repository, mapper, timeService)
+            IUsersService usersService,
+            IVolunteersRepository volunteersRepository) : base(repository, mapper, timeService)
         {
             _usersService = usersService;
+            _volunteersRepository = volunteersRepository;
         }
 
         public async Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id)
@@ -74,6 +77,90 @@ namespace WebAPI.Services
             var items = await _repository.GetAllByPredicate(x => x.Organization.Id == id);
             var mapped = _mapper.Map<ICollection<ProjectDto>>(items);
             return mapped;
+        }
+
+        public async Task AddSavedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Cannot save item");
+            
+            var project = await _repository.GetById(id);
+            var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
+            var savedProjects = await _repository.GetAllByPredicate(x => x.SavedVolunteers.Any(y => y.Project.Id == project.Id));
+            if (savedProjects.Any())
+                throw new InvalidOperationException("Project already saved");
+
+            var savedProject = new SavedProject() {Project = project, Volunteer = volunteer};
+            project.SavedVolunteers.Add(savedProject);
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task RemoveSavedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Cannot remove saved item");
+            
+            var project = await _repository.GetById(id);
+            var savedProject = project.SavedVolunteers.FirstOrDefault(x => x.Project.Id == project.Id && x.Volunteer.User.Id == userId);
+            if (savedProject == null)
+                throw new InvalidOperationException("Project is not saved and cannot be removed");
+
+            project.SavedVolunteers.Remove(savedProject);
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task AddSelectedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Cannot select item");
+
+            var project = await _repository.GetById(id);
+            var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
+            var selectedProjects = await _repository.GetAllByPredicate(x => x.ProjectVolunteers.Any(y => y.Project.Id == project.Id));
+            if (selectedProjects.Any())
+                throw new InvalidOperationException("Project already saved");
+
+            var selectedProject = new ProjectVolunteer() { Project = project, Volunteer = volunteer };
+            project.ProjectVolunteers.Add(selectedProject);
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task RemoveSelectedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Cannot remove selected item");
+
+            var project = await _repository.GetById(id);
+            var selectedProject = project.ProjectVolunteers.FirstOrDefault(x => x.Project.Id == project.Id && x.Volunteer.User.Id == userId);
+            if (selectedProject == null)
+                throw new InvalidOperationException("Project is not selected and cannot be removed");
+
+            project.ProjectVolunteers.Remove(selectedProject);
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsSavedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Not authenticated");
+            
+            var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
+            if (volunteer?.User == null || volunteer.User.Type != UserType.Volunteer)
+                throw new InvalidOperationException("Not authenticated");
+
+            return volunteer.SavedProjects.Any(x => x.Project.Id == id);
+        }
+
+        public async Task<bool> IsSelectedItem(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
+                throw new InvalidOperationException("Not authenticated");
+
+            var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
+            if (volunteer?.User == null || volunteer.User.Type != UserType.Volunteer)
+                throw new InvalidOperationException("Not authenticated");
+
+            return volunteer.VolunteerProjects.Any(x => x.Project.Id == id);
         }
 
         public override bool ValidateDto(ProjectDto entity)

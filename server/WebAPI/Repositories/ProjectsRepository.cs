@@ -22,7 +22,11 @@ namespace WebAPI.Repositories
                 .Include(x => x.Organization)
                 .Include(x => x.Pictures)
                 .Include(x => x.ProjectVolunteers)
-                .ThenInclude(x => x.Volunteer);
+                .ThenInclude(x => x.Volunteer)
+                .ThenInclude(x => x.User)
+                .Include(x => x.SavedVolunteers)
+                .ThenInclude(x => x.Volunteer)
+                .ThenInclude(x => x.User);
             return dependencies;
         }
     }

@@ -38,8 +38,8 @@ namespace WebAPI.Configurations
             CreateMap<Project, ProjectDto>(MemberList.None)
                 .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id))
                 .ForMember(dest => dest.PicturesIds, opt => opt.MapFrom(src => src.Pictures.Select(x => x.Id)))
-                .ForMember(dest => dest.VolunteersIds, opt => opt.MapFrom(src => src.ProjectVolunteers.Select(x => x.ProjectId)))
-                .ForMember(dest => dest.SavedVolunteersIds, opt => opt.MapFrom(src => src.SavedVolunteers.Select(x => x.ProjectId)));
+                .ForMember(dest => dest.VolunteersIds, opt => opt.MapFrom(src => src.ProjectVolunteers.Select(x => x.Volunteer.User.Id)))
+                .ForMember(dest => dest.SavedVolunteersIds, opt => opt.MapFrom(src => src.SavedVolunteers.Select(x => x.Volunteer.User.Id)));
             CreateMap<ProjectDto, Project>(MemberList.Destination);
         }
 

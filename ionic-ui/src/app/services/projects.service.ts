@@ -37,4 +37,24 @@ export class ProjectsService extends BaseService<Project> {
         const headers = this.getHeaders();
         return this.http.get<Volunteer[]>(`${this.api}/` + id + `/volunteers`, { headers: headers });
     }
+
+    public addSavedProject(id: number): Observable<any> {
+        const headers = this.getHeaders();        
+        return this.http.post<any>(`${this.api}/saved/add/${id}`, null, { headers: headers });
+    }
+
+    public removeSavedProject(id: number): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.post<any>(`${this.api}/saved/remove/${id}`, null, { headers: headers });
+    }
+
+    public addSelectedProject(id: number): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.post<any>(`${this.api}/selected/add/${id}`, null, { headers: headers });
+    }
+
+    public removeSelectedProject(id: number): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.post<any>(`${this.api}/selected/remove/${id}`, null, { headers: headers });
+    }
 }

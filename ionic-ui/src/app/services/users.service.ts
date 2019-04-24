@@ -58,7 +58,7 @@ export class UsersService {
         const data = this.helper.decodeToken(this.token);
         this.role = data.role;
         this.id = data.id;
-        this.cookieService.delete('Bearer');
+        this.cookieService.deleteAll('Bearer');
         this.cookieService.set('Bearer', this.token);
     }
 
@@ -79,7 +79,7 @@ export class UsersService {
         this.user = null;
         this.role = null;
         this.id = null;
-        this.cookieService.delete('Bearer');
+        this.cookieService.deleteAll('Bearer');
         return;
     }
 

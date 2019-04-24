@@ -24,11 +24,12 @@ export class ProjectPage implements OnInit {
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
   newUrl = '';
-  private role: number = 4;
+  role: number = 4;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   owner: boolean = false;
   saved: boolean = false;
   selected: boolean = false;
+  id: number;
 
   constructor(
     private usersService: UsersService,
@@ -60,31 +61,39 @@ export class ProjectPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
+    this.id = id;
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
       this.stringparse();
+      this.getRole();
+      if (this.role == 2) {
+        this.setVolunteer();
+        this.checkForProjects();
+      }
+
+      //turim patikrinti ar projekta ziuri organizacija savininke
+      if (this.role == 3) {
+        this.setOrganization();
+        if (this.project.organizationId == this.organization.id) {
+          this.owner = true;
+        }
+      }
     }, error1 => {
       console.log(error1);
     });
-    this.getRole();
-
-    if (this.role == 2) {
-      this.setVolunteer();
-      this.checkForProjects();
-    }
-    //turim patikrinti ar projekta ziuri organizacija savininke
-    if (this.role == 3) {
-      this.setOrganization();
-      if (this.project.organizationId == this.organization.id) {
-        this.owner = true;
-      }
-    }
   }
 
-  checkForProjects(){
+  checkForProjects() {
     //turetu patikrint ar jau pasirinkes projekta ar pridejes prie saved, kad matytusi lange
-    this.saved=false;
-    this.selected=false;
+    this.selected = false;
+    this.saved = false;
+    const id = this.usersService.getTokenId();
+    if (this.project.savedVolunteersIds.indexOf(+id) > -1) {
+      this.saved = true;
+    }
+    if (this.project.volunteersIds.indexOf(+id) > -1) {
+      this.selected = true;
+    }
   }
 
   btnActivate(ionicButton) {
@@ -128,32 +137,66 @@ export class ProjectPage implements OnInit {
 
   //reiktu metodo cia to clipboard copy
   onPhoneClicked(phone: string) {
-    console.log(this.project.phone);
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', (phone));
+      e.preventDefault();
+      document.removeEventListener('copy', null);
+    });
+    document.execCommand('copy');
+  }
+
+  onEmailClicked(email: string) {
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', (email));
+      e.preventDefault();
+      document.removeEventListener('copy', null);
+    });
+    document.execCommand('copy');
   }
 
   // kodel grazina undefined jei prisiloginus kaip volunteer
   addToSaveList() {
-    const userId = this.usersService.getTokenId();
-    this.saved=true;
-    console.log('User id ' + userId + ' update to save list');
-    console.log('Volunteer id '+this.volunteer.id);
+    //const userId = this.usersService.getTokenId();
+    this.projectsService.addSavedProject(this.id).subscribe(value => {
+      this.saved = true;
+    }, error => {
+      console.log(error);
+    });
+
+    //console.log('User id ' + userId + ' update to save list');
+    //console.log('Volunteer id '+this.volunteer.id);
   }
 
-  removeFromSaveList(){
-    this.saved=false;
-    console.log('Volunteer id ' + this.volunteer.id + ' remove from save list');
+  removeFromSaveList() {
+    this.projectsService.removeSavedProject(this.id).subscribe(value => {
+      this.saved = false;
+    }, error => {
+      console.log(error);
+    });
+    //this.saved=false;
+    //console.log('Volunteer id ' + this.volunteer.id + ' remove from save list');
   }
 
   addToSelecteDProjectS() {
-    const userId = this.usersService.getTokenId();
-    this.selected=true;
-    console.log('User id ' + userId + ' update to selected list');
-    console.log('Volunteer id '+this.volunteer.id);
+    this.projectsService.addSelectedProject(this.id).subscribe(value => {
+      this.selected = true;
+    }, error => {
+      console.log(error);
+    });
+    //const userId = this.usersService.getTokenId();
+    //this.selected=true;
+    //console.log('User id ' + userId + ' update to selected list');
+    //console.log('Volunteer id '+this.volunteer.id);
   }
 
-  removeFromSelectedProjectS(){
-    this.selected=false;
-    console.log('Volunteer id ' + this.volunteer.id + ' remove from selected list');
+  removeFromSelectedProjectS() {
+    this.projectsService.removeSelectedProject(this.id).subscribe(value => {
+      this.selected = false;
+    }, error => {
+      console.log(error);
+    });
+    //this.selected=false;
+    //console.log('Volunteer id ' + this.volunteer.id + ' remove from selected list');
   }
 
   setVolunteer() {
@@ -165,9 +208,9 @@ export class ProjectPage implements OnInit {
     });
   }
 
-  setOrganization(){
+  setOrganization() {
     const userId = this.usersService.getTokenId();
-    console.log('User id= '+userId+' ir sitoj vietoj man norisi gauti organizacija is backend');
+    console.log('User id= ' + userId + ' ir sitoj vietoj man norisi gauti organizacija is backend');
   }
 }
 

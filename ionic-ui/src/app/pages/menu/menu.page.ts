@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterEvent} from '@angular/router';
 import {UsersService} from '../../services/users.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
     selector: 'app-menu',
@@ -100,7 +101,7 @@ export class MenuPage implements OnInit {
 
     selectedPath = '';
 
-    constructor(private router: Router, private usersService: UsersService) {
+    constructor(private router: Router, private usersService: UsersService, private navCtrl: NavController) {
         this.router.events.subscribe((event: RouterEvent) => {
             this.selectedPath = event.url;
             this.getRole();
@@ -137,5 +138,6 @@ export class MenuPage implements OnInit {
     logout() {
         this.usersService.logout();
         this.getRole();
+        this.navCtrl.navigateRoot('main').catch(reason => console.log('Error rerouting menu'));
     }
 }

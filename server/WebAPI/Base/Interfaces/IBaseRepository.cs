@@ -14,5 +14,6 @@ namespace WebAPI.Base.Interfaces
         Task Delete(T entity);
         Task<T> GetSingleByPredicate(Expression<Func<T, bool>> predicate);
         Task<ICollection<T>> GetAllByPredicate(Expression<Func<T, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }

@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
     {
         private readonly IProjectsService _projectsService;
         private readonly IOrganizationsService _organizationsService;
-
+        //todo check for generic repository and methods and change volunteersIds to userIds
 
         public ProjectsController(IProjectsService service, IOrganizationsService organizationsService) : base(service)
         {
@@ -89,6 +89,96 @@ namespace WebAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpPost("saved/add/{id}")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> AddSavedItem([FromRoute] long id)
+        {
+            try
+            {
+                await _projectsService.AddSavedItem(User, id);
+                return Ok();
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost("saved/remove/{id}")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> RemoveSavedItem([FromRoute] long id)
+        {
+            try
+            {
+                await _projectsService.RemoveSavedItem(User, id);
+                return Ok();
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost("selected/add/{id}")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> AddSelectedItem([FromRoute] long id)
+        {
+            try
+            {
+                await _projectsService.AddSelectedItem(User, id);
+                return Ok();
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost("selected/remove/{id}")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> RemoveSelectedItem([FromRoute] long id)
+        {
+            try
+            {
+                await _projectsService.RemoveSelectedItem(User, id);
+                return Ok();
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /*[HttpGet("saved/{id}/saved")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> IsSavedItem([FromRoute] long id)
+        {
+            try
+            {
+                var saved = await _projectsService.IsSavedItem(User, id);
+                return Ok(saved);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet("selected/{id}/selected")]
+        [Authorize(Roles = nameof(UserType.Volunteer))]
+        public async Task<IActionResult> IsSelectedItem([FromRoute] long id)
+        {
+            try
+            {
+                var selected = await _projectsService.IsSelectedItem(User, id);
+                return Ok(selected);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }*/
 
         #region CRUD
 

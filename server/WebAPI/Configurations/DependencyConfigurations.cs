@@ -24,7 +24,8 @@ namespace WebAPI.Configurations
                 .AddScoped<IPicturesRepository, PicturesRepository>()
                 .AddScoped<IReviewsRepository, ReviewsRepository>()
                 .AddScoped<IVolunteersRepository, VolunteersRepository>()
-                .AddScoped<ITokensRepository, TokensRepository>();
+                .AddScoped<ITokensRepository, TokensRepository>()
+                .AddScoped<IGenericRepository, GenericRepository>();
         }
         
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)

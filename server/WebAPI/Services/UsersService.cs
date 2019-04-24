@@ -58,7 +58,7 @@ namespace WebAPI.Services
             if (string.IsNullOrWhiteSpace(secret))
                 throw new InvalidOperationException("Secret was null in the environment variables");
 
-            var key = Encoding.ASCII.GetBytes(secret);//_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(secret);
             
             var subject = new ClaimsIdentity(new[]
             {

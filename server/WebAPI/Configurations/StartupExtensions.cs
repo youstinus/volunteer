@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
-using WebAPI.Helpers;
 using WebAPI.Utilities;
 
 namespace WebAPI.Configurations
@@ -88,7 +87,7 @@ namespace WebAPI.Configurations
         {
             var secret = Environment.GetEnvironmentVariable("APP_SECRET");
             if (string.IsNullOrWhiteSpace(secret))
-                secret = "qBHgVxE2L2s7SdL3lLmdD3FWvewNs53dc5DrGPeQMomocMaYordjQ4hQGDp";//throw new InvalidOperationException("Secret was not found for authorization initialization");
+                throw new InvalidOperationException("Secret was not found for authorization initialization");//secret = "qBHgVxE2L2s7SdL3lLmdD3FWvewNs53dc5DrGPeQMomocMaYordjQ4hQGDp";
 
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>

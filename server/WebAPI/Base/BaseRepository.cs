@@ -9,7 +9,7 @@ using WebAPI.Configurations;
 
 namespace WebAPI.Base
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
     {
         protected readonly VolunteerDbContext Context;
 
@@ -62,6 +62,11 @@ namespace WebAPI.Base
         public virtual async Task<ICollection<T>> GetAllByPredicate(Expression<Func<T, bool>> predicate)
         {
             return await IncludeDependencies(ItemSet).Where(predicate).ToListAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await Context.SaveChangesAsync();
         }
     }
 }

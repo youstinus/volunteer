@@ -1,0 +1,2 @@
+@echo off
+cd ../../ionic-ui && ionic cordova build android --prod --release && cd ../utilities/deployment && COPY "../../ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk" "../apk signing/%1"

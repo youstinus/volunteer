@@ -10,6 +10,7 @@ export class Project {
     public end: Date;
     public organizationId: number;
     public volunteersIds: number[];
+    public savedVolunteersIds: number[];
     public picturesIds: number[];
     public imageUrl: string;
 }

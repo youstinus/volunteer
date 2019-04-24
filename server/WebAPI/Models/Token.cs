@@ -1,5 +1,4 @@
-﻿using System;
-using WebAPI.Base;
+﻿using WebAPI.Base;
 
 namespace WebAPI.Models
 {
