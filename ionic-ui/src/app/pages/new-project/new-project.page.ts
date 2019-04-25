@@ -77,16 +77,12 @@ export class NewProjectPage implements OnInit {
   }
   async onCreate() {
     console.log(this.onCreateForm.value);
-    //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
     this.projectsService.create(this.onCreateForm.value).subscribe(value => {
       console.log(value);
       this.createProject = value;
-      // this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
-    
-   // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
     location.assign('projects/type/created');
   }
   getId() {

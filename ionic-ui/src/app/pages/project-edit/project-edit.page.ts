@@ -22,8 +22,10 @@ export class ProjectEditPage implements OnInit {
   id: number;
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
+  role: number = 1;
 
-  constructor(private projectsService: ProjectsService, private location: Location,
+  constructor(private projectsService: ProjectsService,
+     private location: Location,
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -35,9 +37,12 @@ export class ProjectEditPage implements OnInit {
 
   ngOnInit() {
 
+    
+    
     this.id = this.route.snapshot.params['id'];
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
+      this.getRole();
       console.log(value)
     }, error1 => {
       console.log(error1);
@@ -103,6 +108,12 @@ export class ProjectEditPage implements OnInit {
     // });
 
   }
+  getRole() { 
+    if(this.project.imageUrl == "" || this.project.imageUrl == null)
+    {
+      this.role = 0;
+    }
+  }
   onSaved() {
     console.log(this.onEditForm.value);
     //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
@@ -121,7 +132,7 @@ export class ProjectEditPage implements OnInit {
 
       // this.navCtrl.back();
       //this.navCtrl.back();
-     // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
+      // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
       location.assign('projects/type/created');
 
     }, error1 => {

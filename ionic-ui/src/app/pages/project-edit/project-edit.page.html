@@ -2,23 +2,23 @@
 
 <ion-content padding>
 
-  <!-- <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
-    <ion-row style="height:10px"></ion-row> -->
-  <!-- save form -->
   <form [formGroup]="onEditForm" class="list-form">
 
-    <!-- <ion-item lines="none">
-      <ion-label color="primary" position="floating">Project image</ion-label>
-      <ion-input type="text" formControlName="imageUrl" value={{project.imageUrl}}></ion-input>
-    </ion-item> -->
-    <ion-card-header>
-    <ion-item >
-      <img [src]="project.imageUrl" style="height: 200px; width: 400px" />
-    </ion-item>
-    <ion-item >
-      <ion-button shape="round" (click)="onChangePic()">Change picture </ion-button>
-    </ion-item>
-  </ion-card-header>
+    <div *ngIf="role==0">
+      <ion-item>
+        <ion-button class="center" shape="round" expand="block" (click)="onChangePic()">Add picture </ion-button>
+      </ion-item>
+    </div>
+
+    <div *ngIf="role==1">
+      <ion-item lines="none">
+        <img [src]="project.imageUrl" style="height: 200px; width: 400px" />
+      </ion-item>
+      <ion-item >
+        <ion-button class="center" expand="block" shape="round" (click)="onChangePic()">Change picture </ion-button>
+      </ion-item>
+    </div>
+
     <ion-item lines="">
       <ion-label color="primary" position="floating">Edit Title</ion-label>
       <ion-input type="text" formControlName="title" value={{project.title}}></ion-input>
@@ -41,8 +41,7 @@
 
     <ion-item>
       <ion-label color="primary" position="floating">Edit Description</ion-label>
-
-      <ion-input type="text" formControlName="imageUrl" value={{project.imageUrl}} [hidden]="true"> </ion-input>
+      <ion-input type="text" formControlName="imageUrl" value={{project.title}} [hidden]="true"> </ion-input>
       <ion-textarea autosize style=" height: 300px" formControlName="description" value={{project.description}}>
       </ion-textarea>
     </ion-item>
@@ -65,11 +64,7 @@
       <ion-input formControlName="location" type="text" value={{project.location}}></ion-input>
     </ion-item>
 
-
-
-    <!-- organizationId [hidden]="true"> -->
     <ion-item lines="none" [hidden]="true">
-      <!-- <ion-label color="primary" position="floating">organizationId </ion-label> -->
       <ion-input formControlName="organizationId" type="text"></ion-input>
     </ion-item>
   </form>
