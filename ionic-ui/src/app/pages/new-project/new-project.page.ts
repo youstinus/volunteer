@@ -29,7 +29,7 @@ export class NewProjectPage implements OnInit {
 
   ngOnInit() {
     // this.role = this.usersService.getRole();
-    this.id === this.usersService.getId();
+    this.id === this.usersService.getTokenId();
     console.log(this.id);
 
     // this.id = this.route.snapshot.params['id'];
@@ -60,7 +60,7 @@ export class NewProjectPage implements OnInit {
         Validators.required
       ])],
       // 'organizationId': [null , Validators.compose([Validators.required ])],
-      'organizationId': this.usersService.getId(),
+      'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
         Validators.required
       ])],
@@ -90,7 +90,7 @@ export class NewProjectPage implements OnInit {
     });
   }
   getId(){
-    const id = this.usersService.getId();
+    const id = this.usersService.getTokenId();
     return id;
   }
 }

@@ -60,6 +60,20 @@ ion-card2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.185);
 }
 
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 500px;
+  width: 600px;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 500px;
+  width: 600px;
+}
+
 .phone-clip, .email-clip {
   cursor: pointer;
 }

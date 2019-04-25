@@ -19,16 +19,19 @@ namespace WebAPI.Services
     {
         private readonly IUsersService _usersService;
         private readonly IVolunteersRepository _volunteersRepository;
+        private readonly IOrganizationsRepository _organizationsRepository;
 
         public ProjectsService(
             IProjectsRepository repository,
             IMapper mapper,
             ITimeService timeService,
             IUsersService usersService,
-            IVolunteersRepository volunteersRepository) : base(repository, mapper, timeService)
+            IVolunteersRepository volunteersRepository,
+            IOrganizationsRepository organizationsRepository) : base(repository, mapper, timeService)
         {
             _usersService = usersService;
             _volunteersRepository = volunteersRepository;
+            _organizationsRepository = organizationsRepository;
         }
 
         public async Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id)
@@ -83,10 +86,13 @@ namespace WebAPI.Services
         {
             if (!user.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(user.Identity.Name) || !int.TryParse(user.Identity.Name, out var userId))
                 throw new InvalidOperationException("Cannot save item");
-            
+
             var project = await _repository.GetById(id);
             var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
-            var savedProjects = await _repository.GetAllByPredicate(x => x.SavedVolunteers.Any(y => y.Project.Id == project.Id));
+            if (project == null || volunteer == null)
+                throw new InvalidOperationException("Project was not found");
+                
+            var savedProjects = await _repository.GetAllByPredicate(x => x.SavedVolunteers.Any(y => y.Volunteer.User.Id == userId && y.Project.Id == project.Id));
             if (savedProjects.Any())
                 throw new InvalidOperationException("Project already saved");
 
@@ -101,6 +107,9 @@ namespace WebAPI.Services
                 throw new InvalidOperationException("Cannot remove saved item");
             
             var project = await _repository.GetById(id);
+            if (project == null)
+                throw new InvalidOperationException("Project was not found");
+
             var savedProject = project.SavedVolunteers.FirstOrDefault(x => x.Project.Id == project.Id && x.Volunteer.User.Id == userId);
             if (savedProject == null)
                 throw new InvalidOperationException("Project is not saved and cannot be removed");
@@ -116,7 +125,10 @@ namespace WebAPI.Services
 
             var project = await _repository.GetById(id);
             var volunteer = await _volunteersRepository.GetSingleByPredicate(x => x.User.Id == userId);
-            var selectedProjects = await _repository.GetAllByPredicate(x => x.ProjectVolunteers.Any(y => y.Project.Id == project.Id));
+            if (project == null || volunteer == null)
+                throw new InvalidOperationException("Project was not found");
+
+            var selectedProjects = await _repository.GetAllByPredicate(x => x.ProjectVolunteers.Any(y => y.Volunteer.User.Id == userId && y.Project.Id == project.Id));
             if (selectedProjects.Any())
                 throw new InvalidOperationException("Project already saved");
 
@@ -131,6 +143,9 @@ namespace WebAPI.Services
                 throw new InvalidOperationException("Cannot remove selected item");
 
             var project = await _repository.GetById(id);
+            if (project == null)
+                throw new InvalidOperationException("Project was not found");
+
             var selectedProject = project.ProjectVolunteers.FirstOrDefault(x => x.Project.Id == project.Id && x.Volunteer.User.Id == userId);
             if (selectedProject == null)
                 throw new InvalidOperationException("Project is not selected and cannot be removed");
@@ -163,6 +178,48 @@ namespace WebAPI.Services
             return volunteer.VolunteerProjects.Any(x => x.Project.Id == id);
         }
 
+        public override async Task<ProjectDto> Create(ProjectDto entityDto)
+        {
+            if (entityDto == null)
+                throw new ArgumentNullException(nameof(entityDto));
+
+            var entity = CreatePoco(entityDto);
+            if (entity.OrganizationId < 0)
+                throw new InvalidOperationException("Organization not entered");
+
+            var organization = await _organizationsRepository.GetSingleByPredicate(x => x.User.Id == entity.OrganizationId);
+            if (organization == null || organization.Id < 0)
+                throw new InvalidOperationException("Organization was not found");
+
+            entity.OrganizationId = organization.Id;
+            var created = await _repository.Create(entity);
+            var mappedDto = _mapper.Map<ProjectDto>(created);
+            return mappedDto;
+        }
+        // todo need patch also
+        public override async Task Update(long id, ProjectDto entityDto)
+        {
+            if (entityDto == null)
+                throw new ArgumentNullException(nameof(entityDto));
+
+            var itemToUpdate = await _repository.GetById(id);
+            if (itemToUpdate == null)
+                throw new InvalidOperationException($"Entity {id} was not found");
+
+            if (entityDto.OrganizationId < 0)
+                throw new InvalidOperationException("Organization not entered");
+
+            var organization = await _organizationsRepository.GetSingleByPredicate(x => x.User.Id == entityDto.OrganizationId);
+            if (organization == null || organization.Id < 0)
+                throw new InvalidOperationException("Organization was not found");
+
+            entityDto.OrganizationId = organization.Id;
+
+            entityDto.Id = id;
+            _mapper.Map(entityDto, itemToUpdate);
+            await _repository.Update(itemToUpdate);
+        }
+        
         public override bool ValidateDto(ProjectDto entity)
         {
             return entity != null

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { projects } from 'src/app/pages/projects';
+
 @Component({
   selector: 'app-project-edit',
   templateUrl: './project-edit.page.html',

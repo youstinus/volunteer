@@ -39,7 +39,7 @@ namespace WebAPI.Services
             if (entity == null || entity.OrganizationId < 0)
                 return false;
 
-            var organization = await _repository.GetById(entity.OrganizationId);
+            var organization = await _repository.GetSingleByPredicate(x => x.User.Id == entity.OrganizationId);
             return organization != null;
         }
 
