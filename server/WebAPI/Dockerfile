@@ -1,16 +1,10 @@
-FROM microsoft/dotnet:2.1-sdk as builder  
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
 
-RUN mkdir -p /root/src/app/WebAPI
-WORKDIR /root/src/app/WebAPI
- 
-COPY WebAPI.csproj .
-RUN dotnet restore ./WebAPI.csproj
+WORKDIR /app
 
-COPY . .
-RUN dotnet publish -c release -o published
+COPY ./bin/Docker .
 
-FROM microsoft/dotnet-nightly:2.1-runtime-alpine
+ENV ASPNETCORE_ENVIRONMENT docker
+ENV ASPNETCORE_URLS=http://*:$PORT
 
-WORKDIR /root/
-COPY --from=builder /root/src/app/WebAPI/published .
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebAPI.dll
+ENTRYPOINT dotnet WebAPI.dll

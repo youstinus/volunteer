@@ -1,0 +1,1 @@
+echo "Build and publish of webapi executed successfully"
