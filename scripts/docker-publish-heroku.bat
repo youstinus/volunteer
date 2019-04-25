@@ -1,9 +1,5 @@
-SET DOCKER_ENV=production
-SET DOCKER_TAG=latest
 
-heroku login -i $HEROKU_USERNAME $HEROKU_PASSWORD
-
-heroku container:login -u $HEROKU_USERNAME -p $HEROKU_PASSWORD
+docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry.heroku.com
 
 docker build -f ./server/WebAPI/Dockerfile.$DOCKER_ENV -t volunteer-webapi:$DOCKER_TAG ./server/WebAPI/bin/Docker --no-cache
 

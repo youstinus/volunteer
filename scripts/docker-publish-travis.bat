@@ -1,5 +1,3 @@
-SET DOCKER_ENV=production
-SET DOCKER_TAG=latest
 
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
