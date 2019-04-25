@@ -17,22 +17,18 @@ matrix:
           - ./scripts/docker-publish-travis.bat
           - ./scripts/docker-publish-heroku.bat
       after_success:
-          - ./scripts/after-success.bat
-      notifications:
-          email:
-              on_success: never
-              on_failure: always
-      
+          - ./scripts/after-success.bat      
       
     - language: node_js
       dist: trusty
       sudo: required
       node_js:
-        - "6.9.0"
+        - stable
       branches:
           only:
               - master
-      before_script: 
+      before_script:
+          - chmod -R a+x scripts
           - npm install
       script:
           - ./scripts/ionic-build.bat
