@@ -1,4 +1,5 @@
 cd ionic-ui
+npm install --save-dev  --unsafe-perm node-sass
 npm install
 ng lint
 ng build
