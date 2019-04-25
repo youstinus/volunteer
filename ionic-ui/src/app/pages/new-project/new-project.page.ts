@@ -16,7 +16,7 @@ export class NewProjectPage implements OnInit {
   id: number;
   public onCreateForm: FormGroup;
   private role: number = 0;
-  
+
   constructor(
     private usersService: UsersService,
     private projectsService: ProjectsService,
@@ -59,7 +59,6 @@ export class NewProjectPage implements OnInit {
       'end': [null, Validators.compose([
         Validators.required
       ])],
-      // 'organizationId': [null , Validators.compose([Validators.required ])],
       'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
         Validators.required
@@ -76,20 +75,21 @@ export class NewProjectPage implements OnInit {
       ])],
     });
   }
-  async onCreate()
-  {
+  async onCreate() {
     console.log(this.onCreateForm.value);
     //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
     this.projectsService.create(this.onCreateForm.value).subscribe(value => {
-     
       console.log(value);
       this.createProject = value;
       // this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
+    
+   // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
+    location.assign('projects/type/created');
   }
-  getId(){
+  getId() {
     const id = this.usersService.getTokenId();
     return id;
   }

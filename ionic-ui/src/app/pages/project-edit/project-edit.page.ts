@@ -9,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
+import { Location } from '@angular/common';
+import { load } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-project-edit',
@@ -21,11 +23,11 @@ export class ProjectEditPage implements OnInit {
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
 
-  constructor(private projectsService: ProjectsService,
+  constructor(private projectsService: ProjectsService, private location: Location,
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
-private usersService: UsersService,
+    private usersService: UsersService,
     public alertCtrl: AlertController
   ) {
   }
@@ -110,16 +112,18 @@ private usersService: UsersService,
     }, error1 => {
       console.log(error1);
     });
-    this.navCtrl.navigateForward('main').catch(reason => console.log(reason));
-
+    //this.navCtrl.navigateForward('main').catch(reason => console.log(reason));
+    location.assign('projects/type/created');
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
       console.log(value);
 
-      this.navCtrl.back();
-      this.navCtrl.back();
-      //this.navCtrl.navigateForward('../main').catch(reason => console.log(reason));
+      // this.navCtrl.back();
+      //this.navCtrl.back();
+     // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
+      location.assign('projects/type/created');
+
     }, error1 => {
       console.log(error1);
     });
@@ -159,4 +163,7 @@ private usersService: UsersService,
     await alert.present();
   }
 
+  load() {
+    location.reload()
+  }
 }
