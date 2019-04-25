@@ -1,4 +1,4 @@
-# Volunteering system
+# Volunteering system [![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=master)](https://travis-ci.org/youstinus/volunteer)
 
 ## Prepare server   
 Setup MSSQL Express and SSMS   
