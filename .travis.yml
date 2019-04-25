@@ -8,19 +8,14 @@ branches:
         - master
 before_script:
     - chmod -R a+x scripts
-jobs:
-    include:
-        - stage: server
-            script:
-                - ./scripts/dotnet-build.bat
-                - ./scripts/dotnet-test.bat
-                - ./scripts/dotnet-publish.bat
-                - ./scripts/docker-publish-travis.bat
-                - ./scripts/docker-publish-heroku.bat
-        - stage: ui
-            script:
-                - ./scripts/ionic-build.bat
-                - ./scripts/ionic-publish-firebase.bat                
+script:
+    - ./scripts/dotnet-build.bat
+    - ./scripts/dotnet-test.bat
+    - ./scripts/dotnet-publish.bat
+    - ./scripts/docker-publish-travis.bat
+    - ./scripts/docker-publish-heroku.bat
+    - ./scripts/ionic-build.bat
+    - ./scripts/ionic-publish-firebase.bat                
 after_success:
     - ./scripts/after-success.bat
 notifications:
