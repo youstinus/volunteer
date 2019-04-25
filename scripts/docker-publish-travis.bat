@@ -1,21 +1,10 @@
-DOCKER_ENV=''
-DOCKER_TAG=''
+SET DOCKER_ENV=production
+SET DOCKER_TAG=latest
 
-case "$TRAVIS_BRANCH" in
-	"master")
-		DOCKER_ENV=production
-		DOCKER_TAG=latest
-		;;
-	"develop")
-		DOCKER_ENV=development
-		DOCKER_TAG=dev
-		;;
-esac
+docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
 
-docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+docker build -f ./server/WebAPI/Dockerfile.%DOCKER_ENV% -t volunteer-webapi:%DOCKER_TAG% ./server/WebAPI/bin/Docker --no-cache
 
-docker build -f ./server/WebAPI/Dockerfile.$DOCKER_ENV -f volunteer-webapi:$DOCKER_TAG ./server/WebAPI --no-cache
+docker tag volunteer-webapi:%DOCKER_TAG% %DOCKER_USERNAME%/volunteer-webapi:%DOCKER_TAG%
 
-docker tag volunteer-webapi:$DOCKER_TAG $DOCKER_USERNAME/volunteer-webapi:$DOCKER_TAG
-
-docker push $DOCKER_USERNAME/volunteer-webapi:$DOCKER_TAG
+docker push %DOCKER_USERNAME%/volunteer-webapi:%DOCKER_TAG%
