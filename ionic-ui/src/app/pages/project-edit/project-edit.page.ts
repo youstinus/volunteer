@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-project-edit',
@@ -24,7 +25,7 @@ export class ProjectEditPage implements OnInit {
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
-
+private usersService: UsersService,
     public alertCtrl: AlertController
   ) {
   }
@@ -35,6 +36,7 @@ export class ProjectEditPage implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
+      console.log(value)
     }, error1 => {
       console.log(error1);
     });
@@ -59,9 +61,7 @@ export class ProjectEditPage implements OnInit {
       'end': [null, Validators.compose([
         Validators.required
       ])],
-      'organizationId': [null, Validators.compose([
-        Validators.required
-      ])],
+      'organizationId': this.usersService.getTokenId(),
 
       'location': [null, Validators.compose([
         Validators.required
@@ -110,7 +110,7 @@ export class ProjectEditPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-    this.navCtrl.navigateForward('../main').catch(reason => console.log(reason));
+    this.navCtrl.navigateForward('main').catch(reason => console.log(reason));
 
   }
   Delete() {
