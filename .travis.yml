@@ -1,4 +1,4 @@
-- language: csharp
+  - language: csharp
     dist: trusty
     sudo: required
     mono: none
@@ -21,7 +21,7 @@
             on_success: never
             on_failure: always
 
-- language: node_js
+  - language: node_js
     dist: trusty
     sudo: required
     node_js: "6.9.0"
