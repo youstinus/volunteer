@@ -1,6 +1,5 @@
 matrix:
   include:
-
     - language: node_js
       dist: trusty
       sudo: required
