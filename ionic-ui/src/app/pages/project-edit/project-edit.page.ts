@@ -25,7 +25,7 @@ export class ProjectEditPage implements OnInit {
   role: number = 1;
 
   constructor(private projectsService: ProjectsService,
-     private location: Location,
+    private location: Location,
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -37,8 +37,8 @@ export class ProjectEditPage implements OnInit {
 
   ngOnInit() {
 
-    
-    
+   // location.reload();
+
     this.id = this.route.snapshot.params['id'];
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
@@ -49,92 +49,61 @@ export class ProjectEditPage implements OnInit {
     });
 
     this.onEditForm = this.formBuilder.group({
-      'imageUrl': [null, Validators.compose([
-        Validators.minLength(5),
+      'imageUrl': [this.project.imageUrl, Validators.compose([
+        //Validators.minLength(5),
         Validators.required
       ])],
-      'title': [null, Validators.compose([
-        Validators.minLength(5),
+      'title': [this.project.title, Validators.compose([
+        //Validators.minLength(5),
         Validators.required
       ])],
-      'description': [null, Validators.compose([
-        Validators.minLength(5),
+      'description': [this.project.description, Validators.compose([
+        //Validators.minLength(5),
         Validators.required
       ])],
-      'start': [null, Validators.compose([
-        Validators.minLength(5),
+      'start': [this.project.start, Validators.compose([
+        //  Validators.minLength(5),
         Validators.required
       ])],
-      'end': [null, Validators.compose([
+      'end': [this.project.end, Validators.compose([
         Validators.required
       ])],
       'organizationId': this.usersService.getTokenId(),
 
-      'location': [null, Validators.compose([
+      'location': [this.project.location, Validators.compose([
         Validators.required
       ])],
-      'website': [null, Validators.compose([
+      'website': [this.project.website, Validators.compose([
         Validators.required
       ])],
-      'email': [null, Validators.compose([
+      'email': [this.project.email, Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      'phone': [null, Validators.compose([
+      'phone': [this.project.phone, Validators.compose([
         Validators.required
       ])]
     });
-
-    // this.onEditForm = this.formBuilder.group({
-    //   'imageUrl': [null, Validators.compose([
-    //     Validators.minLength(5),
-    //     Validators.required
-    //   ])],
-    //   'title': ['', Validators.compose([
-    //     Validators.required,
-    //   ])],
-    //   'description': [null, Validators.compose([
-    //     Validators.minLength(5),
-    //     Validators.required
-    //   ])],
-    //   'start': [null, Validators.compose([
-    //     Validators.minLength(5),
-    //     Validators.required
-    //   ])],
-    //   'end': [null, Validators.compose([
-    //     Validators.required
-    //   ])]
-
-    // });
-
   }
-  getRole() { 
-    if(this.project.imageUrl == "" || this.project.imageUrl == null)
-    {
+  getRole() {
+    if (this.project.imageUrl == "" || this.project.imageUrl == null) {
       this.role = 0;
     }
   }
   onSaved() {
     console.log(this.onEditForm.value);
-    //this.projectsService.update(this.id, this.project).subscribe(value => { this.onEditForm.value
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       console.log(value);
-      //this.navCtrl.navigateForward('../project/' + this.id).catch(reason => console.log(reason));
+      location.assign('projects/type/created');
+      //this.navCtrl.navigateForward('projects/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
-    //this.navCtrl.navigateForward('main').catch(reason => console.log(reason));
-    location.assign('projects/type/created');
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
       console.log(value);
-
-      // this.navCtrl.back();
-      //this.navCtrl.back();
-      // this.navCtrl.navigateForward('projects/type/created').catch(reason => console.log(reason));
       location.assign('projects/type/created');
-
     }, error1 => {
       console.log(error1);
     });

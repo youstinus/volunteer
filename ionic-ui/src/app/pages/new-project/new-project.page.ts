@@ -41,7 +41,7 @@ export class NewProjectPage implements OnInit {
 
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
-        Validators.minLength(5),
+        //Validators.minLength(5),
         Validators.required
       ])],
       'title': [null, Validators.compose([
@@ -49,11 +49,11 @@ export class NewProjectPage implements OnInit {
         Validators.required
       ])],
       'description': [null, Validators.compose([
-        Validators.minLength(5),
+      //  Validators.minLength(5),
         Validators.required
       ])],
       'start': [null, Validators.compose([
-        Validators.minLength(5),
+       // Validators.minLength(5),
         Validators.required
       ])],
       'end': [null, Validators.compose([

@@ -5,15 +5,18 @@
   <form [formGroup]="onEditForm" class="list-form">
 
     <div *ngIf="role==0">
-      <ion-item>
-        <ion-button class="center" shape="round" expand="block" (click)="onChangePic()">Add picture </ion-button>
-      </ion-item>
+      <ion-item lines="none">
+          <ion-label color="primary" position="floating">Project image</ion-label>
+          <ion-input type="text" formControlName="imageUrl"></ion-input>
+        </ion-item>
     </div>
 
     <div *ngIf="role==1">
       <ion-item lines="none">
-        <img [src]="project.imageUrl" style="height: 200px; width: 400px" />
+        <img [src]="project.imageUrl" class="center"  style="height: 200px; width: 400px" />
       </ion-item>
+      
+      <ion-input type="text" formControlName="imageUrl" [hidden]='true' value={{project.imageUrl}} ></ion-input>
       <ion-item >
         <ion-button class="center" expand="block" shape="round" (click)="onChangePic()">Change picture </ion-button>
       </ion-item>
