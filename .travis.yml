@@ -6,23 +6,23 @@ matrix:
   include:
   
   
-#  - 
-#    language: csharp
-#    dist: trusty
-#    sudo: required
-#    mono: none
-#    dotnet: 2.1
-#    before_script:
-#    - chmod -R a+x scripts
-#    script:
-#    - "./scripts/dotnet-build.bat"
-#    - "./scripts/dotnet-test.bat"
-#    - "./scripts/dotnet-publish.bat"
-#    - "./scripts/docker-publish-travis.bat"
-#    - "./scripts/docker-publish-heroku.bat"
-#    - "./scripts/docker-publish-heroku-release.bat"
-#    after_success:
-#    - "./scripts/after-success.bat"
+  - 
+    language: csharp
+    dist: trusty
+    sudo: required
+    mono: none
+    dotnet: 2.1
+    before_script:
+    - chmod -R a+x scripts
+    script:
+    - "./scripts/dotnet-build.bat"
+    - "./scripts/dotnet-test.bat"
+    - "./scripts/dotnet-publish.bat"
+    - "./scripts/docker-publish-travis.bat"
+    - "./scripts/docker-publish-heroku.bat"
+    - "./scripts/docker-publish-heroku-release.bat"
+    after_success:
+    - "./scripts/after-success.bat"
     
   -
     language: node_js
