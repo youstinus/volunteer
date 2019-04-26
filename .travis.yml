@@ -16,6 +16,7 @@ matrix:
           - ./scripts/dotnet-publish.bat
           - ./scripts/docker-publish-travis.bat
           - ./scripts/docker-publish-heroku.bat
+          - ./scripts/docker-publish-heroku-release.bat
       after_success:
           - ./scripts/after-success.bat      
       
