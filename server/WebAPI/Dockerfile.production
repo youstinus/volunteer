@@ -5,6 +5,5 @@ WORKDIR /app
 COPY ./bin/Docker .
 
 ENV ASPNETCORE_ENVIRONMENT docker
-ENV ASPNETCORE_URLS=http://*:$PORT
 
-CMD dotnet WebAPI.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebAPI.dll
