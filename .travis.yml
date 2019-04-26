@@ -7,7 +7,7 @@ matrix:
       dotnet: 2.1
       branches:
           only:
-              - master
+              - deploy
       before_script:
           - chmod -R a+x scripts
       script:
@@ -30,7 +30,7 @@ matrix:
 #        chrome: stable
 #      branches:
 #        only:
-#          - master
+#          - deploy
 #      before_script:
 #          - chmod -R a+x scripts
 #          - npm install -g @angular/cli
