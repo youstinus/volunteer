@@ -5,4 +5,4 @@ docker build -f ./server/WebAPI/Dockerfile.$DOCKER_ENV -t registry.heroku.com/vo
 
 docker push registry.heroku.com/volunteer-webapi/web:$DOCKER_TAG
 
-heroku container:release web -a volunteer-webapi
+echo "$DOCKER_USERNAME $DOCKER_PASSWORD" | heroku container:release web -a volunteer-webapi
