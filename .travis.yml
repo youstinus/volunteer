@@ -16,7 +16,8 @@ matrix:
           - ./scripts/dotnet-publish.bat
           - ./scripts/docker-publish-travis.bat
           - ./scripts/docker-publish-heroku.bat
-          - ./scripts/docker-publish-heroku-release.bat
+          #- ./scripts/docker-publish-heroku-release.bat
+          - docker run --rm -e HEROKU_API_KEY=$HEROKU_AUTH_TOKEN wingrunr21/alpine-heroku-cli container:release web --app volunteer-webapi
       after_success:
           - ./scripts/after-success.bat      
       
