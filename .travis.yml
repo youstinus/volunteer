@@ -67,8 +67,8 @@ matrix:
       - tools
       - platform-tools
       - tools
-      - build-tools-23.0.1
-      - android-23
+      - build-tools-26.0.2
+      - android-27
       - extra-google-google_play_services
       - extra-google-m2repository
       - extra-android-m2repository
@@ -76,7 +76,10 @@ matrix:
     licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
+    - android-googletv-license-.+
     - google-gdk-license-.+
+    - intel-android-extra-license-.+
+    - mips-android-sysimage-license-.+
     
     before_install:
     - chmod -R a+x scripts
