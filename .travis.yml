@@ -90,8 +90,8 @@ matrix:
     - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     - travis_retry sudo apt-get update -qq
     - travis_retry sudo apt-get install -y -qq yarn
-    - openssl aes-256-cbc -K $encrypted_b9169b51202b_key -iv $encrypted_b9169b51202b_iv
-      -in ./ionic-ui/key.keystore.enc -out ./ionic-ui/key.keystore -d
+    #- openssl aes-256-cbc -K $encrypted_b9169b51202b_key -iv $encrypted_b9169b51202b_iv
+    #  -in ./ionic-ui/key.keystore.enc -out ./ionic-ui/key.keystore -d
     install:
     - yarn
     before_script:
@@ -128,7 +128,6 @@ matrix:
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
-        tags: true
         branch: deploy
       
   -
@@ -159,12 +158,11 @@ matrix:
       api_key:
         secure: ZoPSo+x0ULpRlp9fm5C45beODFHNq4pkib1SCqyUDm/ffBjb6oTwlu//ScgBIjL7sGixaVdUb4ev2ywCcK3UIZ9mDfF84NQ2nYKVQ2i7c7N8DrrEKbQjUlgf1tPEKHpe6fesJdwPKM0EvCR7VcfpxNcF2reTCsRxq0CAU3V0+2DBGsSGo8MxP+61Gbd5hjU8LnM5D0ktGE+1V0QN8yK+bE0lRUOEpPEpYp0LLPQton4jie5VKNz7pslxP/CyoPaMLmc+mo3uZlCKEbQBao2rl+QvQS765BH11U+oS6uLU8//1gA2hyOCDWH2xCpcQZYUDtzFn8ywyoR75Elpsf87IMH1z4A6RxJIVFC3pdTwjlwpJPta42TCrE10RD0aJh/NyEToRPPba0x2/W0ujA0BiOiVzSGWhYfP6Q0A96e+pFfvrvD+UaWSrS3v2VbcGDONH8TyHPyFtIqyHih41mv8ZJTQSeK0x6DbyYDtIwkJiQn/kkkb0eCZQyBuWWMtWWlLbjcoNwtjGQpHkv7X3Tlh0+jKsPhAGCSB97uDF1wQV/KgQW2KO727KEa7pUvhd8v1F711eTjlVAkLazVMIjC93+Daqbx8bSrlynNiMvuszDVtSlpl8xHTPsA5YFFl0ij3PihdGDbKEGNP2u1qzRlthsT4YzBdhIWvOFk0nHf+uFo=
       file:
-      #- "./ionic-ui/platforms/ios/*"
+      - "./ionic-ui/platforms/ios/build/emulator/Volun.app"
       - "./ionic-ui/output/*"
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
-        tags: true
         branch: deploy
       
       
