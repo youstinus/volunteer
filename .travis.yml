@@ -1,6 +1,13 @@
 branches:
   only:
   - deploy
+  
+language: node_js
+node_js:
+    - "10.9.0"
+sudo: false
+
+
 matrix:
   include:
   
@@ -48,15 +55,11 @@ matrix:
 #    after_success:
 #    - "./scripts/ionic-publish-firebase.bat"
 
-  -
-    language: node_js
-    node_js:
-    - "10.9.0"
     
   -
     language: android
     dist: trusty
-
+    jdk: oraclejdk8
     android:
       components:
       - tools
@@ -81,31 +84,31 @@ matrix:
     - android-sdk-license-.+
     - google-gdk-license-.+
     
-before_install:
-- chmod -R a+x scripts
-- export LANG=en_US.UTF-8
-- "./scripts/ionic-android-prebuild.bat"
-before_script:
-#- export ANDROID_HOME=$PWD/ionic-ui/android-sdk-linux
-#- export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/24.0.2
-#- export CHROME_BIN=/usr/bin/google-chrome
-#- export DISPLAY=:99.0
-#- sh -e /etc/init.d/xvfb start
-#- sudo apt-get update
-#- sudo apt-get install -y libappindicator1 fonts-liberation
-#- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#- sudo dpkg -i google-chrome*.deb
-script:
-- "./scripts/ionic-android-build.bat"
-after_success:
-- "./scripts/ionic-android-publish.bat"
-env:
-  global:
-  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
-  - ANDROID_API=24
-  - EMULATOR_API=21
-  - ANDROID_BUILD_TOOLS=24.0.2
-  - ADB_INSTALL_TIMEOUT=5 # minutes
+    before_install:
+    - chmod -R a+x scripts
+    - export LANG=en_US.UTF-8
+    - "./scripts/ionic-android-prebuild.bat"
+    before_script:
+    #- export ANDROID_HOME=$PWD/ionic-ui/android-sdk-linux
+    #- export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/24.0.2
+    #- export CHROME_BIN=/usr/bin/google-chrome
+    #- export DISPLAY=:99.0
+    #- sh -e /etc/init.d/xvfb start
+    #- sudo apt-get update
+    #- sudo apt-get install -y libappindicator1 fonts-liberation
+    #- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    #- sudo dpkg -i google-chrome*.deb
+    script:
+    - "./scripts/ionic-android-build.bat"
+    after_success:
+    - "./scripts/ionic-android-publish.bat"
+    env:
+      global:
+      - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+      - ANDROID_API=24
+      - EMULATOR_API=21
+      - ANDROID_BUILD_TOOLS=24.0.2
+      - ADB_INSTALL_TIMEOUT=5 # minutes
 deploy:
 provider: releases
 api_key:
