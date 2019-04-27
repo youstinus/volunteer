@@ -59,18 +59,30 @@ matrix:
       components:
       - tools
       - platform-tools
-      - build-tools-$ANDROID_BUILD_TOOLS
-      - android-$ANDROID_API
-      - android-$EMULATOR_API_LEVEL
+      - build-tools-26.0.0
+      - android-25
       - extra-google-m2repository
-      - extra-android-m2repository # for design library
+      - extra-android-m2repository # for design library      
+      - extra-google-google_play_services
       - addon-google_apis-google-19 # google play services
-      - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-      - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+
     addons:
-      chrome: stable
+      apt:
+        sources:
+        - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+          key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        packages:
+        - oracle-java8-installer
+        - oracle-java8-set-default
+        - yarn
+        - jq
+    licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
     before_install:
     - chmod -R a+x scripts
+    - export LANG=en_US.UTF-8
     - "./scripts/ionic-android-prebuild.bat"
     before_script:
     #- export CHROME_BIN=/usr/bin/google-chrome
@@ -100,7 +112,7 @@ matrix:
     - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
     - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk"
     - "./ionic-ui/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
-    
+    - "./ionic-ui/output/*"
     on:
         repo: youstinus/volunteer
         branch: deploy

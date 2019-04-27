@@ -1,8 +1,12 @@
 
 cd ionic-ui
 
-npm install -g @angular/cli
+nvm install 8
 
-npm install -g ionic cordova
+yarn global add ionic cordova
+	
+#npm install -g @angular/cli
 
-npm i @ionic/angular-toolkit
+#npm install -g ionic cordova
+
+#npm i @ionic/angular-toolkit
