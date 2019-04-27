@@ -57,7 +57,7 @@ matrix:
       chrome: stable
     before_install:
     - chmod -R a+x scripts
-    - "./scripts/ionic-android_prebuild.bat"
+    - "./scripts/ionic-android-prebuild.bat"
     before_script:
     #- export CHROME_BIN=/usr/bin/google-chrome
     #- export DISPLAY=:99.0
