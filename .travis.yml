@@ -53,6 +53,19 @@ matrix:
     dist: trusty
     node_js:
     - "10.9.0"
+    jdk: oraclejdk8
+    android:
+      components:
+      - tools
+      - platform-tools
+      - build-tools-$ANDROID_BUILD_TOOLS
+      - android-$ANDROID_API
+      - android-$EMULATOR_API_LEVEL
+      - extra-google-m2repository
+      - extra-android-m2repository # for design library
+      - addon-google_apis-google-19 # google play services
+      - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+      - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
     addons:
       chrome: stable
     before_install:
@@ -70,7 +83,13 @@ matrix:
     - "./scripts/ionic-android-build.bat"
     after_success:
     - "./scripts/ionic-android-publish.bat"
-
+    env:
+      global:
+      - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+      - ANDROID_API=24
+      - EMULATOR_API=21
+      - ANDROID_BUILD_TOOLS=24.0.2
+      - ADB_INSTALL_TIMEOUT=5 # minutes
     deploy:
     provider: releases
     api_key:
