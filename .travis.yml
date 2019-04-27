@@ -58,27 +58,21 @@ matrix:
     
   -
     language: android
-    dist: trusty
+    os: linux
     jdk: oraclejdk8
+    sudo: required
+    node_js: false
     android:
       components:
       - tools
       - platform-tools
       - tools
-      - build-tools-26.0.0
-      - android-25
+      - build-tools-23.0.1
+      - android-23
       - extra-google-google_play_services
       - extra-google-m2repository
       - extra-android-m2repository
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-4.8
-        - openjdk-8-jdk
-        - lib32stdc++6
-        - lib32z1
+    
     licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
@@ -102,13 +96,13 @@ matrix:
     - "./scripts/ionic-android-build.bat"
     after_success:
     - "./scripts/ionic-android-publish.bat"
-    env:
-      global:
-      - JAVA_HOME=/usr/lib/jvm/java-8-oracle
-      - ANDROID_API=24
-      - EMULATOR_API=21
-      - ANDROID_BUILD_TOOLS=24.0.2
-      - ADB_INSTALL_TIMEOUT=5 # minutes
+    #env:
+    #  global:
+    #  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+    #  - ANDROID_API=24
+    #  - EMULATOR_API=21
+    #  - ANDROID_BUILD_TOOLS=24.0.2
+    #  - ADB_INSTALL_TIMEOUT=5 # minutes
 deploy:
 provider: releases
 api_key:
