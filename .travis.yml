@@ -1,4 +1,3 @@
-sudo: required
 branches:
   only:
   - deploy
@@ -6,24 +5,49 @@ matrix:
   include:
   
   
-  - 
-    language: csharp
-    dist: trusty
-    sudo: required
-    mono: none
-    dotnet: 2.1
-    before_script:
-    - chmod -R a+x scripts
-    script:
-    - "./scripts/dotnet-build.bat"
-    - "./scripts/dotnet-test.bat"
-    - "./scripts/dotnet-publish.bat"
-    - "./scripts/docker-publish-travis.bat"
-    - "./scripts/docker-publish-heroku.bat"
-    - "./scripts/docker-publish-heroku-release.bat"
-    after_success:
-    - "./scripts/after-success.bat"
-    
+#  - 
+#    language: csharp
+#    dist: trusty
+#    sudo: required
+#    mono: none
+#    dotnet: 2.1
+#    before_script:
+#    - chmod -R a+x scripts
+#    script:
+#    - "./scripts/dotnet-build.bat"
+#    - "./scripts/dotnet-test.bat"
+#    - "./scripts/dotnet-publish.bat"
+#    - "./scripts/docker-publish-travis.bat"
+#    - "./scripts/docker-publish-heroku.bat"
+#    - "./scripts/docker-publish-heroku-release.bat"
+#    after_success:
+#    - "./scripts/after-success.bat"
+#    
+#  -
+#    language: node_js
+#    dist: trusty
+#    node_js:
+#    - "10.9.0"
+#    addons:
+#      chrome: stable
+#    before_install:
+#    - chmod -R a+x scripts
+#    - "./scripts/ionic-prebuild.bat"
+#    before_script:
+#    - npm install -g @angular/cli
+#    - npm install -g firebase-tools
+#    #- export CHROME_BIN=/usr/bin/google-chrome
+#    #- export DISPLAY=:99.0
+#    #- sh -e /etc/init.d/xvfb start
+#    #- sudo apt-get update
+#    #- sudo apt-get install -y libappindicator1 fonts-liberation
+#    #- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#    #- sudo dpkg -i google-chrome*.deb
+#    script:
+#    - "./scripts/ionic-build.bat"
+#    after_success:
+#    - "./scripts/ionic-publish-firebase.bat"
+
   -
     language: node_js
     dist: trusty
@@ -33,10 +57,8 @@ matrix:
       chrome: stable
     before_install:
     - chmod -R a+x scripts
-    - "./scripts/ionic-prebuild.bat"
+    - "./scripts/ionic-android_prebuild.bat"
     before_script:
-    - npm install -g @angular/cli
-    - npm install -g firebase-tools
     #- export CHROME_BIN=/usr/bin/google-chrome
     #- export DISPLAY=:99.0
     #- sh -e /etc/init.d/xvfb start
@@ -45,44 +67,57 @@ matrix:
     #- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     #- sudo dpkg -i google-chrome*.deb
     script:
-    - "./scripts/ionic-build.bat"
+    - "./scripts/ionic-android-build.bat"
     after_success:
-    - "./scripts/ionic-publish-firebase.bat"
+    - "./scripts/ionic-android-publish.bat"
+
+    deploy:
+    provider: releases
+    api_key:
+        secure: ZoPSo+x0ULpRlp9fm5C45beODFHNq4pkib1SCqyUDm/ffBjb6oTwlu//ScgBIjL7sGixaVdUb4ev2ywCcK3UIZ9mDfF84NQ2nYKVQ2i7c7N8DrrEKbQjUlgf1tPEKHpe6fesJdwPKM0EvCR7VcfpxNcF2reTCsRxq0CAU3V0+2DBGsSGo8MxP+61Gbd5hjU8LnM5D0ktGE+1V0QN8yK+bE0lRUOEpPEpYp0LLPQton4jie5VKNz7pslxP/CyoPaMLmc+mo3uZlCKEbQBao2rl+QvQS765BH11U+oS6uLU8//1gA2hyOCDWH2xCpcQZYUDtzFn8ywyoR75Elpsf87IMH1z4A6RxJIVFC3pdTwjlwpJPta42TCrE10RD0aJh/NyEToRPPba0x2/W0ujA0BiOiVzSGWhYfP6Q0A96e+pFfvrvD+UaWSrS3v2VbcGDONH8TyHPyFtIqyHih41mv8ZJTQSeK0x6DbyYDtIwkJiQn/kkkb0eCZQyBuWWMtWWlLbjcoNwtjGQpHkv7X3Tlh0+jKsPhAGCSB97uDF1wQV/KgQW2KO727KEa7pUvhd8v1F711eTjlVAkLazVMIjC93+Daqbx8bSrlynNiMvuszDVtSlpl8xHTPsA5YFFl0ij3PihdGDbKEGNP2u1qzRlthsT4YzBdhIWvOFk0nHf+uFo=
+    file:
+    - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk"
+    - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+    - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk"
+    - "./ionic-ui/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
     
-  -
-    language: objective-c
-    os: osx
-    osx_image: xcode7.2
-    cache: false
-
-    before_install:
-    - export LANG=en_US.UTF-8
-    - brew update
-
-    install:
-    # install minimum set of dependencies to run tests and linters
-    - npm install -g npm gulp bower
-
-    before_script:
-    # update npm and bower dependencies
-    - npm install
-    - bower update
-
-    # run linters and tests
-    # if fails then build process stops
-    # - gulp test
-
-    script:
-    # install android SDK
-    -  wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
-    -  tar -xvf android-sdk_r24.4-macosx.zip
-
-    - "./scripts/ionic-build-premobile.bat"
-
-    -  export ANDROID_HOME=./android-sdk-macosx
-    -  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
-
-    - "./scripts/ionic-build-mobile.bat"
+    on:
+        repo: youstinus/volunteer
+        branch: deploy
+#  -
+#    language: objective-c
+#    os: osx
+#    osx_image: xcode8.3
+#    cache: false
+#
+#    before_install:
+#    - export LANG=en_US.UTF-8
+#    - brew update
+#
+#    install:
+#    # install minimum set of dependencies to run tests and linters
+#    - npm install -g npm gulp bower
+#
+#    before_script:
+#    # update npm and bower dependencies
+#    - npm install
+#    - bower update
+#
+#    # run linters and tests
+#    # if fails then build process stops
+#    # - gulp test
+#
+#    script:
+#    # install android SDK
+#    -  wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
+#    -  tar -xvf android-sdk_r24.4-macosx.zip
+#
+#    - "./scripts/ionic-build-premobile.bat"
+#
+#    -  export ANDROID_HOME=./android-sdk-macosx
+#    -  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
+#
+#    - "./scripts/ionic-build-mobile.bat"
 
 
 notifications:
