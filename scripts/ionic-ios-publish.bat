@@ -5,4 +5,4 @@ set -e
 
 mkdir -p output
 
-tar zcvf output/volun-release-unsigned.app.tgz platforms/ios/build/device/Volun.app
+tar zcvf ./platforms/ios/build/emulator/volun-release-unsigned.app.tgz ./platforms/ios/build/emulator/Volun.app
