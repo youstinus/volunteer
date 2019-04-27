@@ -91,7 +91,7 @@ matrix:
     - travis_retry sudo apt-get update -qq
     - travis_retry sudo apt-get install -y -qq yarn
     - openssl aes-256-cbc -K $encrypted_b9169b51202b_key -iv $encrypted_b9169b51202b_iv
-      -in key.keystore.enc -out key.keystore -d
+      -in ./ionic-ui/key.keystore.enc -out ./ionic-ui/key.keystore -d
     install:
     - yarn
     before_script:
@@ -137,6 +137,7 @@ matrix:
     osx_image: xcode8.2
     node_js: false
     before_install:
+    - chmod -R a+x scripts
     - nvm install v10.9.0
     - node --version
     - travis_retry npm install -g yarn
