@@ -17,4 +17,5 @@ tar -zcf ionic-ui.tar.gz ./www
 
 mkdir -p output
 
+# Does not work
 cp ./ionic-ui.tar.gz ./output/volunteer-ui.tar.gz

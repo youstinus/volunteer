@@ -1,6 +1,7 @@
 branches:
   only:
   - deploy
+  - /^v.*$/
   
 language: node_js
 node_js:
@@ -60,16 +61,13 @@ matrix:
       api_key:
         secure: ZoPSo+x0ULpRlp9fm5C45beODFHNq4pkib1SCqyUDm/ffBjb6oTwlu//ScgBIjL7sGixaVdUb4ev2ywCcK3UIZ9mDfF84NQ2nYKVQ2i7c7N8DrrEKbQjUlgf1tPEKHpe6fesJdwPKM0EvCR7VcfpxNcF2reTCsRxq0CAU3V0+2DBGsSGo8MxP+61Gbd5hjU8LnM5D0ktGE+1V0QN8yK+bE0lRUOEpPEpYp0LLPQton4jie5VKNz7pslxP/CyoPaMLmc+mo3uZlCKEbQBao2rl+QvQS765BH11U+oS6uLU8//1gA2hyOCDWH2xCpcQZYUDtzFn8ywyoR75Elpsf87IMH1z4A6RxJIVFC3pdTwjlwpJPta42TCrE10RD0aJh/NyEToRPPba0x2/W0ujA0BiOiVzSGWhYfP6Q0A96e+pFfvrvD+UaWSrS3v2VbcGDONH8TyHPyFtIqyHih41mv8ZJTQSeK0x6DbyYDtIwkJiQn/kkkb0eCZQyBuWWMtWWlLbjcoNwtjGQpHkv7X3Tlh0+jKsPhAGCSB97uDF1wQV/KgQW2KO727KEa7pUvhd8v1F711eTjlVAkLazVMIjC93+Daqbx8bSrlynNiMvuszDVtSlpl8xHTPsA5YFFl0ij3PihdGDbKEGNP2u1qzRlthsT4YzBdhIWvOFk0nHf+uFo=
       file:
-      #- "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk"
-      #- "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
-      #- "./platforms/android/app/build/outputs/apk/release/volunteer-release.apk"
       - "./ionic-ui/ionic-ui.tar.gz"
-      - "./ionic/output/volunteer-ui.tar.gz"
+      #- "./ionic/output/volunteer-ui.tar.gz"
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
         branch: deploy
-
+        #tags: true
     
   -
     language: android
@@ -138,18 +136,18 @@ matrix:
         secure: ZoPSo+x0ULpRlp9fm5C45beODFHNq4pkib1SCqyUDm/ffBjb6oTwlu//ScgBIjL7sGixaVdUb4ev2ywCcK3UIZ9mDfF84NQ2nYKVQ2i7c7N8DrrEKbQjUlgf1tPEKHpe6fesJdwPKM0EvCR7VcfpxNcF2reTCsRxq0CAU3V0+2DBGsSGo8MxP+61Gbd5hjU8LnM5D0ktGE+1V0QN8yK+bE0lRUOEpPEpYp0LLPQton4jie5VKNz7pslxP/CyoPaMLmc+mo3uZlCKEbQBao2rl+QvQS765BH11U+oS6uLU8//1gA2hyOCDWH2xCpcQZYUDtzFn8ywyoR75Elpsf87IMH1z4A6RxJIVFC3pdTwjlwpJPta42TCrE10RD0aJh/NyEToRPPba0x2/W0ujA0BiOiVzSGWhYfP6Q0A96e+pFfvrvD+UaWSrS3v2VbcGDONH8TyHPyFtIqyHih41mv8ZJTQSeK0x6DbyYDtIwkJiQn/kkkb0eCZQyBuWWMtWWlLbjcoNwtjGQpHkv7X3Tlh0+jKsPhAGCSB97uDF1wQV/KgQW2KO727KEa7pUvhd8v1F711eTjlVAkLazVMIjC93+Daqbx8bSrlynNiMvuszDVtSlpl8xHTPsA5YFFl0ij3PihdGDbKEGNP2u1qzRlthsT4YzBdhIWvOFk0nHf+uFo=
       file:
       #- "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release.apk"
-      - "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
-      - "./ionic-ui/platforms/android/app/build/outputs/apk/release/volunteer-release.apk"
+      #- "./ionic-ui/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+      #- "./ionic-ui/platforms/android/app/build/outputs/apk/release/volunteer-release.apk"
       - "./ionic-ui/output/volunteer-release.apk"
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
         branch: deploy
-      
+        #tags: true
   -
     language: objective-c
     os: osx
-    osx_image: xcode8.2
+    osx_image: xcode9.4
     node_js: false
     before_install:
     - chmod -R a+x scripts
@@ -174,14 +172,14 @@ matrix:
       api_key:
         secure: ZoPSo+x0ULpRlp9fm5C45beODFHNq4pkib1SCqyUDm/ffBjb6oTwlu//ScgBIjL7sGixaVdUb4ev2ywCcK3UIZ9mDfF84NQ2nYKVQ2i7c7N8DrrEKbQjUlgf1tPEKHpe6fesJdwPKM0EvCR7VcfpxNcF2reTCsRxq0CAU3V0+2DBGsSGo8MxP+61Gbd5hjU8LnM5D0ktGE+1V0QN8yK+bE0lRUOEpPEpYp0LLPQton4jie5VKNz7pslxP/CyoPaMLmc+mo3uZlCKEbQBao2rl+QvQS765BH11U+oS6uLU8//1gA2hyOCDWH2xCpcQZYUDtzFn8ywyoR75Elpsf87IMH1z4A6RxJIVFC3pdTwjlwpJPta42TCrE10RD0aJh/NyEToRPPba0x2/W0ujA0BiOiVzSGWhYfP6Q0A96e+pFfvrvD+UaWSrS3v2VbcGDONH8TyHPyFtIqyHih41mv8ZJTQSeK0x6DbyYDtIwkJiQn/kkkb0eCZQyBuWWMtWWlLbjcoNwtjGQpHkv7X3Tlh0+jKsPhAGCSB97uDF1wQV/KgQW2KO727KEa7pUvhd8v1F711eTjlVAkLazVMIjC93+Daqbx8bSrlynNiMvuszDVtSlpl8xHTPsA5YFFl0ij3PihdGDbKEGNP2u1qzRlthsT4YzBdhIWvOFk0nHf+uFo=
       file:
-      - "./ionic-ui/platforms/ios/build/emulator/Volun.app"
-      - "./platforms/ios/build/emulator/volun-release-unsigned.app.tgz"      
+      #- "./ionic-ui/platforms/ios/build/emulator/Volun.app"
+      #- "./ionic-ui/platforms/ios/build/emulator/volun-release-unsigned.app.tgz"      
       - "./ionic-ui/output/volun-release.app.tgz"
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
         branch: deploy
-      
+        #tags: true
       
     #- cd ios
     #- xcodebuild -scheme PepperoniAppTemplate -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
