@@ -49,10 +49,11 @@ matrix:
 #    - "./scripts/ionic-publish-firebase.bat"
 
   -
-    language: node_js
+    #language: node_js
     dist: trusty
-    node_js:
-    - "10.9.0"
+    #node_js:
+    #- "10.9.0"
+    language: android
     jdk: oraclejdk8
     android:
       components:
