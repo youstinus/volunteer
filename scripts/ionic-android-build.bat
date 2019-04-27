@@ -1,10 +1,9 @@
 
 cd ionic-ui
 mkdir -p output
-yarn install
 
 set -e
-cordova platform add android --nofetch
+#cordova platform add android --nofetch
 
 ionic cordova build android
 

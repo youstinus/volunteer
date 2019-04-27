@@ -49,33 +49,20 @@ matrix:
 #    - "./scripts/ionic-publish-firebase.bat"
 
   -
-    #language: node_js
+    language: node_js
     dist: trusty
-    #node_js:
-    #- "10.9.0"
-    language: android
-    jdk: oraclejdk8
-    android:
-      components:
-      - tools
-      - platform-tools
-      - build-tools-26.0.0
-      - android-25
-      - extra-google-m2repository
-      - extra-android-m2repository # for design library      
-      - extra-google-google_play_services
-      - addon-google_apis-google-19 # google play services
+    node_js:
+    - "10.9.0"
 
     addons:
       apt:
         sources:
-        - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
-          key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        - ubuntu-toolchain-r-test
         packages:
-        - oracle-java8-installer
-        - oracle-java8-set-default
-        - yarn
-        - jq
+        - g++-4.8
+        - openjdk-8-jdk
+        - lib32stdc++6
+        - lib32z1
     licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
@@ -85,6 +72,8 @@ matrix:
     - export LANG=en_US.UTF-8
     - "./scripts/ionic-android-prebuild.bat"
     before_script:
+    - export ANDROID_HOME=$PWD/ionic-ui/android-sdk-linux
+    - export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/24.0.2
     #- export CHROME_BIN=/usr/bin/google-chrome
     #- export DISPLAY=:99.0
     #- sh -e /etc/init.d/xvfb start
