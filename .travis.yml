@@ -67,7 +67,7 @@ matrix:
       on:
         repo: youstinus/volunteer
         branch: deploy
-        #tags: true
+        tags: true
     
   -
     language: android
@@ -143,7 +143,7 @@ matrix:
       on:
         repo: youstinus/volunteer
         branch: deploy
-        #tags: true
+        tags: true
   -
     language: objective-c
     os: osx
@@ -174,12 +174,12 @@ matrix:
       file:
       #- "./ionic-ui/platforms/ios/build/emulator/Volun.app"
       #- "./ionic-ui/platforms/ios/build/emulator/volun-release-unsigned.app.tgz"      
-      - "./ionic-ui/output/volun-release.app.tgz"
+      - "./ionic-ui/output/volunteer-release-unsigned.app.tgz"
       skip_cleanup: true
       on:
         repo: youstinus/volunteer
         branch: deploy
-        #tags: true
+        tags: true
       
     #- cd ios
     #- xcodebuild -scheme PepperoniAppTemplate -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
