@@ -14,3 +14,7 @@ npm install node-sass@4.10.0 --no-save
 ng build --prod --base-href .
 
 tar -zcf ionic-ui.tar.gz ./www
+
+mkdir -p output
+
+cp ./ionic-ui.tar.gz ./output/volunteer-ui.tar.gz
