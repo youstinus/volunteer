@@ -1,5 +1,5 @@
 # Volunteering system
-[![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=master)](https://travis-ci.org/youstinus/volunteer)
+[![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=v1.0)](https://travis-ci.org/youstinus/volunteer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Prepare server   
