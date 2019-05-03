@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-about',
@@ -19,21 +20,21 @@ export class AboutPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
 
-    this.sources=
-    [
-      'https://www.gvi.co.uk/blog/17-excellent-reasons-to-volunteer/',
-      'https://buildabroad.org/2017/10/13/why-is-volunteering-important/',
-      'https://www.thebalancesmb.com/unexpected-benefits-of-volunteering-4132453'
-    ];
+    this.sources =
+      [
+        'https://www.gvi.co.uk/blog/17-excellent-reasons-to-volunteer/',
+        'https://buildabroad.org/2017/10/13/why-is-volunteering-important/',
+        'https://www.thebalancesmb.com/unexpected-benefits-of-volunteering-4132453'
+      ];
 
     this.commentForm = this.formBuilder.group({
       'email': [null, Validators.compose([
-        Validators.required ,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'text': [null, Validators.compose([
         Validators.required
@@ -41,9 +42,8 @@ export class AboutPage implements OnInit {
     });
   }
 
-  leaveComment(){
-    console.log(this.commentForm.value);
-    this.commentResult();
+  leaveComment() {
+    this.sendEmail();
   }
 
   async commentResult() {
@@ -58,12 +58,12 @@ export class AboutPage implements OnInit {
           handler: () => {
             // noreciau kad duomenys issitrintu?
             console.log('Confirm continue');
-            
+
             this.commentForm.setValue({
               'email': [null],
-              'text' : [null]
+              'text': [null]
             });
-            
+
           }
         }
       ]
@@ -71,8 +71,29 @@ export class AboutPage implements OnInit {
     await alert.present();
   }
 
-  onSourceClicked(source: string){
+  onSourceClicked(source: string) {
     window.open(source, '_system')
   }
 
+  sendEmail() {
+
+    let url = `https://us-central1-volunteer-ui.cloudfunctions.net/sendMail`
+
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    let params: object = {
+      to: 'volunteering.platypus@gmail.com',
+      subject: this.commentForm.value.email,
+      content: this.commentForm.value.text
+    };
+
+    return this.http.post(url, params, { headers: headers })
+      .toPromise()
+      .then(res => {
+        this.commentResult();
+      })
+      .catch(err => {
+        console.log(err) // error popup
+      })
+
+  }
 }
