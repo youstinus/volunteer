@@ -92,31 +92,35 @@ export class LoginPage implements OnInit {
                     }
                 }, {
                     text: 'Confirm',
-                    handler: async () => {
-                        const loader = await this.loadingCtrl.create({
-                            duration: 2000
-                        });
-                        
-                        //this.sendEmail();
-                        loader.present();
-                        loader.onWillDismiss().then(async l => {
-                            const toast = await this.toastCtrl.create({
-                                showCloseButton: true,
-                                message: 'Email was sent successfully.',
-                                duration: 3000,
-                                position: 'bottom'
-                            });
-
-                            toast.present();
-                        });
-                    },
-                    
-                }
+                    handler: (data) => {
+                        console.log(data.email);
+                        this.sendEmail(data.email);
+                        this.showAutoHideLoader();
+                      }
+                    }
             ]
         });
 
         await alert.present();
     }
+
+    showAutoHideLoader() {
+        this.loadingCtrl.create({
+          duration: 500
+        }).then((res) => {
+          res.present();
+  
+          res.onDidDismiss().then(async l =>  {
+            const toast = await this.toastCtrl.create({
+                showCloseButton: true,
+                message: 'Email was sent successfully.',
+                duration: 2000,
+                position: 'bottom'
+            });
+            toast.present();
+          });
+        });
+      }
 
     sendEmail(email: String) {
 
