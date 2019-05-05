@@ -46,15 +46,16 @@ export class ProjectEditPage implements OnInit {
     });
 
     this.onEditForm = this.formBuilder.group({
-      'imageUrl': [this.project.imageUrl, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])],
-      'title': [this.project.title, Validators.compose([
+      
+      'title': [/*this.project.title*/ null, Validators.compose([
       Validators.minLength(5),
         Validators.required
       ])],
-      'description': [this.project.description, Validators.compose([
+      'imageUrl': [this.project.imageUrl, Validators.compose([
+        /*   Validators.minLength(5),
+           Validators.required*/
+         ])],
+      'description': [null/*this.project.description*/, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
@@ -63,18 +64,18 @@ export class ProjectEditPage implements OnInit {
 
       'organizationId': this.usersService.getTokenId(),
 
-      'location': [this.project.location, Validators.compose([
+      'location': [/*this.project.location*/null, Validators.compose([
         Validators.required
       ])],
-      'website': [this.project.website, Validators.compose([
+      'website': [/*this.project.website*/null, Validators.compose([
         Validators.required,
        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
-      'email': [this.project.email, Validators.compose([
+      'email': [/*this.project.email*/null, Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      'phone': [this.project.phone, Validators.compose([
+      'phone': [null/*this.project.phone*/, Validators.compose([
         Validators.required,
         Validators.pattern('^[+0-9. ()-]*$')
       ])]

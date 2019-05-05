@@ -26,29 +26,29 @@
     <ion-card >
       <ion-item lines="">
         <ion-label color="primary" position="floating">Edit Title</ion-label>
-        <ion-input type="text" formControlName="title" value={{project.title}}></ion-input>
+        <ion-input type="text" formControlName="title" value={{project.title}} ></ion-input>
       </ion-item>
 
       <ion-item lines="">
         <ion-label color="primary" position="floating">Email</ion-label>
-        <ion-input type="text" formControlName="email" value={{project.email}}></ion-input>
+        <ion-input type="text" formControlName="email" value={{project.email}} ></ion-input>
       </ion-item>
 
       <ion-item lines="">
         <ion-label color="primary" position="floating">Phone</ion-label>
-        <ion-input type="text" formControlName="phone" value={{project.phone}}></ion-input>
+        <ion-input type="text" formControlName="phone" value={{project.phone}} ></ion-input>
       </ion-item>
 
       <ion-item lines="">
         <ion-label color="primary" position="floating">Website</ion-label>
-        <ion-input type="text" formControlName="website" value={{project.website}}></ion-input>
+        <ion-input type="text" formControlName="website" value={{project.website}} ></ion-input>
       </ion-item>
     </ion-card>
 
     <ion-card>
       <ion-item>
         <ion-label color="primary" position="floating">Edit Description</ion-label>
-        <ion-input type="text" formControlName="imageUrl" value={{project.title}} [hidden]="true"> </ion-input>
+        <ion-input autosize style=" height: 300px" formControlName="description" value={{project.description}} [hidden]="true"> </ion-input>
         <ion-textarea autosize style=" height: 300px" formControlName="description" value={{project.description}}>
         </ion-textarea>
       </ion-item>
