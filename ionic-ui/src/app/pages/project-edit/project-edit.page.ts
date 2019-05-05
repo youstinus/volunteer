@@ -59,8 +59,10 @@ export class ProjectEditPage implements OnInit {
         Validators.minLength(5),
         Validators.required
       ])],
-      'start':this.project.start,
-      'end': this.project.end,
+      'start':[null,Validators.compose([
+        Validators.required])],//this.project.start,
+      'end': [null,Validators.compose([
+        Validators.required])],//this.project.end,
 
       'organizationId': this.usersService.getTokenId(),
 
