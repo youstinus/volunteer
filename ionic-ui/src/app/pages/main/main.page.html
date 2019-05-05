@@ -1,32 +1,38 @@
 <app-header>Volunteering system</app-header>
 <ion-content padding>
+    <h1 class="logo">
+        <span class="word1">The</span>
+        <span class="word2">Platypus</span>
+    </h1>
+    &nbsp;
+    &nbsp;
     <!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"-->
-    <ion-img class="image"
-             src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg"
-    ></ion-img>
-
-    <ion-toolbar>
-        <ion-title>Upcoming Events</ion-title>
-    </ion-toolbar>
+    <img class="image"
+        src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
+    
+    <ion-title>Upcoming Events</ion-title>
 
     <ion-item-divider>
         <ion-item-group>
             <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
-                <ion-img src="{{ project.imageUrl }}"></ion-img>
+                <img class="img" src="{{ project.imageUrl }}" />
+
                 <ion-item>
                     <ion-icon name="calendar" slot="start"></ion-icon>
                     <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
                 </ion-item>
-                <ion-card-header>
-                    <ion-card-title>{{project.title}}</ion-card-title>
-                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-card-title>
+                        {{project.title}}
+                    </ion-card-title>
+                </ion-card-content>
+
             </ion-card>
         </ion-item-group>
     </ion-item-divider>
 
-    <ion-toolbar>
         <ion-title>Most wanted organizations</ion-title>
-    </ion-toolbar>
 
     <ion-item-divider>
         <ion-item-group>

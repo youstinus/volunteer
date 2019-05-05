@@ -7,16 +7,24 @@ ion-card {
   display: block;
   margin-left: 10px;
   margin-right: 10px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.185);
+  border-radius: 15px;
+  background-color: rgba(200, 233, 163, 0.322);
   cursor: pointer;
 }
 
 ion-content {
   display: inline-block;
-  --background: linear-gradient(40deg, rgba(255, 240, 242, 1) 0%, rgba(238, 251, 255, 1) 100%);
-
-  ion-card {
-    --background: linear-gradient(220deg, rgba(255, 227, 215, 1) 0%, rgba(208, 251, 255, 1) 100%);
-  }
+  //--background: linear-gradient(40deg, rgba(255, 240, 242, 1) 0%, rgba(238, 251, 255, 1) 100%);
+  --background: none;
+  background-image: url('/assets/background.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  //ion-card {
+ //   --background:linear-gradient(135deg,rgba(164, 244, 250, 0.589),rgba(149, 248, 166, 0.541));
+    //--background: linear-gradient(220deg, rgba(255, 227, 215, 1) 0%, rgba(208, 251, 255, 1) 100%);
+ // }
 }
 
 ion-card {
@@ -26,22 +34,100 @@ ion-card {
   }
 }
 
-ion-toolbar {
+ion-title{
+  margin: 1em 0 0.5em 0;
+	font-weight: 600;
+	font-family: 'Titillium Web', sans-serif;
+	position: relative;  
+	font-size: 170%;
+	line-height: 40px;
+	padding: 10px 15px 10px 10%;
+	color: #000000;
+	box-shadow: 
+		inset 0 0 0 1px rgba(62, 129, 53, 0.4), 
+		inset 0 0 5px rgba(53, 129, 76, 0.5),
+		inset -285px 0 35px rgba(255, 255, 255, 0.438);
+	border-radius: 0 20px 0 20px;
   text-align: center;
   max-width: 1320px;
+ // background-color: rgba(200, 233, 163, 0);
 }
 
-.image {
+.img{
+  max-height: 160px;
+  width: 100%;
+}
+
+.image{
+  z-index: 0;
+  width: 100%;
   max-width: 1320px;
+  border-radius: 15px;
+  //box-shadow: inset 0px 0px 40px 40px rgb(50, 219, 78);
+  /*Visas sitas paveiksliuka blurrina*/
+/* -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  filter: blur(20px);*/
 }
 
 ion-item-divider {
   padding: 0px;
-  --background: linear-gradient(45deg, rgba(255,183,183,1) 0%, rgba(138,164,255,1) 100%);
+  //--background: linear-gradient(45deg, rgba(255,183,183,1) 0%, rgba(138,164,255,1) 100%);
+  --background:linear-gradient(135deg,rgba(222, 238, 81, 0.589),rgba(167, 250, 164, 0.336));
   display: inline-block;
   max-width: 1320px;
+  border-radius: 20px;
 }
 
 ion-card-title {
   height: 80px;
 }
+
+.logo {
+  text-align: center;
+  font: 60px 'Arial Narrow', sans-serif;
+  font-weight: 150%;
+  color:black;
+  text-transform: uppercase;
+  letter-spacing: -4px;
+}
+.logo span {
+  position: relative;
+}
+.logo span:before,
+.logo span:after {
+  content: '';
+  position: absolute;
+  border-width: 22px;
+  border-style: solid;
+  border-color: transparent;
+  height: 3;
+  z-index: 10;
+}
+.logo .word1 {
+  color: #18cf00;
+  margin-right: -26px;
+  transform: rotateY(180deg);/* using Prefix free */
+  display: inline-block;/* required for transform */
+  z-index: 10;/* stack 1st word on top */
+}
+.logo .word1:after {
+  left: 14px;/* would be right, but we flipped the word */
+  bottom: -6px;
+  border-bottom-color: #0f350f;
+  border-left-color: #0f350f;/* would be right, but we flipped the word */
+}
+
+/* stuff for 2nd word */
+.logo .word2 {
+  z-index: 0;/* stack 2nd word below */
+}
+.logo .word2:before {
+  left: -4px;
+  top: -6px;
+  border-top-color: #0f350f;
+  border-left-color: #0f350f;
+}
+
