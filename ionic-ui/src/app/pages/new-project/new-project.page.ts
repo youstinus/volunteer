@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton } from '@ionic/angular';
+import { NavController, IonButton, AlertController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -21,7 +21,8 @@ export class NewProjectPage implements OnInit {
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
     public navCtrl: NavController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public alertCtrl: AlertController
   ) { }
 
   createProject: Project = new Project();
@@ -41,30 +42,28 @@ export class NewProjectPage implements OnInit {
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
         //Validators.minLength(5),
-       /* Validators.required*/
+        /* Validators.required*/
       ])],
       'title': [null, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
       'description': [null, Validators.compose([
-      //  Validators.minLength(5),
+        Validators.minLength(5),
         Validators.required
       ])],
       'start': [null, Validators.compose([
-       // Validators.minLength(5),
+        // Validators.minLength(5),
         Validators.required
       ])],
-      'end': [null, Validators.compose([
-        Validators.required
-      ])],
+      'end': [null, Validators.compose([])],
       'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
-        Validators.required
+        /*Validators.required*/
       ])],
       'website': [null, Validators.compose([
-        Validators.required,
-       Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+
+        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': ['', Validators.compose([
         Validators.required,
@@ -84,10 +83,19 @@ export class NewProjectPage implements OnInit {
       location.assign('projects/type/created');
     }, error1 => {
       console.log(error1);
+      this.NotCreated();
     });
   }
   getId() {
     const id = this.usersService.getTokenId();
     return id;
+  }
+  async NotCreated() {
+    const alert = await this.alertCtrl.create({
+      header: 'Project was not created',
+      message: 'Please, fill in empty gaps',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

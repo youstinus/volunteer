@@ -62,7 +62,7 @@ export class ProjectEditPage implements OnInit {
       'start':[null,Validators.compose([
         Validators.required])],//this.project.start,
       'end': [null,Validators.compose([
-        Validators.required])],//this.project.end,
+        ])],//this.project.end,
 
       'organizationId': this.usersService.getTokenId(),
 
@@ -70,10 +70,10 @@ export class ProjectEditPage implements OnInit {
         Validators.required
       ])],
       'website': [/*this.project.website*/null, Validators.compose([
-        Validators.required,
+       /* Validators.required,*/
        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
-      'email': [/*this.project.email*/null, Validators.compose([
+      'email': [/*this.project.email*/'', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
@@ -96,6 +96,7 @@ export class ProjectEditPage implements OnInit {
     location.assign('projects/type/created');
       console.log(value);
     }, error1 => {
+      this.NotEdited();
       console.log(error1);
     });
     
@@ -145,5 +146,13 @@ export class ProjectEditPage implements OnInit {
 
   load() {
     location.reload()
+  }
+  async NotEdited() {
+    const alert = await this.alertCtrl.create({
+      header: 'Project was not created',
+      message: 'Please, fill in empty gaps',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
