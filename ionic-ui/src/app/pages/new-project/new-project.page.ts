@@ -16,7 +16,6 @@ export class NewProjectPage implements OnInit {
   id: number;
   public onCreateForm: FormGroup;
   private role: number = 0;
-
   constructor(
     private usersService: UsersService,
     private projectsService: ProjectsService,
@@ -42,7 +41,7 @@ export class NewProjectPage implements OnInit {
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
         //Validators.minLength(5),
-        Validators.required
+       /* Validators.required*/
       ])],
       'title': [null, Validators.compose([
         Validators.minLength(5),
@@ -64,14 +63,16 @@ export class NewProjectPage implements OnInit {
         Validators.required
       ])],
       'website': [null, Validators.compose([
-        Validators.required
+        Validators.required,
+       Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'phone': [null, Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[+0-9. ()-]*$')
       ])],
     });
   }

@@ -23,7 +23,6 @@ export class ProjectEditPage implements OnInit {
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
   role: number = 1;
-
   constructor(private projectsService: ProjectsService,
     private location: Location,
     private route: ActivatedRoute,
@@ -36,9 +35,7 @@ export class ProjectEditPage implements OnInit {
   project: Project = new Project();
 
   ngOnInit() {
-
-   // location.reload();
-
+ 
     this.id = this.route.snapshot.params['id'];
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
@@ -54,7 +51,7 @@ export class ProjectEditPage implements OnInit {
         Validators.required
       ])],
       'title': [this.project.title, Validators.compose([
-        //Validators.minLength(5),
+        Validators.minLength(5),
         Validators.required
       ])],
       'description': [this.project.description, Validators.compose([
@@ -62,26 +59,28 @@ export class ProjectEditPage implements OnInit {
         Validators.required
       ])],
       'start': [this.project.start, Validators.compose([
-        //  Validators.minLength(5),
-        Validators.required
+       /*  Validators.required*/
       ])],
       'end': [this.project.end, Validators.compose([
-        Validators.required
+        /*Validators.required*/
       ])],
+
       'organizationId': this.usersService.getTokenId(),
 
       'location': [this.project.location, Validators.compose([
         Validators.required
       ])],
       'website': [this.project.website, Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': [this.project.email, Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
       'phone': [this.project.phone, Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[+0-9. ()-]*$')
       ])]
     });
   }
@@ -94,11 +93,11 @@ export class ProjectEditPage implements OnInit {
     console.log(this.onEditForm.value);
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       console.log(value);
-      location.assign('projects/type/created');
-      //this.navCtrl.navigateForward('projects/' + this.id).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
     });
+    
+    location.assign('projects/type/created');
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
@@ -107,7 +106,7 @@ export class ProjectEditPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-
+    this.navCtrl.navigateForward('projects/').catch(e => console.log(e));
   }
   onChangePic() {
     console.log();
