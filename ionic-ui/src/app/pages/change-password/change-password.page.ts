@@ -95,4 +95,8 @@ export class ChangePasswordPage implements OnInit {
     console.log(this.changePasswordForm.value);
   }
 
+  goBack(){
+    console.log('Navigate back to settings');
+    this.navCtrl.back;
+  }
 }
