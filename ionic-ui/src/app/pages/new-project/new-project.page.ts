@@ -81,10 +81,10 @@ export class NewProjectPage implements OnInit {
     this.projectsService.create(this.onCreateForm.value).subscribe(value => {
       console.log(value);
       this.createProject = value;
+      location.assign('projects/type/created');
     }, error1 => {
       console.log(error1);
     });
-    location.assign('projects/type/created');
   }
   getId() {
     const id = this.usersService.getTokenId();
