@@ -47,23 +47,19 @@ export class ProjectEditPage implements OnInit {
 
     this.onEditForm = this.formBuilder.group({
       'imageUrl': [this.project.imageUrl, Validators.compose([
-        //Validators.minLength(5),
-        Validators.required
-      ])],
-      'title': [this.project.title, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
-      'description': [this.project.description, Validators.compose([
-        //Validators.minLength(5),
+      'title': [this.project.title, Validators.compose([
+      Validators.minLength(5),
         Validators.required
       ])],
-      'start': [this.project.start, Validators.compose([
-       /*  Validators.required*/
+      'description': [this.project.description, Validators.compose([
+        Validators.minLength(5),
+        Validators.required
       ])],
-      'end': [this.project.end, Validators.compose([
-        /*Validators.required*/
-      ])],
+      'start':this.project.start,
+      'end': this.project.end,
 
       'organizationId': this.usersService.getTokenId(),
 
@@ -72,7 +68,7 @@ export class ProjectEditPage implements OnInit {
       ])],
       'website': [this.project.website, Validators.compose([
         Validators.required,
-        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+       Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': [this.project.email, Validators.compose([
         Validators.required,
@@ -92,12 +88,14 @@ export class ProjectEditPage implements OnInit {
   onSaved() {
     console.log(this.onEditForm.value);
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
+      
+    this.navCtrl.navigateForward('projects').catch(e => console.log(e));
+    location.assign('projects/type/created');
       console.log(value);
     }, error1 => {
       console.log(error1);
     });
     
-    location.assign('projects/type/created');
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
