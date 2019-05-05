@@ -10,6 +10,9 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 import { Volunteer } from 'src/app/models/Volunteer';
 import { Organization } from 'src/app/models/Organization';
 import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-utils';
+import { User } from 'src/app/models/User';
+import { userInfo } from 'os';
+import { OrganizationsService } from 'src/app/services/organizations.service';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -20,6 +23,7 @@ import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-
 
 export class ProjectPage implements OnInit {
 
+  user: User = new User();
   project: Project = new Project();
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
@@ -35,6 +39,7 @@ export class ProjectPage implements OnInit {
     private usersService: UsersService,
     private volunteersService: VolunteersService,
     private projectsService: ProjectsService,
+    private organizationService: OrganizationsService,
     private route: ActivatedRoute,
     public navCtrl: NavController
     //   private clipboard: Clipboard
@@ -103,10 +108,8 @@ export class ProjectPage implements OnInit {
       ionicButton.color = 'dark';
     else
       ionicButton.color = "success";
-    //console.log(ionicButton);
   }
 
-  //kas cia daryta?
   isSelected(event) {
     console.log(event);
     return 'primary';
@@ -135,7 +138,6 @@ export class ProjectPage implements OnInit {
     }
   }
 
-  //reiktu metodo cia to clipboard copy
   onPhoneClicked(phone: string) {
     document.addEventListener('copy', (e: ClipboardEvent) => {
       e.clipboardData.setData('text/plain', (phone));
@@ -154,7 +156,6 @@ export class ProjectPage implements OnInit {
     document.execCommand('copy');
   }
 
-  // kodel grazina undefined jei prisiloginus kaip volunteer
   addToSaveList() {
     //const userId = this.usersService.getTokenId();
     this.projectsService.addSavedProject(this.id).subscribe(value => {
@@ -162,9 +163,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-
-    //console.log('User id ' + userId + ' update to save list');
-    //console.log('Volunteer id '+this.volunteer.id);
   }
 
   removeFromSaveList() {
@@ -211,6 +209,16 @@ export class ProjectPage implements OnInit {
   setOrganization() {
     const userId = this.usersService.getTokenId();
     console.log('User id= ' + userId + ' ir sitoj vietoj man norisi gauti organizacija is backend');
+    this.user=this.usersService.getUser();
+    console.log(this.user);
+    console.log(this.user.organizationId);
+    this.organizationService.getById(userId).subscribe(value => {
+      this.organization = value;
+      console.log('Organizacija by user id');
+      console.log(value);
+    }, error1 => {
+      console.log(error1);
+    });
   }
 }
 

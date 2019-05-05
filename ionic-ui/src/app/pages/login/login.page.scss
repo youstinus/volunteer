@@ -14,14 +14,14 @@
     padding-right: 0.75em;
     border: 13px solid;
     border-radius: 25px;
-    border-color: rgba(34, 224, 65, 0.315);
+    border-color: rgba(27, 131, 44, 0.432);
  }
  .forLegend{
     font-size: 150%;
  } 
  
  .h2{
-    font-size: 200%;
+    font-size: 230%;
     font-weight: bold;
     font-variant: small-caps;
  }
@@ -44,11 +44,18 @@ ion-button{
 
 ion-content{
  // --ion-background-color:rgb(149, 248, 165);
-  --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165))
+//  --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165))
+  --background: none;
+  background-image: url('/assets/background.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 
 ion-text{
   --color: black;
+  font-size: 15px;
 }
 
 .error-message
@@ -65,5 +72,5 @@ ion-input{
 
 .auth-content {
   margin: auto;
-  max-width: 300px;
+  max-width: 400px;
 }

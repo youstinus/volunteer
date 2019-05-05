@@ -87,12 +87,11 @@
         <ion-card class="myCard">
           <ion-item lines="none">
             <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>
-              Project begins: <br>
-              {{project.start}}
-              <ion-label>
-                Project ends: <br>
-                {{project.end}}
+            <ion-label type="date" >
+              Project begins: {{project.start | date : 'yyyy-MM-dd'}} 
+              <ion-label type="date" >
+                Project ends: {{project.end | date : 'yyyy-MM-dd'}}
+               
               </ion-label>
             </ion-label>
           </ion-item>

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, EmailValidator } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/User';
 import { UserType } from '../../enums/UserType';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { async } from 'q';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginPage implements OnInit {
 
     public onLoginForm: FormGroup;
     private user: User;
-
+    private message: String;
     constructor(
         public navCtrl: NavController,
         public menuCtrl: MenuController,
@@ -23,7 +25,8 @@ export class LoginPage implements OnInit {
         public loadingCtrl: LoadingController,
         private formBuilder: FormBuilder,
         private usersService: UsersService,
-        public alertController: AlertController
+        public alertController: AlertController,
+        private http: HttpClient
     ) {
     }
 
@@ -61,12 +64,12 @@ export class LoginPage implements OnInit {
 
     async presentNotLoggedIn() {
         const alert = await this.alertController.create({
-          header: 'Something went wron',
-          message: 'Please, check your information ant try again or sing up if you are new here!',
-          buttons: ['OK']
+            header: 'Something went wron',
+            message: 'Please, check your information ant try again or sing up if you are new here!',
+            buttons: ['OK']
         });
         await alert.present();
-      }
+    }
 
     async forgotPass() {
         const alert = await this.alertCtrl.create({
@@ -93,7 +96,8 @@ export class LoginPage implements OnInit {
                         const loader = await this.loadingCtrl.create({
                             duration: 2000
                         });
-
+                        
+                        //this.sendEmail();
                         loader.present();
                         loader.onWillDismiss().then(async l => {
                             const toast = await this.toastCtrl.create({
@@ -105,12 +109,36 @@ export class LoginPage implements OnInit {
 
                             toast.present();
                         });
-                    }
+                    },
+                    
                 }
             ]
         });
 
         await alert.present();
+    }
+
+    sendEmail(email: String) {
+
+        let url = `https://us-central1-volunteer-ui.cloudfunctions.net/sendMail`
+        this.message = "Paspauskite sita nuoroda noredami atkurti slaptazodi";
+
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        let params: object = {
+            to: email,
+            subject: 'volunteering.platypus@gmail.com',
+            content: this.message
+        };
+
+        return this.http.post(url, params, { headers: headers })
+            .toPromise()
+            .then(res => {
+                this.forgotPass();
+            })
+            .catch(err => {
+                console.log(err) // error popup
+            })
+
     }
 
     goToRegister() {

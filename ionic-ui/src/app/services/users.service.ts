@@ -17,7 +17,7 @@ export class UsersService {
     private id: number;
     private helper = new JwtHelper();
 
-    constructor(private http: HttpClient, private usersService: UsersService, private cookieService: CookieService) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
     public getUserToken() {
@@ -105,7 +105,7 @@ export class UsersService {
 
     public getHeaders() {
         let auth_token = 'Bearer ';
-        let token = this.usersService.getToken();
+        let token = this.getToken();
         const cookieValue = this.cookieService.get('Bearer');
         token = cookieValue;
         if (token != null) {
