@@ -71,8 +71,29 @@ export class AboutPage implements OnInit {
     await alert.present();
   }
 
-  onSourceClicked(source: string) {
-    window.open(source, '_system')
+  async onSourceClicked(source: string) {
+    const alert = await this.alertCtrl.create({
+      header: '   Wisit?',
+      message: 'Click confirm if you want to navigate to this page in a new tab',
+      buttons: [
+          {
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                  console.log('Confirm Cancel');
+              }
+          }, {
+              text: 'Confirm',
+              handler: () => {
+                  console.log('Confirmed');
+                  window.open(source, '_system')
+                }
+              }
+      ]
+  });
+
+  await alert.present();
   }
 
   sendEmail() {

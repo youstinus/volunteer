@@ -12,11 +12,17 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.185);
 }
 ion-content{
-    //--background: radial-gradient(ellipse at top, rgb(95, 226, 95), transparent), radial-gradient(ellipse at bottom, #65c7ca,transparent);
-    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+//    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+    --background: none;
+    background-image: url('/assets/background1.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
+
 ion-card{
-    background-color: rgba(82, 226, 106, 0.171);
+    background-color: rgba(82, 226, 106, 0.596);
     border-radius: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -25,13 +31,14 @@ ion-card{
 ion-textarea{
     font-size: large;
 }
-
-.h2{
-    font-size: 200%;
-    font-weight: bold;
-    font-variant: small-caps;
- }
-
+ p { 
+    color: #000000; 
+    font-size: 25px; 
+    font-family: "Libre Baskerville", serif; 
+    line-height: 40px; 
+    text-shadow: 0 1px 1px #fff; 
+    padding-top: 20px; 
+}
  ion-item{
     --border-radius: 10px;
     --background-color: rgba(184, 236, 192, 0.767); 
@@ -51,4 +58,16 @@ ion-textarea{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+h1 { 
+    color: #080808; 
+    font-family: "Great Vibes", cursive; 
+    font-size: 300%;
+    line-height: 35px; 
+    font-weight: bold; 
+    margin-bottom: 25px; 
+    margin-top: 20px; 
+    text-align: center; 
+    text-shadow: 0 3px 3px rgb(34, 88, 57); 
 }
