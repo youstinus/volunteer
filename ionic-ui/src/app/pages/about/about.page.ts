@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 
 @Component({
   selector: 'app-about',
@@ -20,9 +21,18 @@ export class AboutPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private streamingMediaOriginal: StreamingMedia
   ) { }
+  startVideo(){
+   let options: StreamingVideoOptions = { 
+     successCallback: () => { console.log() },
+     errorCallback: () => {console.log() },
+     orientation: 'landscape'
+   }
+   this.streamingMediaOriginal.playVideo('https://drive.google.com/uc?authuser=0&id=1m1CcQUV15qzUJpdmG48rgsTMb-UKUjmN&export=download', options);
 
+  }
   ngOnInit() {
 
     this.sources =
