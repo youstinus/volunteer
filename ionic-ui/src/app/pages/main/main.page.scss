@@ -10,6 +10,8 @@ ion-card {
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.185);
   border-radius: 15px;
   background-color: rgba(200, 233, 163, 0.322);
+  font-family: "Georgia", serif;
+  font-weight: 250%;
   cursor: pointer;
 }
 
@@ -33,7 +35,20 @@ ion-card {
     width: 100%;
   }
 }
-
+h2 {
+	color: rgb(0, 0, 0);
+	font-family: 'Cormorant Garamond';
+	border-bottom: 3px solid #e66c7e;
+	font-size: 170%;
+	font-weight: 600;
+	line-height: 40px;
+	letter-spacing: 6px;
+	margin-bottom: 57px;
+	text-align: center;
+  text-indent: 20px;
+  padding: 10px 10px 10px 10%;
+	text-transform: uppercase;
+}
 ion-title{
   margin: 1em 0 0.5em 0;
 	font-weight: 600;
@@ -63,13 +78,6 @@ ion-title{
   width: 100%;
   max-width: 1320px;
   border-radius: 15px;
-  //box-shadow: inset 0px 0px 40px 40px rgb(50, 219, 78);
-  /*Visas sitas paveiksliuka blurrina*/
-/* -webkit-filter: blur(20px);
-  -moz-filter: blur(20px);
-  -o-filter: blur(20px);
-  -ms-filter: blur(20px);
-  filter: blur(20px);*/
 }
 
 ion-item-divider {
@@ -87,7 +95,7 @@ ion-card-title {
 
 .logo {
   text-align: center;
-  font: 60px 'Arial Narrow', sans-serif;
+  font: 56px 'Arial Narrow', sans-serif;
   font-weight: 150%;
   color:black;
   text-transform: uppercase;
@@ -100,7 +108,7 @@ ion-card-title {
 .logo span:after {
   content: '';
   position: absolute;
-  border-width: 22px;
+  border-width: 20px;
   border-style: solid;
   border-color: transparent;
   height: 3;
@@ -108,13 +116,13 @@ ion-card-title {
 }
 .logo .word1 {
   color: #18cf00;
-  margin-right: -26px;
+  margin-right: -20px;
   transform: rotateY(180deg);/* using Prefix free */
   display: inline-block;/* required for transform */
   z-index: 10;/* stack 1st word on top */
 }
 .logo .word1:after {
-  left: 14px;/* would be right, but we flipped the word */
+  left: 12px;/* would be right, but we flipped the word */
   bottom: -6px;
   border-bottom-color: #0f350f;
   border-left-color: #0f350f;/* would be right, but we flipped the word */
