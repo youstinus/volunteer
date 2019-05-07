@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelper } from '../utilities/JwtHelper';
 import { CookieService } from 'ngx-cookie-service';
 import SimpleCrypto from '../utilities/SimpleCrypto';
+//import SimpleCrypto from 'simple-crypto-js';
 
 @Injectable({
     providedIn: 'root'

@@ -13,7 +13,7 @@ export default class SimpleCrypto {
     this._iterations = 100;
   }
 
-  public static generateRandom(length: number = 128, expectsWordArray: boolean = false): string | CryptoJS.WordArray {
+  public static generateRandom(length: number = 128, expectsWordArray: boolean = false): string {
     const random = CryptoJS.lib.WordArray.random(length/8);
     return expectsWordArray ? random : random.toString();
   }
@@ -27,7 +27,7 @@ export default class SimpleCrypto {
       keySize: this._keySize / 32,
       iterations: this._iterations
     });
-    const initialVector: string = SimpleCrypto.generateRandom(128, true).toString();
+    const initialVector: string | CryptoJS.WordArray = SimpleCrypto.generateRandom(128, true);
     const encrypted: CryptoJS.WordArray = CryptoJS.AES.encrypt(string, key, {
       iv: initialVector,
       padding: CryptoJS.pad.Pkcs7,
