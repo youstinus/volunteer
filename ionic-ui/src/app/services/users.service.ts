@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelper } from '../utilities/JwtHelper';
 import { CookieService } from 'ngx-cookie-service';
+import * as CryptoJS from 'crypto-js';
+import SimpleCrypto from "simple-crypto-js";
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +18,8 @@ export class UsersService {
     private role: number;
     private id: number;
     private helper = new JwtHelper();
+    private secretPass = 's6v=e4d6%)2g.;5v/';
+    private simpleCrypto = new SimpleCrypto(this.secretPass);
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
@@ -117,5 +121,22 @@ export class UsersService {
             'Authorization': auth_token
         });
         return headers;
+    }
+
+    public decodeResetMail(encrypted: string) {
+        let message = atob(encrypted);
+        let decrypted = this.simpleCrypto.decrypt(message).toString(); // check date if valid        
+        return decrypted;
+    }
+
+    public encodeResetMail(email: string) {
+        let encrypted = this.simpleCrypto.encrypt(email).toString();
+        let message = btoa(encrypted); //todo insert date with duration
+        return message;
+    }
+
+    public updateByEmail(email: string, passwords: any): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.put<User>(`${this.api}/email/${email}`, {password: passwords.password, token: passwords.oldPassword}, { headers: headers });
     }
 }

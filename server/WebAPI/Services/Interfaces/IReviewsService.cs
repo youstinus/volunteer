@@ -1,4 +1,6 @@
-﻿using WebAPI.Base.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebAPI.Base.Interfaces;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
 
@@ -6,5 +8,6 @@ namespace WebAPI.Services.Interfaces
 {
     public interface IReviewsService : IBaseService<Review, ReviewDto>
     {
+        Task<ICollection<ReviewDto>> GetByOrganizationId(long id);
     }
 }

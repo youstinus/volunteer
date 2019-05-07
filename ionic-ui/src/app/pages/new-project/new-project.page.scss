@@ -65,10 +65,10 @@ ion-card2 {
     border-radius: 25px;
   
     background: #9152f8;
-    background: -webkit-linear-gradient(bottom, #7579ff, #b224ef);
-    background: -o-linear-gradient(bottom, #7579ff, #b224ef);
-    background: -moz-linear-gradient(bottom, #7579ff, #b224ef);
-    background: linear-gradient(bottom, #7579ff, #b224ef);
+    background: -webkit-linear-gradient(to top, #7579ff, #b224ef);
+    background: -o-linear-gradient(to top, #7579ff, #b224ef);
+    background: -moz-linear-gradient(to top, #7579ff, #b224ef);
+    background: linear-gradient(to top, #7579ff, #b224ef);
     position: relative;
     z-index: 1;
   

@@ -124,6 +124,21 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut("email/{email}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateByEmail([FromRoute]string email, [FromBody]UserDto userDto)
+        {
+            try
+            {
+                await _usersService.UpdateByEmail(email, userDto);
+                return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
         public override async Task<IActionResult> Delete([FromRoute]long id)
