@@ -90,3 +90,11 @@ ion-item-divider {
     margin-left: 5px;
     margin-right: 5px; 
 }
+
+.spin {
+    margin: auto;
+    top: 50%;
+    left: 47%;
+    position: absolute;
+    transform: scale(6, 6);
+  }

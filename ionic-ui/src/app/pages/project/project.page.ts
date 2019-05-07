@@ -200,6 +200,10 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
   }
+
+  goToProjects(){
+    this.navCtrl.pop();
+  }
 }
 
 

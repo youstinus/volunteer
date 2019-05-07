@@ -13,6 +13,7 @@ export class AboutPage implements OnInit {
 
   public commentForm: FormGroup;
   sources: string[];
+  public spin = true;
 
   constructor(
     public navCtrl: NavController,
@@ -50,6 +51,7 @@ export class AboutPage implements OnInit {
         Validators.required
       ])]
     });
+    this.spin=false;
   }
 
   leaveComment() {

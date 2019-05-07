@@ -98,8 +98,8 @@
 
     &nbsp;
     <ion-item lines="none">
-      <h3>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;{{project.description}} <br>
+      <h3 class="h3">
+        {{project.description}} <br>
       </h3>
     </ion-item>
   </ion-card>
@@ -139,5 +139,12 @@
 
   &nbsp;
   &nbsp;
-
+  <ion-item lines="none">
+    <ion-button ion-button color="dark" (click)="goToProjects()" slot="end">
+      <ion-icon name="arrow-round-back"></ion-icon>
+      Go back
+    </ion-button>
+  </ion-item>
+  &nbsp;
+  &nbsp;
 </ion-content>
