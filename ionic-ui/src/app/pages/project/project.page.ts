@@ -75,13 +75,15 @@ export class ProjectPage implements OnInit {
         this.setVolunteer();
         this.checkForProjects();
       }
-
-      //turim patikrinti ar projekta ziuri organizacija savininke
-      if (this.role == 3) {
-        this.setOrganization();
-        if (this.project.organizationId == this.organization.id) {
-          this.owner = true;
-        }
+      const userId = this.usersService.getTokenId();
+      if(userId == this.project.organizationId){
+        this.owner = true;
+        console.log('Savininkas');
+      } else {
+        this.owner = false;
+        console.log('Ne savininkas');
+        console.log( this.project.organizationId);
+        console.log( userId);
       }
     }, error1 => {
       console.log(error1);
@@ -206,7 +208,7 @@ export class ProjectPage implements OnInit {
     });
   }
 
-  setOrganization() {
+  /*setOrganization() {
     const userId = this.usersService.getTokenId();
     console.log('User id= ' + userId + ' ir sitoj vietoj man norisi gauti organizacija is backend');
     this.user=this.usersService.getUser();
@@ -219,7 +221,7 @@ export class ProjectPage implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-  }
+  }*/
 }
 
 
