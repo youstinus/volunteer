@@ -51,9 +51,9 @@ export class ProjectEditPage implements OnInit {
       Validators.minLength(5),
         Validators.required
       ])],
-      'imageUrl': [this.project.imageUrl, Validators.compose([
-        /*   Validators.minLength(5),
-           Validators.required*/
+      'imageUrl': [null, Validators.compose([
+           //Validators.minLength(5),
+           Validators.nullValidator
          ])],
       'description': [null/*this.project.description*/, Validators.compose([
         Validators.minLength(5),
@@ -62,6 +62,7 @@ export class ProjectEditPage implements OnInit {
       'start':[null,Validators.compose([
         Validators.required])],//this.project.start,
       'end': [null,Validators.compose([
+        Validators.required
         ])],//this.project.end,
 
       'organizationId': this.usersService.getTokenId(),

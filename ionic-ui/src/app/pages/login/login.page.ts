@@ -17,6 +17,8 @@ export class LoginPage implements OnInit {
     public onLoginForm: FormGroup;
     private user: User;
     private message: String;
+    can: boolean = true;
+
     constructor(
         public navCtrl: NavController,
         public menuCtrl: MenuController,
@@ -45,9 +47,7 @@ export class LoginPage implements OnInit {
 
     onSignIn() {
         this.usersService.login(this.onLoginForm.value).subscribe(user => {
-            // validate somehow
             this.user = user;
-
             // navigate to main page if user logged in. Should return User object with id, token and user type populated
             if (this.user != null && this.user.token != null) {
                 this.usersService.setUser(user);
@@ -72,55 +72,77 @@ export class LoginPage implements OnInit {
     }
 
     async forgotPass() {
-        const alert = await this.alertCtrl.create({
-            header: 'Forgot Password?',
-            message: 'Enter you email address to send a reset link password.',
-            inputs: [
-                {
-                    name: 'email',
-                    type: 'email',
-                    placeholder: 'Email'
-                }
-            ],
+        if (this.can) {
+            this.can = false;
+            const alert = await this.alertCtrl.create({
+                header: 'Forgot Password?',
+                message: 'Enter you email address to send a reset link password.',
+                inputs: [
+                    {
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'Email'
+                    }
+                ],
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                            this.can = true;
+                        }
+                    }, {
+                        text: 'Confirm',
+                        handler: (data) => {
+                            console.log(data.email);
+                            this.sendEmail(data.email);
+                        }
+                    }
+                ]
+            });
+            await alert.present();
+        }
+    }
+    async presentSToast() {
+        const toast = await this.toastCtrl.create({
+            message: 'Email has been sent.',
+            duration: 2000,
+            position: 'bottom',
+            color:'success',
+            translucent: true,
             buttons: [
                 {
-                    text: 'Cancel',
+                    text: 'Close',
                     role: 'cancel',
-                    cssClass: 'secondary',
                     handler: () => {
-                        console.log('Confirm Cancel');
+                        console.log('Cancel clicked');
                     }
-                }, {
-                    text: 'Confirm',
-                    handler: (data) => {
-                        console.log(data.email);
-                        this.sendEmail(data.email);
-                        this.showAutoHideLoader();
-                      }
-                    }
+                }
             ]
         });
-
-        await alert.present();
+        toast.present();
     }
-
-    showAutoHideLoader() {
-        this.loadingCtrl.create({
-          duration: 500
-        }).then((res) => {
-          res.present();
-  
-          res.onDidDismiss().then(async l =>  {
-            const toast = await this.toastCtrl.create({
-                showCloseButton: true,
-                message: 'Email was sent successfully.',
-                duration: 2000,
-                position: 'bottom'
-            });
-            toast.present();
-          });
+    async presentFToast() {
+        const toast = await this.toastCtrl.create({
+            message: 'Email has not sent.',
+            duration: 2000,
+            position: 'bottom',
+            color:'warning',
+            translucent: true,
+            buttons: [
+                {
+                    text: 'Close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
         });
-      }
+        toast.present();
+    }
 
     sendEmail(email: String) {
 
@@ -138,9 +160,13 @@ export class LoginPage implements OnInit {
             .toPromise()
             .then(res => {
                 this.forgotPass();
+                this.presentSToast();
+                this.can = true;
             })
             .catch(err => {
                 console.log(err) // error popup
+                this.presentFToast();
+                this.can = true;
             })
 
     }
