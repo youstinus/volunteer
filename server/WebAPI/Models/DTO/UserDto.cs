@@ -10,8 +10,7 @@ namespace WebAPI.Models.DTO
         public UserType Type { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
-
-        /*public long? VolunteerId { get; set; }
-        public long? OrganizationId { get; set; }*/
+        public long? VolunteerId { get; set; }
+        public long? OrganizationId { get; set; }
     }
 }

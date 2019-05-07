@@ -19,7 +19,6 @@ namespace WebAPI.Repositories
         protected override IQueryable<Project> IncludeDependencies(IQueryable<Project> queryable)
         {
             var dependencies = queryable
-                .Include(x => x.Organization)
                 .Include(x => x.Pictures)
                 .Include(x => x.ProjectVolunteers)
                 .ThenInclude(x => x.Volunteer)
