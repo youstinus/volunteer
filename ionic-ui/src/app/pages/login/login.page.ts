@@ -47,9 +47,7 @@ export class LoginPage implements OnInit {
 
     onSignIn() {
         this.usersService.login(this.onLoginForm.value).subscribe(user => {
-            // validate somehow
             this.user = user;
-
             // navigate to main page if user logged in. Should return User object with id, token and user type populated
             if (this.user != null && this.user.token != null) {
                 this.usersService.setUser(user);

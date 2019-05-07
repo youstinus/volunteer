@@ -81,9 +81,6 @@ export class ProjectPage implements OnInit {
         console.log('Savininkas');
       } else {
         this.owner = false;
-        console.log('Ne savininkas');
-        console.log( this.project.organizationId);
-        console.log( userId);
       }
     }, error1 => {
       console.log(error1);
@@ -173,8 +170,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-    //this.saved=false;
-    //console.log('Volunteer id ' + this.volunteer.id + ' remove from save list');
   }
 
   addToSelecteDProjectS() {
@@ -195,8 +190,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-    //this.selected=false;
-    //console.log('Volunteer id ' + this.volunteer.id + ' remove from selected list');
   }
 
   setVolunteer() {
@@ -207,21 +200,6 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
   }
-
-  /*setOrganization() {
-    const userId = this.usersService.getTokenId();
-    console.log('User id= ' + userId + ' ir sitoj vietoj man norisi gauti organizacija is backend');
-    this.user=this.usersService.getUser();
-    console.log(this.user);
-    console.log(this.user.organizationId);
-    this.organizationService.getById(userId).subscribe(value => {
-      this.organization = value;
-      console.log('Organizacija by user id');
-      console.log(value);
-    }, error1 => {
-      console.log(error1);
-    });
-  }*/
 }
 
 

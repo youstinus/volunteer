@@ -73,7 +73,7 @@ export class AboutPage implements OnInit {
 
   async onSourceClicked(source: string) {
     const alert = await this.alertCtrl.create({
-      header: '   Wisit?',
+      header: 'Want to know more?',
       message: 'Click confirm if you want to navigate to this page in a new tab',
       buttons: [
           {
