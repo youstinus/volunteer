@@ -5,8 +5,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelper } from '../utilities/JwtHelper';
 import { CookieService } from 'ngx-cookie-service';
-import * as CryptoJS from 'crypto-js';
-import SimpleCrypto from "simple-crypto-js";
+import SimpleCrypto from '../utilities/SimpleCrypto';
+//import SimpleCrypto from 'simple-crypto-js';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class UsersService {
     private role: number;
     private id: number;
     private helper = new JwtHelper();
-    private secretPass = 's6v=e4d6%)2g.;5v/';
+    private secretPass = 's6v=e4d6%)2g.;5v/'; // todo put to environment variables
     private simpleCrypto = new SimpleCrypto(this.secretPass);
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
