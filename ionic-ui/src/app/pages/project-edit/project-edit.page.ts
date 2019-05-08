@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Directive } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
@@ -94,7 +94,7 @@ export class ProjectEditPage implements OnInit {
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       
     this.navCtrl.navigateForward('projects').catch(e => console.log(e));
-    location.assign('projects/type/created');
+    // location.assign('projects/type/created');
       console.log(value);
     }, error1 => {
       this.NotEdited();
@@ -155,5 +155,32 @@ export class ProjectEditPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+  updateUrl(event)
+  {
+    this.project.imageUrl = Strings.Default_Image_Url;
+  }
+  updateIMG(searchValue : string)
+  {
+    this.project.imageUrl = searchValue;
+  }
+  onSearchChange(searchValue : string ) {
+    this.updateIMG(searchValue) ;
+  }
+
+}
+@Directive({
+  selector: 'img[default]',
+  host: {
+    '(error)':'updateUrl()',
+    '[src]':'src'
+   }
+})
+class DefaultImage {
+  @Input() src:string;
+  @Input() default:string;
+
+  updateUrl() {
+    this.src = this.default;
   }
 }
