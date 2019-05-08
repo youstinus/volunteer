@@ -20,8 +20,8 @@ export class CalendarPage implements OnInit {
   private subscription: Subscription;
   private type: String;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
-  
-  eventSource: {title: string,  startTime: Date,  endTime: Date, allDay: boolean }[] = [];
+
+  eventSource: { title: string, startTime: Date, endTime: Date, allDay: boolean }[] = [];
   constructor(private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
   ngOnInit() {
     /* this.resetEvent();*/
@@ -36,10 +36,7 @@ export class CalendarPage implements OnInit {
     mode: 'month',
     currentDate: new Date()
   }; // these are the variable used by the calendar.
-  loadEvents() {
-    //this.eventSource = this.createRandomEvents();
-    this.eventSource = this.loadexistingEvents1();
-  }
+  
   onViewTitleChanged(title) {
     this.viewTitle = title;
   }
@@ -71,58 +68,30 @@ export class CalendarPage implements OnInit {
     event.setHours(0, 0, 0, 0);
     this.isToday = today.getTime() === event.getTime();
   }
-  subscribeProjects(observable: Observable<Project[]>, ev) {
-    return observable.subscribe(items => {
-      this.projects = items.map(value => {
-        ev.push({
-          title: value.title,
-          startTime: value.start,//startTime,
-          endTime: value.end,
-          allDay: true
-        });
-        return value;
-      });
 
-    }, error1 => {
-      console.log(error1);
-    });
+  addDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() + days);
+    return date;
   }
-  loadexistingEvents1() {
-    var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true
-        });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        events.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false
-        });
-      }
-    }
-    return events;
+
+  onRangeChanged(ev) {
+    console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
+
+  markDisabled = (date: Date) => {
+    var current = new Date();
+    current.setHours(0, 0, 0);
+    return date < current;
+  };
+  back() {
+    var swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slidePrev();
+  }
+  next() {
+    var swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slideNext();
+  }
+
   loadexistingEvents() {
     this.projectsService.get().subscribe(items => {
       this.projects = items;
@@ -134,145 +103,52 @@ export class CalendarPage implements OnInit {
           allDay: true
         });
       });
-        this.myCal.loadEvents();
+      this.myCal.loadEvents();
     }, error1 => {
       console.log(error1);
     });
-    //-----------------------------------------------------------------------------
-
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        //  events.push({
-        //    title: 'All Day - ' + i,
-        //    startTime: startTime,
-        //    endTime: endTime,
-        //    allDay: true
-        //   });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        //events.push({
-        //title: 'Event - ' + i,
-        // startTime: startTime,
-        // endTime: endTime,
-        // allDay: false
-        // });
-      }
-
-    }
-    //return events;
   }
-    //-----------------------------------------------------------------------------
 
 
-    //return events;
-    //this.subscription = this.subscribeProjects(observable, events);
-    // this.subscription = this.projectsService.get().subscribe(items => {
-    //   this.projects = items.map(value => {
-    //     return value;
-    //   })
-    // });
-    //  console.log('PROJEKTO ILGIS: '+ this.projects[7].title);
-    // for (var i = 0; i < this.projects.length; i += 1) {
-
-    //   var date = new Date();
-    //   var startTime = this.projects[i].start;
-    //   var endTime = this.projects[i].end;
-
-    //   var eventType = Math.floor(Math.random() * 2);
-    //   var startDay = new Date(startTime.getTime());//Math.floor(Math.random() * 90) - 45;
-    //   var endDay = new Date(endTime.getTime() + startTime.getTime());
-
-    //   if (eventType === 0) {
-    //     startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay.getTime()));
-    //     if (endDay === startDay) {
-    //       endDay = this.addDays(endDay, 1);
-    //     }
-    //     endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay.getDate()));
-    //     events.push({
-    //       title: this.projects[i].title,
-    //       startTime: this.projects[i].start,//startTime,
-    //       endTime: this.projects[i].end,
-    //       allDay: true
-    //     });
-    //   } 
- //   return events;
-
- // }
+  //-----------------------------------------------------------------------------
 
 
-addDays(date: Date, days: number): Date {
-  date.setDate(date.getDate() + days);
-  return date;
-}
+  //return events;
+  //this.subscription = this.subscribeProjects(observable, events);
+  // this.subscription = this.projectsService.get().subscribe(items => {
+  //   this.projects = items.map(value => {
+  //     return value;
+  //   })
+  // });
+  //  console.log('PROJEKTO ILGIS: '+ this.projects[7].title);
+  // for (var i = 0; i < this.projects.length; i += 1) {
+
+  //   var date = new Date();
+  //   var startTime = this.projects[i].start;
+  //   var endTime = this.projects[i].end;
+
+  //   var eventType = Math.floor(Math.random() * 2);
+  //   var startDay = new Date(startTime.getTime());//Math.floor(Math.random() * 90) - 45;
+  //   var endDay = new Date(endTime.getTime() + startTime.getTime());
+
+  //   if (eventType === 0) {
+  //     startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay.getTime()));
+  //     if (endDay === startDay) {
+  //       endDay = this.addDays(endDay, 1);
+  //     }
+  //     endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay.getDate()));
+  //     events.push({
+  //       title: this.projects[i].title,
+  //       startTime: this.projects[i].start,//startTime,
+  //       endTime: this.projects[i].end,
+  //       allDay: true
+  //     });
+  //   } 
+  //   return events;
+
+  // }
 
 
-createRandomEvents() {
-  var events = [];
-  for (var i = 0; i < 50; i += 1) {
-    var date = new Date();
-    var eventType = Math.floor(Math.random() * 2);
-    var startDay = Math.floor(Math.random() * 90) - 45;
-    var endDay = Math.floor(Math.random() * 2) + startDay;
-    var startTime;
-    var endTime;
-    if (eventType === 0) {
-      startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-      if (endDay === startDay) {
-        endDay += 1;
-      }
-      endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-      events.push({
-        title: 'All Day - ' + i,
-        startTime: startTime,
-        endTime: endTime,
-        allDay: true
-      });
-    } else {
-      var startMinute = Math.floor(Math.random() * 24 * 60);
-      var endMinute = Math.floor(Math.random() * 180) + startMinute;
-      startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-      endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-      events.push({
-        title: 'Event - ' + i,
-        startTime: startTime,
-        endTime: endTime,
-        allDay: false
-      });
-    }
-  }
-  return events;
-}
-onRangeChanged(ev) {
-  console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
-}
-
-markDisabled = (date: Date) => {
-  var current = new Date();
-  current.setHours(0, 0, 0);
-  return date < current;
-};
-back() {
-  var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slidePrev();
-}
-next() {
-  var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slideNext();
-}
   // private subscription: Subscription;
   // projects: Project[];
   // projectsFiltered: Project[] = this.projects;
