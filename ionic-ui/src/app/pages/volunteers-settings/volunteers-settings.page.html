@@ -2,100 +2,61 @@
 
 <ion-content padding>
 
-    <ion-card>
-        <ion-card-header>
-            <img src='{{volunteer.imageUrl}}' style="height: 200px; width: 200px"/>
-            <ion-button  shape ="round" (click)="onChangePic()">Change picture </ion-button>
-        </ion-card-header>
+    <form [formGroup]="onSaveForm" class="list-form">
+        <ion-card>
+            <!--<img src='{{volunteer.imageUrl}}' style="height: 200px; width: 200px"/>
+            <ion-button  shape ="round" (click)="onChangePic()">Change picture </ion-button>-->
+            <ion-card-header>
+                <ion-label color="dark" position="floating">Your image url</ion-label>
+                <ion-input type="text" formControlName="imageUrl"></ion-input>
+            </ion-card-header>
 
+            <ion-card-content>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Name:
+                    </ion-label>
+                    <ion-input formControlName="firstName" clearInput value={{volunteer.firstName}}></ion-input>
+                </ion-item>
 
-        <ion-list>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Name:</h1>
-                        </ion-text>
-                    </div>
-                </ion-label>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Last Name:
+                    </ion-label>
+                    <ion-input formControlName="lastName" clearInput value={{volunteer.lastName}}></ion-input>
+                </ion-item>
 
-                <div class = input>
-                    <ion-input clearInput value= {{volunteer.firstName}} ></ion-input>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Phone:
+                    </ion-label>
+                    <ion-input formControlName="phone" clearInput value={{volunteer.phone}}></ion-input>
+                </ion-item>
 
-                </div>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Email:
+                    </ion-label>
+                    <ion-input clearInput formControlName="email" value={{volunteer.email}}></ion-input>
+                </ion-item>
 
-            </ion-item>
-
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Last Name:</h1>
-                        </ion-text>
-                    </div>
-                </ion-label>
-
-                <div class = input>
-                    <ion-input clearInput  value= {{volunteer.lastName}} ></ion-input>
-
-                </div>
-
-            </ion-item>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Phone:</h1>
-
-                        </ion-text>
-
-                    </div>
-
-
-                </ion-label>
-
-                <div class = input>
-                    <ion-input clearInput value= {{volunteer.phone}} ></ion-input>
-
-                </div>
-
-            </ion-item>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Email:</h1>
-
-                        </ion-text>
-                    </div>
-                </ion-label>
-                <div class = input>
-                    <ion-input clearInput value= {{volunteer.email}}></ion-input>
-
-                </div>
-
-            </ion-item>
-            <ion-item>
-                <ion-label>
-                    <ion-text>
+                <ion-item lines="none">
+                    <ion-label>
                         <h1>Description:</h1>
+                    </ion-label>
+                </ion-item>
+                <ion-textarea formControlName="description" value={{volunteer.description}}></ion-textarea>
 
-                    </ion-text>
+                <ion-item lines="none" [hidden]="true">
+                    <ion-input formControlName="userId" type="text"></ion-input>
+                </ion-item>
 
-                </ion-label>
+            </ion-card-content>
+        </ion-card>
 
-            </ion-item>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveVolunteer()">
+            Save changes
+        </ion-button>
 
-            <ion-textarea value= {{volunteer.description}} ></ion-textarea>
-        </ion-list>
-
-
-        <ion-card-content>
-            <ion-button color="primary" (click)="saveVolunteer()">Save changes</ion-button>
-        </ion-card-content>
-
-
-
-
-    </ion-card>
-
+    </form>
+</ion-content>
