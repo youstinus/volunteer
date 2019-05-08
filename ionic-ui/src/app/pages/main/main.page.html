@@ -18,7 +18,7 @@
 
                 <ion-item>
                     <ion-icon name="calendar" slot="start"></ion-icon>
-                    <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
+                    <ion-label>Starts: &nbsp;&nbsp;{{project.start | date : 'yyyy-MM-dd'}}</ion-label>
                 </ion-item>
 
                 <ion-card-content>
@@ -48,3 +48,4 @@
 
 </ion-content>
 
+<ion-spinner name="bubbles" class="spin" *ngIf="spin" color="secondary"></ion-spinner>

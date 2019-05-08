@@ -20,6 +20,8 @@ export class VolunteersPage implements OnInit {
   project: Project = Objects.Empty_Project; // Objects.Four_Test_Projects[1];
   //volunteers: Volunteer[] = [];//Objects.Empty_Volunteer_Arr;
   volunteers: Volunteer[] = [];
+  defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
+
   constructor(
     private organizationsService: VolunteersService,
     private route: ActivatedRoute,

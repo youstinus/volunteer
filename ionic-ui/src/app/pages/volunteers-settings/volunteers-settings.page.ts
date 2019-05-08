@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Volunteer} from '../../models/Volunteer';
-import {VolunteersService} from '../../services/volunteers.service';
-import {ActivatedRoute} from '@angular/router';
-import {User} from '../../models/User';
-import {UsersService} from '../../services/users.service';
-import {NavController} from '@ionic/angular';
-import {AlertController} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { Volunteer } from '../../models/Volunteer';
+import { VolunteersService } from '../../services/volunteers.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/User';
+import { UsersService } from '../../services/users.service';
+import { NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -18,6 +19,7 @@ export class VolunteersSettingsPage implements OnInit {
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
+    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
 
     constructor(
         private volunteersService: VolunteersService,
@@ -31,13 +33,13 @@ export class VolunteersSettingsPage implements OnInit {
     ngOnInit() {
         this.onSaveForm = this.formBuilder.group({
             'imageUrl': [null, Validators.nullValidator],
-            'firstName':[null, Validators.nullValidator],
+            'firstName': [null, Validators.nullValidator],
             'lastName': [null, Validators.nullValidator],
             'phone': [null, Validators.nullValidator],
             'email': [null, Validators.nullValidator],
             'description': [null, Validators.nullValidator],
-            'userId':this.usersService.getTokenId()
-          });
+            'userId': this.usersService.getTokenId()
+        });
         this.user = this.usersService.getTokenId();
         if (this.user === null) {
             this.navCtrl.navigateRoot('main').catch(e => console.log(e));
@@ -56,7 +58,7 @@ export class VolunteersSettingsPage implements OnInit {
 
     saveVolunteer() {
         console.log(this.onSaveForm.value);
-        this.volunteersService.update(this.volunteer.id,this.onSaveForm.value).subscribe(value => {
+        this.volunteersService.update(this.volunteer.id, this.onSaveForm.value).subscribe(value => {
             console.log('Volunteer was updated successfully');
             console.log(value);
 
@@ -87,7 +89,7 @@ export class VolunteersSettingsPage implements OnInit {
                     }
                 }
             ],
-            inputs : [
+            inputs: [
                 {
                     name: 'URL',
                     type: 'text',
@@ -97,5 +99,15 @@ export class VolunteersSettingsPage implements OnInit {
         });
 
         await alert.present();
+    }
+
+    onSearchChange(searchValue: string) {
+        this.updateIMG(searchValue);
+    }
+    updateIMG(searchValue: string) {
+        this.volunteer.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
+    }
+    updateUrl(event) {
+        this.volunteer.imageUrl = this.defaulUrl;
     }
 }

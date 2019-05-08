@@ -93,6 +93,14 @@ ion-card-title {
   height: 80px;
 }
 
+.spin {
+  margin: auto;
+  top: 50%;
+  left: 47%;
+  position: absolute;
+  transform: scale(6, 6);
+}
+
 .logo {
   text-align: center;
   font: 56px 'Arial Narrow', sans-serif;

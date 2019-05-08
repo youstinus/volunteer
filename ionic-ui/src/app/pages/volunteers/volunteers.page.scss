@@ -1,11 +1,17 @@
 ion-content{
-    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+    //--background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
+    display: inline-block;
+    --background: none;
+    background-image: url('/assets/background2.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 ion-item {
     //padding:20px;
-    --ion-background-color: rgba(107, 167, 127, 0.062);
-    background:  rgba(107, 167, 127, 0.062);
+    --background:  rgba(163, 219, 146, 0);
+    background: rgba(163, 219, 146, 0);
   }
   
 .ruondItem{
@@ -13,8 +19,10 @@ ion-item {
 }
 
 ion-list{
-    --ion-background-color: rgba(252, 252, 252, 0);
-    background:  rgba(255, 255, 255, 0);
+    --ion-background-color: rgba(163, 219, 146, 0.801);
+    background:  rgba(163, 219, 146, 0.801);
+    border-radius: 25px;
+    cursor: pointer;
 }
 
 div.a{
@@ -30,10 +38,6 @@ ion-img{
     width: 30%;
 }
 
-ion-list {
-    cursor: pointer;
-}
-
 .fieldset {
     display: block;
     margin-left: 10px;
@@ -42,22 +46,65 @@ ion-list {
     padding-bottom: 0.625em;
     padding-left: 0.75em;
     padding-right: 0.75em;
-    border: 13px solid;
+    border: 15px solid;
     border-radius: 25px;
-    border-color: rgba(130, 185, 139, 0.315);
- }
+    border-color: #197725;
+}
+
  .forLegend{
     font-size: 150%;
  } 
- 
- .h2{
-    font-size: 200%;
-    font-weight: bold;
-    font-variant: all-petite-caps;
- }
+
 
  .h1{
-    font-size: 200%;
-    font-weight: bold;
-    font-variant-caps: titling-caps;
+    color: rgb(0, 0, 0);
+    font-family: 'Cormorant Garamond';
+    border-bottom: 5px solid #197725;
+    font-size: 160%;
+    font-weight: 600;
+    line-height: 35px;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px 10px 10px 10%;
+    text-transform: uppercase;
  }
+
+ .h2{
+    color: rgb(0, 0, 0);
+    font-family: 'Cormorant Garamond';
+    font-size: 140%;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px 10px 10px 10%;
+    text-transform: uppercase;
+ }
+
+ p { 
+    color: #000000; 
+    font-size: 25px; 
+    font-family: "Libre Baskerville", serif; 
+    line-height: 40px; 
+    text-shadow: 0 1px 1px #fff; 
+    padding-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-indent: 20px;
+}
+
+ion-item-divider {
+    padding: 0px;
+    --background:linear-gradient(135deg,rgba(163, 219, 146, 0.801),rgba(146, 230, 158, 0.705));
+    display: inline-block;
+    max-width: 1320px;
+    border-radius: 20px;
+    margin-bottom: 5px; 
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px; 
+}

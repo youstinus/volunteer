@@ -1,5 +1,6 @@
 ion-toolbar {
    text-align: left;
+   color: black;
 }
 
 ion-header.header-md ion-toolbar:first-child {
@@ -7,10 +8,6 @@ ion-header.header-md ion-toolbar:first-child {
 }
 
 ion-toolbar {
-
-   //--background: linear-gradient(to right, rgba(255,237,227,1) 0%,rgba(255,227,211,1) 18%,rgba(255,227,211,1) 37%,rgba(255,209,183,1) 56%,rgba(255,189,151,1) 74%);
-   //background: rgb(221,255,168);
-   //--background: linear-gradient(45deg, rgba(221,255,168,1) 0%, rgba(200,170,255,1) 100%);
-   --background: linear-gradient(45deg, rgba(239,255,212,1) 0%, rgba(226,210,255,1) 100%);
-   background: linear-gradient(45deg, rgba(239,255,212,1) 0%, rgba(226,210,255,1) 100%);
+   --background: linear-gradient(45deg, #61bd86, #10dc60,);
+   background: linear-gradient(45deg, #61bd86,#10dc60);
 }

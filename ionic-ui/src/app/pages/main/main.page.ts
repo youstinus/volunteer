@@ -18,6 +18,7 @@ export class MainPage implements OnInit {
     private organizations: Organization[];
     public threeProjects: Project[];
     public threeOrganizations: Organization[];
+    public spin = false;
 
     constructor(
         private navCtrl: NavController,
@@ -42,6 +43,7 @@ export class MainPage implements OnInit {
             this.filterNewProjects();
         }, error1 => {
             console.log(error1);
+            this.spin=false;
         });
     }
 
@@ -55,8 +57,10 @@ export class MainPage implements OnInit {
                 return value;
             });
             this.filterNewOrganizations();
+            this.spin=false;
         }, error1 => {
             console.log(error1);
+            this.spin=false;
         });
     }
 
