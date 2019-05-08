@@ -19,7 +19,7 @@
 
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
+            <ion-label>{{project.start | date : 'yyyy-MM-dd HH:mm'}}</ion-label>
         </ion-item>
 
         <ion-card-content>
