@@ -13,6 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProjectsPage implements OnInit, OnDestroy {
 
+    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
     public spin = true;
     public searchTerm = '';
     public archive = false;
@@ -21,7 +22,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
     private dateNow = new Date();
     private type: String;
     private subscription: Subscription;
-
     constructor(private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
     }
 
@@ -118,5 +118,9 @@ export class ProjectsPage implements OnInit, OnDestroy {
 
     checkDate(project: Project) {
         return project.end >= this.dateNow && project.start <= this.dateNow;
+    }
+
+    updateUrl(project: Project) {
+        project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
     }
 }

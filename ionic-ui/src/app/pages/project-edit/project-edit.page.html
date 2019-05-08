@@ -5,25 +5,18 @@
     <ion-card lines="none">
 
       &nbsp;
-      <!-- <div *ngIf="role==0"> -->
-    
-
-      <!-- <div *ngIf="role==1"> -->
       <div>
         <ion-item lines="none">
           <img [src]="project.imageUrl" (error)="updateUrl($event)" class="center"
             style="height: 200px; width: 400px" />
         </ion-item>
         <div>
-            <ion-item lines="none">
-              <ion-label color="primary" position="floating">Project image</ion-label>
-              <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)" formControlName="imageUrl"></ion-input>
-            </ion-item>
-          </div>
-        <!-- <ion-input type="text" formControlName="imageUrl" [hidden]='true' value={{project.imageUrl}}></ion-input> -->
-        <!-- <ion-item lines="none">
-          <ion-button class="center" expand="block" shape="round" (click)="onChangePic()">Change picture </ion-button>
-        </ion-item> -->
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">Project image</ion-label>
+            <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)"
+              formControlName="imageUrl"></ion-input>
+          </ion-item>
+        </div>
       </div>
     </ion-card>
     <ion-card>
@@ -83,9 +76,6 @@
       <ion-input formControlName="organizationId" type="text"></ion-input>
     </ion-item>
   </form>
-
-
-
   <ion-button class="submit-btn" expand="block" type="submit" (click)='onSaved()'>Save</ion-button>
   <ion-item lines="none"></ion-item>
   <ion-button class="submit-btn" expand="block" color="dark" type="submit" (click)='Delete()'>Delete</ion-button>
