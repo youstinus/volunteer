@@ -76,7 +76,7 @@ export class ProjectPage implements OnInit {
         this.checkForProjects();
       }
       const userId = this.usersService.getTokenId();
-      if(userId == this.project.organizationId){
+      if (userId == this.project.organizationId) {
         this.owner = true;
         console.log('Savininkas');
       } else {
@@ -200,8 +200,10 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
   }
-
-  goToProjects(){
+  updateUrl(event) {
+    this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+  }
+  goToProjects() {
     this.navCtrl.pop();
   }
 }

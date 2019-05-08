@@ -1,9 +1,15 @@
-
 <app-header>Projects Calendar</app-header>
 
 <ion-content>
-  <!-- Card for adding a new event -->
-  <ion-card>
+    <ion-card> <ion-buttons end>
+    <button ion-button [disabled]="isToday" (click)="today()">Today</button>
+    <button ion-button (click)="changeMode('month')">M</button>
+    <button ion-button (click)="changeMode('week')">W</button>
+    <button ion-button (click)="changeMode('day')">D</button>
+    <button ion-button (click)="loadEvents()">Load Events</button>
+  </ion-buttons></ion-card>
+<!-- Card for adding a new event -->
+<!-- <ion-card>
     <ion-card-header tappable (click)="collapseCard = !collapseCard">
       <ion-card-title>New Project</ion-card-title>
     </ion-card-header>
@@ -32,45 +38,50 @@
       <ion-button fill="outline" expand="block" (click)="addEvent()" [disabled]="event.title == ''">Add Event
       </ion-button>
 
-    </ion-card-content>
+    </ion-card-content> -->
 
-  </ion-card>
+<!-- </ion-card> -->
 
-  <ion-card>
+<ion-card>
 
-    <ion-card-header>
-      <ion-card-title> {{ viewTitle }}</ion-card-title>
+  <ion-card-header>
+    <ion-card-title> {{ viewTitle }}</ion-card-title>
 
-    </ion-card-header>
+  </ion-card-header>
 
-  </ion-card>
-  <ion-row>
+</ion-card>
+<ion-row>
 
-    <!-- Move back one screen of the slides -->
-    <ion-col size="5" text-left>
-      <ion-button fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
+  <!-- Move back one screen of the slides -->
+  <ion-col size="5" text-left>
+    <ion-button fill="clear" (click)="back()">
+      <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-col>
 
-    <ion-col size="5" text-center>
-      <ion-buttons>
-        <ion-button (click)="today()">Today</ion-button>
-      </ion-buttons>
-    </ion-col>
+  <ion-col size="5" text-center>
+    <ion-buttons>
+      <ion-button (click)="today()">Today</ion-button>
+    </ion-buttons>
+  </ion-col>
 
-    <!-- Move forward one screen of the slides -->
-    <ion-col size="2" text-right>
-      <ion-button fill="clear" (click)="next()">
-        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
+  <!-- Move forward one screen of the slides -->
+  <ion-col size="2" text-right>
+    <ion-button fill="clear" (click)="next()">
+      <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+<ion-content class="has-header">
   <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+    (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+  </calendar>
+</ion-content>
+<!-- <calendar  [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
     (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
     (onTimeSelected)="onTimeSelected($event)" startHour="6" endHour="20" step="30" startingDayWeek="1">
-  </calendar>
+  </calendar> -->
 
 
 
