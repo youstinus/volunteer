@@ -19,16 +19,17 @@ export class CalendarPage implements OnInit {
   events3: Project[];
   private subscription: Subscription;
   private type: String;
+  @ViewChild(CalendarComponent) myCal: CalendarComponent;
   
+  eventSource: {title: string,  startTime: Date,  endTime: Date, allDay: boolean }[] = [];
   constructor(private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
   ngOnInit() {
     /* this.resetEvent();*/
     this.type = this.route.snapshot.params['type'];
     // this.loadItemsByType();
-    this.loadEvents();
-    //this.eventSource = this.loadexistingEvents();
+    //this.loadEvents();
+    this.loadexistingEvents();
   }
-  eventSource;
   viewTitle;
   isToday: boolean;
   calendar = {
@@ -123,23 +124,17 @@ export class CalendarPage implements OnInit {
     return events;
   }
   loadexistingEvents() {
-    let observable: Observable<Project[]>;
-    observable = this.projectsService.get();
-    var events = [];
-    var events1 = [];
-
-    observable = this.projectsService.get();
-    observable.subscribe(items => {
-      this.projects = items.map(value => {
-        console.log(value.end);
-        events.push({
+    this.projectsService.get().subscribe(items => {
+      this.projects = items;
+      items.forEach(value => {
+        this.eventSource.push({
           title: value.title,
-          startTime: value.start,
-          endTime: value.end,
+          startTime: new Date(value.start),
+          endTime: new Date(value.end),
           allDay: true
         });
-        return value;
       });
+        this.myCal.loadEvents();
     }, error1 => {
       console.log(error1);
     });
@@ -178,7 +173,7 @@ export class CalendarPage implements OnInit {
       }
 
     }
-    return events;
+    //return events;
   }
     //-----------------------------------------------------------------------------
 

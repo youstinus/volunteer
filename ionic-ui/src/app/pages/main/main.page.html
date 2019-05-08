@@ -1,5 +1,5 @@
 <app-header>Volunteering system</app-header>
-<ion-content padding>
+<ion-content padding class="bodis">
     <h1 class="logo">
         <span class="word1">The</span>
         <span class="word2">Platypus</span>
@@ -13,7 +13,7 @@
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
+            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)" style="text-align: center;">
                 <img class="img" src="{{ project.imageUrl }}" />
 
                 <ion-item>
@@ -35,7 +35,7 @@
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)">
+            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)" style="text-align: center;">
                 <ion-img src="{{ organization.imageUrl }}"></ion-img>
                 <ion-card-header>
                     <ion-card-title>{{organization.title}}</ion-card-title>

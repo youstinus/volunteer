@@ -3,8 +3,7 @@ ion-card {
   max-width: 310px;
   min-width: 310px;
   min-height: 300px;
-  float: left;
-  display: block;
+  display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.185);
@@ -106,4 +105,8 @@ h1 {
     //  -28px 56px 1px #e4e3e2;
   }
  
+}
+
+.bodis {
+  text-align: center;
 }
