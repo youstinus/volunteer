@@ -18,7 +18,7 @@
       </legend>
 
     <!-- Register form -->
-    <form [formGroup]="onRegisterForm" class="list-form">
+    <form [formGroup]="onRegisterForm" class="list-form" (keyup.enter)="signUp()">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="person" item-start></ion-icon>

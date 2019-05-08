@@ -16,7 +16,7 @@
        <strong> Log in </strong>
     </legend>
     <!-- Login form -->
-    <form [formGroup]="onLoginForm" class="list-form">
+    <form [formGroup]="onLoginForm" class="list-form" (keyup.enter)="onSignIn()">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="person" item-start></ion-icon>

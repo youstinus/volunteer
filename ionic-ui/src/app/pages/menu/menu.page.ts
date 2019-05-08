@@ -20,30 +20,6 @@ export class MenuPage implements OnInit {
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: 'Login',
-            url: '/login',
-            icon: 'log-in',
-            roles: [4]
-        },
-        {
-            title: 'Registration',
-            url: '/registration',
-            icon: 'finger-print',
-            roles: [4] //list-box
-        },        
-        {
-            title: 'Settings',
-            url: '/volunteers-settings',
-            icon: 'settings',
-            roles: [2]
-        },        
-        {
-            title: 'Settings',
-            url: '/organizations-settings',
-            icon: 'settings',
-            roles: [3]
-        },
-        {
             title: 'Organizations',
             url: '/organizations',
             icon: 'briefcase',
@@ -96,6 +72,30 @@ export class MenuPage implements OnInit {
             url: '/privacy',
             icon: 'at',
             roles: [0, 1, 2, 3, 4]
+        },
+        {
+            title: 'Login',
+            url: '/login',
+            icon: 'log-in',
+            roles: [4]
+        },
+        {
+            title: 'Registration',
+            url: '/registration',
+            icon: 'finger-print',
+            roles: [4] //list-box
+        },        
+        {
+            title: 'Settings',
+            url: '/volunteers-settings',
+            icon: 'settings',
+            roles: [2]
+        },        
+        {
+            title: 'Settings',
+            url: '/organizations-settings',
+            icon: 'settings',
+            roles: [3]
         }
     ];
 
@@ -136,8 +136,11 @@ export class MenuPage implements OnInit {
     }
 
     logout() {
+        console.log('logged out');
         this.usersService.logout();
         this.getRole();
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error rerouting menu'));
+        //this.usersService.logout();
+        //location.reload();
     }
 }
