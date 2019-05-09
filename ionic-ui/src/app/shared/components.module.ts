@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {IonicModule} from '@ionic/angular';
-import {HeaderPage} from '../pages/header/header.page';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { HeaderPage } from '../pages/header/header.page';
 import { SafePipe } from './safe.pipe';
 
 @NgModule({
@@ -12,4 +12,4 @@ import { SafePipe } from './safe.pipe';
     declarations: [HeaderPage, SafePipe],
     exports: [HeaderPage, SafePipe]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }
