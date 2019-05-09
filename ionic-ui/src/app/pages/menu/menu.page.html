@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="success">
         <ion-title>
-          <ion-text color="dark"><strong>Menu</strong></ion-text>
+          <ion-text color="dark"><strong>{{menuMenu}}</strong></ion-text>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -16,8 +16,8 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-item lines="full" tappable routerLink="main" routerDirection="root" *ngIf="checkLogout()" (click)="logout()">
-          <ion-icon name="log-out" slot="start">Logout</ion-icon>
-          <ion-label>Logout</ion-label>
+          <ion-icon name="log-out" slot="start">{{menuLogout}}</ion-icon>
+          <ion-label>{{menuLogout}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
