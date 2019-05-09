@@ -205,6 +205,7 @@ export class ProjectPage implements OnInit {
   }
   goToProjects() {
     this.navCtrl.pop();
+//    this.navCtrl.back();
   }
 }
 

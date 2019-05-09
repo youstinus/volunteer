@@ -8,35 +8,58 @@
 
 <ion-content>
   <ion-card>
-    <img class="img" src="{{volPic }}">
-      <ion-card-header>
-          <ion-card-title class="label">Contact information:           
-          </ion-card-title>
-      </ion-card-header>
-      <ion-item lines="none">
-          <h4>
-            <ion-icon name="phone-portrait"></ion-icon>
-            {{volphone}}
-          </h4>
-      </ion-item>
-      
-      <ion-item>
-          <h4>
-            <ion-icon name="mail-open"></ion-icon>
-            {{volemail}}
-          </h4>
-      </ion-item>
+      <div *ngIf="volPic==null">
+            <img src="{{ defaulUrl }}">
+        </div>
+        <div *ngIf="volPic!=null">
+            <img src="{{volPic }}">
+        </div>
+    <ion-card-header>
+      <ion-card-title class="label">Contact information:
+      </ion-card-title>
+    </ion-card-header>
+    <ion-item lines="none">
+      <div *ngIf="volphone==null">
+        <h4>
+          <ion-icon name="phone-portrait"></ion-icon>
+          None
+        </h4>
+      </div>
+      <div *ngIf="volphone!=null">
+        <h4>
+          <ion-icon name="phone-portrait"></ion-icon>
+          {{volphone}}
+        </h4>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div *ngIf="volemail==null">
+        <h4>
+          <ion-icon name="mail-open"></ion-icon>
+          None
+        </h4>
+      </div>
+      <div *ngIf="volemail!=null">
+        <h4>
+          <ion-icon name="mail-open"></ion-icon>
+          {{volemail}}
+        </h4>
+      </div>
+    </ion-item>
 
     <ion-card>
-        <ion-card-header>
-            <ion-card-title class="label">Description about activities:           
-            </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            {{voldescrip}}
-        </ion-card-content>
+      <ion-card-header>
+        <ion-card-title class="label">Description about activities:
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{voldescrip}}
+      </ion-card-content>
     </ion-card>
-  
+
   </ion-card>
 </ion-content>
-<footer><ion-button (click)="closeModal()" >Close </ion-button></footer>
+<footer>
+  <ion-button (click)="closeModal()">Close </ion-button>
+</footer>
