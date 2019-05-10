@@ -6,6 +6,7 @@ import {Objects} from '../../constants/Objects';
 import {Strings} from '../../constants/Strings';
 import {ProjectsService} from '../../services/projects.service';
 import {OrganizationsService} from '../../services/organizations.service';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
     selector: 'app-main',
@@ -13,6 +14,10 @@ import {OrganizationsService} from '../../services/organizations.service';
     styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
+
+    mainTitle: string = Language.Lang.mainTitle;
+    mainEvents: string = Language.Lang.mainEvents;
+    mainWantedOrganizations: string = Language.Lang.mainWantedOrganizations;
 
     private projects: Project[];
     private organizations: Organization[];
