@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-about',
@@ -10,6 +11,25 @@ import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-m
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
+
+  menuAboutUs:string=Language.Lang.menuAboutUs;
+  aboutTitle: string=Language.Lang.aboutTitle;
+  aboutTitle2: string=Language.Lang.aboutTitle2;
+  aboutParag1: string=Language.Lang.aboutParag1;
+  aboutParag2: string=Language.Lang.aboutParag2;
+  aboutParag3: string=Language.Lang.aboutParag3;
+  aboutParag4: string=Language.Lang.aboutParag4;
+  aboutParag5: string=Language.Lang.aboutParag5;
+  aboutParag6: string=Language.Lang.aboutParag6;
+  aboutVisit: string=Language.Lang.aboutVisit;
+  aboutOpinion: string=Language.Lang.aboutOpinion;
+  aboutButtonComment: string=Language.Lang.aboutButtonComment;
+  aboutButtonVideo: string=Language.Lang.aboutButtonVideo;
+  aboutEnterEmail: string=Language.Lang.aboutEnterEmail;
+  aboutFeelFree: string=Language.Lang.aboutFeelFree;
+  aboutComment: string=Language.Lang.aboutComment;
+  aboutRequired: string=Language.Lang.aboutRequired;
+
 
   public commentForm: FormGroup;
   sources: string[];
@@ -60,8 +80,8 @@ export class AboutPage implements OnInit {
 
   async commentResult() {
     const alert = await this.alertCtrl.create({
-      header: 'Thank you',
-      message: 'Your email has been submited',
+      header: Language.Lang.aboutAlertCommentHeader,
+      message: Language.Lang.aboutAlertCommentMessage,
       buttons: [
         {
           text: 'Continue',
@@ -85,18 +105,18 @@ export class AboutPage implements OnInit {
 
   async onSourceClicked(source: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Want to know more?',
-      message: 'Click confirm if you want to navigate to this page in a new tab',
+      header: Language.Lang.aboutSourceHeader,
+      message: Language.Lang.aboutSourceMessage,
       buttons: [
           {
-              text: 'Cancel',
+              text: Language.Lang.alertCancel,
               role: 'cancel',
               cssClass: 'secondary',
               handler: () => {
                   console.log('Confirm Cancel');
               }
           }, {
-              text: 'Confirm',
+              text: Language.Lang.alertConfirm,
               handler: () => {
                   console.log('Confirmed');
                   window.open(source, '_system')

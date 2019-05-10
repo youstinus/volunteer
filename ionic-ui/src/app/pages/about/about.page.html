@@ -1,25 +1,24 @@
-<app-header>About us</app-header>
+<app-header>{{menuAboutUs}}</app-header>
 <!--Inspired by legacy of John F. Kennedy, Robert Kennedy and       Ted Kennedy InTheKennedyFootsteps offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities.-->
 <ion-content padding>
     <div padding-horizontal text-center>
       <div class="logo"></div>
       <h1>
-        Shortly about us
+        {{aboutTitle}}
       </h1>
     </div>
     <div>
       <ion-button icon-left size="medium" expand="full" shape="round" color="dark"(click)="startVideo()" tappable>
-        Watch video
+        {{aboutButtonVideo}}
         <ion-icon name="arrow-dropright-circle"></ion-icon>
       </ion-button>
   </div>
     <ion-item-divider>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Platypus offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities.
-      We hope:<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; give something back to an organisation that has impacted on a person's life, either directly or indirectly<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; make a difference to the lives of others<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; help the environment<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; help others less fortunate or without a voice feel valued and part of a team</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{aboutParag1}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag2}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag3}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag4}}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag5}}</p>
   </ion-item-divider>
     <ion-img class="img" src="https://broadviewthomsonpta.com/wp-content/uploads/2018/06/Volunteer.png">
     </ion-img>
@@ -27,19 +26,16 @@
     <div padding-horizontal text-center>
       <div class="logo"></div>
       <h1>
-        Why?
+        {{aboutTitle2}}
       </h1>
     </div>
     <ion-item-divider>
-      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; When you look at the reasons why volunteering is important, it’s not only about the 
-        impacts we can make in the lives of those less fortunate but 
-        the role it can play in <strong> making us more tolerant individuals</strong>  and giving towards the global community. 
-        <strong>Each of us</strong>  should be willing to offer our own time and expect nothing in return.</p>
+      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; {{aboutParag6}}</p>
     </ion-item-divider>
         &nbsp;
     <ion-card>
         <ion-card-header>
-            <ion-card-title class="label">Visit and find out more
+            <ion-card-title class="label">{{aboutVisit}}
                 <ion-icon name="arrow-dropright-circle"></ion-icon>            
             </ion-card-title>
         </ion-card-header>
@@ -54,19 +50,19 @@
       <!-- Comment form -->
     <ion-card>
         <ion-card-header>
-            <ion-card-title class="label">Your opinion is important for us!</ion-card-title>      
+            <ion-card-title class="label">{{aboutOpinion}}</ion-card-title>      
           </ion-card-header>
     <form [formGroup]="commentForm" class="list-form">
         <ion-item no-padding class="animated fadeInUp">
           <ion-label position="floating">
             <ion-icon name="mail" item-start></ion-icon> <!--mail tai cia simboliukas-->
-            Enter email
+            {{aboutEnterEmail}}
           </ion-label>
           <ion-input type="email" formControlName="email" placeholder="email@ .... "></ion-input>
         </ion-item>
         <p ion-text class="text08" *ngIf="commentForm.get('email').touched && commentForm.get('email').hasError('required')">
           <ion-text class="error-message">
-            Required Field
+           {{aboutRequired}}
           </ion-text>
         </p>
       &nbsp;
@@ -74,19 +70,19 @@
         <ion-item no-padding class="animated fadeInUp">
           <ion-label position="floating">
             <ion-icon name="happy" item-start></ion-icon>
-            Feel free to contact us
+            {{aboutFeelFree}}
           </ion-label>
-          <ion-textarea rows="4" type="text" placeholder="Comment .... " formControlName="text"></ion-textarea>
+          <ion-textarea rows="4" type="text" placeholder="{{aboutComment}} " formControlName="text"></ion-textarea>
         </ion-item>
         <p ion-text color="warning" class="text08" *ngIf="commentForm.get('text').touched && commentForm.get('text').hasError('required')">
           <ion-text class="error-message">
-            Required Field
+            {{aboutRequired}}
           </ion-text>
           </p>
     </form>
     <div>
         <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="leaveComment()" [disabled]="!commentForm.valid" tappable>
-          Leave comment!
+          {{aboutButtonComment}}
           <ion-icon name="arrow-dropright-circle"></ion-icon>
         </ion-button>
     </div>
