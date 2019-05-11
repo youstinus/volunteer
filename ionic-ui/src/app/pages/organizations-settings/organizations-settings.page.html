@@ -1,106 +1,83 @@
-<app-header>Organizations Settings</app-header>
+<app-header>Organization Settings</app-header>
 
 <ion-content padding>
 
-    <ion-card>
-        <ion-card-header>
-
-            <img [src]="organization.imageUrl" style="height: 200px; width: 200px"/>
+    <form [formGroup]="onSaveForm" class="list-form">
+        <ion-card>
+            <!--<img src='{{volunteer.imageUrl}}' style="height: 200px; width: 200px"/>
             <ion-button  shape ="round" (click)="onChangePic()">Change picture </ion-button>
+                        <ion-label color="dark" position="floating">Your image url</ion-label>
+                <ion-input type="text" formControlName="imageUrl"></ion-input> -->
+            <ion-card-header>
+                <ion-card class="myCard" lines="none">
+                    <img [src]="organization.imageUrl" (error)="updateUrl($event)" class="center"
+                         style="height: 200px; width: 400px;" />
+                    <ion-card-content>
+                        <ion-item lines="none">
+                            <ion-label color="dark" position="floating">Your image url</ion-label>
+                            <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
+                                       formControlName="imageUrl" value="{{organization.imageUrl}}"></ion-input>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-card-header>
 
+            <ion-card-content>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Organization title:
+                    </ion-label>
+                    <ion-input formControlName="title" clearInput value={{organization.title}}></ion-input>
+                </ion-item>
 
-        </ion-card-header>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Address:
+                    </ion-label>
+                    <ion-input formControlName="address" clearInput value={{organization.address}}></ion-input>
+                </ion-item>
 
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Phone:
+                    </ion-label>
+                    <ion-input formControlName="phone" clearInput value={{organization.phone}}></ion-input>
+                </ion-item>
 
-        <ion-list>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Title :</h1>
-                        </ion-text>
-                    </div>
-                </ion-label>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        Website:
+                    </ion-label>
+                    <ion-input clearInput formControlName="website" value={{organization.website}}></ion-input>
+                </ion-item>
 
-                <div class = input>
-                    <ion-input clearInput value= {{organization.title}} ></ion-input>
-
-                </div>
-
-            </ion-item>
-
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                    <ion-text>
-                        <h1>Address :</h1>
-                    </ion-text>
-                    </div>
-                </ion-label>
-
-                <div class = input>
-                    <ion-input clearInput  value= {{organization.address}} ></ion-input>
-
-                </div>
-
-            </ion-item>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                        <ion-text>
-                            <h1>Phone :</h1>
-
-                        </ion-text>
-
-                    </div>
-
-
-                </ion-label>
-
-                <div class = input>
-                    <ion-input clearInput value= {{organization.phone}} ></ion-input>
-
-                </div>
-
-            </ion-item>
-            <ion-item>
-                <ion-label>
-                    <div class = txt>
-                    <ion-text>
-                        <h1>Website:</h1>
-
-                    </ion-text>
-                    </div>
-                </ion-label>
-                <div class = input>
-                    <ion-input clearInput value= {{organization.website}}></ion-input>
-
-                </div>
-
-            </ion-item>
-
-            <ion-item>
-                <ion-label>
-                    <ion-text>
+                <ion-item lines="none">
+                    <ion-label>
                         <h1>Description:</h1>
-                    </ion-text>
-                </ion-label>
+                    </ion-label>
+                </ion-item>
+                <ion-textarea formControlName="description" value={{organization.description}}></ion-textarea>
 
-            </ion-item>
+                <ion-item lines="none" [hidden]="true">
+                    <ion-input formControlName="userId" type="text"></ion-input>
+                </ion-item>
 
+            </ion-card-content>
+        </ion-card>
 
-
-            <ion-textarea value= {{organization.description}} ></ion-textarea>
-
-        </ion-list>
-
-
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveOrganization()">
+            Save changes
+        </ion-button>
         <ion-card-content>
-            <ion-button color="primary" (click)="saveOrganization()">Save changes</ion-button>
+
+            <ion-button style = "font-size: 12px" size="small" color="dark" shape="round" >
+                Change Password
+            </ion-button>
+
+            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round" >
+                Delete account
+            </ion-button>
+
         </ion-card-content>
-
-
-
-
-    </ion-card>
-
+    </form>
+</ion-content>

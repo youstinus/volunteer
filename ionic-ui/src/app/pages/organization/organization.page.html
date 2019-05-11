@@ -51,27 +51,37 @@
       </ion-item>
     </ion-list>
 
+    <ion-card-content *ngFor="let review of reviews ">
+      <ion-card-title> {{review.title}}</ion-card-title>
+      <ion-card-subtitle>{{review.text}}</ion-card-subtitle>
+
+    </ion-card-content>
 
     <ion-card-content>
 
-      <ion-input type="Title" placeholder="Title"></ion-input>
+
+      <form [formGroup]="onCreateForm" >
+      <ion-input formControlName="title" type="Title" placeholder="Title"></ion-input>
 
       <ion-row style="height:20px">
       </ion-row>
 
-      <ion-textarea rows="4" type="text" placeholder="Comment .... "></ion-textarea>
-      <ion-row style="height:20px">
-      </ion-row>
-      <ion-button expand="50%" shape ="round" style="float: left">Comment</ion-button>
-      <fieldset class="rating"  >
-        <input type="radio"   id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
-        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
-        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" t></label>
-        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
+      <ion-textarea formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
+      <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left">Comment</ion-button>
+      <fieldset  class="rating">
+        <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
+        <input  (click)="on4halfStarClicked()" type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" ></label>
+        <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
+        <input  (click)="on3halfStarClicked()" type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" ></label>
+        <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
+        <input  (click)="on2halfStarClicked()" type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" t></label>
+        <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" t></label>
+        <input  (click)="on1halfStarClicked()" type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" ></label>
+        <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
+        <input  (click)="onhalfStarClicked()" type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" ></label>
       </fieldset>
 
-
+      </form>
     </ion-card-content>
 
 

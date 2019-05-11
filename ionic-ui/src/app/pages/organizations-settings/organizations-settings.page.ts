@@ -6,6 +6,9 @@ import {UsersService} from '../../services/users.service';
 import {AlertController, NavController} from '@ionic/angular';
 import {User} from "../../models/User";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Volunteer} from "../../models/Volunteer";
+import {VolunteersService} from "../../services/volunteers.service";
+import {Strings} from "../../constants/Strings";
 
 @Component({
   selector: 'app-organizations-settings',
@@ -15,40 +18,50 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 export class OrganizationsSettingsPage implements OnInit {
-  public imgForm: FormGroup;
-  user: User;
-  organization: Organization = {
-    id: 11,
-    projectsIds: [1],
-    title: 'VšĮ Pagirk',
-    description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-    website: 'google.com',
-    userId: 5,
-    phone: '866666666',
-    picturesIds: [1],
-    address : 'test g. 696',
-    email: 'test@gmail.com',
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq1Qu_U_0Phe8tE6ffGJ9Zc7SmnWq8mO3DgL3rpmwV57D7iAUjMQ'
-  };
 
-  constructor(private organizationsService: OrganizationsService,
-              private route: ActivatedRoute,
-              private usersService: UsersService,
-              private navCtrl: NavController,
-              public alertCtrl: AlertController,
-              ) { }
+  user: number;
+  public onSaveForm: FormGroup;
+  organization: Organization = new Organization();
+  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+
+  constructor(
+      private organizationService: OrganizationsService,
+      private route: ActivatedRoute,
+      private usersService: UsersService,
+      private navCtrl: NavController,
+      private formBuilder: FormBuilder,
+      public alertCtrl: AlertController) {
+  }
 
   ngOnInit() {
-
-    this.user = this.usersService.getUser();
-    if (this.organization === null) {
+    this.onSaveForm = this.formBuilder.group({
+      'imageUrl': [null, Validators.nullValidator],
+      'title': [null, Validators.nullValidator],
+      'address': [null, Validators.nullValidator],
+      'phone': [null, Validators.nullValidator],
+      'website': [null, Validators.nullValidator],
+      'description': [null, Validators.nullValidator],
+      'userId': this.usersService.getTokenId()
+    });
+    this.user = this.usersService.getTokenId();
+    if (this.user === null) {
       this.navCtrl.navigateRoot('main').catch(e => console.log(e));
     }
 
     this.loadOrganization();
   }
+
+  loadOrganization() {
+    this.organizationService.getByOrganizationId(this.user).subscribe(value => {
+      this.organization = value;
+    }, error1 => {
+      console.log('Cannot get organization from database', error1);
+    });
+  }
+
   saveOrganization() {
-    this.organizationsService.update(this.organization.id, this.organization).subscribe(value => {
+    console.log(this.onSaveForm.value);
+    this.organizationService.update(this.organization.id, this.onSaveForm.value).subscribe(value => {
       console.log('Organization was updated successfully');
       console.log(value);
 
@@ -57,16 +70,9 @@ export class OrganizationsSettingsPage implements OnInit {
     });
   }
 
-  loadOrganization() {
-    this.organizationsService.getByOrganizationId(this.organization.id).subscribe(value => {
-      this.organization = value;
-    }, error1 => {
-      console.log('Cannot get organization from database', error1);
-    });
-  }
   onChangePic() {
     console.log();
-  this.changePic();
+    this.changePic();
   }
   async changePic() {
     const alert = await this.alertCtrl.create({
@@ -86,19 +92,28 @@ export class OrganizationsSettingsPage implements OnInit {
           }
         }
       ],
-      inputs : [
+      inputs: [
         {
           name: 'URL',
           type: 'text',
           placeholder: ''
         }
-       ]
+      ]
     });
 
     await alert.present();
   }
 
+  onSearchChange(searchValue: string) {
+    this.updateIMG(searchValue);
   }
+  updateIMG(searchValue: string) {
+    this.organization.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
+  }
+  updateUrl(event) {
+    this.organization.imageUrl = this.defaulUrl;
+  }
+}
 
 
 
