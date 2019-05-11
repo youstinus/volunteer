@@ -15,6 +15,7 @@ export class ModalVolunteerPage implements OnInit {
   @Input("volemail") volemail;
   @Input("voldescrip") voldescrip;
   @Input("volPic") volPic;
+  defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
 
   constructor(
     private navParms: NavParams,

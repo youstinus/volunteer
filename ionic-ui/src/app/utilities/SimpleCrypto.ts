@@ -27,7 +27,7 @@ export default class SimpleCrypto {
       keySize: this._keySize / 32,
       iterations: this._iterations
     });
-    const initialVector: string = SimpleCrypto.generateRandom(128, true).toString();
+    const initialVector: string = SimpleCrypto.generateRandom(128, true);
     const encrypted: CryptoJS.WordArray = CryptoJS.AES.encrypt(string, key, {
       iv: initialVector,
       padding: CryptoJS.pad.Pkcs7,

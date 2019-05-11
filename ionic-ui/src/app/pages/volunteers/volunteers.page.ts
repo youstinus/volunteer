@@ -21,6 +21,8 @@ export class VolunteersPage implements OnInit {
   //volunteers: Volunteer[] = [];//Objects.Empty_Volunteer_Arr;
   volunteers: Volunteer[] = [];
   defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
+  defaultName: string = 'Anonymous user';
+  sendName: string;
 
   constructor(
     private organizationsService: VolunteersService,
@@ -38,26 +40,33 @@ export class VolunteersPage implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
-      console.log(this.project.description);
     }, error1 => {
       console.log(error1);
     });
 
     this.projectsService.getVolunteers(id).subscribe(value => {
       this.volunteers = value;
-      console.log(value)
     }, error1 => {
       console.log(error1);
     })
+
+  
   }
 
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   async onVolunteerClicked(volunteer: Volunteer) {
     console.log(volunteer)
+    if(volunteer.firstName==null || volunteer.lastName==null)
+    {
+      this.sendName=this.defaultName;
+    } else{
+      this.sendName=volunteer.firstName + " " + volunteer.lastName
+    }
+
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
       componentProps: {
-        volname: volunteer.firstName + " " + volunteer.lastName,
+        volname: this.sendName,
         volphone: volunteer.phone,
         volemail: volunteer.email,
         voldescrip: volunteer.description,
@@ -65,6 +74,10 @@ export class VolunteersPage implements OnInit {
       }
     });
     await myModal.present();
+  }
+
+  goToProjects() {
+    this.navCtrl.back();
   }
 
 }

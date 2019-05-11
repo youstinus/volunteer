@@ -17,7 +17,7 @@
 
     <ion-list *ngFor="let volunteer of volunteers">
 
-      <ion-item lines="none" (click)="onVolunteerClicked(volunteer)">
+      <ion-item lines="none" class="click" (click)="onVolunteerClicked(volunteer)">
         <div *ngIf="volunteer.imageUrl==null">
           <ion-avatar slot="start">
             <img src="{{ defaulUrl }}">
@@ -34,7 +34,7 @@
               Anonymous user
             </ion-label>
           </div>
-          <div *ngIf="volunteer.firstName!=null">
+          <div *ngIf="volunteer.firstName!=null && volunteer.lastName!=null">
             <ion-label>
               {{volunteer.firstName}} {{volunteer.lastName}}
             </ion-label>
@@ -43,21 +43,47 @@
       </ion-item>
 
       <ion-item lines="none">
-        <h4>
-          <ion-icon name="phone-portrait"></ion-icon>
-          {{volunteer.phone}}
-        </h4>
+        <div *ngIf="volunteer.phone==null">
+          <h4>
+            <ion-icon name="phone-portrait"></ion-icon>
+            None
+          </h4>
+        </div>
+
+        <div *ngIf="volunteer.phone!=null">
+          <h4>
+            <ion-icon name="phone-portrait"></ion-icon>
+            {{volunteer.phone}}
+          </h4>
+        </div>
+
       </ion-item>
 
-      <ion-item>
-        <h4>
-          <ion-icon name="mail-open"></ion-icon>
-          {{volunteer.email}}
-        </h4>
+      <ion-item lines="none">
+        <div *ngIf="volunteer.email==null">
+          <h4>
+            <ion-icon name="mail-open"></ion-icon>
+            None
+          </h4>
+        </div>
+
+        <div *ngIf="volunteer.email!=null">
+          <h4>
+            <ion-icon name="mail-open"></ion-icon>
+            {{volunteer.email}}
+
+          </h4>
+        </div>
       </ion-item>
 
     </ion-list>
 
   </fieldset>
 
+  <ion-item lines="none">
+      <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Go back
+      </ion-button>
+    </ion-item>
   <!--/ion-content-->

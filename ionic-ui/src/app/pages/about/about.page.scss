@@ -10,6 +10,7 @@
     background-color: rgba(123, 172, 137, 0.24);
     border-radius: 50px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.185);
+    cursor: pointer;
 }
 ion-content{
 //    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
@@ -32,6 +33,7 @@ ion-card{
 ion-button{
     --background: #062f77;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 p { 
@@ -55,8 +57,8 @@ ion-item{
 {
   color: red;
   font-size: 14px;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .img {

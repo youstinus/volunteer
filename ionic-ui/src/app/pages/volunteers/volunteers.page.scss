@@ -18,11 +18,15 @@ ion-item {
     border-radius: 15px;
 }
 
+.click{
+    cursor: pointer;
+}
+
 ion-list{
     --ion-background-color: rgba(163, 219, 146, 0.801);
     background:  rgba(163, 219, 146, 0.801);
     border-radius: 25px;
-    cursor: pointer;
+    border-color: #197725;
 }
 
 div.a{
