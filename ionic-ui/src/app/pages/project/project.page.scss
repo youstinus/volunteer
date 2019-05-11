@@ -170,7 +170,7 @@ img {
   max-width: 600px;
   /*width: 100%;
   height: 100%;*/
-  max-height: 350px; 
+  max-height: 350px !important; 
   width: auto;
 }
 
@@ -178,7 +178,27 @@ img {
   text-align: center;  
   align-content: center;
   align-items: center;
-  width: 600px;
-  height: 350px;
+  height: 350px !important;
   margin: auto;
 }
+.col img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+body {
+  cursor: url('https://ionicframework.com/img/finger.png'), auto;
+}
+
+img{
+  display:block !important;
+  height:auto !important;
+}
+.myphoto {
+  img {
+  height: 70vh !important;
+  width: auto !important;
+  align-items: center;
+  }
+  }

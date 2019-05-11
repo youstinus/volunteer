@@ -180,7 +180,7 @@ export class ProjectEditPage implements OnInit {
 
   updateIMG(searchValue: string) {
 
-    this.project.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
+    this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
 
   }
 

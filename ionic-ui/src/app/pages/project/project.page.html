@@ -44,11 +44,11 @@
       <ion-row>
         <ion-col size=50%>
           <div class="ion-text-center img2">
-            <div *ngIf="(project.imageUrl==null || project.imageUrl=='')">
+            <div class="myphoto" class="tools col col-50" *ngIf="(project.imageUrl==null || project.imageUrl=='')">
               <img class="img" src="{{defaulUrl}}">
             </div>
 
-            <div *ngIf="(project.imageUrl!='') ">
+            <div class="myphoto" class="tools col col-50" *ngIf="(project.imageUrl!='') ">
               <img class="img" src="{{project.imageUrl}}" (error)="updateUrl($event)">
             </div>
           </div>
