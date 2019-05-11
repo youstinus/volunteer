@@ -111,6 +111,32 @@ export class En {
         modalVContatInfo: 'Contact information',
         modalNone: 'None',
         modalVDescription: 'Description about activities',
-        modalClose: 'Close'
+        modalClose: 'Close',
+        //New project
+        newPojectHeader: 'New project',
+        newPojectImage: 'Project image',
+        newPojectTitle: 'Title',
+        newPojectEmail: 'Email',
+        newPojectPhone: 'Phone',
+        newPojectWebsite: 'Website',
+        newPojectDescription: 'Description',
+        newPojectStart: 'Start date',
+        newPojectEnd: 'End date',
+        newPojectLocation: 'Loacation address',
+        newPojectCreate: 'Create',
+        newPojectAlertNotHeader: 'Project was not created',
+        newPojectAlertNotMessage: 'Please, fill in empty gaps',
+        newPojectAlertOk: 'OK',
+        //Edit project
+        editProjectDelete: 'DELETE',
+        editProjectAlertEditHeader: 'Update failed',
+        editProjectAlertEditMessage: 'Please, fill in an empty gaps',
+        editHeader: 'Edit project',
+        editTitle: 'Edit title',
+        editDescription: 'Edit description',
+        editChangeStart: 'Change start date',
+        editChangeEnd: 'Change end date',
+        changeLocation: 'Change location address',
+        editSave: 'Save changes'
     }
 }

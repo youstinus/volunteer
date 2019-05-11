@@ -111,6 +111,32 @@ export class Lt {
         modalVContatInfo: 'Kontaktinė informacija',
         modalNone: 'Nėra informacijos',
         modalVDescription: 'Aprašymas apie veiklas',
-        modalClose: 'Uždaryti'    
+        modalClose: 'Uždaryti',
+        //New project
+        newPojectHeader: 'Naujas projektas',
+        newPojectImage: 'Projekto paveikslėlis',
+        newPojectTitle: 'Pavadinimas',
+        newPojectEmail: 'El-pašto adresas',
+        newPojectPhone: 'Telefono numeris',
+        newPojectWebsite: 'Internetinis tinklapis',
+        newPojectDescription: 'Aprašymas',
+        newPojectStart: 'Pradžios data',
+        newPojectEnd: 'Pabaigos data',
+        newPojectLocation: 'Vietovės adresas',
+        newPojectCreate: 'Sukurti',
+        newPojectAlertNotHeader: 'Projektas nebuvo sukurtas',
+        newPojectAlertNotMessage: 'Prašome užpildykite tuščius laukus',
+        newPojectAlertOk: 'Gerai',
+        //Edit project
+        editProjectDelete: 'Ištrinti',
+        editProjectAlertEditHeader: 'Atnaujinimas nepavyko',
+        editProjectAlertEditMessage: 'Prašome užpildyti tuščius laukelius',
+        editHeader: 'Koreguoti projektą',
+        editTitle: 'Redaguoti pavadinimą',
+        editDescription: 'Redaguoti aprašą',
+        editChangeStart: 'Keisti pradžios laiką',
+        editChangeEnd: 'Keisti pabaigos laiką',
+        changeLocation: 'Keisti vietovę',
+        editSave: 'Išsaugoti pakeitimus'    
     }
 }

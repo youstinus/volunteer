@@ -107,6 +107,32 @@ export class Lang {
     public modalVContatInfo: string;
     public modalNone: string;
     public modalVDescription: string;
-    public modalClose: string; 
+    public modalClose: string;
+    //New project
+    public newPojectHeader: string;
+    public newPojectImage: string;
+    public newPojectTitle: string;
+    public newPojectEmail: string;
+    public newPojectPhone: string;
+    public newPojectWebsite: string;
+    public newPojectDescription: string;
+    public newPojectStart: string;
+    public newPojectEnd: string;
+    public newPojectLocation: string;
+    public newPojectCreate: string;
+    public newPojectAlertNotHeader: string;
+    public newPojectAlertNotMessage: string;
+    public newPojectAlertOk: string;
+    //Edit project
+    public editProjectDelete: string;
+    public editProjectAlertEditHeader: string;
+    public editProjectAlertEditMessage: string;
+    public editHeader: string;
+    public editTitle: string;
+    public editDescription: string;
+    public editChangeStart: string;
+    public editChangeEnd: string;
+    public changeLocation: string;
+    public editSave: string;
 
 }

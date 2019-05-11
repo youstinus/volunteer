@@ -1,4 +1,4 @@
-<app-header>New Project</app-header>
+<app-header>{{newPojectHeader}}</app-header>
 
 <ion-content padding>
 
@@ -6,32 +6,32 @@
   <form [formGroup]="onCreateForm" class="list-form">
     
     <ion-item lines="">
-      <ion-label color="primary" position="floating">Project image</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectImage}}</ion-label>
       <ion-input type="text" formControlName="imageUrl"></ion-input>
     </ion-item>
 
     <ion-item lines="">
-      <ion-label color="primary" position="floating">Title</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectTitle}}</ion-label>
       <ion-input type="text" formControlName="title" ></ion-input>
     </ion-item>
 
     <ion-item lines="">
-      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectEmail}}</ion-label>
       <ion-input type="text" formControlName="email" ></ion-input>
     </ion-item>
 
     <ion-item lines="">
-      <ion-label color="primary" position="floating">Phone</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectPhone}}</ion-label>
       <ion-input type="text" formControlName="phone" ></ion-input>
     </ion-item>
 
     <ion-item lines="">
-      <ion-label color="primary" position="floating">Website</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectWebsite}}</ion-label>
       <ion-input type="text" formControlName="website" ></ion-input>
     </ion-item>
    
     <ion-item>
-      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-label color="primary" position="floating">{{newPojectDescription}}</ion-label>
 
       <ion-textarea autosize style=" height: 300px" formControlName="description" >
       </ion-textarea>
@@ -39,19 +39,19 @@
       
       <ion-item>
           <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label color="primary" stacked>Start Date:</ion-label>
+        <ion-label color="primary" stacked>{{newPojectStart}}:</ion-label>
         <ion-datetime formControlName="start"></ion-datetime>
       </ion-item>
 
       <ion-item>
           <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label color="primary" stacked>End date:</ion-label>
+        <ion-label color="primary" stacked>{{newPojectEnd}}:</ion-label>
 
         <ion-datetime formControlName="end"></ion-datetime>
       </ion-item>
     <ion-item lines="">
       <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label color="primary" position="floating">Loacation address: </ion-label>
+      <ion-label color="primary" position="floating">{{newPojectLocation}}: </ion-label>
       <ion-input formControlName="location" type="text"></ion-input>
     </ion-item>
 
@@ -61,7 +61,7 @@
   </form>
   &nbsp;
  
-  <ion-button expand="block" type="submit" (click)='onCreate()'>Create</ion-button>
+  <ion-button expand="block" type="submit" (click)='onCreate()'>{{newPojectCreate}}</ion-button>
   <ion-item lines="none">
   </ion-item>
 </ion-content>
