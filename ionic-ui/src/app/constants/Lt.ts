@@ -22,6 +22,7 @@ export class Lt {
         mainTitle: 'Savanoriavimo sistema',
         mainEvents: 'Artimiausi projektai',
         mainWantedOrganizations: 'Populiariausios organizacijos',
+        mainStart: 'Pradžia',
         //About us page
         aboutTitle: 'Trumpai apie mus',
         aboutParag1: 'Platypus offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities. We hope:',
@@ -81,6 +82,35 @@ export class Lt {
         registrationValidEmail: 'Validus el-paštas yra būtinas',
         registrationNotRegisteredHeader: 'Registracija nesėkminga',
         registrationNotRegisteredMessage: 'Prašome patikrinti informaciją ir bandyti dar kartą',
-        registrationSuccess: 'Vartotojas sėkmingai priregistruotas'
+        registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
+        //Projects page
+        projectsSearch: 'Paieška',
+        projectsArchive: 'ARCHYVAS',
+        projectsNew: 'NAUJI PROJEKTAI',
+       //Project page
+        projectEdit: 'Redaguoti projektą',
+        projectVolunteers: 'Savanoriai',
+        projectFind: 'Mus rasite',
+        projectSave: 'Išsaugoti',
+        projectsToVolunteer: 'Aš noriu savanoriauti',
+        projectSaved: 'Išsaugotas',
+        projectsYouVolunteer: 'Jūs esate savanoris',
+        projectStart: 'Projektas prasidės',
+        projectEnd: 'Projektas baigsis',
+        projectGoBack: 'Grįžti',
+        projectHeader: 'Projekto puslapis',
+        //Volunteers page
+        volunteersHeader: 'Savanorių puslpapis',
+        volunteersYourVolunteers: 'Jūsų projekto savanoriai',
+        volunteersAll: 'Visi užsiregistravę vartotojai',
+        volunteersNone: 'Nėra informacijos',
+        volunteersAnonymous: 'Anoniminis vartotojas',
+        volunteersGoBack: 'Grįžti',
+        //Modal volunteer
+        modalVAnonymous: 'Anoniminis vartotojas',
+        modalVContatInfo: 'Kontaktinė informacija',
+        modalNone: 'Nėra informacijos',
+        modalVDescription: 'Aprašymas apie veiklas',
+        modalClose: 'Uždaryti'    
     }
 }

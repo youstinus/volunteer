@@ -22,6 +22,7 @@ export class En {
         mainTitle: 'Volunteering system',
         mainEvents: 'Upcoming events',
         mainWantedOrganizations: 'Most wanted organizations',
+        mainStart: 'Starts',
         //About us page
         aboutTitle: 'Shortly about us',
         aboutParag1: 'Platypus offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities. We hope:',
@@ -81,6 +82,35 @@ export class En {
         registrationValidEmail: 'Valid email is required',
         registrationNotRegisteredHeader: 'User was not registered',
         registrationNotRegisteredMessage: 'Please, check your information ant try again',
-        registrationSuccess: 'User was registered successfully'
+        registrationSuccess: 'User was registered successfully',
+        //Projects page
+        projectsSearch: 'Search',
+        projectsArchive: 'ARCHIVE',
+        projectsNew: 'NEW PROJECTS',
+        //Project page
+        projectEdit: 'Edit project',
+        projectVolunteers: 'Volunteers',
+        projectFind: 'Find us at',
+        projectSave: 'Save',
+        projectsToVolunteer: 'I want to volunteer',
+        projectSaved: 'Saved',
+        projectsYouVolunteer: 'You volunteer in this project',
+        projectStart: 'Project begins',
+        projectEnd: 'Project ends',
+        projectGoBack: 'Go back',
+        projectHeader: 'Project page',
+        //Volunteers page
+        volunteersHeader: 'Volunteers page',
+        volunteersYourVolunteers: 'Your project volunteers',
+        volunteersAll: 'All registered users',
+        volunteersNone: 'None',
+        volunteersAnonymous: 'Anonymous user',
+        volunteersGoBack: 'Go back',
+        //Modal volunteer
+        modalVAnonymous: 'Anonymous user',
+        modalVContatInfo: 'Contact information',
+        modalNone: 'None',
+        modalVDescription: 'Description about activities',
+        modalClose: 'Close'
     }
 }

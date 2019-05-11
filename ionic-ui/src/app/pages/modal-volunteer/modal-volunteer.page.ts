@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { ViewController } from '@ionic/core/dist/types/components/nav/nav-interface';
 import { Volunteer } from 'src/app/models/Volunteer';
 import { validateConfig } from '@angular/router/src/config';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-modal-volunteer',
@@ -16,7 +17,13 @@ export class ModalVolunteerPage implements OnInit {
   @Input("voldescrip") voldescrip;
   @Input("volPic") volPic;
   defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
-
+  
+  modalVAnonymous: string = Language.Lang.modalVAnonymous;
+  modalVContatInfo: string = Language.Lang.modalVContatInfo;
+  modalNone: string = Language.Lang.modalNone;
+  modalVDescription: string = Language.Lang.modalVDescription;
+  modalClose: string = Language.Lang.modalClose; 
+  
   constructor(
     private navParms: NavParams,
     private modalCtrl: ModalController

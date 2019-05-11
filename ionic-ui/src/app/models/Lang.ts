@@ -19,6 +19,7 @@ export class Lang {
     public mainTitle: string;
     public mainEvents: string;
     public mainWantedOrganizations: string;
+    public mainStart: string;
     //About us
     public aboutTitle: string;
     public aboutTitle2: string;
@@ -78,5 +79,34 @@ export class Lang {
     public registrationNotRegisteredHeader: string;
     public registrationNotRegisteredMessage: string;
     public registrationSuccess: string;
+    //Projects page
+    public projectsSearch: string;
+    public projectsArchive: string;
+    public projectsNew: string;
+    //Project page
+    public projectEdit: string;
+    public projectVolunteers: string;
+    public projectFind: string;
+    public projectSave: string;
+    public projectsToVolunteer: string;
+    public projectSaved: string;
+    public projectsYouVolunteer: string;
+    public projectStart: string;
+    public projectEnd: string;
+    public projectGoBack: string;
+    public projectHeader: string;
+    //Volunteers page
+    public volunteersHeader: string;
+    public volunteersYourVolunteers: string;
+    public volunteersAll: string;
+    public volunteersNone: string;
+    public volunteersAnonymous: string;
+    public volunteersGoBack: string;
+    //Modal volunteer
+    public modalVAnonymous: string;
+    public modalVContatInfo: string;
+    public modalNone: string;
+    public modalVDescription: string;
+    public modalClose: string; 
 
 }

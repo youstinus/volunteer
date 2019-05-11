@@ -9,6 +9,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
 import { Objects } from 'src/app/constants/Objects';
 import { projection } from '@angular/core/src/render3';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-volunteers',
@@ -16,12 +17,18 @@ import { projection } from '@angular/core/src/render3';
   styleUrls: ['./volunteers.page.scss'],
 })
 export class VolunteersPage implements OnInit {
+  volunteersHeader: string = Language.Lang.volunteersHeader;
+  volunteersYourVolunteers: string = Language.Lang.volunteersYourVolunteers;
+  volunteersAll: string = Language.Lang.volunteersAll;
+  volunteersNone: string = Language.Lang.volunteersNone;
+  volunteersAnonymous: string = Language.Lang.volunteersAnonymous;
+  volunteersGoBack: string = Language.Lang.volunteersGoBack;
 
   project: Project = Objects.Empty_Project; // Objects.Four_Test_Projects[1];
   //volunteers: Volunteer[] = [];//Objects.Empty_Volunteer_Arr;
   volunteers: Volunteer[] = [];
   defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
-  defaultName: string = 'Anonymous user';
+  defaultName: string = Language.Lang.volunteersAnonymous;
   sendName: string;
 
   constructor(
