@@ -184,6 +184,16 @@ export class Lang {
     public cr47: string;
     public cr48: string;
     public cr49: string;
-
+    // Volunteers settings page
+    public volSettingsHeader: string;
+    public volSettingsImage: string;
+    public volSettingsName: string;
+    public volSettingsLastName: string;
+    public volSettingsPhone: string;
+    public volSettingsEmail: string;
+    public volSettingsDescription: string;
+    public volSettingsSaveChanges: string;
+    public volSettingsAlertSuccess: string;
+    public volSettingsAlertFail: string;
 
 }
