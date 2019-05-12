@@ -160,6 +160,25 @@ namespace WebAPI.Services
 
             await _repository.Update(user);
         }
+        
+        // is it possible to change username ?
+        public async Task UpdateByEmail(string email, UserDto userDto)
+        {
+            var user = await _repository.GetSingleByPredicate(x => x.Email.Equals(email));
+
+            if (user == null || userDto == null || string.IsNullOrWhiteSpace(userDto.Password) || userDto.Password.Length < 3)
+                throw new InvalidOperationException($"User with email {email} was not found");
+            
+            // later implement mapper
+            user.Updated = _timeService.GetCurrentTime();
+
+            // update password if it was entered
+            CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
+            user.Hash = passwordHash;
+            user.Salt = passwordSalt;
+            
+            await _repository.Update(user);
+        }
 
         public override User CreatePoco(UserDto entityDto)
         {

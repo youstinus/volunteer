@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton } from '@ionic/angular';
+import { NavController, IonButton, AlertController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-new-project',
@@ -12,6 +13,21 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./new-project.page.scss'],
 })
 export class NewProjectPage implements OnInit {
+
+  newPojectHeader: string = Language.Lang.newPojectHeader;
+  newPojectImage: string = Language.Lang.newPojectImage;
+  newPojectTitle: string = Language.Lang.newPojectTitle;
+  newPojectEmail: string = Language.Lang.newPojectEmail;
+  newPojectPhone: string = Language.Lang.newPojectPhone;
+  newPojectWebsite: string = Language.Lang.newPojectWebsite;
+  newPojectDescription: string = Language.Lang.newPojectDescription;
+  newPojectStart: string = Language.Lang.newPojectStart;
+  newPojectEnd: string = Language.Lang.newPojectEnd;
+  newPojectLocation: string = Language.Lang.newPojectLocation;
+  newPojectCreate: string = Language.Lang.newPojectCreate;
+  newPojectAlertNotHeader: string = Language.Lang.newPojectAlertNotHeader;
+  newPojectAlertNotMessage: string = Language.Lang.newPojectAlertNotMessage;
+  newPojectAlertOk: string = Language.Lang.newPojectAlertOk;
 
   id: number;
   public onCreateForm: FormGroup;
@@ -21,7 +37,8 @@ export class NewProjectPage implements OnInit {
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
     public navCtrl: NavController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public alertCtrl: AlertController
   ) { }
 
   createProject: Project = new Project();
@@ -41,30 +58,28 @@ export class NewProjectPage implements OnInit {
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
         //Validators.minLength(5),
-       /* Validators.required*/
+        /* Validators.required*/
       ])],
       'title': [null, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
       'description': [null, Validators.compose([
-      //  Validators.minLength(5),
+        Validators.minLength(5),
         Validators.required
       ])],
       'start': [null, Validators.compose([
-       // Validators.minLength(5),
+        // Validators.minLength(5),
         Validators.required
       ])],
-      'end': [null, Validators.compose([
-        Validators.required
-      ])],
+      'end': [null, Validators.compose([])],
       'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
-        Validators.required
+        /*Validators.required*/
       ])],
       'website': [null, Validators.compose([
-        Validators.required,
-       Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+
+        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': ['', Validators.compose([
         Validators.required,
@@ -81,13 +96,22 @@ export class NewProjectPage implements OnInit {
     this.projectsService.create(this.onCreateForm.value).subscribe(value => {
       console.log(value);
       this.createProject = value;
+      location.assign('projects/type/created');
     }, error1 => {
       console.log(error1);
+      this.NotCreated();
     });
-    location.assign('projects/type/created');
   }
   getId() {
     const id = this.usersService.getTokenId();
     return id;
+  }
+  async NotCreated() {
+    const alert = await this.alertCtrl.create({
+      header: this.newPojectAlertNotHeader,
+      message: this.newPojectAlertNotMessage,
+      buttons: [this.newPojectAlertOk]
+    });
+    await alert.present();
   }
 }

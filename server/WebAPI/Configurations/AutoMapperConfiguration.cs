@@ -54,9 +54,9 @@ namespace WebAPI.Configurations
 
         private void MapUser()
         {
-            CreateMap<User, UserDto>(MemberList.None);
-                /*.ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id))
-                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.Id));*/
+            CreateMap<User, UserDto>(MemberList.None)
+                .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization != null ? src.Organization.Id : (long?)null))
+                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer != null ? src.Volunteer.Id : (long?)null));
             CreateMap<UserDto, User>(MemberList.Destination);
         }
 
@@ -74,7 +74,7 @@ namespace WebAPI.Configurations
         private void MapReview()
         {
             CreateMap<Review, ReviewDto>()
-                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.Id))
+                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.User.Id))
                 .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id));
             CreateMap<ReviewDto, Review>();
         }

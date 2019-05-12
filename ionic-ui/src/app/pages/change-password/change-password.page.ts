@@ -5,6 +5,7 @@ import { NavController, MenuController, LoadingController, AlertController } fro
 import { UsersService } from 'src/app/services/users.service';
 import { RegistrationPage } from '../registration/registration.page';
 import { PasswordValidator } from '../registration/password.validator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -17,6 +18,7 @@ export class ChangePasswordPage implements OnInit {
   user: User = new User();
   public changePasswordForm: FormGroup;
   public matching_passwords_group: FormGroup;
+  private email: string;
 
   constructor(
     public navCtrl: NavController,
@@ -24,10 +26,12 @@ export class ChangePasswordPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.validateLink();
     this.getRole();
     this.changePasswordForm = new FormGroup({
       password1: new FormControl(),
@@ -93,6 +97,33 @@ export class ChangePasswordPage implements OnInit {
   changePassword() {
     console.log('Changed password:');
     console.log(this.changePasswordForm.value);
+    var pass = this.changePasswordForm.value;
+    if(pass.password == pass.password1) {
+      this.usersService.updateByEmail(this.email, pass).subscribe(() => {
+        console.log('Password changed');
+      }, error1 => {
+        console.log('password not changed', error1);
+      });
+    }
   }
 
+  goBack(){
+    console.log('Navigate back to settings');
+    this.navCtrl.back;
+  }
+
+  validateLink() {
+    const reset = this.route.snapshot.params['reset'];
+    console.log(reset);
+    let mail = this.usersService.decodeResetMail(reset);
+    console.log(mail);
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    let success = regexp.test(mail);
+    if(!success){
+      this.navCtrl.back;
+      this.navCtrl.navigateRoot('main').catch(error => console.error(error));
+    } else {
+      this.email = mail;
+    }
+  }
 }

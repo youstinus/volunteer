@@ -38,7 +38,13 @@ const routes: Routes = [
         children: [
             { path: ':id', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' /*'./pages/project/project.module#ProjectPageModule'*/ }
         ]
-    },  { path: 'change-password', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
+    },
+    {
+        path: 'change-password',
+        children: [
+            { path: ':reset', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
+        ]
+    }
 
 
 ];

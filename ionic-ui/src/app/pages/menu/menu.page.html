@@ -1,23 +1,23 @@
 <ion-split-pane>
   <ion-menu contentId="content" class="sidenav" enable-menu-with-back-views="true">
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="success">
         <ion-title>
-          Menu
+          <ion-text color="dark"><strong>{{menuMenu}}</strong></ion-text>
         </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of pages; let i = index">
-          <ion-item [routerLink]="p.url" *ngIf="check(i)">
+          <ion-item lines="full" [routerLink]="p.url" *ngIf="check(i)">
             <ion-icon [name]="p.icon" slot="start"></ion-icon>
             <ion-label>{{p.title}}</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-item tappable routerLink="main" routerDirection="root" *ngIf="checkLogout()" (click)="logout()">
-          <ion-icon name="log-out" slot="start">Logout</ion-icon>
-          <ion-label>Logout</ion-label>
+        <ion-item lines="full" tappable routerLink="main" routerDirection="root" *ngIf="checkLogout()" (click)="logout()">
+          <ion-icon name="log-out" slot="start">{{menuLogout}}</ion-icon>
+          <ion-label>{{menuLogout}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

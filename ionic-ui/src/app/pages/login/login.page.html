@@ -1,4 +1,4 @@
-<app-header>Login</app-header>
+<app-header>{{menuLogin}}</app-header>
 <ion-content padding>
   <div class="theme-bg"></div>
   <div class="auth-content">
@@ -7,46 +7,46 @@
     <div padding-horizontal text-center>
       <div class="logo"></div>
       <h2 no-margin class="h2">
-          Welcome!
+          {{loginWelcome}}
       </h2>
     </div>
     &nbsp;
 <fieldset class="fieldset">
     <legend class="forLegend">
-       <strong> Log in </strong>
+       <strong> {{loginFieldset}} </strong>
     </legend>
     <!-- Login form -->
-    <form [formGroup]="onLoginForm" class="list-form">
+    <form [formGroup]="onLoginForm" class="list-form" (keyup.enter)="onSignIn()">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="person" item-start></ion-icon>
-          Username
+          {{loginUsername}}
         </ion-label>
         <ion-input type="username" formControlName="username"></ion-input>
       </ion-item>
       <p ion-text *ngIf="onLoginForm.get('username').touched && onLoginForm.get('username').errors">
         <ion-text class="error-message">
-          Required field, must contain at least 5 letters
+          {{loginRequiredField}}
         </ion-text>
       </p>
       &nbsp;
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="lock" item-start></ion-icon>
-          Password
+          {{loginPassword}}
         </ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <p ion-text *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').errors">
         <ion-text class="error-message">
-          Required field, must contain at least 5 letters
+          {{loginRequiredField}}
         </ion-text>
         </p>
     </form>
 
     <p text-right tappable (click)="forgotPass()" class="paz">
       <ion-text >
-        <strong>Forgot your password?</strong>
+        <strong>{{loginForgot}}</strong>
       </ion-text>
     </p>
   </fieldset>
@@ -55,7 +55,7 @@
 
     <div>
       <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="onSignIn()" [disabled]="!onLoginForm.valid" tappable>
-        Sign in
+        {{loginButton}}
         <ion-icon name="log-in"></ion-icon>
       </ion-button>
     </div>
@@ -66,7 +66,7 @@
     <div text-center margin-top>
       <span (click)="goToRegister()" class="paz" tappable>
         <ion-text >
-          New here? <strong>Sign Up</strong>
+          {{loginNewHere}} <strong>{{loginSignUp}}</strong>
         </ion-text>
       </span>
     </div>

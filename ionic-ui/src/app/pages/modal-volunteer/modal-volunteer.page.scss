@@ -1,15 +1,22 @@
 .img {
-    max-width: 75%;
-    max-height: 75%;
+    max-width: 65%;
+    max-height: 65%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 ion-button{
     justify-content: flex-end;
     display: flex;
     --background: #000000;
 }
+
+ion-toolbar {
+  --background: linear-gradient(45deg, #61bd86, #10dc60,);
+  background: linear-gradient(45deg, #61bd86,#10dc60);
+}
+
 ion-card{
   background-color: rgba(163, 233, 175, 0.726);
   border-radius: 15px;
@@ -24,7 +31,12 @@ ion-item {
 }
 
 ion-content{
-  --background:linear-gradient(135deg,rgba(115, 200, 206, 0.884),rgb(112, 201, 127),rgba(29, 151, 125, 0.863));
+  display: inline-block;
+  --background: none;
+  background-image: url('/assets/background2.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ion-header{

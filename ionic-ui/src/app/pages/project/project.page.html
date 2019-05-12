@@ -1,14 +1,14 @@
-<app-header>Project</app-header>
+<app-header>{{projectTitle}}</app-header>
 <ion-content padding>
 
-    <h1 class="h1" padding-horizontal text-center>{{project.title}}</h1>
+  <h1 class="h1" padding-horizontal text-center>{{project.title}}</h1>
 
 
   <div *ngIf="role==2 && !saved">
     <ion-item lines="none">
       <ion-button id="1" #first ion-button color="dark" (click)="addToSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
-        Save
+        {{projectSave}}
       </ion-button>
     </ion-item>
   </div>
@@ -17,7 +17,7 @@
     <ion-item lines="none">
       <ion-button id="1" #first ion-button color="success" (click)="removeFromSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
-        Saved
+        projectSaved
       </ion-button>
     </ion-item>
   </div>
@@ -27,112 +27,126 @@
     <ion-item lines="none">
       <ion-button slot="end" color="dark" (click)="navigateToEdit()">
         <ion-icon slot="start" name="create"></ion-icon>
-        Edit project
+        {{projectEdit}}
       </ion-button>
+    </ion-item>
+    <ion-item lines="none">
       <ion-button slot="end" color="dark" (click)="navigateToVolunteers()">
         <!-- id="1" #first ion-button color="dark" (click)="onVolunteersNavigate()" slot="end"> -->
-      <ion-icon slot="start" name="people"></ion-icon>
-        Volunteers
+        <ion-icon slot="start" name="people"></ion-icon>
+        {{projectVolunteers}}
       </ion-button>
     </ion-item>
   </div>
-  
+
   <ion-card>
-      &nbsp;
-      <div *ngIf="(project.imageUrl==null || project.imageUrl=='')">
-          <img class="img" src="{{defaulUrl}}">
-        </div>
-      
-        <div *ngIf="(project.imageUrl!='') ">
-          <img class="img" src="{{project.imageUrl}}">
-        </div>
-        
+    <ion-grid>
+      <ion-row>
+        <ion-col ion-item no-lines no-padding text-center col-2 size=50%>
+          <div class="ion-text-center img2">
+            <div class="tools col col-50" class="myphoto" class="tools col col-50" *ngIf="(project.imageUrl==null || project.imageUrl=='')">
+              <img class="img" src="{{defaulUrl}}">
+            </div>
+
+            <div class="tools col col-50" *ngIf="(project.imageUrl!='') ">
+              <img class="img" src="{{project.imageUrl}}" (error)="updateUrl($event)">
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-card class="myCard">
+              <ion-item lines="none" (click)="onSourceClicked(project.website)">
+                <ion-icon name="link" slot="start"></ion-icon>
+                <ion-label>
+                  {{project.website}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard phone-clip tooltip">
+              <ion-item lines="none" (click)="onPhoneClicked(project.phone)">
+                <span class="tooltiptext">Copy to clipboard</span>
+                <ion-icon name="md-call" slot="start"></ion-icon>
+                <ion-label>
+                  {{project.phone}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard email-clip tooltip">
+              <ion-item lines="none" (click)="onEmailClicked(project.email)">
+                <span class="tooltiptext">Copy to clipboard</span>
+                <ion-icon name="ios-mail" slot="start"></ion-icon>
+                <ion-label>
+                  {{project.email}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard">
+              <ion-item lines="none">
+                <ion-icon name="calendar" slot="start"></ion-icon>
+                <ion-label type="date">
+                  {{projectStart}}: {{project.start | date : 'yyyy-MM-dd'}}
+                  <ion-label type="date">
+                    {{projectEnd}}: {{project.end | date : 'yyyy-MM-dd'}}
+
+                  </ion-label>
+                </ion-label>
+              </ion-item>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    &nbsp;
     <ion-item lines="none">
-        <h3>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;{{project.description}} <br>
-        </h3>
+      <h3 class="h3">
+        {{project.description}} <br>
+      </h3>
     </ion-item>
-
-    <ion-card-content>
-    <ion-card class="myCard">
-        <ion-item lines="none" (click)="onSourceClicked(project.website)">
-          <ion-icon name="link" slot="start"></ion-icon>
-          <ion-label>
-            {{project.website}}
-          </ion-label>
-        </ion-item>
-      </ion-card>
-
-      <ion-card class="myCard phone-clip tooltip">
-          <ion-item lines="none" (click)="onPhoneClicked(project.phone)">
-              <span class="tooltiptext">Copy to clipboard</span>
-            <ion-icon name="md-call" slot="start"></ion-icon>
-            <ion-label>
-             {{project.phone}}
-            </ion-label>
-          </ion-item>
-          
-        </ion-card>
-      
-        <ion-card class="myCard email-clip tooltip">
-          <ion-item lines="none" (click)="onEmailClicked(project.email)">
-              <span class="tooltiptext">Copy to clipboard</span>
-            <ion-icon name="ios-mail" slot="start"></ion-icon>
-            <ion-label>
-              {{project.email}}
-            </ion-label>              
-          </ion-item>          
-        </ion-card>
-      
-        <ion-card class="myCard">
-          <ion-item lines="none">
-            <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label type="date" >
-              Project begins: {{project.start | date : 'yyyy-MM-dd'}} 
-              <ion-label type="date" >
-                Project ends: {{project.end | date : 'yyyy-MM-dd'}}
-               
-              </ion-label>
-            </ion-label>
-          </ion-item>
-        </ion-card>
-
-      </ion-card-content>
   </ion-card>
 
   &nbsp;
-
   <div *ngIf="role==2 && !selected">
-      <ion-button id="2" #second ion-button color="dark" (click)="addToSelecteDProjectS()" expand="full" shape="round">
-        I want to Volunteer
-      </ion-button>
-      &nbsp;
-  </div>
-
-  <div *ngIf="role==2 && selected">
-    <ion-button id="2" #second ion-button color="success" (click)="removeFromSelectedProjectS()" expand="full" shape="round">
-      You volunteer in this project
+    <ion-button id="2" #second ion-button color="dark" (click)="addToSelecteDProjectS()" expand="full" shape="round">
+      {{projectsToVolunteer}}!
     </ion-button>
     &nbsp;
   </div>
 
-  <ion-card>
-      <ion-card-header>
-          <ion-card-title class="label">Find us at:           
-          </ion-card-title>
-      </ion-card-header>
+  <div *ngIf="role==2 && selected">
+    <ion-button id="2" #second ion-button color="success" (click)="removeFromSelectedProjectS()" expand="full"
+      shape="round">
+      {{projectsYouVolunteer}}
+    </ion-button>
+    &nbsp;
+  </div>
+
+  <ion-card style="height: auto; max-height: 500px">
+    <ion-card-header>
+      <ion-card-title class="label">{{projectFind}}:
+      </ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-    <div class="mapouter" >
-      <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas"
-          [src]="newUrl | safe" frameborder="0"
-          scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.emojilib.com">emojilib.com</a>
+      <div class="map-responsive">
+        <div class="gmap_canvas">
+          <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
+            [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+            href="https://www.emojilib.com">emojilib.com</a>
+        </div>
+
       </div>
-
-    </div>
-  </ion-card-content>
+    </ion-card-content>
   </ion-card>
-  
-  &nbsp;  
-  &nbsp;
 
+  &nbsp;
+  &nbsp;
+  <ion-item lines="none">
+    <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
+      <ion-icon name="arrow-round-back"></ion-icon>
+      {{projectGoBack}}
+    </ion-button>
+  </ion-item>
+  &nbsp;
+  &nbsp;
 </ion-content>

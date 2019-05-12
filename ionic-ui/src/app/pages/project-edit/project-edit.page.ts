@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Directive } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Location } from '@angular/common';
 import { load } from '@angular/core/src/render3';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-project-edit',
@@ -19,10 +20,27 @@ import { load } from '@angular/core/src/render3';
 })
 export class ProjectEditPage implements OnInit {
 
+  newPojectImage: string = Language.Lang.newPojectImage;
+  newPojectEmail: string = Language.Lang.newPojectEmail;
+  newPojectPhone: string = Language.Lang.newPojectPhone;
+  newPojectWebsite: string = Language.Lang.newPojectWebsite;
+  newPojectAlertOk: string = Language.Lang.newPojectAlertOk;
+  editProjectDelete: string = Language.Lang.editProjectDelete;
+  editProjectAlertEditHeader: string = Language.Lang.editProjectAlertEditHeader;
+  editProjectAlertEditMessage: string = Language.Lang.editProjectAlertEditMessage;
+  editHeader: string = Language.Lang.editHeader;
+  editTitle: string = Language.Lang.editTitle;
+  editDescription: string = Language.Lang.editDescription;
+  editChangeStart: string = Language.Lang.editChangeStart;
+  editChangeEnd: string = Language.Lang.editChangeEnd;
+  changeLocation: string = Language.Lang.changeLocation;
+  editSave: string = Language.Lang.editSave;
+
   id: number;
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
   role: number = 1;
+  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   constructor(private projectsService: ProjectsService,
     private location: Location,
     private route: ActivatedRoute,
@@ -35,7 +53,6 @@ export class ProjectEditPage implements OnInit {
   project: Project = new Project();
 
   ngOnInit() {
- 
     this.id = this.route.snapshot.params['id'];
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
@@ -46,32 +63,35 @@ export class ProjectEditPage implements OnInit {
     });
 
     this.onEditForm = this.formBuilder.group({
-      
+
       'title': [/*this.project.title*/ null, Validators.compose([
-      Validators.minLength(5),
+        Validators.minLength(5),
         Validators.required
       ])],
-      'imageUrl': [this.project.imageUrl, Validators.compose([
-        /*   Validators.minLength(5),
-           Validators.required*/
-         ])],
+      'imageUrl': [null, Validators.compose([
+        //Validators.minLength(5),
+        Validators.nullValidator
+      ])],
       'description': [null/*this.project.description*/, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
-      'start':this.project.start,
-      'end': this.project.end,
+      'start': [null, Validators.compose([
+        Validators.required])],//this.project.start,
+      'end': [null, Validators.compose([
+        Validators.required
+      ])],//this.project.end,
 
       'organizationId': this.usersService.getTokenId(),
 
       'location': [/*this.project.location*/null, Validators.compose([
-        Validators.required
+        /* Validators.required*/
       ])],
       'website': [/*this.project.website*/null, Validators.compose([
-        Validators.required,
-       Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+        /* Validators.required,*/
+        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
-      'email': [/*this.project.email*/null, Validators.compose([
+      'email': [/*this.project.email*/'', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
@@ -89,14 +109,15 @@ export class ProjectEditPage implements OnInit {
   onSaved() {
     console.log(this.onEditForm.value);
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
-      
-    this.navCtrl.navigateForward('projects').catch(e => console.log(e));
-    location.assign('projects/type/created');
+
+      this.navCtrl.navigateForward('projects').catch(e => console.log(e));
+      // location.assign('projects/type/created');
       console.log(value);
     }, error1 => {
+      this.NotEdited();
       console.log(error1);
     });
-    
+
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
@@ -144,4 +165,27 @@ export class ProjectEditPage implements OnInit {
   load() {
     location.reload()
   }
+  async NotEdited() {
+    const alert = await this.alertCtrl.create({
+      header: this.editProjectAlertEditHeader,
+      message: this.editProjectAlertEditMessage,
+      buttons: [this.newPojectAlertOk]
+    });
+    await alert.present();
+  }
+
+  updateUrl(event) {
+    this.project.imageUrl = this.defaulUrl;
+  }
+
+  updateIMG(searchValue: string) {
+
+    this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
+
+  }
+
+  onSearchChange(searchValue: string) {
+    this.updateIMG(searchValue);
+  }
+
 }

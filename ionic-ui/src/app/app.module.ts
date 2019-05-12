@@ -13,8 +13,7 @@ import { MenuPage } from './pages/menu/menu.page';
 import { ComponentsModule } from './shared/components.module';
 import { FooterPage } from './pages/footer/footer.page';
 import { CookieService } from 'ngx-cookie-service';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
-
+import { StreamingMedia} from '@ionic-native/streaming-media/ngx';
 @NgModule({
     declarations: [
         AppComponent, MenuPage, FooterPage
@@ -30,8 +29,8 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
     providers: [
         StatusBar,
         SplashScreen,
-        YoutubeVideoPlayer,
         CookieService,
+        StreamingMedia,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

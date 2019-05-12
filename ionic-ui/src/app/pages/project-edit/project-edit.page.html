@@ -1,54 +1,51 @@
-<app-header>Page edit</app-header>
+<app-header>{{editHeader}}</app-header>
 
 <ion-content padding>
   <form [formGroup]="onEditForm" class="list-form">
     <ion-card lines="none">
-      
-        &nbsp;
-      <div *ngIf="role==0">
-        <ion-item lines="none">
-          <ion-label color="primary" position="floating">Project image</ion-label>
-          <ion-input type="text" formControlName="imageUrl"></ion-input>
-        </ion-item>
-      </div>
 
-      <div *ngIf="role==1">
+      &nbsp;
+      <div class="tools col col-50">
         <ion-item lines="none">
-          <img [src]="project.imageUrl" class="center" style="height: 200px; width: 400px" />
+          <img  [src]="project.imageUrl" (error)="updateUrl($event)" class="center"
+            style="height: 200px; width: 400px" />
         </ion-item>
-
-        <ion-input type="text" formControlName="imageUrl" [hidden]='true' value={{project.imageUrl}}></ion-input>
-        <ion-item lines="none">
-          <ion-button  class="center" expand="block" shape="round" (click)="onChangePic()">Change picture </ion-button>
-        </ion-item>
+        <div>
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">{{newPojectImage}}</ion-label>
+            <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)"
+              formControlName="imageUrl"></ion-input>
+          </ion-item>
+        </div>
       </div>
     </ion-card>
-    <ion-card >
+    <ion-card>
       <ion-item lines="">
-        <ion-label color="primary" position="floating">Edit Title</ion-label>
-        <ion-input type="text" formControlName="title" value={{project.title}} ></ion-input>
+        <ion-label color="primary" position="floating">{{editTitle}}</ion-label>
+        <ion-input type="text" formControlName="title" value={{project.title}}></ion-input>
       </ion-item>
 
       <ion-item lines="">
-        <ion-label color="primary" position="floating">Email</ion-label>
-        <ion-input type="text" formControlName="email" value={{project.email}} ></ion-input>
+        <ion-label color="primary" position="floating">{{newPojectEmail}}</ion-label>
+        <ion-input type="text" formControlName="email" value={{project.email}}></ion-input>
       </ion-item>
 
       <ion-item lines="">
-        <ion-label color="primary" position="floating">Phone</ion-label>
-        <ion-input type="text" formControlName="phone" value={{project.phone}} ></ion-input>
+        <ion-label color="primary" position="floating">{{newPojectPhone}}</ion-label>
+        <ion-input type="text" formControlName="phone" value={{project.phone}}></ion-input>
       </ion-item>
 
       <ion-item lines="">
-        <ion-label color="primary" position="floating">Website</ion-label>
-        <ion-input type="text" formControlName="website" value={{project.website}} ></ion-input>
+        <ion-label color="primary" position="floating">{{newPojectWebsite}}</ion-label>
+        <ion-input type="text" formControlName="website" value={{project.website}}></ion-input>
       </ion-item>
     </ion-card>
 
     <ion-card>
       <ion-item>
-        <ion-label color="primary" position="floating">Edit Description</ion-label>
-        <ion-input autosize style=" height: 300px" formControlName="description" value={{project.description}} [hidden]="true"> </ion-input>
+        <ion-label color="primary" position="floating">{{editDescription}}</ion-label>
+        <ion-input autosize style=" height: 300px" formControlName="description" value={{project.description}}
+          [hidden]="true"> </ion-input>
         <ion-textarea autosize style=" height: 300px" formControlName="description" value={{project.description}}>
         </ion-textarea>
       </ion-item>
@@ -57,19 +54,20 @@
     <ion-card>
       <ion-item>
         <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label stacked>Change Start Date</ion-label>
+        <ion-label stacked>{{editChangeStart}}</ion-label>
         <ion-datetime formControlName="start" value={{project.start}}></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label stacked>Change End date</ion-label>
+        <ion-label stacked>{{editChangeEnd}}</ion-label>
 
         <ion-datetime formControlName="end" value={{project.end}}></ion-datetime>
       </ion-item>
+
       <ion-item lines="">
         <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label color="primary" position="floating">Change loacation address: </ion-label>
+        <ion-label color="primary" position="floating">{{changeLocation}}: </ion-label>
         <ion-input formControlName="location" type="text" value={{project.location}}></ion-input>
       </ion-item>
     </ion-card>
@@ -78,11 +76,8 @@
       <ion-input formControlName="organizationId" type="text"></ion-input>
     </ion-item>
   </form>
-
-
-
-  <ion-button class="submit-btn" expand="block" type="submit" (click)='onSaved()'>Save</ion-button>
+  <ion-button class="submit-btn" expand="block" type="submit" (click)='onSaved()'>{{editSave}}</ion-button>
   <ion-item lines="none"></ion-item>
-  <ion-button class="submit-btn" expand="block" color="dark" type="submit" (click)='Delete()'>Delete</ion-button>
+  <ion-button class="submit-btn" expand="block" color="dark" type="submit" (click)='Delete()'>{{editProjectDelete}}</ion-button>
   <ion-item lines="none"></ion-item>
 </ion-content>

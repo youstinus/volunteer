@@ -13,6 +13,7 @@ import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-
 import { User } from 'src/app/models/User';
 import { userInfo } from 'os';
 import { OrganizationsService } from 'src/app/services/organizations.service';
+import { Language } from 'src/app/utilities/Language';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -22,6 +23,18 @@ import { OrganizationsService } from 'src/app/services/organizations.service';
 })
 
 export class ProjectPage implements OnInit {
+
+  projectTitle: string = Language.Lang.projectHeader;
+  projectEdit: string = Language.Lang.projectEdit;
+  projectVolunteers: string = Language.Lang.projectVolunteers;
+  projectFind: string = Language.Lang.projectFind;
+  projectSaved: string = Language.Lang.projectSaved;
+  projectsYouVolunteer: string = Language.Lang.projectsYouVolunteer;
+  projectSave: string = Language.Lang.projectSave;
+  projectsToVolunteer: string = Language.Lang.projectsToVolunteer;
+  projectStart: string = Language.Lang.projectStart;
+  projectEnd: string = Language.Lang.projectEnd;
+  projectGoBack: string = Language.Lang.projectGoBack;
 
   user: User = new User();
   project: Project = new Project();
@@ -75,13 +88,12 @@ export class ProjectPage implements OnInit {
         this.setVolunteer();
         this.checkForProjects();
       }
-
-      //turim patikrinti ar projekta ziuri organizacija savininke
-      if (this.role == 3) {
-        this.setOrganization();
-        if (this.project.organizationId == this.organization.id) {
-          this.owner = true;
-        }
+      const userId = this.usersService.getTokenId();
+      if (userId == this.project.organizationId) {
+        this.owner = true;
+        console.log('Savininkas');
+      } else {
+        this.owner = false;
       }
     }, error1 => {
       console.log(error1);
@@ -171,8 +183,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-    //this.saved=false;
-    //console.log('Volunteer id ' + this.volunteer.id + ' remove from save list');
   }
 
   addToSelecteDProjectS() {
@@ -193,8 +203,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-    //this.selected=false;
-    //console.log('Volunteer id ' + this.volunteer.id + ' remove from selected list');
   }
 
   setVolunteer() {
@@ -205,20 +213,12 @@ export class ProjectPage implements OnInit {
       console.log(error1);
     });
   }
-
-  setOrganization() {
-    const userId = this.usersService.getTokenId();
-    console.log('User id= ' + userId + ' ir sitoj vietoj man norisi gauti organizacija is backend');
-    this.user=this.usersService.getUser();
-    console.log(this.user);
-    console.log(this.user.organizationId);
-    this.organizationService.getById(userId).subscribe(value => {
-      this.organization = value;
-      console.log('Organizacija by user id');
-      console.log(value);
-    }, error1 => {
-      console.log(error1);
-    });
+  updateUrl(event) {
+    this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+  }
+  goToProjects() {
+    this.navCtrl.pop();
+    //    this.navCtrl.back();
   }
 }
 

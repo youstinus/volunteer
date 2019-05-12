@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
     selector: 'app-projects',
@@ -13,6 +14,12 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProjectsPage implements OnInit, OnDestroy {
 
+    projectsTitle: string = Language.Lang.menuProjects;
+    projectsSearch: string = Language.Lang.projectsSearch;
+    projectsArchive: string = Language.Lang.projectsArchive;
+    projectsNew: string = Language.Lang.projectsNew;
+
+    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
     public spin = true;
     public searchTerm = '';
     public archive = false;
@@ -21,7 +28,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
     private dateNow = new Date();
     private type: String;
     private subscription: Subscription;
-
     constructor(private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
     }
 
@@ -118,5 +124,9 @@ export class ProjectsPage implements OnInit, OnDestroy {
 
     checkDate(project: Project) {
         return project.end >= this.dateNow && project.start <= this.dateNow;
+    }
+
+    updateUrl(project: Project) {
+        project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
     }
 }

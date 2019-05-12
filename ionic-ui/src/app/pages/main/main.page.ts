@@ -6,6 +6,7 @@ import {Objects} from '../../constants/Objects';
 import {Strings} from '../../constants/Strings';
 import {ProjectsService} from '../../services/projects.service';
 import {OrganizationsService} from '../../services/organizations.service';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
     selector: 'app-main',
@@ -14,10 +15,16 @@ import {OrganizationsService} from '../../services/organizations.service';
 })
 export class MainPage implements OnInit {
 
+    mainTitle: string = Language.Lang.mainTitle;
+    mainEvents: string = Language.Lang.mainEvents;
+    mainWantedOrganizations: string = Language.Lang.mainWantedOrganizations;
+    mainStart: string = Language.Lang.mainStart;
+
     private projects: Project[];
     private organizations: Organization[];
     public threeProjects: Project[];
     public threeOrganizations: Organization[];
+    public spin = false;
 
     constructor(
         private navCtrl: NavController,
@@ -42,6 +49,7 @@ export class MainPage implements OnInit {
             this.filterNewProjects();
         }, error1 => {
             console.log(error1);
+            this.spin=false;
         });
     }
 
@@ -55,8 +63,10 @@ export class MainPage implements OnInit {
                 return value;
             });
             this.filterNewOrganizations();
+            this.spin=false;
         }, error1 => {
             console.log(error1);
+            this.spin=false;
         });
     }
 

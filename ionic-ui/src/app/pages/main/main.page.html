@@ -1,36 +1,41 @@
-<app-header>Volunteering system</app-header>
-<ion-content padding>
+<app-header>{{mainTitle}}</app-header>
+<ion-content padding class="bodis">
+    <h1 class="logo">
+        <span class="word1">The</span>
+        <span class="word2">Platypus</span>
+    </h1>
+    &nbsp;
     <!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"-->
-    <ion-img class="image"
-             src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg"
-    ></ion-img>
-
-    <ion-toolbar>
-        <ion-title>Upcoming Events</ion-title>
-    </ion-toolbar>
+    <img class="image"
+        src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
+    
+    <h2>{{mainEvents}}</h2>
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
-                <ion-img src="{{ project.imageUrl }}"></ion-img>
+            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)" style="text-align: center;">
+                <img class="img" src="{{ project.imageUrl }}" />
+
                 <ion-item>
                     <ion-icon name="calendar" slot="start"></ion-icon>
-                    <ion-label>{{ project.start.toLocaleString('lt-lt') }}</ion-label>
+                    <ion-label>{{mainStart}}: &nbsp;&nbsp;{{project.start | date : 'yyyy-MM-dd'}}</ion-label>
                 </ion-item>
-                <ion-card-header>
-                    <ion-card-title>{{project.title}}</ion-card-title>
-                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-card-title>
+                        {{project.title}}
+                    </ion-card-title>
+                </ion-card-content>
+
             </ion-card>
         </ion-item-group>
     </ion-item-divider>
 
-    <ion-toolbar>
-        <ion-title>Most wanted organizations</ion-title>
-    </ion-toolbar>
+    <h2>{{mainWantedOrganizations}}</h2>
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)">
+            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)" style="text-align: center;">
                 <ion-img src="{{ organization.imageUrl }}"></ion-img>
                 <ion-card-header>
                     <ion-card-title>{{organization.title}}</ion-card-title>
@@ -42,3 +47,5 @@
 
 
 </ion-content>
+
+<ion-spinner name="bubbles" class="spin" *ngIf="spin" color="secondary"></ion-spinner>
