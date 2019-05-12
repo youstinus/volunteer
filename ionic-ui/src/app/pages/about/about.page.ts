@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 @Component({
   selector: 'app-about',
@@ -20,9 +21,12 @@ export class AboutPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
+    private youtube: YoutubeVideoPlayer,
     private http: HttpClient
   ) { }
-
+ watch(watch){
+    this.youtube.openVideo(watch);
+  }
   ngOnInit() {
 
     this.sources =
@@ -41,7 +45,6 @@ export class AboutPage implements OnInit {
       ])]
     });
   }
-
   leaveComment() {
     this.sendEmail();
   }
