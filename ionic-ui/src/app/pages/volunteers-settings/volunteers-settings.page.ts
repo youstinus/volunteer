@@ -110,4 +110,9 @@ export class VolunteersSettingsPage implements OnInit {
     updateUrl(event) {
         this.volunteer.imageUrl = this.defaulUrl;
     }
+
+    onChangePass()
+    {
+        this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
+    }
 }

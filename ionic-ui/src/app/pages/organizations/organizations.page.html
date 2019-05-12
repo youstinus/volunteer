@@ -1,19 +1,27 @@
 <app-header>Organizations</app-header>
 
-<ion-content padding>
-    <ion-card *ngFor="let organization of organizations" (click)="onOrganizationClicked(organization)">
-        <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png">
-        <ion-card-header>
+<ion-content padding class="bodis">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <!--<ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()"></ion-searchbar>-->
+            </ion-col>
+            <ion-col>
 
-            <ion-card-title>{{organization.title}}</ion-card-title>
-            <ion-card-subtitle>{{organization.address}}</ion-card-subtitle>
-            <ion-card-subtitle>{{organization.website}}</ion-card-subtitle>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-        </ion-card-header>
+    <ion-card *ngFor="let organizations of organizationsx" (click)="onOrganizationClicked(organizations)">
+        <img class="img" [src]="organizations.imageUrl" (error)="updateUrl(organizations)" />
 
-        <ion-card-content>
-            {{organization.description}}
-        </ion-card-content>
+            <ion-card-title>
+                {{organizations.title}}
+            </ion-card-title>
+
+        <ion-card-content style=" white-space: pre-line ;word-break: normal; overflow: hidden; text-overflow: ellipsis" >{{organizations.description}}</ion-card-content>
+
     </ion-card>
-
 </ion-content>
+
+<ion-spinner name="bubbles" class="spin" *ngIf="spin" color="secondary"></ion-spinner>

@@ -1,95 +1,136 @@
-<app-header>Organization</app-header>
-
+<app-header>Organization page</app-header>
 <ion-content padding>
 
+  <h1 class="h1" padding-horizontal text-center>{{organization.title}}</h1>
+
+
   <ion-card>
-    <ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col size=50%>
+          <div class="ion-text-center img2">
+            <div *ngIf="(organization.imageUrl==null || organization.imageUrl=='')">
+              <img class="img" src="{{defaulUrl}}">
+            </div>
 
-      <ion-title lines="full">
-        {{organization.title}}
+            <div *ngIf="(organization.imageUrl!='') ">
+              <img class="img" [src]='organization.imageUrl' (error)="updateUrl($event)">
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-card class="myCard">
+              <ion-item lines="none" (click)="onSourceClicked(organization.website)">
+                <ion-icon name="link" slot="start"></ion-icon>
+                <ion-label>
+                  {{organization.website}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard phone-clip tooltip">
+              <ion-item lines="none" (click)="onPhoneClicked(organization.phone)">
+                <span class="tooltiptext">Copy to clipboard</span>
+                <ion-icon name="md-call" slot="start"></ion-icon>
+                <ion-label>
+                  {{organization.phone}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard email-clip tooltip">
+              <ion-item lines="none" (click)="onEmailClicked(organization.email)">
+                <span class="tooltiptext">Copy to clipboard</span>
+                <ion-icon name="ios-mail" slot="start"></ion-icon>
+                <ion-label>
+                  {{organization.email}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
 
-        <ion-row style="height:20px">
-        </ion-row>
-
-      </ion-title>
-      <img src="//www.sprouts.com/wp-content/uploads/2017/11/img-placeholder-generic-1-300x189.png" style="height: 200px; width: 200px"/>
-
-      <ion-row style="height:20px">
+          </div>
+        </ion-col>
       </ion-row>
+    </ion-grid>
 
-      <ion-label>
-        <ion-icon name="pin" style="width: 20px; height: 20px"></ion-icon>
-        <a href="https://maps.google.com/?q={{organization.address}}" >{{organization.address}} </a>
+    &nbsp;
+    <ion-item lines="none">
+      <h3 class="h3">
+        {{organization.description}} <br>
+      </h3>
+    </ion-item>
+  </ion-card>
 
-
-
-
-
-      </ion-label>
-      <ion-row style="height:10px"></ion-row>
-       <ion-label (click)="onWebClicked(organization.website)"> <ion-icon name="at" style="width: 20px; height: 20px"></ion-icon>
-
-        <a style="cursor: pointer"> <u>{{organization.website}}</u>  </a>
-
-      </ion-label>
-      <ion-row style="height:10px"></ion-row>
-      <ion-label> <ion-icon name="call" style="width: 20px; height: 20px"></ion-icon> {{organization.phone}}</ion-label>
-      <ion-row style="height:50px"></ion-row>
+  <ion-list>
+    <ion-item *ngFor="let project of projects; let i = index" (click)="onProjectClicked(i)">
+      <ion-label>{{ project.title }}</ion-label>
+      <ion-button expand="full" shape ="round">Go to project page</ion-button>
+    </ion-item>
+  </ion-list>
 
 
+  <ion-card style="height: auto; max-height: 500px">
+    <ion-card-header>
+      <ion-card-title class="label">Find us at:
+      </ion-card-title>
     </ion-card-header>
-
     <ion-card-content>
-      {{organization.description}}
+      <div class="map-responsive">
+        <div class="gmap_canvas">
+          <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
+                  [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe>
+
+        </div>
+
+      </div>
     </ion-card-content>
+  </ion-card>
 
+  <ion-card  >
+    <ion-list *ngFor="let review of reviews">
 
-    <ion-list>
-      <ion-item *ngFor="let project of projects; let i = index" (click)="onProjectClicked(i)">
-        <ion-label>{{ project.title }}</ion-label>
-        <ion-button expand="full" shape ="round">Go to project page</ion-button>
-      </ion-item>
+      <ion-card-header >
+        <ion-card-title>
+          {{review.title}}
+
+        </ion-card-title>
+
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text style="height: auto">{{review.text}}</ion-text>
+      </ion-card-content>
+
     </ion-list>
 
-    <ion-card-content *ngFor="let review of reviews ">
-      <ion-card-title> {{review.title}}</ion-card-title>
-      <ion-card-subtitle>{{review.text}}</ion-card-subtitle>
-
-    </ion-card-content>
-
-    <ion-card-content>
-
-
-      <form [formGroup]="onCreateForm" >
-      <ion-input formControlName="title" type="Title" placeholder="Title"></ion-input>
-
-      <ion-row style="height:20px">
-      </ion-row>
-
-      <ion-textarea formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
-      <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left">Comment</ion-button>
-      <fieldset  class="rating">
-        <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
-        <input  (click)="on4halfStarClicked()" type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" ></label>
-        <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
-        <input  (click)="on3halfStarClicked()" type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" ></label>
-        <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
-        <input  (click)="on2halfStarClicked()" type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" t></label>
-        <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" t></label>
-        <input  (click)="on1halfStarClicked()" type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" ></label>
-        <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
-        <input  (click)="onhalfStarClicked()" type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" ></label>
-      </fieldset>
-
-      </form>
-    </ion-card-content>
 
 
 
   </ion-card>
 
+  <ion-card>
+
+    <ion-card-content>
+
+
+      <form [formGroup]="onCreateForm" >
+        <ion-input formControlName="title" type="Title" placeholder="Title"   style="border-bottom: #1e2023 solid 2px"></ion-input>
+
+        <ion-row style="height:20px">
+        </ion-row>
+
+        <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
+        <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left" [disabled]="checkRole() && !onCreateForm.valid" >Comment</ion-button>
+        <fieldset  class="rating">
+          <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
+          <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
+          <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
+          <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" t></label>
+          <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
+
+        </fieldset>
+
+      </form>
+      </ion-card-content>
+
+  </ion-card>
 
 </ion-content>
-
-
-

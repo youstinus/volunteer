@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Organization} from '../../models/Organization';
 import {Volunteer} from '../../models/Volunteer';
+import { VolunteersService } from 'src/app/services/volunteers.service';
 import {ActivatedRoute} from '@angular/router';
 import {OrganizationsService} from '../../services/organizations.service';
 import {Project} from '../../models/Project';
@@ -9,6 +10,8 @@ import {Review} from '../../models/Review';
 import {ReviewsService} from '../../services/reviews.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
+import {User} from "../../models/User";
+import {Strings} from "../../constants/Strings";
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.page.html',
@@ -26,7 +29,7 @@ export class OrganizationPage implements OnInit {
     userId: 5,
     phone: '866666666',
     picturesIds: [1],
-    address: 'test g. 696',
+    address: 'studentu g.',
     email: 'test@gmail.com',
     imageUrl: ''
   };
@@ -51,7 +54,19 @@ export class OrganizationPage implements OnInit {
 
   volunteers: Volunteer[];
   projects: Project[];
+
+
+
   public onCreateForm: FormGroup;
+  user: User = new User();
+  project: Project = new Project();
+  volunteer: Volunteer = new Volunteer();
+  //organization: Organization = new Organization();
+  newUrl = '';
+  role: number = 4;
+  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+
+  id: number;
   constructor(
       private organizationsService: OrganizationsService,
       private usersService: UsersService,
@@ -59,17 +74,20 @@ export class OrganizationPage implements OnInit {
       private navCtrl: NavController,
       private reviewsService: ReviewsService,
       private formBuilder: FormBuilder,
+      private volunteersService: VolunteersService,
       public alertCtrl: AlertController
   ) {}
   createReview: Review = new Review();
 
   ngOnInit() {
+    this.stringparse();
     const id = this.route.snapshot.params['id'];
     this.organizationsService.getById(id).subscribe(value => {
       this.organization = value;
     }, error1 => {
       console.log(error1);
     });
+
     this.reviewsService.getReviews(id).subscribe(value => {
       this.reviews = value;
       this.reviews.map(value1 => value1.organizationId === this.organization.id);
@@ -89,9 +107,10 @@ export class OrganizationPage implements OnInit {
         Validators.required
       ])],
       'grade': [null, Validators.compose([
+          Validators.required
 
       ])],
-      'volunteerId': this.usersService.getId(),
+      'volunteerId': this.setVolunteer(),
 
     });
   }
@@ -116,58 +135,104 @@ export class OrganizationPage implements OnInit {
     }
 
 
-
+  setVolunteer() {
+    const userId = this.usersService.getTokenId();
+    this.volunteersService.getByUsersId(userId).subscribe(value => {
+      this.volunteer = value;
+    }, error1 => {
+      console.log(error1);
+    });
+  }
   // consider transfering whole object to project page to reduce time
   onProjectClicked(id: number) {
     this.navCtrl.navigateForward('projects/' + id).catch(reason => console.log(reason));
   }
 
-  onWebClicked(website: string) {
-    window.open('//' + website, '_blank');
-  }
+
 
   on5StarClicked()
   {
     this.onCreateForm.controls['grade'].setValue(5);
   }
 
-  on4halfStarClicked()
-  {
-    this.onCreateForm.controls['grade'].setValue(4.5);
-  }
   on4StarClicked()
   {
     this.onCreateForm.controls['grade'].setValue(4);
-  }
-  on3halfStarClicked()
-  {
-    this.onCreateForm.controls['grade'].setValue(3.5);
   }
   on3StarClicked()
   {
     this.onCreateForm.controls['grade'].setValue(3);
   }
-  on2halfStarClicked()
-  {
-    this.onCreateForm.controls['grade'].setValue(2.5);
-  }
   on2StarClicked()
   {
     this.onCreateForm.controls['grade'].setValue(2);
   }
-  on1halfStarClicked()
-  {
-    this.onCreateForm.controls['grade'].setValue(1.5);
-  }
+
   on1StarClicked()
   {
     this.onCreateForm.controls['grade'].setValue(1);
   }
-  onhalfStarClicked()
-  {
-    this.onCreateForm.controls['grade'].setValue(0.5);
+
+
+
+  stringparse() {
+    let newurl: string = '';
+    newurl += 'https://maps.google.com/maps?q=';
+    if (this.organization !== null && this.organization.address !== null && this.organization.address !== '') {
+      newurl += this.organization.address.replace(' ', '%20').replace(',', '%2C');
+    }
+    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+    this.newUrl = newurl;
   }
 
+
+  onSourceClicked(source: string) {
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(source)) {
+      url += 'http://';
+    }
+    url += source;
+    window.open(url, '_blank');
+  }
+
+  onPhoneClicked(phone: string) {
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', (phone));
+      e.preventDefault();
+      document.removeEventListener('copy', null);
+    });
+    document.execCommand('copy');
+  }
+
+  onEmailClicked(email: string) {
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', (email));
+      e.preventDefault();
+      document.removeEventListener('copy', null);
+    });
+    document.execCommand('copy');
+  }
+
+  updateUrl(event) {
+    this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+  }
+  getRole() {
+    const role = this.usersService.getTokenRole();
+    if (role == 'Volunteer') {
+      this.role = 2;
+    } else if (role == 'Organization') {
+      this.role = 3;
+    } else if (role == 'Moderator') {
+      this.role = 1;
+    } else if (role == 'Admin') {
+      this.role = 0;
+    } else {
+      this.role = 4;
+    }
+  }
+  checkRole() {
+    return this.role ! = 4 ,this.role !=3;
+  }
 
 }
 

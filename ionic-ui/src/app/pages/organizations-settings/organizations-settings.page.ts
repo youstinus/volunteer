@@ -113,6 +113,11 @@ export class OrganizationsSettingsPage implements OnInit {
   updateUrl(event) {
     this.organization.imageUrl = this.defaulUrl;
   }
+  onChangePass()
+  {
+    this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
+  }
+
 }
 
 
