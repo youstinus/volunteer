@@ -80,7 +80,9 @@ export class OrganizationPage implements OnInit {
   createReview: Review = new Review();
 
   ngOnInit() {
+    this.getRole();
     this.stringparse();
+    console.log(this.getRole());
     const id = this.route.snapshot.params['id'];
     this.organizationsService.getById(id).subscribe(value => {
       this.organization = value;
@@ -110,9 +112,11 @@ export class OrganizationPage implements OnInit {
           Validators.required
 
       ])],
+      'organizationId': this.organization.id,
       'volunteerId': this.setVolunteer(),
 
     });
+
   }
   async onCreate() {
     console.log(this.onCreateForm.value);
@@ -231,8 +235,11 @@ export class OrganizationPage implements OnInit {
     }
   }
   checkRole() {
-    return this.role ! = 4 ,this.role !=3;
+   if( this.role == 4)
+     return 1
   }
+
+
 
 }
 

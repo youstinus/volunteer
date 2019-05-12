@@ -118,12 +118,12 @@
         </ion-row>
 
         <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
-        <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left" [disabled]="checkRole() && !onCreateForm.valid" >Comment</ion-button>
+        <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left"  [disabled]="checkRole() == 1 || !onCreateForm.valid" >Comment</ion-button>
         <fieldset  class="rating">
           <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
           <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
           <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
-          <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" t></label>
+          <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2"></label>
           <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
 
         </fieldset>
