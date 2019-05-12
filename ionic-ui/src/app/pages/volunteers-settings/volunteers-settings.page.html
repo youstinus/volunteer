@@ -1,4 +1,4 @@
-<app-header>Volunteer Settings</app-header>
+<app-header>{{volSettingsHeader}}</app-header>
 
 <ion-content padding>
 
@@ -16,7 +16,7 @@
 
                     <ion-card-content>
                         <ion-item lines="none">
-                            <ion-label color="dark" position="floating">Your image url</ion-label>
+                            <ion-label color="dark" position="floating">{{volSettingsImage}}</ion-label>
                             <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
                                 formControlName="imageUrl" value="{{volunteer.imageUrl}}"></ion-input>
                         </ion-item>
@@ -27,35 +27,35 @@
             <ion-card-content>
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Name:
+                        {{volSettingsName}}:
                     </ion-label>
                     <ion-input formControlName="firstName" clearInput value={{volunteer.firstName}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Last Name:
+                        {{volSettingsLastName}}:
                     </ion-label>
                     <ion-input formControlName="lastName" clearInput value={{volunteer.lastName}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Phone:
+                        {{volSettingsPhone}}:
                     </ion-label>
                     <ion-input formControlName="phone" clearInput value={{volunteer.phone}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Email:
+                        {{volSettingsEmail}}:
                     </ion-label>
                     <ion-input clearInput formControlName="email" value={{volunteer.email}}></ion-input>
                 </ion-item>
 
                 <ion-item lines="none">
                     <ion-label>
-                        <h1>Description:</h1>
+                        <h1>{{volSettingsDescription}}:</h1>
                     </ion-label>
                 </ion-item>
                 <ion-textarea formControlName="description" value={{volunteer.description}}></ion-textarea>
@@ -68,7 +68,7 @@
         </ion-card>
 
         <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveVolunteer()">
-            Save changes
+            {{volSettingsSaveChanges}}
         </ion-button>
 
     </form>

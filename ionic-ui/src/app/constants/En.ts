@@ -188,6 +188,17 @@ export class En {
         cr46: 'Privacy Policy Changes',
         cr47: 'Although most changes are likely to be minor, volunteering.ga may change its Privacy Policy from time to time, and at volunteering.ga’s sole discretion. volunteering.ga encourages visitors to frequently check this page for any changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.',
         cr48: 'Contact',
-        cr49: 'Please contact us if you have any questions about our privacy policy or information we hold about you by emailing teamPlatypus@volunteering.ga.'
+        cr49: 'Please contact us if you have any questions about our privacy policy or information we hold about you by emailing teamPlatypus@volunteering.ga.',
+        // Volunteers settings page
+        volSettingsHeader: 'Volunteer Settings',
+        volSettingsImage: 'Your image url',
+        volSettingsName: 'Name',
+        volSettingsLastName: 'Last Name',
+        volSettingsPhone: 'Phone',
+        volSettingsEmail: 'Email',
+        volSettingsDescription: 'Description',
+        volSettingsSaveChanges: 'Save changes',
+        volSettingsAlertSuccess: 'Your changes were saved successfully',
+        volSettingsAlertFail: "Your changes haven't been saved"
     }
 }

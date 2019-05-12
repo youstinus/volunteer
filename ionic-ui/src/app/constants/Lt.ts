@@ -188,7 +188,18 @@ export class Lt {
         cr46: 'Privatumo politikos pakeitimai',
         cr47: 'Nors dauguma pakeitimų gali būti nedideli, volunteering.ga kartais gali keisti savo privatumo politiką ir volunteering.ga skatina lankytojus dažnai patikrinti šį puslapį dėl bet kokių jo privatumo politikos pakeitimų. Jūsų tęstinis šio tinklalapio naudojimas po bet kokių šios privatumo politikos pakeitimų bus jūsų pritarimas tokiems pakeitimams.',
         cr48: 'Kontaktai',
-        cr49: 'Prašome susisiekti su mumis, jei turite kokių nors klausimų apie mūsų privatumo politiką ar informaciją, kurią mes laikome apie jus elektroniniu paštu teamPlatypus@volunteering.ga.'
+        cr49: 'Prašome susisiekti su mumis, jei turite kokių nors klausimų apie mūsų privatumo politiką ar informaciją, kurią mes laikome apie jus elektroniniu paštu teamPlatypus@volunteering.ga.',
+        // Volunteers settings page
+        volSettingsHeader: 'Savanario parametrų keitimas',
+        volSettingsImage: 'Jūsų nuotraukos nuoroda',
+        volSettingsName: 'Vardas',
+        volSettingsLastName: 'Pavardė',
+        volSettingsPhone: 'Telefono numeris',
+        volSettingsEmail: 'El-pašto adresas',
+        volSettingsDescription: 'Aprašas apie jus',
+        volSettingsSaveChanges: 'Išsaugoti pakeitimus',
+        volSettingsAlertSuccess: 'Pakeitimai išsaugoti sėkmingai',
+        volSettingsAlertFail: "Pakeitimų išsaugoti nepavyko"
 
     }
 }
