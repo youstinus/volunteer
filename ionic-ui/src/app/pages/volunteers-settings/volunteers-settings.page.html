@@ -9,9 +9,11 @@
                         <ion-label color="dark" position="floating">Your image url</ion-label>
                 <ion-input type="text" formControlName="imageUrl"></ion-input> -->
             <ion-card-header>
-                <ion-card class="myCard" lines="none">
-                    <img [src]="volunteer.imageUrl" (error)="updateUrl($event)" class="center"
-                        style="height: 200px; width: 400px;" />
+                <ion-card  class="myCard" lines="none">
+
+                    <div class="values col col-50"><img [src]="volunteer.imageUrl" (error)="updateUrl($event)" class="center"
+                        style="height: 200px; width: 400px;" /></div>
+
                     <ion-card-content>
                         <ion-item lines="none">
                             <ion-label color="dark" position="floating">Your image url</ion-label>

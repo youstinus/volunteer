@@ -18,6 +18,7 @@ export class MainPage implements OnInit {
     mainTitle: string = Language.Lang.mainTitle;
     mainEvents: string = Language.Lang.mainEvents;
     mainWantedOrganizations: string = Language.Lang.mainWantedOrganizations;
+    mainStart: string = Language.Lang.mainStart;
 
     private projects: Project[];
     private organizations: Organization[];

@@ -101,3 +101,18 @@ ion-card2 {
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+  .col img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+  }
+  body {
+    cursor: url('https://ionicframework.com/img/finger.png'), auto;
+  }
+  
+  img{
+    display:block !important;
+    max-width:100% !important;
+    height:auto !important;
+  }

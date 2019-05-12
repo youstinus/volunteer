@@ -1,4 +1,4 @@
-<app-header>Volunteers page</app-header>
+<app-header>{{volunteersHeader}}</app-header>
 <ion-content padding>
 
 
@@ -7,12 +7,12 @@
     <p>{{project.description}}</p>
   </ion-item-divider>
   &nbsp;
-  <h1 class="h2" padding-horizontal text-center>Your project volunteers:</h1>
+  <h1 class="h2" padding-horizontal text-center>{{volunteersYourVolunteers}}:</h1>
 
 
   <fieldset class="fieldset">
     <legend class="forLegend">
-      <strong>&nbsp; All registered users &nbsp;</strong>
+      <strong>&nbsp; {{volunteersAll}} &nbsp;</strong>
     </legend>
 
     <ion-list *ngFor="let volunteer of volunteers">
@@ -31,7 +31,7 @@
         <ion-list-header size=large>
           <div *ngIf="volunteer.firstName==null || volunteer.lastName==null">
             <ion-label>
-              Anonymous user
+              {{volunteersAnonymous}}
             </ion-label>
           </div>
           <div *ngIf="volunteer.firstName!=null && volunteer.lastName!=null">
@@ -46,7 +46,7 @@
         <div *ngIf="volunteer.phone==null">
           <h4>
             <ion-icon name="phone-portrait"></ion-icon>
-            None
+            {{volunteersNone}}
           </h4>
         </div>
 
@@ -63,7 +63,7 @@
         <div *ngIf="volunteer.email==null">
           <h4>
             <ion-icon name="mail-open"></ion-icon>
-            None
+            {{volunteersNone}}
           </h4>
         </div>
 
@@ -83,7 +83,7 @@
   <ion-item lines="none">
       <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
         <ion-icon name="arrow-round-back"></ion-icon>
-        Go back
+        {{volunteersGoBack}}
       </ion-button>
     </ion-item>
   <!--/ion-content-->

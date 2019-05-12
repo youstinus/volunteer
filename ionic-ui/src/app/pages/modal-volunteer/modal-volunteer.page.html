@@ -15,14 +15,14 @@
             <img src="{{volPic }}">
         </div>
     <ion-card-header>
-      <ion-card-title class="label">Contact information:
+      <ion-card-title class="label">{{modalVContatInfo}}:
       </ion-card-title>
     </ion-card-header>
     <ion-item lines="none">
       <div *ngIf="volphone==null">
         <h4>
           <ion-icon name="phone-portrait"></ion-icon>
-          None
+          {{modalNone}}
         </h4>
       </div>
       <div *ngIf="volphone!=null">
@@ -37,7 +37,7 @@
       <div *ngIf="volemail==null">
         <h4>
           <ion-icon name="mail-open"></ion-icon>
-          None
+          {{modalNone}}
         </h4>
       </div>
       <div *ngIf="volemail!=null">
@@ -50,7 +50,7 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-title class="label">Description about activities:
+        <ion-card-title class="label">{{modalVDescription}}:
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
@@ -61,5 +61,5 @@
   </ion-card>
 </ion-content>
 <footer>
-  <ion-button (click)="closeModal()">Close </ion-button>
+  <ion-button (click)="closeModal()">{{modalClose}} </ion-button>
 </footer>

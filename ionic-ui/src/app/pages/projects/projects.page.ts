@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
     selector: 'app-projects',
@@ -12,6 +13,11 @@ import { Observable, Subscription } from 'rxjs';
     styleUrls: ['./projects.page.scss'],
 })
 export class ProjectsPage implements OnInit, OnDestroy {
+
+    projectsTitle: string = Language.Lang.menuProjects;
+    projectsSearch: string = Language.Lang.projectsSearch;
+    projectsArchive: string = Language.Lang.projectsArchive;
+    projectsNew: string = Language.Lang.projectsNew;
 
     defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
     public spin = true;

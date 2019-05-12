@@ -1,4 +1,4 @@
-<app-header>Projects</app-header>
+<app-header>{{projectsTitle}}</app-header>
 
 <ion-content padding class="bodis">
     <ion-grid>
@@ -7,14 +7,14 @@
                 <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()"></ion-searchbar>
             </ion-col>
             <ion-col>
-                <ion-button *ngIf="!archive" color="dark" (click)="toggleArchive()">Archive</ion-button>
-                <ion-button *ngIf="archive" color="dark" (click)="toggleArchive()">New projects</ion-button>
+                <ion-button *ngIf="!archive" color="dark" (click)="toggleArchive()">{{projectsArchive}}</ion-button>
+                <ion-button *ngIf="archive" color="dark" (click)="toggleArchive()">{{projectsNew}}</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
 
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
-        <img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" />
+        <div class="values col col-50"><img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" /></div>
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
             <ion-label>{{project.start | date : 'yyyy-MM-dd HH:mm'}}</ion-label>

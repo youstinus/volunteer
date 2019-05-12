@@ -5,6 +5,7 @@ import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, IonButton, AlertController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-new-project',
@@ -12,6 +13,21 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./new-project.page.scss'],
 })
 export class NewProjectPage implements OnInit {
+
+  newPojectHeader: string = Language.Lang.newPojectHeader;
+  newPojectImage: string = Language.Lang.newPojectImage;
+  newPojectTitle: string = Language.Lang.newPojectTitle;
+  newPojectEmail: string = Language.Lang.newPojectEmail;
+  newPojectPhone: string = Language.Lang.newPojectPhone;
+  newPojectWebsite: string = Language.Lang.newPojectWebsite;
+  newPojectDescription: string = Language.Lang.newPojectDescription;
+  newPojectStart: string = Language.Lang.newPojectStart;
+  newPojectEnd: string = Language.Lang.newPojectEnd;
+  newPojectLocation: string = Language.Lang.newPojectLocation;
+  newPojectCreate: string = Language.Lang.newPojectCreate;
+  newPojectAlertNotHeader: string = Language.Lang.newPojectAlertNotHeader;
+  newPojectAlertNotMessage: string = Language.Lang.newPojectAlertNotMessage;
+  newPojectAlertOk: string = Language.Lang.newPojectAlertOk;
 
   id: number;
   public onCreateForm: FormGroup;
@@ -92,9 +108,9 @@ export class NewProjectPage implements OnInit {
   }
   async NotCreated() {
     const alert = await this.alertCtrl.create({
-      header: 'Project was not created',
-      message: 'Please, fill in empty gaps',
-      buttons: ['OK']
+      header: this.newPojectAlertNotHeader,
+      message: this.newPojectAlertNotMessage,
+      buttons: [this.newPojectAlertOk]
     });
     await alert.present();
   }
