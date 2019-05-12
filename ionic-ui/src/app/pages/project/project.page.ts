@@ -13,6 +13,7 @@ import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-
 import { User } from 'src/app/models/User';
 import { userInfo } from 'os';
 import { OrganizationsService } from 'src/app/services/organizations.service';
+import { Language } from 'src/app/utilities/Language';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -22,6 +23,18 @@ import { OrganizationsService } from 'src/app/services/organizations.service';
 })
 
 export class ProjectPage implements OnInit {
+
+  projectTitle: string = Language.Lang.projectHeader;
+  projectEdit: string = Language.Lang.projectEdit;
+  projectVolunteers: string = Language.Lang.projectVolunteers;
+  projectFind: string = Language.Lang.projectFind;
+  projectSaved: string = Language.Lang.projectSaved;
+  projectsYouVolunteer: string = Language.Lang.projectsYouVolunteer;
+  projectSave: string = Language.Lang.projectSave;
+  projectsToVolunteer: string = Language.Lang.projectsToVolunteer;
+  projectStart: string = Language.Lang.projectStart;
+  projectEnd: string = Language.Lang.projectEnd;
+  projectGoBack: string = Language.Lang.projectGoBack;
 
   user: User = new User();
   project: Project = new Project();
@@ -205,7 +218,7 @@ export class ProjectPage implements OnInit {
   }
   goToProjects() {
     this.navCtrl.pop();
-//    this.navCtrl.back();
+    //    this.navCtrl.back();
   }
 }
 

@@ -99,7 +99,7 @@ export class CalendarPage implements OnInit {
         this.eventSource.push({
           title: value.title,
           startTime: new Date(value.start),
-          endTime: new Date(value.end),
+          endTime: new Date(value.start), // #EDITED TO START BECAUSE THERE IS TOO MUCH OF SPAM IN CALENDAR
           allDay: true
         });
       });

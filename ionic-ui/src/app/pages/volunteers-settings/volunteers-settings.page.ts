@@ -105,7 +105,7 @@ export class VolunteersSettingsPage implements OnInit {
         this.updateIMG(searchValue);
     }
     updateIMG(searchValue: string) {
-        this.volunteer.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
+        this.volunteer.imageUrl = searchValue;//Strings.Default_Image_Url;//
     }
     updateUrl(event) {
         this.volunteer.imageUrl = this.defaulUrl;

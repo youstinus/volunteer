@@ -1,4 +1,4 @@
-<app-header>Project</app-header>
+<app-header>{{projectTitle}}</app-header>
 <ion-content padding>
 
   <h1 class="h1" padding-horizontal text-center>{{project.title}}</h1>
@@ -8,7 +8,7 @@
     <ion-item lines="none">
       <ion-button id="1" #first ion-button color="dark" (click)="addToSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
-        Save
+        {{projectSave}}
       </ion-button>
     </ion-item>
   </div>
@@ -17,7 +17,7 @@
     <ion-item lines="none">
       <ion-button id="1" #first ion-button color="success" (click)="removeFromSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
-        Saved
+        projectSaved
       </ion-button>
     </ion-item>
   </div>
@@ -27,12 +27,14 @@
     <ion-item lines="none">
       <ion-button slot="end" color="dark" (click)="navigateToEdit()">
         <ion-icon slot="start" name="create"></ion-icon>
-        Edit project
+        {{projectEdit}}
       </ion-button>
+    </ion-item>
+    <ion-item lines="none">
       <ion-button slot="end" color="dark" (click)="navigateToVolunteers()">
         <!-- id="1" #first ion-button color="dark" (click)="onVolunteersNavigate()" slot="end"> -->
         <ion-icon slot="start" name="people"></ion-icon>
-        Volunteers
+        {{projectVolunteers}}
       </ion-button>
     </ion-item>
   </div>
@@ -40,13 +42,13 @@
   <ion-card>
     <ion-grid>
       <ion-row>
-        <ion-col size=50%>
+        <ion-col ion-item no-lines no-padding text-center col-2 size=50%>
           <div class="ion-text-center img2">
-            <div *ngIf="(project.imageUrl==null || project.imageUrl=='')">
+            <div class="tools col col-50" class="myphoto" class="tools col col-50" *ngIf="(project.imageUrl==null || project.imageUrl=='')">
               <img class="img" src="{{defaulUrl}}">
             </div>
 
-            <div *ngIf="(project.imageUrl!='') ">
+            <div class="tools col col-50" *ngIf="(project.imageUrl!='') ">
               <img class="img" src="{{project.imageUrl}}" (error)="updateUrl($event)">
             </div>
           </div>
@@ -83,9 +85,9 @@
               <ion-item lines="none">
                 <ion-icon name="calendar" slot="start"></ion-icon>
                 <ion-label type="date">
-                  Project begins: {{project.start | date : 'yyyy-MM-dd'}}
+                  {{projectStart}}: {{project.start | date : 'yyyy-MM-dd'}}
                   <ion-label type="date">
-                    Project ends: {{project.end | date : 'yyyy-MM-dd'}}
+                    {{projectEnd}}: {{project.end | date : 'yyyy-MM-dd'}}
 
                   </ion-label>
                 </ion-label>
@@ -107,7 +109,7 @@
   &nbsp;
   <div *ngIf="role==2 && !selected">
     <ion-button id="2" #second ion-button color="dark" (click)="addToSelecteDProjectS()" expand="full" shape="round">
-      I want to Volunteer
+      {{projectsToVolunteer}}!
     </ion-button>
     &nbsp;
   </div>
@@ -115,14 +117,14 @@
   <div *ngIf="role==2 && selected">
     <ion-button id="2" #second ion-button color="success" (click)="removeFromSelectedProjectS()" expand="full"
       shape="round">
-      You volunteer in this project
+      {{projectsYouVolunteer}}
     </ion-button>
     &nbsp;
   </div>
 
   <ion-card style="height: auto; max-height: 500px">
     <ion-card-header>
-      <ion-card-title class="label">Find us at:
+      <ion-card-title class="label">{{projectFind}}:
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -143,7 +145,7 @@
   <ion-item lines="none">
     <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
       <ion-icon name="arrow-round-back"></ion-icon>
-      Go back
+      {{projectGoBack}}
     </ion-button>
   </ion-item>
   &nbsp;

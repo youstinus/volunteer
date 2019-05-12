@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Location } from '@angular/common';
 import { load } from '@angular/core/src/render3';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-project-edit',
@@ -18,6 +19,22 @@ import { load } from '@angular/core/src/render3';
   styleUrls: ['./project-edit.page.scss'],
 })
 export class ProjectEditPage implements OnInit {
+
+  newPojectImage: string = Language.Lang.newPojectImage;
+  newPojectEmail: string = Language.Lang.newPojectEmail;
+  newPojectPhone: string = Language.Lang.newPojectPhone;
+  newPojectWebsite: string = Language.Lang.newPojectWebsite;
+  newPojectAlertOk: string = Language.Lang.newPojectAlertOk;
+  editProjectDelete: string = Language.Lang.editProjectDelete;
+  editProjectAlertEditHeader: string = Language.Lang.editProjectAlertEditHeader;
+  editProjectAlertEditMessage: string = Language.Lang.editProjectAlertEditMessage;
+  editHeader: string = Language.Lang.editHeader;
+  editTitle: string = Language.Lang.editTitle;
+  editDescription: string = Language.Lang.editDescription;
+  editChangeStart: string = Language.Lang.editChangeStart;
+  editChangeEnd: string = Language.Lang.editChangeEnd;
+  changeLocation: string = Language.Lang.changeLocation;
+  editSave: string = Language.Lang.editSave;
 
   id: number;
   public onEditForm: FormGroup;
@@ -68,7 +85,7 @@ export class ProjectEditPage implements OnInit {
       'organizationId': this.usersService.getTokenId(),
 
       'location': [/*this.project.location*/null, Validators.compose([
-       /* Validators.required*/
+        /* Validators.required*/
       ])],
       'website': [/*this.project.website*/null, Validators.compose([
         /* Validators.required,*/
@@ -150,9 +167,9 @@ export class ProjectEditPage implements OnInit {
   }
   async NotEdited() {
     const alert = await this.alertCtrl.create({
-      header: 'Project was not created',
-      message: 'Please, fill in empty gaps',
-      buttons: ['OK']
+      header: this.editProjectAlertEditHeader,
+      message: this.editProjectAlertEditMessage,
+      buttons: [this.newPojectAlertOk]
     });
     await alert.present();
   }
@@ -162,11 +179,11 @@ export class ProjectEditPage implements OnInit {
   }
 
   updateIMG(searchValue: string) {
-    
-    this.project.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
-    
+
+    this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
+
   }
-   
+
   onSearchChange(searchValue: string) {
     this.updateIMG(searchValue);
   }
