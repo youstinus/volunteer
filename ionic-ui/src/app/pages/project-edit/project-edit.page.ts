@@ -57,6 +57,7 @@ export class ProjectEditPage implements OnInit {
    this.id = this.route.snapshot.params['id'];
    this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
+      this.atsarginisUrl = this.project.imageUrl;
       this.getRole();
       console.log(value)
     }, error1 => {
@@ -177,11 +178,11 @@ export class ProjectEditPage implements OnInit {
   
 
   updateUrl(event) {
-  //his.project.imageUrl= this.project.imageUrl;
+  //this.project.imageUrl= this.project.imageUrl;
   this.atsarginisUrl = this.defaulUrl;
   }
   updateUrl2(event) {
-    this.atsarginisUrl = this.project.imageUrl;
+    this.atsarginisUrl = this.project.imageUrl; 
   }
   updateIMG(searchValue: string) {
 
