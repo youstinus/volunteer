@@ -19,7 +19,7 @@ import { Language } from 'src/app/utilities/Language';
   styleUrls: ['./project-edit.page.scss'],
 })
 export class ProjectEditPage implements OnInit {
-
+  
   newPojectImage: string = Language.Lang.newPojectImage;
   newPojectEmail: string = Language.Lang.newPojectEmail;
   newPojectPhone: string = Language.Lang.newPojectPhone;
@@ -35,7 +35,9 @@ export class ProjectEditPage implements OnInit {
   editChangeEnd: string = Language.Lang.editChangeEnd;
   changeLocation: string = Language.Lang.changeLocation;
   editSave: string = Language.Lang.editSave;
-
+  
+  project: Project = new Project();
+  atsarginisUrl: string = this.project.imageUrl;
   id: number;
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
@@ -50,12 +52,12 @@ export class ProjectEditPage implements OnInit {
     public alertCtrl: AlertController
   ) {
   }
-  project: Project = new Project();
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.projectsService.getById(this.id).subscribe(value => {
+   this.id = this.route.snapshot.params['id'];
+   this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
+      this.atsarginisUrl = this.project.imageUrl;
       this.getRole();
       console.log(value)
     }, error1 => {
@@ -173,14 +175,19 @@ export class ProjectEditPage implements OnInit {
     });
     await alert.present();
   }
+  
 
   updateUrl(event) {
-    this.project.imageUrl = this.defaulUrl;
+  //this.project.imageUrl= this.project.imageUrl;
+  this.atsarginisUrl = this.defaulUrl;
   }
-
+  updateUrl2(event) {
+    this.atsarginisUrl = this.project.imageUrl; 
+  }
   updateIMG(searchValue: string) {
 
     this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
+    this.atsarginisUrl = searchValue;
 
   }
 

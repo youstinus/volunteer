@@ -1,5 +1,5 @@
 
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
@@ -21,8 +21,8 @@ export class CalendarPage implements OnInit {
   private type: String;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
-  eventSource: { title: string, startTime: Date, endTime: Date, allDay: boolean }[] = [];
-  constructor(private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
+  eventSource: { title: string, startTime: Date, endTime: Date, allDay: boolean, id: number }[] = [];
+  constructor( public navCtrl: NavController,private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
   ngOnInit() {
     /* this.resetEvent();*/
     this.type = this.route.snapshot.params['type'];
@@ -47,9 +47,15 @@ export class CalendarPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: event.title,
       subHeader: event.desc,
-      message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
-    });
+      message: 'Nuo: ' + start + '<br><br>Iki: ' + end,
+     buttons: [{
+        text: "Details",
+        handler: () => {
+          alert.dismiss().then(() => {
+            this.navCtrl.navigateForward('projects/'+event.id).catch(e => console.log(e));
+          })
+        }},'OK']
+     });
     alert.present();
   }
   changeMode(mode) {
@@ -100,7 +106,8 @@ export class CalendarPage implements OnInit {
           title: value.title,
           startTime: new Date(value.start),
           endTime: new Date(value.start), // #EDITED TO START BECAUSE THERE IS TOO MUCH OF SPAM IN CALENDAR
-          allDay: true
+          allDay: true,
+          id: value.id
         });
       });
       this.myCal.loadEvents();

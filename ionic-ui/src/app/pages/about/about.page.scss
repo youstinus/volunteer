@@ -7,13 +7,14 @@
     }
 
 .myCard{
+  //  width: 1500px;
+    max-width: 1500px;
     background-color: rgba(123, 172, 137, 0.24);
     border-radius: 50px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.185);
     cursor: pointer;
 }
 ion-content{
-//    --background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
     --background: none;
     background-image: url('/assets/background2.jpg');
     background-position: center top;
@@ -23,6 +24,7 @@ ion-content{
 }
 
 ion-card{
+    max-width: 1500px;
     background-color: rgba(146, 230, 158, 0.705);
     border-radius: 15px;
     padding-top: 10px;
@@ -31,6 +33,7 @@ ion-card{
 }
 
 ion-button{
+    max-width: 1500px;
     --background: #062f77;
     text-transform: uppercase;
     cursor: pointer;
@@ -62,11 +65,11 @@ ion-item{
 }
 
 .img {
-    max-width: 85%;
+    max-width: 1400px;
     max-height: 85%;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+   // margin-left: auto;
+   // margin-right: auto;
 }
 
 h1 { 
@@ -85,7 +88,7 @@ ion-item-divider {
     padding: 0px;
     --background:linear-gradient(135deg,rgba(191, 238, 81, 0.849),rgba(146, 230, 158, 0.705));
     display: inline-block;
-    max-width: 1320px;
+    max-width: 1500px;
     border-radius: 20px;
     margin-bottom: 5px; 
     margin-top: 5px;
