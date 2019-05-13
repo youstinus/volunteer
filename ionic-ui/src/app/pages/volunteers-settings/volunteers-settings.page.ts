@@ -8,6 +8,7 @@ import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Strings } from 'src/app/constants/Strings';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -15,6 +16,17 @@ import { Strings } from 'src/app/constants/Strings';
     styleUrls: ['./volunteers-settings.page.scss'],
 })
 export class VolunteersSettingsPage implements OnInit {
+    
+    volSettingsHeader: string = Language.Lang.volSettingsHeader;
+    volSettingsImage: string = Language.Lang.volSettingsImage;
+    volSettingsName: string = Language.Lang.volSettingsName;
+    volSettingsLastName: string = Language.Lang.volSettingsLastName;
+    volSettingsPhone: string = Language.Lang.volSettingsPhone;
+    volSettingsEmail: string = Language.Lang.volSettingsEmail;
+    volSettingsDescription: string = Language.Lang.volSettingsDescription;
+    volSettingsSaveChanges: string = Language.Lang.volSettingsSaveChanges;
+    volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
+    volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
 
     user: number;
     public onSaveForm: FormGroup;
