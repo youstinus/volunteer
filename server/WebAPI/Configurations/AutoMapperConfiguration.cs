@@ -47,8 +47,8 @@ namespace WebAPI.Configurations
         {
             CreateMap<Picture, PictureDto>(MemberList.None)
                 .ForMember(dest => dest.ProjectId, opt => opt.MapFrom(src => src.Project.Id))
-                .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id))
-                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.Id));
+                .ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.User.Id))
+                .ForMember(dest => dest.VolunteerId, opt => opt.MapFrom(src => src.Volunteer.User.Id));
             CreateMap<PictureDto, Picture>(MemberList.Destination);
         }
 
@@ -65,7 +65,7 @@ namespace WebAPI.Configurations
             CreateMap<Volunteer, VolunteerDto>(MemberList.None)
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.Id))
                 .ForMember(dest => dest.PictureId, opt => opt.MapFrom(src => src.Picture.Id))
-                .ForMember(dest => dest.ProjectsIds, opt => opt.MapFrom(src => src.VolunteerProjects.Select(x => x.ProjectId)))
+                .ForMember(dest => dest.ProjectsIds, opt => opt.MapFrom(src => src.VolunteerProjects.Select(x => x.Project.Id)))
                 .ForMember(dest => dest.ReviewsIds, opt => opt.MapFrom(src => src.Reviews.Select(x => x.Id)))
                 .ForMember(dest => dest.SavedProjectsIds, opt => opt.MapFrom(src => src.SavedProjects.Select(x => x.Project.Id)));
             CreateMap<VolunteerDto, Volunteer>(MemberList.Destination);

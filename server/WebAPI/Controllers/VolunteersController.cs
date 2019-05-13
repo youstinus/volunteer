@@ -27,7 +27,9 @@ namespace WebAPI.Controllers
         [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
         public async Task<IActionResult> GetByUsersId([FromRoute] long id)
         {
-            try
+            return await Task.Run(() => BadRequest("Not supported"));
+
+            /*try
             {
                 var entity = await _volunteersService.GetByUsersId(id);
                 return Ok(entity);
@@ -35,7 +37,7 @@ namespace WebAPI.Controllers
             catch (InvalidOperationException e)
             {
                 return NotFound(e.Message);
-            }
+            }*/
         }
 
         #region CRUD
@@ -49,37 +51,55 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization))]
-        public override Task<IActionResult> Get()
+        public override async Task<IActionResult> Get()
         {
-            return base.Get();
+            return await Task.Run(() => BadRequest("Not supported"));
+            //return base.Get();
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
-        public override Task<IActionResult> GetById([FromRoute] long id)
+        [Authorize(Roles = /*nameof(UserType.Admin) + "," + nameof(UserType.Moderator) + "," + nameof(UserType.Organization) + "," + */nameof(UserType.Volunteer))]
+        public override async Task<IActionResult> GetById([FromRoute] long id)
         {
-            return base.GetById(id);
+            if (!ModelState.IsValid)
+                return Forbid();
+
+            try
+            {
+                var entity = await _volunteersService.GetByUser(User, id);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPatch("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<VolunteerDto> patchDto)
+        public override async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<VolunteerDto> patchDto)
         {
-            return base.Patch(id, patchDto);
+            return await Task.Run(() => BadRequest("Not supported"));
+            //return base.Patch(id, patchDto);
         }
 
         [HttpPost]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Post([FromBody] VolunteerDto entity)
+        public override async Task<IActionResult> Post([FromBody] VolunteerDto entity)
         {
-            return base.Post(entity);
+            return await Task.Run(() => BadRequest("Not supported"));
+            //return base.Post(entity);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Put([FromRoute] long id, [FromBody] VolunteerDto entity)
+        public override async Task<IActionResult> Put([FromRoute] long id, [FromBody] VolunteerDto entity)
         {
-            return base.Put(id, entity);
+            if (!ModelState.IsValid || !await _volunteersService.ValidateUserByVolunteersId(User, id))
+                return Forbid();
+
+            //return await Task.Run(() => BadRequest("Not supported"));
+            return await base.Put(id, entity);
         }
 
         #endregion

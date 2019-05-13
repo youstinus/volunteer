@@ -161,7 +161,6 @@ namespace WebAPI.Services
             await _repository.Update(user);
         }
         
-        // is it possible to change username ?
         public async Task UpdateByEmail(string email, UserDto userDto)
         {
             var user = await _repository.GetSingleByPredicate(x => x.Email.Equals(email));

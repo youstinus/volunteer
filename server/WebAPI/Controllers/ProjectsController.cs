@@ -213,15 +213,23 @@ namespace WebAPI.Controllers
             if (!(await _projectsService.ValidateOrganizationByProjectId(User, id)))
                 return Forbid();
 
-            return await base.Patch(id, patchDto);
+            return await Task.Run(() => BadRequest("Endpoint not supported"));
+            //return await base.Patch(id, patchDto);
         }
 
         [HttpPost]
         [Authorize(Roles = nameof(UserType.Organization))]
         public override async Task<IActionResult> Post([FromBody] ProjectDto entity)
         {
-            if (!ModelState.IsValid || !(await _organizationsService.OrganizationExists(entity)))
-                return BadRequest();
+            try
+            {
+                if (!ModelState.IsValid || !(await _organizationsService.OrganizationExists(entity)))
+                    return BadRequest();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return await base.Post(entity);
         }

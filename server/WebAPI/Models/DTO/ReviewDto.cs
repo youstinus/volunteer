@@ -10,6 +10,7 @@ namespace WebAPI.Models.DTO
         public string Text { get; set; }
 
         public long OrganizationId { get; set; }
+        // Mapped from User.Id
         public long VolunteerId { get; set; }
     }
 }

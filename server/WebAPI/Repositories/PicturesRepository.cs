@@ -20,7 +20,9 @@ namespace WebAPI.Repositories
         {
             var dependencies = queryable
                 .Include(x => x.Organization)
+                .ThenInclude(x => x.User)
                 .Include(x => x.Volunteer)
+                .ThenInclude(x => x.User)
                 .Include(x => x.Project);
             return dependencies;
         }

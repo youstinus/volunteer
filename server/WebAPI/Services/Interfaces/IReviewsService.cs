@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Base.Interfaces;
 using WebAPI.Models;
@@ -9,5 +10,6 @@ namespace WebAPI.Services.Interfaces
     public interface IReviewsService : IBaseService<Review, ReviewDto>
     {
         Task<ICollection<ReviewDto>> GetByOrganizationId(long id);
+        Task<ReviewDto> CreateByUser(ClaimsPrincipal user, ReviewDto entity);
     }
 }

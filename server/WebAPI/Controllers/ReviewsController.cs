@@ -62,23 +62,34 @@ namespace WebAPI.Controllers
 
         [HttpPatch("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<ReviewDto> patchDto)
+        public override async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<ReviewDto> patchDto)
         {
-            return base.Patch(id, patchDto);
+            return await Task.Run(() => BadRequest("Not supported"));
+            //return base.Patch(id, patchDto);
         }
 
         [HttpPost]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Post([FromBody] ReviewDto entity)
+        public override async Task<IActionResult> Post([FromBody] ReviewDto entity)
         {
-            return base.Post(entity);
+            try
+            {
+                var created = await _reviewsService.CreateByUser(User, entity);
+                var entityUri = _service.CreateResourceUri(created.Id);
+                return Created(entityUri, created);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
-        public override Task<IActionResult> Put([FromRoute] long id, [FromBody] ReviewDto entity)
+        public override async Task<IActionResult> Put([FromRoute] long id, [FromBody] ReviewDto entity)
         {
-            return base.Put(id, entity);
+            return await Task.Run(() => BadRequest("Not supported"));
+            //return base.Put(id, entity);
         }
     }
 }

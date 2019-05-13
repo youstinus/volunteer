@@ -22,8 +22,7 @@
     </ion-item>
   </div>
 
-  <!--*ngIf="owner"-->
-  <div *ngIf="role==3">
+  <div *ngIf="owner">
     <ion-item lines="none">
       <ion-button slot="end" color="dark" (click)="navigateToEdit()">
         <ion-icon slot="start" name="create"></ion-icon>

@@ -20,6 +20,7 @@ namespace WebAPI.Models.DTO
         public ICollection<long> SavedVolunteersIds { get; set; }
         public ICollection<long> PicturesIds { get; set; }
 
+        // Mapped from User.Id
         public long OrganizationId { get; set; }
     }
 }

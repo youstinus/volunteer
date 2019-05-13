@@ -51,7 +51,8 @@ namespace WebAPI.Controllers
             if (!ModelState.IsValid || !await _organizationsService.ValidateUserByOrganizationsId(User, id))
                 return Forbid();
 
-            return await base.Patch(id, patchDto);
+            return BadRequest("Endpoint not supported");
+            //return await base.Patch(id, patchDto);
         }
 
         [HttpPost]

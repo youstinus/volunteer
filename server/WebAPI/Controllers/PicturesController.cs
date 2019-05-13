@@ -42,9 +42,10 @@ namespace WebAPI.Controllers
 
         [HttpPatch("{id}")]
         [AllowAnonymous]
-        public override Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<PictureDto> patchDto)
+        public override async Task<IActionResult> Patch([FromRoute] long id, [FromBody] JsonPatchDocument<PictureDto> patchDto)
         {
-            return base.Patch(id, patchDto);
+            return await Task.Run(() => BadRequest("Endpoint not supported"));
+            //return base.Patch(id, patchDto);
         }
 
         [HttpPost]
