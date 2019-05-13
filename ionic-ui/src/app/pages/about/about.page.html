@@ -50,7 +50,7 @@
       <!-- Comment form -->
     <ion-card>
         <ion-card-header>
-            <ion-card-title class="label">{{aboutOpinion}}</ion-card-title>      
+            <ion-card-title [attr.class]="label">{{aboutOpinion}}</ion-card-title>      
           </ion-card-header>
     <form [formGroup]="commentForm" class="list-form">
         <ion-item no-padding class="animated fadeInUp">
