@@ -7,15 +7,14 @@
       &nbsp;
       <div class="tools col col-50">
         <ion-item lines="none">
-          <img  [src]="project.imageUrl" (error)="updateUrl($event)" class="center"
+          <img  [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
             style="height: 200px; width: 400px" />
         </ion-item>
         <div>
           <ion-item lines="none">
             <ion-label color="primary" position="floating" >{{newPojectImage}}</ion-label>
             <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)"
-              formControlName="imageUrl" ></ion-input>
-              <!-- value={{project.imageUrl}} -->
+              formControlName="imageUrl" value={{project.imageUrl}}></ion-input>
           </ion-item>
         </div>
       </div>
