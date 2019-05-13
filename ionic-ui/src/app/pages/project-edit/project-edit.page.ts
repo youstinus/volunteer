@@ -37,6 +37,7 @@ export class ProjectEditPage implements OnInit {
   editSave: string = Language.Lang.editSave;
   imgBegining: string;
   id: number;
+  atsarginisUrl: string ;
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
   role: number = 1;
@@ -53,6 +54,7 @@ export class ProjectEditPage implements OnInit {
   project: Project = new Project();
 
   ngOnInit() {
+    this.atsarginisUrl = this.project.imageUrl;
    this.id = this.route.snapshot.params['id'];
    this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
@@ -175,7 +177,7 @@ export class ProjectEditPage implements OnInit {
   }
 
   updateUrl(event) {
-    this.project.imageUrl = this.defaulUrl;//this.project.imageUrl;//
+    this.project.imageUrl = this.defaulUrl;//this.project.imageUrl;
   }
 
   updateIMG(searchValue: string) {
