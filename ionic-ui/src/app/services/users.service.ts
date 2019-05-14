@@ -134,6 +134,7 @@ export class UsersService {
     public encodeResetMail(email: string) {
         let encrypted = this.simpleCrypto.encrypt(email).toString();
         let message = btoa(encrypted); //todo insert date with duration
+        console.log(message);
         return message;
     }
 

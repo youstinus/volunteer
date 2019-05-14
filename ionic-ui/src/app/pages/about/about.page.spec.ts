@@ -3,26 +3,32 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {Location, LocationStrategy, PathLocationStrategy, APP_BASE_HREF} from '@angular/common';
 import { AboutPage } from './about.page';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { IonicModule } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 describe('AboutPage', () => {
   let component: AboutPage;
   let fixture: ComponentFixture<AboutPage>;
-
+  const fakeActivatedRoute = {
+    snapshot: { data: { }, params: Observable.create({ type: 'all' }) }
+  } as ActivatedRoute;
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AboutPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule],
-      providers: [Location, LocationStrategy,HttpClient,HttpHandler,
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
+      providers: [Location, LocationStrategy,HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      //{ provide: APP_BASE_HREF, useValue: '/my/app'}
+      { provide: APP_BASE_HREF, useValue: '.'}, 
+      {provide: ActivatedRoute, useValue: fakeActivatedRoute}
           ]    })
     .compileComponents();
   }));

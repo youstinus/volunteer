@@ -1,6 +1,6 @@
 branches:
   only:
-  - deploy
+  #- deploy
   - /^v.*$/
   
 language: node_js
@@ -53,6 +53,7 @@ matrix:
     #- sudo dpkg -i google-chrome*.deb
     script:
     - "./scripts/ionic-build.bat"
+    - "./scripts/ionic-build-functions.bat"
     after_success:
     - "./scripts/ionic-publish-firebase.bat"
     

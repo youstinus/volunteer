@@ -1,7 +1,7 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 
@@ -9,30 +9,8 @@ import { Language } from 'src/app/utilities/Language';
   selector: 'app-about',
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => AboutPage),
-      
-    }
-]
 })
-export class AboutPage implements OnInit, ControlValueAccessor {
-  @Input() label = 'switch';
-  @Input('value') _value = false;
-  onChange: any = () => {};
-  onTouched: any = () => {};
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-  }
+export class AboutPage implements OnInit {
 
   menuAboutUs:string=Language.Lang.menuAboutUs;
   aboutTitle: string=Language.Lang.aboutTitle;
@@ -67,20 +45,6 @@ export class AboutPage implements OnInit, ControlValueAccessor {
     private http: HttpClient,
     private streamingMediaOriginal: StreamingMedia
   ) { }
-
-  registerOnChange(fn) {
-    this.onChange = fn;
-  }
-
-  writeValue(value) {
-    if (value)
-      this.value = value;
-  }
-
-  registerOnTouched(fn) {
-    this.onTouched = fn;
-  }
-
   startVideo(){
    let options: StreamingVideoOptions = { 
      successCallback: () => { console.log() },
