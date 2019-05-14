@@ -19,7 +19,7 @@ import { Language } from 'src/app/utilities/Language';
   styleUrls: ['./project-edit.page.scss'],
 })
 export class ProjectEditPage implements OnInit {
-  
+
   newPojectImage: string = Language.Lang.newPojectImage;
   newPojectEmail: string = Language.Lang.newPojectEmail;
   newPojectPhone: string = Language.Lang.newPojectPhone;
@@ -35,7 +35,7 @@ export class ProjectEditPage implements OnInit {
   editChangeEnd: string = Language.Lang.editChangeEnd;
   changeLocation: string = Language.Lang.changeLocation;
   editSave: string = Language.Lang.editSave;
-  
+
   project: Project = new Project();
   atsarginisUrl: string = this.project.imageUrl;
   id: number;
@@ -54,8 +54,8 @@ export class ProjectEditPage implements OnInit {
   }
 
   ngOnInit() {
-   this.id = this.route.snapshot.params['id'];
-   this.projectsService.getById(this.id).subscribe(value => {
+    this.id = this.route.snapshot.params['id'];
+    this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
       this.atsarginisUrl = this.project.imageUrl;
       this.getRole();
@@ -78,11 +78,15 @@ export class ProjectEditPage implements OnInit {
         Validators.minLength(5),
         Validators.required
       ])],
-      'start': [null, Validators.compose([
-        Validators.required])],//this.project.start,
-      'end': [null, Validators.compose([
-        Validators.required
-      ])],//this.project.end,
+      // 'start': [null, Validators.compose([
+      //   Validators.required])],//this.project.start,
+
+      'start': '',
+      'end': '',
+
+      // 'end': [null, Validators.compose([
+      //   Validators.required
+      // ])],//this.project.end,
 
       'organizationId': this.usersService.getTokenId(),
 
@@ -112,8 +116,8 @@ export class ProjectEditPage implements OnInit {
     console.log(this.onEditForm.value);
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
 
-      this.navCtrl.navigateForward('projects').catch(e => console.log(e));
-      // location.assign('projects/type/created');
+      //this.navCtrl.navigateForward('projects').catch(e => console.log(e));
+      location.assign('projects/type/created');
       console.log(value);
     }, error1 => {
       this.NotEdited();
@@ -175,14 +179,14 @@ export class ProjectEditPage implements OnInit {
     });
     await alert.present();
   }
-  
+
 
   updateUrl(event) {
-  //this.project.imageUrl= this.project.imageUrl;
-  this.atsarginisUrl = this.defaulUrl;
+    //this.project.imageUrl= this.project.imageUrl;
+    this.atsarginisUrl = this.defaulUrl;
   }
   updateUrl2(event) {
-    this.atsarginisUrl = this.project.imageUrl; 
+    this.atsarginisUrl = this.project.imageUrl;
   }
   updateIMG(searchValue: string) {
 
