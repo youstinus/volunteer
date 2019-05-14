@@ -139,6 +139,9 @@ export class Lt {
         changeLocation: 'Keisti vietovę',
         editSave: 'Išsaugoti pakeitimus',
         editSucesfull: 'Sėkmingai išsaugota',
+        editConfirmDelete: 'Ar tikrai norite ištrynti šį projektą?',
+        yes: 'Taip',
+        no: 'Ne',
         //registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
         //Copyright
         cr1: 'Privatumo politika',

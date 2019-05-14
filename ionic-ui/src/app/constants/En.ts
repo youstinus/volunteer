@@ -139,6 +139,9 @@ export class En {
         changeLocation: 'Change location address',
         editSave: 'Save changes',
         editSucesfull: 'Sucesfully Saved!',
+        editConfirmDelete: 'Are you sure want to delete this project?',
+        yes: 'Yes',
+        no: 'No',
         //registrationSuccess: 'User was registered successfully',
         //copyright
         cr1: 'Privacy Policy',

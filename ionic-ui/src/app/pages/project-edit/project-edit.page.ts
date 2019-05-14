@@ -29,6 +29,7 @@ export class ProjectEditPage implements OnInit {
   editProjectAlertEditHeader: string = Language.Lang.editProjectAlertEditHeader;
   editProjectAlertEditMessage: string = Language.Lang.editProjectAlertEditMessage;
   editSuccesfull: string = Language.Lang.editSucesfull;
+  areYouSure: string = Language.Lang.editConfirmDelete;
   editHeader: string = Language.Lang.editHeader;
   editTitle: string = Language.Lang.editTitle;
   editDescription: string = Language.Lang.editDescription;
@@ -37,6 +38,8 @@ export class ProjectEditPage implements OnInit {
   changeLocation: string = Language.Lang.changeLocation;
   editSave: string = Language.Lang.editSave;
   projectGoBack: string = Language.Lang.projectGoBack;
+  eYes: string = Language.Lang.yes;
+  eNo: string = Language.Lang.no;
   project: Project = new Project();
   atsarginisUrl: string = this.project.imageUrl;
   id: number;
@@ -135,7 +138,23 @@ export class ProjectEditPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: this.editSuccesfull,
      /* message: this.editSuccesfull,*/
-      buttons: [this.newPojectAlertOk]
+      buttons: [{ text:this.projectGoBack ,handler: () => {
+        alert.dismiss().then(() => {
+          this.navCtrl.back();
+        })
+      }},this.newPojectAlertOk]
+    });
+    await alert.present();
+  }
+  async OnDeletePopUp() {
+    const alert = await this.alertCtrl.create({
+      header: this.areYouSure,
+      buttons: [{ text:this.eYes ,handler: () => {
+        alert.dismiss().then(() => {
+          this.Delete();
+          this.navCtrl.back();
+        })
+      }},this.eNo]
     });
     await alert.present();
   }

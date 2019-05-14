@@ -135,6 +135,9 @@ export class Lang {
     public changeLocation: string;
     public editSave: string;
     public editSucesfull: string;
+    public editConfirmDelete: string;
+    public yes: string;
+    public no: string;
     //Copyright page
     public cr1: string;
     public cr2: string;
