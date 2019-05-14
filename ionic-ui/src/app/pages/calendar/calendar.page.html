@@ -1,11 +1,9 @@
-<app-header>Projects Calendar</app-header>
+<app-header>{{ viewTitle }}</app-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title> {{ viewTitle }}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <!-- <ion-card>
+    <h1 class="h1" padding-horizontal text-center> {{ viewTitle }}</h1>
+  </ion-card> -->
   <ion-row>
     <ion-col size="5" text-left>
       <ion-button fill="clear" (click)="back()">
@@ -15,8 +13,8 @@
 
     <ion-col size="5">
       <p>
-        <ion-buttons>
-          <ion-button (click)="today()">Today</ion-button>
+        <ion-buttons class="CC">
+          <ion-button  (click)="today()">Today</ion-button>
         </ion-buttons>
       </p>
     </ion-col>

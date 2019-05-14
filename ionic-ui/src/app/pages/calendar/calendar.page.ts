@@ -21,7 +21,7 @@ export class CalendarPage implements OnInit {
   private type: String;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
-  eventSource: { title: string, startTime: Date, endTime: Date, allDay: boolean, id: number }[] = [];
+  eventSource: { title: string, startTime: Date, endTime: Date, /*allDay: boolean,*/ id: number }[] = [];
   constructor( public navCtrl: NavController,private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
   ngOnInit() {
     /* this.resetEvent();*/
@@ -75,11 +75,6 @@ export class CalendarPage implements OnInit {
     this.isToday = today.getTime() === event.getTime();
   }
 
-  addDays(date: Date, days: number): Date {
-    date.setDate(date.getDate() + days);
-    return date;
-  }
-
   onRangeChanged(ev) {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
@@ -106,7 +101,7 @@ export class CalendarPage implements OnInit {
           title: value.title,
           startTime: new Date(value.start),
           endTime: new Date(value.start), // #EDITED TO START BECAUSE THERE IS TOO MUCH OF SPAM IN CALENDAR
-          allDay: true,
+          //allDay: true,
           id: value.id
         });
       });
