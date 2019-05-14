@@ -28,6 +28,7 @@ export class ProjectEditPage implements OnInit {
   editProjectDelete: string = Language.Lang.editProjectDelete;
   editProjectAlertEditHeader: string = Language.Lang.editProjectAlertEditHeader;
   editProjectAlertEditMessage: string = Language.Lang.editProjectAlertEditMessage;
+  editSuccesfull: string = Language.Lang.editSucesfull;
   editHeader: string = Language.Lang.editHeader;
   editTitle: string = Language.Lang.editTitle;
   editDescription: string = Language.Lang.editDescription;
@@ -35,7 +36,7 @@ export class ProjectEditPage implements OnInit {
   editChangeEnd: string = Language.Lang.editChangeEnd;
   changeLocation: string = Language.Lang.changeLocation;
   editSave: string = Language.Lang.editSave;
-
+  projectGoBack: string = Language.Lang.projectGoBack;
   project: Project = new Project();
   atsarginisUrl: string = this.project.imageUrl;
   id: number;
@@ -117,13 +118,26 @@ export class ProjectEditPage implements OnInit {
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
 
       //this.navCtrl.navigateForward('projects').catch(e => console.log(e));
-      location.assign('projects/type/created');
+      //location.assign('projects/type/created');
+      this.OnSavePopUp();
       console.log(value);
     }, error1 => {
       this.NotEdited();
       console.log(error1);
     });
 
+  }
+  goToProjects() {
+    //this.navCtrl.pop();
+        this.navCtrl.back();
+  }
+  async OnSavePopUp() {
+    const alert = await this.alertCtrl.create({
+      header: this.editSuccesfull,
+     /* message: this.editSuccesfull,*/
+      buttons: [this.newPojectAlertOk]
+    });
+    await alert.present();
   }
   Delete() {
     this.projectsService.delete(this.id).subscribe(value => {
@@ -189,10 +203,8 @@ export class ProjectEditPage implements OnInit {
     this.atsarginisUrl = this.project.imageUrl;
   }
   updateIMG(searchValue: string) {
-
     this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
     this.atsarginisUrl = searchValue;
-
   }
 
   onSearchChange(searchValue: string) {

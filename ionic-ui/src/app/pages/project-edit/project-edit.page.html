@@ -1,10 +1,15 @@
 <app-header>{{editHeader}}</app-header>
 
 <ion-content padding>
+    <ion-item lines="none">
+        <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
+          <ion-icon name="arrow-round-back"></ion-icon>
+          {{projectGoBack}}
+        </ion-button>
+      </ion-item>
   <form [formGroup]="onEditForm" class="list-form">
     <ion-card lines="none">
-
-      &nbsp;
+        &nbsp;
       <div class="tools col col-50">
         <ion-item lines="none">
           <img  [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
@@ -70,6 +75,8 @@
         <ion-label color="primary" position="floating">{{changeLocation}}: </ion-label>
         <ion-input formControlName="location" type="text" value={{project.location}}></ion-input>
       </ion-item>
+
+    
     </ion-card>
 
     <ion-item lines="none" [hidden]="true">

@@ -138,6 +138,7 @@ export class En {
         editChangeEnd: 'Change end date',
         changeLocation: 'Change location address',
         editSave: 'Save changes',
+        editSucesfull: 'Sucesfully Saved!',
         //registrationSuccess: 'User was registered successfully',
         //copyright
         cr1: 'Privacy Policy',

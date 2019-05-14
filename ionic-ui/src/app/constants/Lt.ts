@@ -138,6 +138,7 @@ export class Lt {
         editChangeEnd: 'Keisti pabaigos laiką',
         changeLocation: 'Keisti vietovę',
         editSave: 'Išsaugoti pakeitimus',
+        editSucesfull: 'Sėkmingai išsaugota',
         //registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
         //Copyright
         cr1: 'Privatumo politika',

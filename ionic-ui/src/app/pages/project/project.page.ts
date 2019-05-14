@@ -217,8 +217,8 @@ export class ProjectPage implements OnInit {
     this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
   }
   goToProjects() {
-    this.navCtrl.pop();
-    //    this.navCtrl.back();
+   // this.navCtrl.pop();
+        this.navCtrl.back();
   }
 }
 
