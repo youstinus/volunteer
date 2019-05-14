@@ -21,6 +21,6 @@ export class VolunteersService extends BaseService<Volunteer> {
   // returns 400 all the time
   getByUsersId(id: number): Observable<Volunteer> {
     const headers = this.getHeaders();
-    return this.http.get<Volunteer>(this.api + '/users/' + id, {headers: headers});
+    return this.http.get<Volunteer>(this.api + '/' + id, {headers: headers});
   }
 }

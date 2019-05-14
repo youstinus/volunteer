@@ -14,7 +14,7 @@
     <ion-col size="5">
       <p>
         <ion-buttons class="CC">
-          <ion-button  (click)="today()">Today</ion-button>
+          <ion-button (click)="today()">Today</ion-button>
         </ion-buttons>
       </p>
     </ion-col>
@@ -28,11 +28,26 @@
   <ion-content class="has-header">
     <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
       (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
-      (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+      (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30"
+      [monthviewEventDetailTemplate]="template2">
     </calendar>
   </ion-content>
-
-
-
-
 </ion-content>
+
+<!-- <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+  <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+    <span class="event-detail">{{event.title}}</span>
+  </ion-item>
+</ng-template> -->
+
+<ng-template #template2 let-showEventDetail="showEventDetail" let-selectedDate="selectedDate"
+  let-noEventsLabel="noEventsLabel">
+  <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+    <ion-item *ngFor="let event of selectedDate?.events" (click)="onEventSelected(event)" class="event-detail-custom">
+      <span class="event-detail">{{event.title}}</span>
+    </ion-item>
+    <ion-item *ngIf="selectedDate?.events.length==0">
+      <div class="no-events-label">{{noEventsLabel}}</div>
+    </ion-item>
+  </ion-list>
+</ng-template>
