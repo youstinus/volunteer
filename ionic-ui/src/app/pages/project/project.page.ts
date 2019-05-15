@@ -191,10 +191,6 @@ export class ProjectPage implements OnInit {
     }, error => {
       console.log(error);
     });
-    //const userId = this.usersService.getTokenId();
-    //this.selected=true;
-    //console.log('User id ' + userId + ' update to selected list');
-    //console.log('Volunteer id '+this.volunteer.id);
   }
 
   removeFromSelectedProjectS() {
@@ -216,9 +212,10 @@ export class ProjectPage implements OnInit {
   updateUrl(event) {
     this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
   }
+
   goToProjects() {
-   // this.navCtrl.pop();
-        this.navCtrl.back();
+    // this.navCtrl.pop();
+    this.navCtrl.back();
   }
 }
 

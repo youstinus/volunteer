@@ -83,6 +83,7 @@ export class Lang {
     public projectsSearch: string;
     public projectsArchive: string;
     public projectsNew: string;
+    public projectsUntil: string;
     //Project page
     public projectEdit: string;
     public projectVolunteers: string;

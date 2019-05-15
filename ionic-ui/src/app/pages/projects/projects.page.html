@@ -17,7 +17,7 @@
         <div class="values col col-50"><img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" /></div>
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>{{project.start | date : 'yyyy-MM-dd HH:mm'}}</ion-label>
+            <ion-label>{{project.start | date : 'yyyy-MM-dd'}}</ion-label>
         </ion-item>
 
         <ion-card-content>

@@ -87,6 +87,7 @@ export class Lt {
         projectsSearch: 'Paieška',
         projectsArchive: 'ARCHYVAS',
         projectsNew: 'NAUJI PROJEKTAI',
+        projectsUntil: 'until',
         //Project page
         projectEdit: 'Redaguoti projektą',
         projectVolunteers: 'Savanoriai',

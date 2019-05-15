@@ -87,6 +87,7 @@ export class En {
         projectsSearch: 'Search',
         projectsArchive: 'ARCHIVE',
         projectsNew: 'NEW PROJECTS',
+        projectsUntil: 'until',
         //Project page
         projectEdit: 'Edit project',
         projectVolunteers: 'Volunteers',
