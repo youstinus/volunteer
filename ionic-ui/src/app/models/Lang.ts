@@ -101,7 +101,8 @@ export class Lang {
     public volunteersYourVolunteers: string;
     public volunteersAll: string;
     public volunteersNone: string;
-    public volunteersAnonymous: string;
+    public volunteersAnonymousName: string;
+    public volunteersAnonymousLast: string;
     public volunteersGoBack: string;
     //Modal volunteer
     public modalVAnonymous: string;

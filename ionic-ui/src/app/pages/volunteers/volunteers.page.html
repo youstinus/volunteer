@@ -7,7 +7,7 @@
     <p>{{project.description}}</p>
   </ion-item-divider>
   &nbsp;
-  <h1 class="h2" padding-horizontal text-center>{{volunteersYourVolunteers}}:</h1>
+  <h2 class="h2" padding-horizontal text-center>{{volunteersYourVolunteers}}:</h2>
 
 
   <fieldset class="fieldset">
@@ -18,40 +18,26 @@
     <ion-list *ngFor="let volunteer of volunteers">
 
       <ion-item lines="none" class="click" (click)="onVolunteerClicked(volunteer)">
-        <div *ngIf="volunteer.imageUrl==null">
-          <ion-avatar slot="start">
-            <img src="{{ defaulUrl }}">
-          </ion-avatar>
-        </div>
-        <div *ngIf="volunteer.imageUrl!=null">
           <ion-avatar slot="start">
             <img src="{{ volunteer.imageUrl }}">
           </ion-avatar>
-        </div>
         <ion-list-header size=large>
-          <div *ngIf="volunteer.firstName==null || volunteer.lastName==null">
-            <ion-label>
-              {{volunteersAnonymous}}
-            </ion-label>
-          </div>
-          <div *ngIf="volunteer.firstName!=null && volunteer.lastName!=null">
-            <ion-label>
+            <ion-label class="myLabel">
               {{volunteer.firstName}} {{volunteer.lastName}}
             </ion-label>
-          </div>
         </ion-list-header>
       </ion-item>
 
       <ion-item lines="none">
         <div *ngIf="volunteer.phone==null">
-          <h4>
+          <h4 class="h4">
             <ion-icon name="phone-portrait"></ion-icon>
             {{volunteersNone}}
           </h4>
         </div>
 
         <div *ngIf="volunteer.phone!=null">
-          <h4>
+          <h4 class="h4">
             <ion-icon name="phone-portrait"></ion-icon>
             {{volunteer.phone}}
           </h4>
@@ -61,17 +47,16 @@
 
       <ion-item lines="none">
         <div *ngIf="volunteer.email==null">
-          <h4>
+          <h4 class="h4">
             <ion-icon name="mail-open"></ion-icon>
             {{volunteersNone}}
           </h4>
         </div>
 
         <div *ngIf="volunteer.email!=null">
-          <h4>
+          <h4 class="h4">
             <ion-icon name="mail-open"></ion-icon>
             {{volunteer.email}}
-
           </h4>
         </div>
       </ion-item>

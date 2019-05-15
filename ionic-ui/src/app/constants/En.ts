@@ -105,7 +105,8 @@ export class En {
         volunteersYourVolunteers: 'Your project volunteers',
         volunteersAll: 'All registered users',
         volunteersNone: 'None',
-        volunteersAnonymous: 'Anonymous user',
+        volunteersAnonymousName: 'Anonymous',
+        volunteersAnonymousLast: 'user',
         volunteersGoBack: 'Go back',
         //Modal volunteer
         modalVAnonymous: 'Anonymous user',

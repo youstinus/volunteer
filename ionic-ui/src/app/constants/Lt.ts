@@ -73,7 +73,7 @@ export class Lt {
         registrationVolunteer: 'Savanoris',
         registrationOrganization: 'Organizacija',
         registrationPassword: 'Slaptažodis',
-        registrationConfirm: 'Patvirtinit slaptažodį',
+        registrationConfirm: 'Patvirtinkit slaptažodį',
         registrationTerms: 'Sutinku su sąlygomis!',
         registrationSingUp: 'Registruotis',
         registrationRequiredMessage: 'Šis laukas privalomas ir turi turėti bent 5 simbolius',
@@ -105,7 +105,8 @@ export class Lt {
         volunteersYourVolunteers: 'Jūsų projekto savanoriai',
         volunteersAll: 'Visi užsiregistravę vartotojai',
         volunteersNone: 'Nėra informacijos',
-        volunteersAnonymous: 'Anoniminis vartotojas',
+        volunteersAnonymousName: 'Anoniminis ',
+        volunteersAnonymousLast: 'vartotojas',
         volunteersGoBack: 'Grįžti',
         //Modal volunteer
         modalVAnonymous: 'Anoniminis vartotojas',

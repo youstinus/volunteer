@@ -8,7 +8,6 @@ import { AlertController, LoadingController, ToastController, NavController, Mod
 import { ProjectsService } from 'src/app/services/projects.service';
 import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
 import { Objects } from 'src/app/constants/Objects';
-import { projection } from '@angular/core/src/render3';
 import { Language } from 'src/app/utilities/Language';
 
 @Component({
@@ -21,14 +20,14 @@ export class VolunteersPage implements OnInit {
   volunteersYourVolunteers: string = Language.Lang.volunteersYourVolunteers;
   volunteersAll: string = Language.Lang.volunteersAll;
   volunteersNone: string = Language.Lang.volunteersNone;
-  volunteersAnonymous: string = Language.Lang.volunteersAnonymous;
+  volunteersAnonymousName: string = Language.Lang.volunteersAnonymousName;
+  volunteersAnonymousLast: string = Language.Lang.volunteersAnonymousLast;
   volunteersGoBack: string = Language.Lang.volunteersGoBack;
 
-  project: Project = Objects.Empty_Project; // Objects.Four_Test_Projects[1];
-  //volunteers: Volunteer[] = [];//Objects.Empty_Volunteer_Arr;
+  project: Project = Objects.Empty_Project;
   volunteers: Volunteer[] = [];
   defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
-  defaultName: string = Language.Lang.volunteersAnonymous;
+  defaultName: string =  Language.Lang.volunteersAnonymousName+Language.Lang.volunteersAnonymousLast;
   sendName: string;
 
   constructor(
@@ -51,8 +50,19 @@ export class VolunteersPage implements OnInit {
       console.log(error1);
     });
 
-    this.projectsService.getVolunteers(id).subscribe(value => {
-      this.volunteers = value;
+    this.projectsService.getVolunteers(id).subscribe(items => {
+      this.volunteers = items.map(value => {
+        if (value.imageUrl === null || value.imageUrl === '') {
+            value.imageUrl = this.defaulUrl;
+        }
+        if(value.firstName==null || value.lastName==null)
+        {
+          console.log('True');
+          value.firstName=this.volunteersAnonymousName;
+          value.lastName=this.volunteersAnonymousLast;
+        }
+        return value;
+    });
     }, error1 => {
       console.log(error1);
     })
@@ -62,18 +72,11 @@ export class VolunteersPage implements OnInit {
 
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   async onVolunteerClicked(volunteer: Volunteer) {
-    console.log(volunteer)
-    if(volunteer.firstName==null || volunteer.lastName==null)
-    {
-      this.sendName=this.defaultName;
-    } else{
-      this.sendName=volunteer.firstName + " " + volunteer.lastName
-    }
-
+    console.log(volunteer);
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
       componentProps: {
-        volname: this.sendName,
+        volname: volunteer.firstName + " " + volunteer.lastName,
         volphone: volunteer.phone,
         volemail: volunteer.email,
         voldescrip: volunteer.description,

@@ -1,5 +1,4 @@
 ion-content{
-    //--background:linear-gradient(135deg,rgba(164, 244, 250, 0.884),rgb(149, 248, 165),rgba(40, 192, 159, 0.863));
     display: inline-block;
     --background: none;
     background-image: url('/assets/background2.jpg');
@@ -9,7 +8,6 @@ ion-content{
 }
 
 ion-item {
-    //padding:20px;
     --background:  rgba(163, 219, 146, 0);
     background: rgba(163, 219, 146, 0);
   }
@@ -36,10 +34,18 @@ div.a{
 
 ion-label{
     font-weight: bold;
+    font-size: 20px;
 }
+
 ion-img{
     height: 30%;
     width: 30%;
+}
+
+.myLabel{
+    font-weight: bold;
+    font-size: 120%;
+    letter-spacing: 1px;
 }
 
 .fieldset {
@@ -88,6 +94,11 @@ ion-img{
     padding: 10px 10px 10px 10%;
     text-transform: uppercase;
  }
+
+.h4{
+    font-weight: bold;
+    font-size: 16px;
+}
 
  p { 
     color: #000000; 
