@@ -205,6 +205,19 @@ export class En {
         volSettingsDescription: 'Description',
         volSettingsSaveChanges: 'Save changes',
         volSettingsAlertSuccess: 'Your changes were saved successfully',
-        volSettingsAlertFail: "Your changes haven't been saved"
+        volSettingsAlertFail: "Your changes haven't been saved",
+        //Change-password page
+        changePassHeader: 'RESET YOUR PASSWORD',
+        changePassFieldSet: 'Needed information',
+        changePassEnterUserEmail: 'Enter user email',
+        changePassNewPassword: 'New password',
+        changePassConfirmPassword: 'Confirm password',
+        changePassButton: 'Change password',
+        changePassGoBack: 'Changed your mind? Go back',
+        changePassChangedSuccess: 'Your password was changed successfully',
+        changePassChangeFail: "Your password haven't been changed",
+        changePassFielRequired: 'This field is required',
+        changePassContain5: 'This field is required and must contain at least 5 characters ',
+        changePassPassDontMatch: 'Password and ConfirmPassword do not match'
     }
 }

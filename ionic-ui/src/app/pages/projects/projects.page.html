@@ -14,10 +14,12 @@
     </ion-grid>
 
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
-        <div class="values col col-50"><img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" /></div>
+        <div class="values col col-50" [ngStyle]="{'background-image':' url(' + project?.imageUrl + ')'}">
+            <img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" />
+        </div>
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>{{project.start | date : 'yyyy-MM-dd'}}</ion-label>
+            <ion-label>{{project.start | date : 'yyyy-MM-dd'}} - {{project.end | date : 'yyyy-MM-dd'}}</ion-label>
         </ion-item>
 
         <ion-card-content>

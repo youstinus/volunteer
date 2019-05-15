@@ -24,10 +24,7 @@ ion-content {
     --background: linear-gradient(0deg, rgb(202, 255, 142) 0%, rgb(177, 243, 255) 100%);
   }
 }
-.img{
-  max-height: 160px;
-  /*width: 100%;*/
-}
+
 ion-img {
   max-height: 140px;
   /*width: 100%;*/
@@ -109,4 +106,22 @@ h1 {
 
 .bodis {
   text-align: center;
+}
+
+.values {
+  //filter: blur(5px);
+  min-height: 160px;
+  max-height: 160px;
+  width: 310px;
+  height: 160px;
+}
+
+.img{
+  // max-height: 160px;
+  // min-height: 160px;
+  /*width: 100%;*/
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  //filter: none;
 }

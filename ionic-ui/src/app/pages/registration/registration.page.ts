@@ -13,7 +13,7 @@ import { Lang } from 'src/app/models/Lang';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
-
+  lang = new Lang();
   register: string= Language.Lang.menuRegistration;
   registrationTitle: string=Language.Lang.registrationTitle;
   registrationInformation: string=Language.Lang.registrationInformation;

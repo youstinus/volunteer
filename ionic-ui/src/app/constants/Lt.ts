@@ -205,7 +205,20 @@ export class Lt {
         volSettingsDescription: 'Aprašas apie jus',
         volSettingsSaveChanges: 'Išsaugoti pakeitimus',
         volSettingsAlertSuccess: 'Pakeitimai išsaugoti sėkmingai',
-        volSettingsAlertFail: "Pakeitimų išsaugoti nepavyko"
+        volSettingsAlertFail: "Pakeitimų išsaugoti nepavyko",
+        //Change-password page
+        changePassHeader: 'PASIKEISKITE SLAPTAŽODŠĮ',
+        changePassFieldSet: 'Reikalinga informacija ',
+        changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
+        changePassNewPassword: 'Naujas slaptažodis',
+        changePassConfirmPassword: 'Patvirtinkite slaptažodį',
+        changePassButton: 'Keisti slaptažodį',
+        changePassGoBack: 'Persigalvojote? Grįžkite atgal',
+        changePassChangedSuccess: 'Slaptažodis pakeistas sėkmingai',
+        changePassChangeFail: "Slaptažodžio pakeisti nepavyko",
+        changePassFielRequired: 'Šis laukas yra privalomas',
+        changePassContain5: 'Šis laukas yra privalomas ir turi būti sudarytas bent iš 5 simbolių',
+        changePassPassDontMatch: 'Slaptažodžiai nesutampa'
 
     }
 }

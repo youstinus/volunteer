@@ -4,7 +4,7 @@ import { VolunteersService } from '../../services/volunteers.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/User';
 import { UsersService } from '../../services/users.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Strings } from 'src/app/constants/Strings';
@@ -16,7 +16,7 @@ import { Language } from 'src/app/utilities/Language';
     styleUrls: ['./volunteers-settings.page.scss'],
 })
 export class VolunteersSettingsPage implements OnInit {
-    
+
     volSettingsHeader: string = Language.Lang.volSettingsHeader;
     volSettingsImage: string = Language.Lang.volSettingsImage;
     volSettingsName: string = Language.Lang.volSettingsName;
@@ -34,6 +34,7 @@ export class VolunteersSettingsPage implements OnInit {
     defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
 
     constructor(
+        public toastCtrl: ToastController,
         private volunteersService: VolunteersService,
         private route: ActivatedRoute,
         private usersService: UsersService,
@@ -71,11 +72,10 @@ export class VolunteersSettingsPage implements OnInit {
     saveVolunteer() {
         console.log(this.onSaveForm.value);
         this.volunteersService.update(this.volunteer.id, this.onSaveForm.value).subscribe(value => {
-            console.log('Volunteer was updated successfully');
             console.log(value);
-
+            this.presentSToast();
         }, error1 => {
-            console.log('Volunteer was not updated', error1);
+            this.presentFToast();
         });
     }
 
@@ -123,8 +123,50 @@ export class VolunteersSettingsPage implements OnInit {
         this.volunteer.imageUrl = this.defaulUrl;
     }
 
-    onChangePass()
-    {
+    onChangePass() {
         this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
     }
+
+    async presentSToast() {
+        const toast = await this.toastCtrl.create({
+            message: this.volSettingsAlertSuccess,
+            duration: 2500,
+            position: 'bottom',
+            color: 'success',
+            cssClass: "toast",
+            translucent: true,
+            buttons: [
+                {
+                    text: Language.Lang.toastClose,
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        toast.present();
+    }
+
+    async presentFToast() {
+        const toast = await this.toastCtrl.create({
+            message: this.volSettingsAlertFail,
+            duration: 2500,
+            cssClass: "toast",
+            position: 'bottom',
+            color: 'danger',
+            translucent: true,
+            buttons: [
+                {
+                    text: Language.Lang.toastClose,
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        toast.present();
+    }
+
 }

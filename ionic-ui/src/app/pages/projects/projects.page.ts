@@ -18,7 +18,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
     projectsSearch: string = Language.Lang.projectsSearch;
     projectsArchive: string = Language.Lang.projectsArchive;
     projectsNew: string = Language.Lang.projectsNew;
-
     defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
     public spin = true;
     public searchTerm = '';

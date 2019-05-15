@@ -42,7 +42,8 @@ const routes: Routes = [
     {
         path: 'change-password',
         children: [
-            { path: ':reset', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
+            { path: ':reset', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' },
+            { path: '', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
         ]
     }
 

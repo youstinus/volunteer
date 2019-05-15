@@ -40,7 +40,7 @@ export class ProjectPage implements OnInit {
   project: Project = new Project();
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
-  newUrl = '';
+  newUrl: string= '';
   role: number = 4;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   owner: boolean = false;
@@ -57,7 +57,9 @@ export class ProjectPage implements OnInit {
     public navCtrl: NavController
     //   private clipboard: Clipboard
   ) { }
-
+  check(){
+    return this.newUrl != '';
+  }
   stringparse() {
     let newurl: string = '';
     newurl += 'https://maps.google.com/maps?q=';
@@ -66,6 +68,7 @@ export class ProjectPage implements OnInit {
     }
     newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
     this.newUrl = newurl;
+    
   }
 
   onSourceClicked(source: string) {
@@ -215,7 +218,8 @@ export class ProjectPage implements OnInit {
 
   goToProjects() {
     // this.navCtrl.pop();
-    this.navCtrl.back();
+    console.log(this.navCtrl);
+    this.navCtrl.back({animated: true});
   }
 }
 

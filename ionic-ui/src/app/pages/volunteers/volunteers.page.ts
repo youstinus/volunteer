@@ -27,7 +27,7 @@ export class VolunteersPage implements OnInit {
   project: Project = Objects.Empty_Project;
   volunteers: Volunteer[] = [];
   defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
-  defaultName: string =  Language.Lang.volunteersAnonymousName+Language.Lang.volunteersAnonymousLast;
+  defaultName: string = Language.Lang.volunteersAnonymousName + Language.Lang.volunteersAnonymousLast;
   sendName: string;
 
   constructor(
@@ -53,21 +53,17 @@ export class VolunteersPage implements OnInit {
     this.projectsService.getVolunteers(id).subscribe(items => {
       this.volunteers = items.map(value => {
         if (value.imageUrl === null || value.imageUrl === '') {
-            value.imageUrl = this.defaulUrl;
+          value.imageUrl = this.defaulUrl;
         }
-        if(value.firstName==null || value.lastName==null)
-        {
-          console.log('True');
-          value.firstName=this.volunteersAnonymousName;
-          value.lastName=this.volunteersAnonymousLast;
+        if (value.firstName == null || value.lastName == null) {
+          value.firstName = this.volunteersAnonymousName;
+          value.lastName = this.volunteersAnonymousLast;
         }
         return value;
-    });
+      });
     }, error1 => {
       console.log(error1);
     })
-
-  
   }
 
   //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
@@ -89,5 +85,5 @@ export class VolunteersPage implements OnInit {
   goToProjects() {
     this.navCtrl.back();
   }
-
+  
 }

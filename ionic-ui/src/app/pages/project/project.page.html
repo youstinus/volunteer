@@ -131,15 +131,12 @@
       <ion-card-title class="label">{{projectFind}}:
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content *ngIf="check()">
       <div class="map-responsive">
         <div class="gmap_canvas">
-          <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
-            [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe><a
-            href="https://www.emojilib.com">emojilib.com</a>
+          <iframe width="600" height="450" frameborder="0" style="border:0" id="gmap_canvas"
+            [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe>
         </div>
-
-
       </div>
     </ion-card-content>
   </ion-card>

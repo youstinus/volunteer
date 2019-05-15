@@ -201,5 +201,17 @@ export class Lang {
     public volSettingsSaveChanges: string;
     public volSettingsAlertSuccess: string;
     public volSettingsAlertFail: string;
-
+    // Change password page
+    public changePassHeader: string;
+    public changePassFieldSet: string;
+    public changePassEnterUserEmail: string;
+    public changePassNewPassword: string;
+    public changePassConfirmPassword: string;
+    public changePassButton: string;
+    public changePassGoBack: string;
+    public changePassChangedSuccess: string;
+    public changePassChangeFail: string;
+    public changePassFielRequired: string;
+    public changePassContain5: string;
+    public changePassPassDontMatch: string;
 }
