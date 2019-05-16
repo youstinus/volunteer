@@ -12,6 +12,9 @@ import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { OrganizationPage } from './organization.page';
+import { SafePipeModule } from 'safe-pipe';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 
 describe('OrganizationPage', () => {
   let component: OrganizationPage;
@@ -23,9 +26,14 @@ describe('OrganizationPage', () => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, SafePipeModule],
       providers: [Location, LocationStrategy,HttpHandler,
-        StreamingMedia,Language, 
+        StreamingMedia,Language, SafePipeModule, 
+        {provide: DomSanitizer, useClass: {
+          sanitize: () => 'safeString',
+          bypassSecurityTrustHtml: () => 'safeString'
+        }
+      },
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},

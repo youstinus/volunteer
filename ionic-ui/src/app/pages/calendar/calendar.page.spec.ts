@@ -25,7 +25,7 @@ describe('CalendarPage', () => {
     TestBed.configureTestingModule({
       declarations: [ CalendarPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, NgCalendarModule],
       providers: [Location, LocationStrategy,HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },

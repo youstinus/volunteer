@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
+
 describe('ChangePasswordPage', () => {
   let component: ChangePasswordPage;
   let fixture: ComponentFixture<ChangePasswordPage>;
@@ -26,7 +27,7 @@ describe('ChangePasswordPage', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
       providers: [Location, LocationStrategy,HttpHandler,CookieService,
-        StreamingMedia,Language, 
+        StreamingMedia,Language, FormBuilder,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 
       {provide: ActivatedRoute, useValue: fakeActivatedRoute}
