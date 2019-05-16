@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
-import {Project} from '../../models/Project';
-import {Organization} from '../../models/Organization';
-import {Objects} from '../../constants/Objects';
-import {Strings} from '../../constants/Strings';
-import {ProjectsService} from '../../services/projects.service';
-import {OrganizationsService} from '../../services/organizations.service';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Project } from '../../models/Project';
+import { Organization } from '../../models/Organization';
+import { Strings } from '../../constants/Strings';
+import { ProjectsService } from '../../services/projects.service';
+import { OrganizationsService } from '../../services/organizations.service';
 import { Language } from 'src/app/utilities/Language';
 import { ActivatedRoute } from '@angular/router';
-import { En } from 'src/app/constants/En';
-import { Lt } from 'src/app/constants/Lt';
 
 @Component({
     selector: 'app-main',
@@ -28,14 +25,12 @@ export class MainPage implements OnInit {
     public threeProjects: Project[];
     public threeOrganizations: Organization[];
     public spin = false;
-    private lang: string;
 
     constructor(
         private navCtrl: NavController,
         private projectsService: ProjectsService,
         private organizationsService: OrganizationsService,
-        private route: ActivatedRoute
-        ) {
+    ) {
     }
 
     ngOnInit() {
@@ -55,7 +50,7 @@ export class MainPage implements OnInit {
             this.filterNewProjects();
         }, error1 => {
             console.log(error1);
-            this.spin=false;
+            this.spin = false;
         });
     }
 
@@ -69,10 +64,10 @@ export class MainPage implements OnInit {
                 return value;
             });
             this.filterNewOrganizations();
-            this.spin=false;
+            this.spin = false;
         }, error1 => {
             console.log(error1);
-            this.spin=false;
+            this.spin = false;
         });
     }
 

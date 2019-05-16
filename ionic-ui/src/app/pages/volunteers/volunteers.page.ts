@@ -24,9 +24,9 @@ export class VolunteersPage implements OnInit {
   volunteersAnonymousLast: string = Language.Lang.volunteersAnonymousLast;
   volunteersGoBack: string = Language.Lang.volunteersGoBack;
 
-  project: Project = Objects.Empty_Project;
+  project: Project;
   volunteers: Volunteer[] = [];
-  defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
+  defaulUrl: string = Strings.Default_Image_Url2;
   defaultName: string = Language.Lang.volunteersAnonymousName + Language.Lang.volunteersAnonymousLast;
   sendName: string;
 
