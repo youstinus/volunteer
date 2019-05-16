@@ -139,6 +139,21 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut("signed")]
+        [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer) + "," + nameof(UserType.Admin) + "," + nameof(UserType.Moderator))]
+        public async Task<IActionResult> UpdateLoggedInUser([FromBody]UserDto userDto)
+        {
+            try
+            {
+                await _usersService.UpdateLoggedInUser(userDto, User);
+                return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Organization) + "," + nameof(UserType.Volunteer))]
         public override async Task<IActionResult> Delete([FromRoute]long id)

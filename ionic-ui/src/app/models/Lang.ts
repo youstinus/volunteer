@@ -205,6 +205,7 @@ export class Lang {
     public changePassHeader: string;
     public changePassFieldSet: string;
     public changePassEnterUserEmail: string;
+    public changePassOldPassword: string;
     public changePassNewPassword: string;
     public changePassConfirmPassword: string;
     public changePassButton: string;

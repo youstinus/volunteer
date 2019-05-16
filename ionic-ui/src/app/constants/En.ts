@@ -210,6 +210,7 @@ export class En {
         changePassHeader: 'RESET YOUR PASSWORD',
         changePassFieldSet: 'Needed information',
         changePassEnterUserEmail: 'Enter user email',
+        changePassOldPassword: 'Old password',
         changePassNewPassword: 'New password',
         changePassConfirmPassword: 'Confirm password',
         changePassButton: 'Change password',

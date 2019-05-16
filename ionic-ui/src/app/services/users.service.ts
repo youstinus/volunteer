@@ -125,21 +125,90 @@ export class UsersService {
         return headers;
     }
 
+    // remove. cannot be used inside front-end
     public decodeResetMail(encrypted: string) {
         let message = atob(encrypted);
-        let decrypted = this.simpleCrypto.decrypt(message).toString(); // check date if valid        
+        // let decrypted = this.simpleCrypto.decrypt(message).toString(); // check date if valid    
+        let decrypted = this.decrypt2(message).toString();
         return decrypted;
     }
 
     public encodeResetMail(email: string) {
-        let encrypted = this.simpleCrypto.encrypt(email).toString();
-        let message = btoa(encrypted); //todo insert date with duration
-        console.log(message);
-        return message;
+        // let encrypted = this.simpleCrypto.encrypt(email).toString();
+        // let message = btoa(encrypted); //todo insert date with duration
+        // console.log(message);        
+        // return message;
+
+        //return this.encrypt(email);
+
+        return btoa(this.encrypt2(email).toString());
     }
 
     public updateByEmail(email: string, passwords: any): Observable<any> {
         const headers = this.getHeaders();
-        return this.http.put<User>(`${this.api}/email/${email}`, {password: passwords.password, token: passwords.oldPassword}, { headers: headers });
+        return this.http.put<User>(`${this.api}/email/${email}`, { password: passwords.password }, { headers: headers });
+    }
+
+    public updateLoggedInUser(passwords: any): Observable<any> {
+        const headers = this.getHeaders();
+        return this.http.put<User>(`${this.api}/signed`, { password: passwords.password, token: passwords.oldPassword }, { headers: headers });
+    }
+
+    public encryptNodeJs(email: string) {
+        var crypto = require('crypto-js');
+        var key = 's7^(v(WMjOi.mI387OPfYTcy.SWbX7zy'; //replace with your key
+        var iv = '#yH2*m14v8((5kBQ'; //replace with your IV
+        var cipher = crypto.createCipheriv('aes256', key, iv)
+        var crypted = cipher.update(email, 'utf8', 'base64')
+        crypted += cipher.final('base64');
+        return crypted;
+    }
+
+    public encrypt(text: string) {
+        var crypto = require('crypto-js');
+        var alg = 'des-ede-cbc';
+        var key = new Buffer('s7^(v(WMjOi.mI387OPfYTcy.SWbX7zy', 'utf-8');
+        var iv = new Buffer('#yH2*m14v8((5kBQ', 'base64');    //This is from c# cipher iv
+
+        var cipher = crypto.createCipheriv(alg, key, iv);
+        var encoded = cipher.update(text, 'ascii', 'base64');
+        encoded += cipher.final('base64');
+
+        return encoded;
+    }
+
+    public decrypt(encryptedText: string) {
+        var crypto = require('crypto-js');
+        var alg = 'des-ede-cbc';
+        var key = new Buffer('s7^(v(WMjOi.mI387OPfYTcy.SWbX7zy', 'utf-8');
+        var iv = new Buffer('#yH2*m14v8((5kBQ', 'base64');    //This is from c# cipher iv
+
+        var encrypted = new Buffer(encryptedText, 'base64');
+        var decipher = crypto.createDecipheriv(alg, key, iv);
+        var decoded = decipher.update(encrypted, 'binary', 'ascii');
+        decoded += decipher.final('ascii');
+
+        return decoded;
+    }
+
+
+    public encrypt2(text) {
+        var CryptoJS = require("crypto-js");
+        var key = CryptoJS.enc.Utf8.parse('J0bg8HQ8InMZl&yZWFq18nMl');
+        var iv = CryptoJS.enc.Utf8.parse('giK0vwUC');
+        var encoded = CryptoJS.enc.Utf8.parse(text);
+        var ciphertext = CryptoJS.TripleDES.encrypt(encoded, key, { mode: CryptoJS.mode.CBC, iv: iv });
+
+        return ciphertext.toString();
+    }
+
+    public decrypt2(encryptedText) {
+        var CryptoJS = require("crypto-js");
+        var key = CryptoJS.enc.Utf8.parse('J0bg8HQ8InMZl&yZWFq18nMl');
+        var iv = CryptoJS.enc.Utf8.parse('giK0vwUC');
+        var bytes = CryptoJS.TripleDES.decrypt(encryptedText, key, { mode: CryptoJS.mode.CBC, iv: iv });
+        var decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+
+        return decryptedText;
     }
 }

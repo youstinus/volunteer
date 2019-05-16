@@ -9,6 +9,8 @@ namespace WebAPI.Models.DTO
         public string LastName { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
         public ICollection<long> ProjectsIds { get; set; }
         public ICollection<long> SavedProjectsIds { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,6 +14,7 @@ using WebAPI.Models;
 using WebAPI.Models.DTO;
 using WebAPI.Repositories.Interfaces;
 using WebAPI.Services.Interfaces;
+using WebAPI.Utilities;
 
 namespace WebAPI.Services
 {
@@ -161,22 +163,53 @@ namespace WebAPI.Services
             await _repository.Update(user);
         }
         
-        public async Task UpdateByEmail(string email, UserDto userDto)
+        public async Task UpdateByEmail(string cipher, UserDto userDto)
         {
-            var user = await _repository.GetSingleByPredicate(x => x.Email.Equals(email));
+            if(string.IsNullOrWhiteSpace(cipher))
+                throw new InvalidOperationException("Bad parameter");
 
-            if (user == null || userDto == null || string.IsNullOrWhiteSpace(userDto.Password) || userDto.Password.Length < 3)
+            var email = Crypto.Decrypt(Decipher(cipher));
+
+            var entity = await _repository.GetSingleByPredicate(x => x.Email.Equals(email));
+
+            if (entity == null || userDto == null || string.IsNullOrWhiteSpace(userDto.Password) || userDto.Password.Length < 3)
                 throw new InvalidOperationException($"User with email {email} was not found");
             
             // later implement mapper
-            user.Updated = _timeService.GetCurrentTime();
+            entity.Updated = _timeService.GetCurrentTime();
 
             // update password if it was entered
             CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
-            user.Hash = passwordHash;
-            user.Salt = passwordSalt;
+            entity.Hash = passwordHash;
+            entity.Salt = passwordSalt;
             
-            await _repository.Update(user);
+            await _repository.Update(entity);
+        }
+        
+        // old pass is in token
+        public async Task UpdateLoggedInUser(UserDto userDto, ClaimsPrincipal user)
+        {
+            if (user == null || user.Identity == null || !user.Identity.IsAuthenticated || !int.TryParse(user.Identity.Name, out var id))
+                throw new InvalidOperationException("Cannot change password");
+            
+            var entity = await _repository.GetById(id);
+
+            if (entity == null || userDto == null || string.IsNullOrWhiteSpace(userDto.Password) || userDto.Password.Length < 3)
+                throw new InvalidOperationException($"Cannot update password");
+            
+            // Old password is token
+            if (!VerifyPasswordHash(userDto.Token, entity.Hash, entity.Salt))
+                throw new InvalidOperationException($"Incorrect old password");
+
+            // later implement mapper
+            entity.Updated = _timeService.GetCurrentTime();
+
+            // update password if it was entered
+            CreatePasswordHash(userDto.Password, out var passwordHash, out var passwordSalt);
+            entity.Hash = passwordHash;
+            entity.Salt = passwordSalt;
+
+            await _repository.Update(entity);
         }
 
         public override User CreatePoco(UserDto entityDto)
@@ -226,7 +259,7 @@ namespace WebAPI.Services
             return true;
         }
 
-        private void CreateProfileByType(User user)
+        private static void CreateProfileByType(User user)
         {
             switch (user.Type)
             {
@@ -245,9 +278,40 @@ namespace WebAPI.Services
             }
         }
 
+        private static string Decipher(string cipher)
+        {
+            var mod4 = cipher.Length % 4;
+            if (mod4 > 0)
+            {
+                cipher += new string('=', 4 - mod4);
+            }
+            var data = Convert.FromBase64String(cipher);
+            return Encoding.ASCII.GetString(data);
+        }
+
+        private static string DecryptNodeJs2(string encoded)
+        {
+            var keyString = "s7^(v(WMjOi.mI387OPfYTcy.SWbX7zy"; //replace with your key
+            var ivString = "#yH2*m14v8((5kBQ"; //replace with your iv
+
+            var key = Encoding.ASCII.GetBytes(keyString);
+            var iv = Encoding.ASCII.GetBytes(ivString);
+
+            using (var rijndaelManaged = new RijndaelManaged { Key = key, IV = iv, Mode = CipherMode.CBC })
+            {
+                rijndaelManaged.BlockSize = 128;
+                rijndaelManaged.KeySize = 256;
+                using (var memoryStream = new MemoryStream(Convert.FromBase64String(encoded)))
+                using (var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(key, iv), CryptoStreamMode.Read))
+                {
+                    return new StreamReader(cryptoStream).ReadToEnd();
+                }
+            }
+        }
+
         #endregion
 
-        #region Validation
+            #region Validation
 
         public override bool ValidateDto(UserDto entity)
         { // define user validations

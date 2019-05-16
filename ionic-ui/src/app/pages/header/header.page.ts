@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderPage implements OnInit {
 
-  constructor() { }
+  private selected: number = 1;
+
+  constructor(public navCtrl: NavController, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
 
+  flagClicked(lang: string) {
+    /*this.cookieService.delete('Lang', '/');
+    this.cookieService.delete('Lang', '.');*/
+    this.cookieService.set('Lang', lang, 365, '/');
+    location.reload(); 
+  }
 }

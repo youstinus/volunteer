@@ -18,6 +18,7 @@ export class ChangePasswordPage implements OnInit {
   changePassHeader: string = Language.Lang.changePassHeader;
   changePassFieldSet: string = Language.Lang.changePassFieldSet;
   changePassEnterUserEmail: string = Language.Lang.changePassEnterUserEmail;
+  changePassOldPassword: string = Language.Lang.changePassOldPassword;
   changePassNewPassword: string = Language.Lang.changePassNewPassword;
   changePassConfirmPassword: string = Language.Lang.changePassConfirmPassword;
   changePassButton: string = Language.Lang.changePassButton;
@@ -33,6 +34,8 @@ export class ChangePasswordPage implements OnInit {
   public changePasswordForm: FormGroup;
   public matching_passwords_group: FormGroup;
   private email: string;
+  private resetParam: string;
+  private forgotPass = false;
 
   constructor(
     public toastCtrl: ToastController,
@@ -46,11 +49,12 @@ export class ChangePasswordPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.validateLink();
     this.getRole();
+    this.validateLink();
     this.changePasswordForm = new FormGroup({
       password1: new FormControl(),
-      password: new FormControl()
+      password: new FormControl(),
+      oldPassword: new FormControl()
     });
     if (this.role == 4) {
       this.changePasswordForm = this.formBuilder.group({
@@ -68,7 +72,7 @@ export class ChangePasswordPage implements OnInit {
         });
     } else {
       this.changePasswordForm = this.formBuilder.group({
-        'email': [null, Validators.compose([
+        'oldPassword': [null, Validators.compose([
           Validators.minLength(5),
           Validators.required
         ])],
@@ -109,7 +113,7 @@ export class ChangePasswordPage implements OnInit {
     }
   }
 
-  changePassword() {
+  resetPassword() {
     console.log('Changed password:');
     console.log(this.changePasswordForm.value);
     if(this.role!=4){
@@ -117,7 +121,7 @@ export class ChangePasswordPage implements OnInit {
     }
     var pass = this.changePasswordForm.value;
     if (pass.password == pass.password1) {
-      this.usersService.updateByEmail(this.email, pass).subscribe(() => {
+      this.usersService.updateByEmail(this.resetParam, pass).subscribe(() => { // resetParam instead of email
         console.log('Password changed');
         this.presentSToast();
         this.navCtrl.navigateRoot('login').catch(error => console.error(error));
@@ -128,17 +132,29 @@ export class ChangePasswordPage implements OnInit {
     }
   }
 
+  changePassword() {
+    this.usersService.updateLoggedInUser(this.changePasswordForm.value).subscribe(() => {
+      console.log('Password changed');
+      this.presentSToast();
+      this.navCtrl.back();
+    }, error1 => {
+      this.presentFToast();
+      console.log('password not changed', error1);
+    });
+  }
+
   goBack() {
     console.log('Navigate back to settings');
     this.navCtrl.back;
   }
-
+// http://localhost:8100/change-password/ZjhUTUhUdWw2aS9nUmhjemtzYVMvVVJqa25CdUcxZlk
   validateLink() {
-    const reset = this.route.snapshot.params['reset'];
+    this.resetParam = this.route.snapshot.params['reset'];
     console.log(this.usersService.getTokenId())
-    if (reset != null && reset != '') {
-      console.log(reset);
-      let mail = this.usersService.decodeResetMail(reset);
+    if (this.resetParam != null && this.resetParam != '') {
+      this.forgotPass = true;
+      console.log(this.resetParam);
+      let mail = this.usersService.decodeResetMail(this.resetParam);
       console.log(mail);
       let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       let success = regexp.test(mail);
@@ -149,6 +165,7 @@ export class ChangePasswordPage implements OnInit {
         this.email = mail;
       }
     } else {
+      this.forgotPass = false;
         if(this.role<=0 || this.role>3)
         {
           this.navCtrl.navigateRoot('main').catch(error => console.error(error));

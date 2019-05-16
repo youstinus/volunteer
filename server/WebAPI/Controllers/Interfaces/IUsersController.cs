@@ -10,5 +10,7 @@ namespace WebAPI.Controllers.Interfaces
     {
         Task<IActionResult> Authenticate([FromBody] UserDto user);
         Task<IActionResult> Logout();
+        Task<IActionResult> UpdateByEmail([FromRoute] string email, [FromBody] UserDto userDto);
+        Task<IActionResult> UpdateLoggedInUser([FromBody] UserDto userDto);
     }
 }

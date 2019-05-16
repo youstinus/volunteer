@@ -7,6 +7,9 @@ import {Strings} from '../../constants/Strings';
 import {ProjectsService} from '../../services/projects.service';
 import {OrganizationsService} from '../../services/organizations.service';
 import { Language } from 'src/app/utilities/Language';
+import { ActivatedRoute } from '@angular/router';
+import { En } from 'src/app/constants/En';
+import { Lt } from 'src/app/constants/Lt';
 
 @Component({
     selector: 'app-main',
@@ -25,11 +28,14 @@ export class MainPage implements OnInit {
     public threeProjects: Project[];
     public threeOrganizations: Organization[];
     public spin = false;
+    private lang: string;
 
     constructor(
         private navCtrl: NavController,
         private projectsService: ProjectsService,
-        private organizationsService: OrganizationsService) {
+        private organizationsService: OrganizationsService,
+        private route: ActivatedRoute
+        ) {
     }
 
     ngOnInit() {

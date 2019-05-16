@@ -210,6 +210,7 @@ export class Lt {
         changePassHeader: 'PASIKEISKITE SLAPTAŽODŠĮ',
         changePassFieldSet: 'Reikalinga informacija ',
         changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
+        changePassOldPassword: 'Senas password',
         changePassNewPassword: 'Naujas slaptažodis',
         changePassConfirmPassword: 'Patvirtinkite slaptažodį',
         changePassButton: 'Keisti slaptažodį',
