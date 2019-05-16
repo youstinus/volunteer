@@ -1,5 +1,9 @@
+<head>
+    <script type="text/javascript" src="bubble.js"></script>
+</head>
 <app-header>{{mainTitle}}</app-header>
-<ion-content padding class="bodis">
+<ion-content padding class="bodis"> <!-- bodis2 -->
+
     <h1 class="logo">
         <span class="word1">The</span>
         <span class="word2">Platypus</span>
@@ -8,12 +12,13 @@
     <!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"-->
     <img class="image"
         src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
-    
+
     <h2>{{mainEvents}}</h2>
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)" style="text-align: center;">
+            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)"
+                style="text-align: center;">
                 <img class="img" src="{{ project.imageUrl }}" />
 
                 <ion-item>
@@ -35,16 +40,15 @@
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)" style="text-align: center;">
+            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)"
+                style="text-align: center;">
                 <ion-img src="{{ organization.imageUrl }}"></ion-img>
                 <ion-card-header>
                     <ion-card-title>{{organization.title}}</ion-card-title>
                 </ion-card-header>
-
             </ion-card>
         </ion-item-group>
     </ion-item-divider>
-
 
 </ion-content>
 

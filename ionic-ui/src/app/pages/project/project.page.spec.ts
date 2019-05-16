@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SafePipeModule } from 'safe-pipe';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {Location, LocationStrategy, PathLocationStrategy, APP_BASE_HREF} from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -14,6 +13,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProjectPage } from './project.page';
+import { SafePipe } from 'src/app/shared/safe.pipe';
 
 describe('ProjectPage', () => {
   let component: ProjectPage;
@@ -23,9 +23,9 @@ describe('ProjectPage', () => {
   } as ActivatedRoute;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectPage ],
+      declarations: [ ProjectPage, SafePipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, SafePipeModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
       providers: [Location, LocationStrategy,HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },

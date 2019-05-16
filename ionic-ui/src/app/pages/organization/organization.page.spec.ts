@@ -12,9 +12,9 @@ import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { OrganizationPage } from './organization.page';
-import { SafePipeModule } from 'safe-pipe';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
+import { SafePipe } from 'src/app/shared/safe.pipe';
 
 describe('OrganizationPage', () => {
   let component: OrganizationPage;
@@ -24,17 +24,17 @@ describe('OrganizationPage', () => {
   } as ActivatedRoute;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrganizationPage ],
+      declarations: [ OrganizationPage, SafePipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, SafePipeModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
       providers: [Location, LocationStrategy,HttpHandler,
-        StreamingMedia,Language, SafePipeModule, 
-        {provide: DomSanitizer, useClass: {
+        StreamingMedia,Language, PathLocationStrategy,
+        {provide: DomSanitizer, useValue: {
           sanitize: () => 'safeString',
           bypassSecurityTrustHtml: () => 'safeString'
         }
       },
-      { provide: LocationStrategy, useClass: PathLocationStrategy },
+      { provide: LocationStrategy, useValue: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
       CookieService, RouterTestingModule
