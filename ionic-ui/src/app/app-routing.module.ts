@@ -45,7 +45,8 @@ const routes: Routes = [
             { path: ':reset', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' },
             { path: '', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
         ]
-    },  { path: 'not-found', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
+    },
+  { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
 
 
 
@@ -56,4 +57,5 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class AppRoutingModule {
+
 }
