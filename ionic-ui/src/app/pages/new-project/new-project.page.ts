@@ -44,21 +44,10 @@ export class NewProjectPage implements OnInit {
   createProject: Project = new Project();
 
   ngOnInit() {
-    // this.role = this.usersService.getRole();
     this.id === this.usersService.getTokenId();
     console.log(this.id);
-
-    // this.id = this.route.snapshot.params['id'];
-    // this.projectsService.getById(this.id).subscribe(value => {
-    //   this.createProject = value;
-    // }, error1 => {
-    //   console.log(error1);
-    // });
-
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
-        //Validators.minLength(5),
-        /* Validators.required*/
       ])],
       'title': [null, Validators.compose([
         Validators.minLength(5),
@@ -69,13 +58,11 @@ export class NewProjectPage implements OnInit {
         Validators.required
       ])],
       'start': [null, Validators.compose([
-        // Validators.minLength(5),
         Validators.required
       ])],
       'end': [null, Validators.compose([])],
       'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
-        /*Validators.required*/
       ])],
       'website': [null, Validators.compose([
 

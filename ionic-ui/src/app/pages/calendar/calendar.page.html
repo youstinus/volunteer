@@ -1,9 +1,6 @@
 <app-header>{{ viewTitle }}</app-header>
 
 <ion-content>
-  <!-- <ion-card>
-    <h1 class="h1" padding-horizontal text-center> {{ viewTitle }}</h1>
-  </ion-card> -->
   <ion-row>
     <ion-col size="5" text-left>
       <ion-button fill="clear" (click)="back()">
@@ -33,12 +30,6 @@
     </calendar>
   </ion-content>
 </ion-content>
-
-<!-- <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
-  <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
-    <span class="event-detail">{{event.title}}</span>
-  </ion-item>
-</ng-template> -->
 
 <ng-template #template2 let-showEventDetail="showEventDetail" let-selectedDate="selectedDate"
   let-noEventsLabel="noEventsLabel">

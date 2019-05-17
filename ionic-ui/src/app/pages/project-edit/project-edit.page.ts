@@ -3,14 +3,9 @@ import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, IonButton, AlertController } from '@ionic/angular';
-import { Strings } from '../../constants/Strings';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Location } from '@angular/common';
-import { load } from '@angular/core/src/render3';
 import { Language } from 'src/app/utilities/Language';
 
 @Component({
@@ -63,49 +58,39 @@ export class ProjectEditPage implements OnInit {
       this.project = value;
       this.atsarginisUrl = this.project.imageUrl;
       this.getRole();
-      console.log(value)
     }, error1 => {
       console.log(error1);
     });
 
     this.onEditForm = this.formBuilder.group({
 
-      'title': [/*this.project.title*/ null, Validators.compose([
+      'title': [null, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
       'imageUrl': [null, Validators.compose([
-        //Validators.minLength(5),
         Validators.nullValidator
       ])],
-      'description': [null/*this.project.description*/, Validators.compose([
+      'description': [null, Validators.compose([
         Validators.minLength(5),
         Validators.required
       ])],
-      // 'start': [null, Validators.compose([
-      //   Validators.required])],//this.project.start,
 
       'start': '',
       'end': '',
 
-      // 'end': [null, Validators.compose([
-      //   Validators.required
-      // ])],//this.project.end,
-
       'organizationId': this.usersService.getTokenId(),
 
-      'location': [/*this.project.location*/null, Validators.compose([
-        /* Validators.required*/
+      'location': [null, Validators.compose([
       ])],
-      'website': [/*this.project.website*/null, Validators.compose([
-        /* Validators.required,*/
+      'website': [null, Validators.compose([
         Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
-      'email': [/*this.project.email*/'', Validators.compose([
+      'email': ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      'phone': [null/*this.project.phone*/, Validators.compose([
+      'phone': [null, Validators.compose([
         Validators.required,
         Validators.pattern('^[+0-9. ()-]*$')
       ])]
@@ -117,13 +102,8 @@ export class ProjectEditPage implements OnInit {
     }
   }
   onSaved() {
-    console.log(this.onEditForm.value);
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
-
-      //this.navCtrl.navigateForward('projects').catch(e => console.log(e));
-      //location.assign('projects/type/created');
       this.OnSavePopUp();
-      console.log(value);
     }, error1 => {
       this.NotEdited();
       console.log(error1);
@@ -132,29 +112,32 @@ export class ProjectEditPage implements OnInit {
   }
   goToProjects() {
     //this.navCtrl.pop();
-        this.navCtrl.back();
+    this.navCtrl.back();
   }
   async OnSavePopUp() {
     const alert = await this.alertCtrl.create({
       header: this.editSuccesfull,
-     /* message: this.editSuccesfull,*/
-      buttons: [{ text:this.projectGoBack ,handler: () => {
-        alert.dismiss().then(() => {
-          this.navCtrl.back();
-        })
-      }},this.newPojectAlertOk]
+      buttons: [{
+        text: this.projectGoBack, handler: () => {
+          alert.dismiss().then(() => {
+            this.navCtrl.back();
+          })
+        }
+      }, this.newPojectAlertOk]
     });
     await alert.present();
   }
   async OnDeletePopUp() {
     const alert = await this.alertCtrl.create({
       header: this.areYouSure,
-      buttons: [{ text:this.eYes ,handler: () => {
-        alert.dismiss().then(() => {
-          this.Delete();
-          this.navCtrl.back();
-        })
-      }},this.eNo]
+      buttons: [{
+        text: this.eYes, handler: () => {
+          alert.dismiss().then(() => {
+            this.Delete();
+            this.navCtrl.back();
+          })
+        }
+      }, this.eNo]
     });
     await alert.present();
   }
@@ -167,43 +150,7 @@ export class ProjectEditPage implements OnInit {
     });
     this.navCtrl.navigateForward('projects/').catch(e => console.log(e));
   }
-  onChangePic() {
-    console.log();
-    this.changePic();
-  }
-  async changePic() {
-    const alert = await this.alertCtrl.create({
-      header: 'Please enter the url of your image',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        }, {
-          text: 'Confirm',
-          handler: data => {
-            console.log('Confirm');
-            this.project.imageUrl = data.URL;
-          }
-        }
-      ],
-      inputs: [
-        {
-          name: 'URL',
-          type: 'text',
-          placeholder: ''
-        }
-      ]
-    });
 
-    await alert.present();
-  }
-
-  load() {
-    location.reload()
-  }
   async NotEdited() {
     const alert = await this.alertCtrl.create({
       header: this.editProjectAlertEditHeader,
@@ -213,16 +160,14 @@ export class ProjectEditPage implements OnInit {
     await alert.present();
   }
 
-
   updateUrl(event) {
-    //this.project.imageUrl= this.project.imageUrl;
     this.atsarginisUrl = this.defaulUrl;
   }
   updateUrl2(event) {
     this.atsarginisUrl = this.project.imageUrl;
   }
   updateIMG(searchValue: string) {
-    this.project.imageUrl = searchValue;//Strings.Default_Image_Url;//
+    this.project.imageUrl = searchValue;
     this.atsarginisUrl = searchValue;
   }
 
