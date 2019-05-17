@@ -41,6 +41,7 @@ export class ProjectEditPage implements OnInit {
   public onEditForm: FormGroup;
   public imgForm: FormGroup;
   role: number = 1;
+  owner: boolean = false;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   constructor(private projectsService: ProjectsService,
     private location: Location,
@@ -58,6 +59,14 @@ export class ProjectEditPage implements OnInit {
       this.project = value;
       this.atsarginisUrl = this.project.imageUrl;
       this.getRole();
+      const userId = this.usersService.getTokenId();
+      if (userId == this.project.organizationId) {
+        this.owner = true;
+        console.log('Savininkas');
+      } else {
+        this.owner = false;
+        this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+      }
     }, error1 => {
       console.log(error1);
     });
