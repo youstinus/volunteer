@@ -40,14 +40,15 @@ export class ProjectPage implements OnInit {
   project: Project = new Project();
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
-  newUrl: string= '';
+  newUrl: string = '';
   role: number = 4;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   owner: boolean = false;
   saved: boolean = false;
   selected: boolean = false;
   id: number;
-
+  projectLocation: boolean = false;
+  isWebsiteNotEmpty: boolean = false;
   constructor(
     private usersService: UsersService,
     private volunteersService: VolunteersService,
@@ -57,7 +58,7 @@ export class ProjectPage implements OnInit {
     public navCtrl: NavController
     //   private clipboard: Clipboard
   ) { }
-  check(){
+  check() {
     return this.newUrl != '';
   }
   stringparse() {
@@ -68,9 +69,11 @@ export class ProjectPage implements OnInit {
     }
     newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
     this.newUrl = newurl;
-    
-  }
 
+  }
+  isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+  }
   onSourceClicked(source: string) {
     let url: string = '';
     if (!/^http[s]?:\/\//.test(source)) {
@@ -85,7 +88,9 @@ export class ProjectPage implements OnInit {
     this.id = id;
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
-      this.stringparse();
+      this.isWebsiteNotEmpty = !this.isEmptyOrSpaces(this.project.website);
+      this.projectLocation = !this.isEmptyOrSpaces(this.project.location);
+       this.stringparse();
       this.getRole();
       if (this.role == 2) {
         this.setVolunteer();
@@ -219,38 +224,6 @@ export class ProjectPage implements OnInit {
   goToProjects() {
     // this.navCtrl.pop();
     console.log(this.navCtrl);
-    this.navCtrl.back({animated: true});
-  }
-}
-
-
-
-export class PopoverComponent {
-
-  public ionicNamedColor: string = 'primary';
-  color: any;
-  submit(event) {
-    let prevColor = this.color;
-    if (this.color === 'primary') {
-      this.color = 'light'
-    } else {
-      this.color = 'primary'
-    }
-
-    if (event.target.localName === 'button') {
-      event.target.className = event.target.className.replace('button-md-' + prevColor, 'button-md-' + this.color);
-    } else if (event.target.parentElement.localName === 'button') {
-      event.target.parentElement.className = event.target.parentElement.className.replace('button-md-' + prevColor, 'button-md-' + this.color);
-    }
-  }
-  constructor() {
-  }
-
-  public toggleNamedColor(): void {
-    if (this.ionicNamedColor === 'primary') {
-      this.ionicNamedColor = 'light'
-    } else {
-      this.ionicNamedColor = 'primary'
-    }
+    this.navCtrl.back({ animated: true });
   }
 }
