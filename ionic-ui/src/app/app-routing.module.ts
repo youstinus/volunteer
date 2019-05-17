@@ -46,7 +46,7 @@ const routes: Routes = [
             { path: '', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
         ]
     },
-  { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
+// { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
 
 
 

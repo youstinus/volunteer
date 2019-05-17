@@ -234,3 +234,54 @@ img {
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: orange;  }
 
+
+
+
+
+/****** Style Star Rating Widget FOr average*****/
+
+.ratingAvg {
+  border: none ;
+  float: left;
+}
+
+.ratingAvg > input { display: none;}
+.ratingAvg > label:before {
+  margin: 5px;
+  font-size: 30px;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.ratingAvg > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.ratingAvg > label {
+  color: #1e2023;
+  float: right;
+}
+
+
+
+
+
+
+
+.ratingAvg > input:checked ~ label, /* show gold star when clicked */
+
+
+
+
+.ratingAvg > input:checked ~ label:hover,
+.ratingAvg > label:hover ~ input:checked ~ label, /* lighten current selection */
+.ratingAvg > input:checked ~ label:hover ~ label { color: orange;  }
+.ratingAvg > label::selection ~ input:checked ~ label, /* lighten current selection */
+.ratingAvg > input:checked ~ label:hover ~ label { color: orange;  }
+
+
+
+
+

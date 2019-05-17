@@ -1,4 +1,4 @@
-<app-header>Organization page</app-header>
+<app-header>{{orgsHeader}}</app-header>
 <ion-content padding>
 
   <h1 class="h1" padding-horizontal text-center>{{organization.title}}</h1>
@@ -14,14 +14,14 @@
             </div>
 
             <div *ngIf="(organization.imageUrl!='') ">
-              <img class="img" [src]='organization.imageUrl' (error)="updateUrl($event)">
+              <img class="img" [src]='organization.imageUrl' (error)="updateUrl($event)" >
             </div>
           </div>
         </ion-col>
         <ion-col>
           <div>
             <ion-card class="myCard">
-              <ion-item lines="none" (click)="onSourceClicked(organization.website)">
+              <ion-item lines="none" style ="cursor:pointer" (click)="onSourceClicked(organization.website)">
                 <ion-icon name="link" slot="start"></ion-icon>
                 <ion-label>
                   {{organization.website}}
@@ -30,7 +30,7 @@
             </ion-card>
             <ion-card class="myCard phone-clip tooltip">
               <ion-item lines="none" (click)="onPhoneClicked(organization.phone)">
-                <span class="tooltiptext">Copy to clipboard</span>
+                <span class="tooltiptext">{{orgClipBoard}}</span>
                 <ion-icon name="md-call" slot="start"></ion-icon>
                 <ion-label>
                   {{organization.phone}}
@@ -39,10 +39,30 @@
             </ion-card>
             <ion-card class="myCard email-clip tooltip">
               <ion-item lines="none" (click)="onEmailClicked(organization.email)">
-                <span class="tooltiptext">Copy to clipboard</span>
+                <span class="tooltiptext">{{orgClipBoard}}</span>
                 <ion-icon name="ios-mail" slot="start"></ion-icon>
                 <ion-label>
                   {{organization.email}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            <ion-card class="myCard">
+              <ion-item lines="none">
+                <ion-label >
+                  <fieldset  class="ratingAvg">
+                    <input *ngIf="getAverage()>4.5" type="radio" id="stara5" name="rating" value="5" checked aria-disabled="true"/><label class = "full" for="stara5" ></label>
+                    <input *ngIf="getAverage()===4.5 " type="radio" id="star4half" name="rating" value="4 and a half" checked aria-disabled="true"/><label class="half" for="star4half" ></label>
+                    <input  *ngIf="getAverage()>3.5 && getAverage()<=4" type="radio" id="star4a" name="rating" value="4" checked aria-disabled="true"/><label class = "full" for="star4a" ></label>
+                    <input *ngIf="getAverage()===3.5"type="radio" id="star3half" name="rating" value="3 and a half" checked aria-disabled="true"/><label class="half" for="star3half" ></label>
+                    <input  *ngIf="getAverage()>2.5 && getAverage()<=3" type="radio" id="star3a" name="rating" value="3" checked aria-disabled="true"/><label class = "full" for="star3a" ></label>
+                    <input *ngIf="getAverage()===2.5"type="radio" id="star2half" name="rating" value="2 and a half" checked aria-disabled="true" /><label class="half" for="star2half" ></label>
+                    <input  *ngIf="getAverage()>1.5 && getAverage()<=2" type="radio" id="star2a" name="rating" value="2" checked aria-disabled="true"/><label class = "full" for="star2a"></label>
+                    <input *ngIf="getAverage()===1.5"type="radio" id="star1half" name="rating" value="1 and a half" checked aria-disabled="true"/><label class="half" for="star1half" ></label>
+                    <input *ngIf="getAverage()>0.5 && getAverage()<=1"type="radio" id="starhalf" name="rating" value="half" checked aria-disabled="true"/><label class="half" for="starhalf"></label>
+                    <input  *ngIf="getAverage()===0.5" type="radio" id="star1a" name="rating" value="1" checked aria-disabled="true"/><label class = "full" for="star1a" ></label>
+
+                  </fieldset>
+
                 </ion-label>
               </ion-item>
             </ion-card>
@@ -60,17 +80,21 @@
     </ion-item>
   </ion-card>
 
-  <ion-list>
-    <ion-item *ngFor="let project of projects; let i = index" (click)="onProjectClicked(i)">
+  <!--<ion-list>-->
+  <ion-card>
+    <ion-card-title style="margin-left: 20px;" > Projektai
+    </ion-card-title>
+    <ion-item *ngFor="let project of projects">
       <ion-label>{{ project.title }}</ion-label>
-      <ion-button expand="full" shape ="round">Go to project page</ion-button>
+      <ion-button (click)="onProjectClicked(project.id)" expand="full" shape ="round">{{orgGoToProject}}</ion-button>
     </ion-item>
-  </ion-list>
+
+  </ion-card>
 
 
   <ion-card style="height: auto; max-height: 500px">
     <ion-card-header>
-      <ion-card-title class="label">Find us at:
+      <ion-card-title class="label">{{orgFindUs}}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -78,33 +102,31 @@
         <div class="gmap_canvas">
           <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
                   [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe>
-
         </div>
 
       </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-card  >
-    <ion-list *ngFor="let review of reviews">
+  <ion-card>
+    <ion-card-title style="margin-left: 20px;" > Komentarai
+    </ion-card-title>
+  <ion-item *ngFor="let review of reviews">
 
-      <ion-card-header >
-        <ion-card-title>
-          {{review.title}}
+    <ion-card-header >
+      <ion-card-title>
+        {{review.title}}
+      </ion-card-title>
 
-        </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text style="height: auto">{{review.text}}</ion-text>
+    </ion-card-content>
 
-      </ion-card-header>
-      <ion-card-content>
-        <ion-text style="height: auto">{{review.text}}</ion-text>
-      </ion-card-content>
-
-    </ion-list>
-
-
+  </ion-item>
+    </ion-card>
 
 
-  </ion-card>
 
   <ion-card>
 
@@ -118,18 +140,17 @@
         </ion-row>
 
         <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
-        <ion-button (click) = 'onCreate()' expand="50%" shape ="round" style="float: left"  [disabled]="checkRole() == 1 || !onCreateForm.valid" >Comment</ion-button>
+        <ion-button   (click) = 'onCreate()' expand="50%" shape ="round" style="float: left" [disabled]="checkRole() == 1 || !onCreateForm.valid" >{{orgComment}}</ion-button>
         <fieldset  class="rating">
-          <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
+          <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
           <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
           <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
           <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2"></label>
           <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
-
         </fieldset>
 
       </form>
-      </ion-card-content>
+    </ion-card-content>
 
   </ion-card>
 

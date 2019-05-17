@@ -206,6 +206,8 @@ export class En {
         volSettingsSaveChanges: 'Save changes',
         volSettingsAlertSuccess: 'Your changes were saved successfully',
         volSettingsAlertFail: "Your changes haven't been saved",
+        volSettingsChangePass: "Change password",
+        volSettingsDeleteAcc: "Delete account",
         //Change-password page
         changePassHeader: 'RESET YOUR PASSWORD',
         changePassFieldSet: 'Needed information',
@@ -219,6 +221,35 @@ export class En {
         changePassChangeFail: "Your password haven't been changed",
         changePassFielRequired: 'This field is required',
         changePassContain5: 'This field is required and must contain at least 5 characters ',
-        changePassPassDontMatch: 'Password and ConfirmPassword do not match'
+        changePassPassDontMatch: 'Password and ConfirmPassword do not match',
+        // Organization settings page
+        orgSettingsHeader: 'Organization Settings',
+        orgSettingsWebsite: 'Website',
+        orgSettingsImage: 'Your image url',
+        orgSettingsTitle: 'Organization title',
+        orgSettingsAddress: 'Address',
+        orgSettingsPhone: 'Phone',
+        orgSettingsEmail: 'Email',
+        orgSettingsDescription: 'Description',
+        orgSettingsSaveChanges: 'Save changes',
+        orgSettingsAlertSuccess: 'Your changes were saved successfully',
+        orgSettingsAlertFail: "Your changes haven't been saved",
+        orgSettingsChangePass: 'Change password',
+        orgSettingsDeleteAcc: 'Delete account',
+        orgSettingsDeleteAalert: "You're about to delete your account",
+        orgSettingsDeleteConfirm: "Are  you sure?",
+        orgSettingsDeleteButton:"Yes",
+        orgSettingsAlertConfirm: "Ok",
+        orgSettingsDeleteCancel: "Cancel",
+        orgSettingsDeleted: "Account deleted",
+
+        // Organization page
+        orgHeader: 'Organization page',
+        orgGoToProject: 'Go to project page',
+        orgClipBoard: 'Copied to clipboard',
+        orgFindUs : 'Find us at',
+        orgComment: 'Comment',
+        // OrganizationS page
+        orgsHeader: 'Organizations'
     }
 }

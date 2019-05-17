@@ -15,7 +15,7 @@ import {Volunteer} from '../models/Volunteer';
   providedIn: 'root'
 })
 export class ReviewsService extends BaseService<Review> {
-  public api = `${environment.webApiUrl}/volunteers`;
+  public api = `${environment.webApiUrl}/reviews`;
 
   constructor(public http: HttpClient, public usersService: UsersService, public cookieService: CookieService) {
     super(http, usersService, cookieService);

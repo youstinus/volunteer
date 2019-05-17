@@ -201,6 +201,8 @@ export class Lang {
     public volSettingsSaveChanges: string;
     public volSettingsAlertSuccess: string;
     public volSettingsAlertFail: string;
+    public volSettingsChangePass: string;
+    public volSettingsDeleteAcc: string;
     // Change password page
     public changePassHeader: string;
     public changePassFieldSet: string;
@@ -215,4 +217,34 @@ export class Lang {
     public changePassFielRequired: string;
     public changePassContain5: string;
     public changePassPassDontMatch: string;
+
+    //Organization settings page
+    public orgSettingsHeader: string;
+    public orgSettingsWebsite: string;
+    public orgSettingsImage: string;
+    public orgSettingsTitle: string;
+    public orgSettingsAddress: string;
+    public orgSettingsPhone: string;
+    public orgSettingsEmail: string;
+    public orgSettingsDescription: string;
+    public orgSettingsSaveChanges: string;
+    public orgSettingsAlertSuccess: string;
+    public orgSettingsAlertFail: string;
+    public orgSettingsChangePass: string;
+    public orgSettingsDeleteAcc: string;
+    public orgSettingsDeleteAalert: string;
+    public orgSettingsDeleteConfirm: string;
+    public orgSettingsDeleteCancel: string;
+    public orgSettingsDeleteButton: string;
+    public orgSettingsAlertConfirm: string;
+    public orgSettingsDeleted: string;
+
+    //Organization page
+    public  orgHeader: string;
+    public orgGoToProject: string;
+    public orgClipBoard: string;
+    public orgFindUs: string;
+    public orgComment: string;
+    // OrganizationS page
+    public orgsHeader: string;
 }

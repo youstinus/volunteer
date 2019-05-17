@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Volunteer} from "../../models/Volunteer";
 import {VolunteersService} from "../../services/volunteers.service";
 import {Strings} from "../../constants/Strings";
+import {text} from "@angular/core/src/render3";
+import {Language} from "../../utilities/Language";
 
 @Component({
   selector: 'app-organizations-settings',
@@ -18,6 +20,28 @@ import {Strings} from "../../constants/Strings";
 
 
 export class OrganizationsSettingsPage implements OnInit {
+
+  orgSettingsHeader: string = Language.Lang.orgSettingsHeader;
+  orgSettingsImage: string = Language.Lang.orgSettingsImage;
+  orgSettingsWebsite: string = Language.Lang.orgSettingsWebsite;
+  orgSettingsTitle: string = Language.Lang.orgSettingsTitle;
+  orgSettingsAddress: string = Language.Lang.orgSettingsAddress;
+  orgSettingsPhone: string = Language.Lang.orgSettingsPhone;
+  orgSettingsEmail: string = Language.Lang.orgSettingsEmail;
+  orgSettingsDescription: string = Language.Lang.orgSettingsDescription;
+  orgSettingsSaveChanges: string = Language.Lang.orgSettingsSaveChanges;
+  orgSettingsAlertSuccess: string = Language.Lang.orgSettingsAlertSuccess;
+  orgSettingsAlertFail: string = Language.Lang.orgSettingsAlertFail;
+  orgSettingsChangePass: string = Language.Lang.orgSettingsChangePass;
+  orgSettingsDeleteAcc: string = Language.Lang.orgSettingsDeleteAcc;
+  orgSettingsDeleteAalert: string = Language.Lang.orgSettingsDeleteAalert;
+  orgSettingsDeleteConfirm: string = Language.Lang.orgSettingsDeleteConfirm;
+  orgSettingsDeleteButton:string = Language.Lang.orgSettingsDeleteButton;
+  orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
+  orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
+  orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
+
+
 
   user: number;
   public onSaveForm: FormGroup;
@@ -74,6 +98,7 @@ export class OrganizationsSettingsPage implements OnInit {
     console.log();
     this.changePic();
   }
+
   async changePic() {
     const alert = await this.alertCtrl.create({
       header: 'Please enter the url of your image',
@@ -107,17 +132,83 @@ export class OrganizationsSettingsPage implements OnInit {
   onSearchChange(searchValue: string) {
     this.updateIMG(searchValue);
   }
+
   updateIMG(searchValue: string) {
-    this.organization.imageUrl = Strings.Default_Image_Url;//Strings.Default_Image_Url;//searchValue;
+    this.organization.imageUrl = searchValue;//Strings.Default_Image_Url;//
   }
+
   updateUrl(event) {
     this.organization.imageUrl = this.defaulUrl;
   }
-  onChangePass()
-  {
-    this.navCtrl.navigateForward('/change-password').catch(reason => console.log(reason));
+
+  onChangePass() {
+    this.navCtrl.navigateForward('/change-password/reset').catch(reason => console.log(reason));
   }
 
+
+  onDelete() {
+    console.log();
+    this.delete();
+  }
+
+  async delete() {
+    const alert = await this.alertCtrl.create({
+      header: this.orgSettingsDeleteAalert,
+      message: this.orgSettingsDeleteConfirm,
+      buttons: [
+        {
+          text:  this.orgSettingsDeleteButton,
+          role : 'delete',
+          cssClass: '',
+          handler: data => {
+            {
+              console.log('Confirm');
+              this.usersService.delete(this.organization.id);
+              this.conf();
+            }
+          }
+        }, {
+          text: this.orgSettingsDeleteCancel,
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+      ],
+
+    });
+
+    await alert.present();
+  }
+
+
+  Confirm() {
+    console.log();
+    this.conf();
+  }
+
+  async conf() {
+    const alert = await this.alertCtrl.create({
+      header: this.orgSettingsDeleted,
+      buttons: [
+        {
+          text: this.orgSettingsAlertConfirm,
+          role : 'Ok',
+          cssClass: 'btn',
+          handler: data => {
+            {
+              console.log('Confirm');
+              this.navCtrl.navigateRoot('main');
+
+            }
+          }
+        }
+      ],
+
+    });
+
+    await alert.present();
+  }
 }
 
 

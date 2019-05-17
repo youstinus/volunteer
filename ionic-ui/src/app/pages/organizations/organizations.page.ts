@@ -7,7 +7,9 @@ import { ProjectsService } from '../../services/projects.service';
 import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-
+import {Review} from '../../models/Review';
+import {ReviewsService} from '../../services/reviews.service';
+import {Language} from "../../utilities/Language";
 
 @Component({
   selector: 'app-organizations',
@@ -15,48 +17,20 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./organizations.page.scss'],
 })
 export class OrganizationsPage implements OnInit {
-  organizationsx: Organization[] =
-      [
-        {
-          id: 11,
-          projectsIds: [1],
-          title: 'Pam param , yeet skeet',
-          description: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-          website: 'google.com',
-          userId: 5,
-          phone: '866666666',
-          picturesIds: [1],
-          address: 'test g. 696',
-          email: 'test@gmail.com',
-          imageUrl: 'https://rarepepewallet.com/images/pepemoney.png'
-        },
-
-        {
-          id: 12,
-          projectsIds: [2],
-          title: 'VšĮ Pagirk',
-          description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-          website: 'google.com',
-          userId: 5,
-          phone: '866666666',
-          picturesIds: [1],
-          address: 'test g. 696',
-          email: 'test@gmail.com',
-          imageUrl: 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg'
-        }
+  orgsHeader: string = Language.Lang.orgsHeader;
 
 
 
-  ]
+
 
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
   public spin = true;
   public searchTerm = '';
   organizations: Organization[];
-  organizationsFiltered: Organization[] = this.organizations;
+  // organizationsFiltered: Organization[] = this.organizations;
 
 
-  constructor(private organizationsService: OrganizationsService, private navCtrl: NavController) {
+  constructor(private organizationsService: OrganizationsService, private navCtrl: NavController, private reviewsService: ReviewsService) {
   }
 
   ngOnInit() {
@@ -66,6 +40,12 @@ export class OrganizationsPage implements OnInit {
 
     }, error1 => {
       console.log(error1);
+      // });
+      // this.reviewsService.getReviews(id).subscribe(value => {
+      //   this.reviews = value;
+      //   this.reviews.map(value1 => value1.organizationId === this.organization.id);
+      // }, error1 => {
+      //   console.log(error1);
     });
   }
 
@@ -78,6 +58,16 @@ export class OrganizationsPage implements OnInit {
   updateUrl(organization: Organization) {
     organization.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
   }
+
+  // getAverage() {
+  //   const sum = this.reviews.filter(item => item.grade && item.organizationId === this.organization.id)
+  //       .reduce((sum, current) => sum + current.grade, 0);
+  //
+  //   const count = this.reviews.filter((x) => { return x.organizationId === this.organization.id; });
+  //   var lngth = count.length;
+  //   return sum / lngth;
+  // }
+
 
   // setFilteredItems() {
   //   this.organizationsFiltered = this.filteredOrganizations(this.searchTerm);

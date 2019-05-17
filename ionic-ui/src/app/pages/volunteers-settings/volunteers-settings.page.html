@@ -73,11 +73,11 @@
         <ion-card-content>
 
             <ion-button (click)="onChangePass()" style = "font-size: 12px" size="small" color="dark" shape="round" >
-                Change Password
+                {{volSettingsChangePass}}
             </ion-button>
 
-            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round" >
-                Delete account
+            <ion-button (click)="onDelete()" style=" float: right; font-size: 12px" size="small" color="dark" shape="round" >
+                {{volSettingsDeleteAcc}}
             </ion-button>
 
         </ion-card-content>

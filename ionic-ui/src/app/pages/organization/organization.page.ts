@@ -4,7 +4,6 @@ import {Volunteer} from '../../models/Volunteer';
 import { VolunteersService } from 'src/app/services/volunteers.service';
 import {ActivatedRoute} from '@angular/router';
 import {OrganizationsService} from '../../services/organizations.service';
-import {Project} from '../../models/Project';
 import {AlertController, NavController} from '@ionic/angular';
 import {Review} from '../../models/Review';
 import {ReviewsService} from '../../services/reviews.service';
@@ -12,6 +11,12 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { UsersService } from 'src/app/services/users.service';
 import {User} from "../../models/User";
 import {Strings} from "../../constants/Strings";
+import { Language } from 'src/app/utilities/Language';
+import { Project } from 'src/app/models/Project';
+import { ProjectsService } from '../../services/projects.service';
+
+
+
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.page.html',
@@ -19,54 +24,29 @@ import {Strings} from "../../constants/Strings";
 })
 export class OrganizationPage implements OnInit {
 
+  orgsHeader: string = Language.Lang.orgHeader;
+  orgGoToProject: string = Language.Lang.orgGoToProject;
+  orgClipBoard: string = Language.Lang.orgClipBoard;
+  orgFindUs: string = Language.Lang.orgFindUs;
+  orgComment: string = Language.Lang.orgComment;
 
-  organization: Organization = {
-    id: 11,
-    projectsIds: [1],
-    title: 'VšĮ Pagirk',
-    description: 'Kviečiami savanoriai įvairiems pagalbiniams darbams atlikti:•gyvūnų priežiūrai•aplinkos tvarkymui Lietuvos zoologijos sode;•pagalbai ruošiantis renginiams (dekoracijų gaminimas, idėjų generavimas, veiklų koordinavimas ir vykdymas renginio dieną, gyvūnų pristatymas',
-    website: 'google.com',
-    userId: 5,
-    phone: '866666666',
-    picturesIds: [1],
-    address: 'studentu g.',
-    email: 'test@gmail.com',
-    imageUrl: ''
-  };
-  reviews: Review[] = [{
-    id: 13,
-    title: 'Yaga',
-    grade: 5,
-    text: 'Yeet skeet, labai gers , labai patiko, skibidy bap bap skrrt',
-    organizationId: 11,
-    volunteerId: 4
-  },
-    {
-      id: 14,
-      title: 'Yeet',
-      grade: 5,
-      text: 'Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet Yeet YeetYeet Yeet Yeet ',
-      organizationId: 11,
-      volunteerId: 4
-    }
 
-  ];
-
+  userId : number;
+  id : number;
+  reviews: Review[] ;
+  createReview: Review = new Review();
+  sum: number;
+  average: number;
   volunteers: Volunteer[];
   projects: Project[];
-
-
-
   public onCreateForm: FormGroup;
   user: User = new User();
-  project: Project = new Project();
-  volunteer: Volunteer = new Volunteer();
-  //organization: Organization = new Organization();
+  //volunteer: Volunteer = new Volunteer();
+  organization: Organization = new Organization();
   newUrl = '';
   role: number = 4;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
 
-  id: number;
   constructor(
       private organizationsService: OrganizationsService,
       private usersService: UsersService,
@@ -75,33 +55,60 @@ export class OrganizationPage implements OnInit {
       private reviewsService: ReviewsService,
       private formBuilder: FormBuilder,
       private volunteersService: VolunteersService,
-      public alertCtrl: AlertController
-  ) {}
-  createReview: Review = new Review();
+      public alertCtrl: AlertController,
+      public    projectService: ProjectsService,
 
+  ) {}
+
+
+  stringparse() {
+    let newurl: string = '';
+    newurl += 'https://maps.google.com/maps?q=';
+    if (this.organization !== null && this.organization.address !== null && this.organization.address !== '') {
+      newurl += this.organization.address.replace(' ', '%20').replace(',', '%2C');
+    }
+    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+    this.newUrl = newurl;
+  }
   ngOnInit() {
     this.getRole();
-    this.stringparse();
-    console.log(this.getRole());
+
     const id = this.route.snapshot.params['id'];
+
+
+
+
     this.organizationsService.getById(id).subscribe(value => {
       this.organization = value;
+      this.userId = this.organization.userId;
+
+      this.stringparse();
     }, error1 => {
       console.log(error1);
     });
 
-    this.reviewsService.getReviews(id).subscribe(value => {
-      this.reviews = value;
-      this.reviews.map(value1 => value1.organizationId === this.organization.id);
+    this.reviewsService.get().subscribe(value1 => {
+
+      this.reviews = value1;//.filter(val1 => val1.organizationId ===id);
+
+      console.log( this.reviews);
+      console.log( id);
     }, error1 => {
       console.log(error1);
     });
-    this.organizationsService.getProjectsByOrganizationId(id).subscribe(value => {
-      this.projects = value;
+
+    this.projectService.get().subscribe(value => {
+      this.projects = value.filter(val => val.organizationId === this.userId);
+
+      console.log(this.projects);
+      console.log(this.userId);
     }, error1 => {
       console.log(error1);
     });
+
+
     this.onCreateForm = this.formBuilder.group({
+
       'text': [null, Validators.compose([
         Validators.required
       ])],
@@ -109,13 +116,16 @@ export class OrganizationPage implements OnInit {
         Validators.required
       ])],
       'grade': [null, Validators.compose([
-          Validators.required
+        Validators.required
 
       ])],
-      'organizationId': this.organization.id,
-      'volunteerId': this.setVolunteer(),
+      'organizationId' : this.id,
 
-    });
+      'volunteerId': this.userId
+
+
+    } );
+
 
   }
   async onCreate() {
@@ -123,34 +133,17 @@ export class OrganizationPage implements OnInit {
     this.reviewsService.create(this.onCreateForm.value).subscribe(value => {
       console.log(value);
       this.createReview = value;
-      // location.assign('');
+
     }, error1 => {
       console.log(error1);
-      //this.NotCreated();
+
     });
   }
-    async NotCreated() {
-      const alert = await this.alertCtrl.create({
-        header: 'Review was not created',
-        message: 'Please, fill in required fields',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
 
-
-  setVolunteer() {
-    const userId = this.usersService.getTokenId();
-    this.volunteersService.getByUsersId(userId).subscribe(value => {
-      this.volunteer = value;
-    }, error1 => {
-      console.log(error1);
-    });
-  }
-  // consider transfering whole object to project page to reduce time
   onProjectClicked(id: number) {
     this.navCtrl.navigateForward('projects/' + id).catch(reason => console.log(reason));
   }
+
 
 
 
@@ -177,17 +170,6 @@ export class OrganizationPage implements OnInit {
     this.onCreateForm.controls['grade'].setValue(1);
   }
 
-
-
-  stringparse() {
-    let newurl: string = '';
-    newurl += 'https://maps.google.com/maps?q=';
-    if (this.organization !== null && this.organization.address !== null && this.organization.address !== '') {
-      newurl += this.organization.address.replace(' ', '%20').replace(',', '%2C');
-    }
-    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
-    this.newUrl = newurl;
-  }
 
 
   onSourceClicked(source: string) {
@@ -218,26 +200,44 @@ export class OrganizationPage implements OnInit {
   }
 
   updateUrl(event) {
-    this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+    this.organization.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
   }
   getRole() {
     const role = this.usersService.getTokenRole();
-    if (role == 'Volunteer') {
+    if (role === 'Volunteer') {
       this.role = 2;
-    } else if (role == 'Organization') {
+    } else if (role === 'Organization') {
       this.role = 3;
-    } else if (role == 'Moderator') {
+    } else if (role === 'Moderator') {
       this.role = 1;
-    } else if (role == 'Admin') {
+    } else if (role === 'Admin') {
       this.role = 0;
     } else {
       this.role = 4;
     }
   }
   checkRole() {
-   if( this.role == 4)
-     return 1
+    if( this.role === 4)
+      return 1;
   }
+
+
+
+
+  getAverage() {
+    if (this.reviews !== undefined && this.reviews !== null) {
+      const sum = this.reviews.filter(item => item.grade && item.organizationId === this.organization.id)
+          .reduce((sum, current) => sum + current.grade, 0);
+      const count = this.reviews.filter((x) => {
+        return x.organizationId === this.organization.id;
+      });
+      var lngth = count.length;
+      //console.log(sum);
+      return sum / lngth;
+    }
+    else {return 0; }
+  }
+
 
 
 

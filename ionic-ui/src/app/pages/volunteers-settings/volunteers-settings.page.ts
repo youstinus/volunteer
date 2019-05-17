@@ -27,6 +27,15 @@ export class VolunteersSettingsPage implements OnInit {
     volSettingsSaveChanges: string = Language.Lang.volSettingsSaveChanges;
     volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
     volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
+    volSettingsChangePass: string = Language.Lang.volSettingsChangePass;
+    volSettingsDeleteAcc: string = Language.Lang.volSettingsDeleteAcc;
+    orgSettingsDeleteAalert: string = Language.Lang.orgSettingsDeleteAalert;
+    orgSettingsDeleteConfirm: string = Language.Lang.orgSettingsDeleteConfirm;
+    orgSettingsDeleteButton:string = Language.Lang.orgSettingsDeleteButton;
+    orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
+    orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
+    orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
+
 
     user: number;
     public onSaveForm: FormGroup;
@@ -167,6 +176,70 @@ export class VolunteersSettingsPage implements OnInit {
             ]
         });
         toast.present();
+    }
+
+    onDelete() {
+        console.log();
+        this.delete();
+    }
+
+    async delete() {
+        const alert = await this.alertCtrl.create({
+            header: this.orgSettingsDeleteAalert,
+            message: this.orgSettingsDeleteConfirm,
+            buttons: [
+                {
+                    text:  this.orgSettingsDeleteButton,
+                    role : 'delete',
+                    cssClass: '',
+                    handler: data => {
+                        {
+                            console.log('Confirm');
+                            this.usersService.delete(this.user);
+                            console.log(this.user);
+                            this.conf();
+                        }
+                    }
+                }, {
+                    text: this.orgSettingsDeleteCancel,
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                    }
+                },
+            ],
+
+        });
+
+        await alert.present();
+    }
+
+    Confirm() {
+        console.log();
+        this.conf();
+    }
+
+    async conf() {
+        const alert = await this.alertCtrl.create({
+            header: this.orgSettingsDeleted,
+            buttons: [
+                {
+                    text: this.orgSettingsAlertConfirm,
+                    role : 'Ok',
+                    cssClass: 'btn',
+                    handler: data => {
+                        {
+                            console.log('Confirm');
+                            this.navCtrl.navigateRoot('main');
+
+                        }
+                    }
+                }
+            ],
+
+        });
+
+        await alert.present();
     }
 
 }

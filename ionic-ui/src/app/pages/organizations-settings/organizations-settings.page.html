@@ -1,4 +1,4 @@
-<app-header>Organization Settings</app-header>
+<app-header>{{orgSettingsHeader}}</app-header>
 
 <ion-content padding>
 
@@ -14,8 +14,9 @@
                          style="height: 200px; width: 400px;" />
                     <ion-card-content>
                         <ion-item lines="none">
-                            <ion-label color="dark" position="floating">Your image url</ion-label>
-                            <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
+                            <ion-label color="dark" position="floating">{{orgSettingsImage}}</ion-label>
+                            <ion-input class="myInput" type="text"
+                                       (input)="onSearchChange($event.target.value)"
                                        formControlName="imageUrl" value="{{organization.imageUrl}}"></ion-input>
                         </ion-item>
                     </ion-card-content>
@@ -25,35 +26,35 @@
             <ion-card-content>
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Organization title:
+                        {{orgSettingsTitle}}:
                     </ion-label>
                     <ion-input formControlName="title" clearInput value={{organization.title}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Address:
+                        {{orgSettingsAddress}}:
                     </ion-label>
                     <ion-input formControlName="address" clearInput value={{organization.address}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Phone:
+                        {{orgSettingsPhone}}:
                     </ion-label>
                     <ion-input formControlName="phone" clearInput value={{organization.phone}}></ion-input>
                 </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
-                        Website:
+                        {{orgSettingsWebsite}}:
                     </ion-label>
                     <ion-input clearInput formControlName="website" value={{organization.website}}></ion-input>
                 </ion-item>
 
                 <ion-item lines="none">
                     <ion-label>
-                        <h1>Description:</h1>
+                        <h1>{{orgSettingsDescription}}:</h1>
                     </ion-label>
                 </ion-item>
                 <ion-textarea formControlName="description" value={{organization.description}}></ion-textarea>
@@ -66,16 +67,16 @@
         </ion-card>
 
         <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveOrganization()">
-            Save changes
+            {{orgSettingsSaveChanges}}
         </ion-button>
         <ion-card-content>
 
             <ion-button (click)="onChangePass()" style = "font-size: 12px" size="small" color="dark" shape="round" >
-                Change Password
+                {{orgSettingsChangePass}}
             </ion-button>
 
-            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round" >
-                Delete account
+            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round" (click)="onDelete()" >
+                {{orgSettingsDeleteAcc}}
             </ion-button>
 
         </ion-card-content>

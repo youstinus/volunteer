@@ -206,8 +206,10 @@ export class Lt {
         volSettingsSaveChanges: 'Išsaugoti pakeitimus',
         volSettingsAlertSuccess: 'Pakeitimai išsaugoti sėkmingai',
         volSettingsAlertFail: "Pakeitimų išsaugoti nepavyko",
+        volSettingsChangePass: 'Pakeisti slaptažodį',
+        volSettingsDeleteAcc: 'Ištrinti paskyrą',
         //Change-password page
-        changePassHeader: 'PASIKEISKITE SLAPTAŽODŠĮ',
+        changePassHeader: 'PASIKEISKITE SLAPTAŽODĮ',
         changePassFieldSet: 'Reikalinga informacija ',
         changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
         changePassOldPassword: 'Senas password',
@@ -219,7 +221,38 @@ export class Lt {
         changePassChangeFail: "Slaptažodžio pakeisti nepavyko",
         changePassFielRequired: 'Šis laukas yra privalomas',
         changePassContain5: 'Šis laukas yra privalomas ir turi būti sudarytas bent iš 5 simbolių',
-        changePassPassDontMatch: 'Slaptažodžiai nesutampa'
+        changePassPassDontMatch: 'Slaptažodžiai nesutampa',
+
+        // Organization settings page
+        orgSettingsHeader: 'Organizacijos parametrų keitimas',
+        orgSettingsWebsite: 'Organizacijos puslapis',
+        orgSettingsImage: 'Jūsų nuotraukos nuoroda',
+        orgSettingsTitle: 'Organizacijos pavadinimas',
+        orgSettingsAddress: 'Adresas',
+        orgSettingsPhone: 'Telefonas',
+        orgSettingsEmail: 'El-pašto adresas',
+        orgSettingsDescription: 'Jūsų aprašas',
+        orgSettingsSaveChanges: 'Išsaugoti pakeitimus',
+        orgSettingsAlertSuccess: 'Pakeitimai išsaugoti sėkmingai',
+        orgSettingsAlertFail: 'Pakeitimų išsaugoti nepavyko',
+        orgSettingsChangePass: 'Pakeisti slaptažodį',
+        orgSettingsDeleteAcc: 'Ištrinti paskyrą',
+        orgSettingsDeleteAalert: "Jūs pasirinkote ištrinti savo paskyrą",
+        orgSettingsDeleteConfirm: "Ar tikrai norite ją ištrinti?",
+        orgSettingsDeleteButton:"Taip",
+        orgSettingsAlertConfirm: "Gerai",
+        orgSettingsDeleteCancel: "Grįžti",
+        orgSettingsDeleted: "Paskyra ištrinta",
+
+
+        // Organization page
+        orgHeader: 'Organizacijos puslapis',
+        orgGoToProject: 'Eiti į projekto puslapį',
+        orgClipBoard: 'Nukopijuota į iškarpinę',
+        orgFindUs : 'Mus galite rasti',
+        orgComment: 'Komentuoti',
+        // OrganizationS page
+        orgsHeader: 'Organizacijos'
 
     }
 }
