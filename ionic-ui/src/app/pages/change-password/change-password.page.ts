@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NavController, MenuController, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
-import { RegistrationPage } from '../registration/registration.page';
 import { PasswordValidator } from '../registration/password.validator';
 import { ActivatedRoute } from '@angular/router';
 import { Language } from 'src/app/utilities/Language';
@@ -51,14 +50,10 @@ export class ChangePasswordPage implements OnInit {
   ngOnInit() {
     this.getRole();
     this.validateLink();
-    this.changePasswordForm = new FormGroup({
-      password1: new FormControl(),
-      password: new FormControl(),
-      oldPassword: new FormControl()
-    });
+
     if (this.role == 4) {
       this.changePasswordForm = this.formBuilder.group({
-        'email': [null, Validators.nullValidator],
+        'oldPassword': [null, Validators.nullValidator],
         'password1': [null, Validators.compose([
           Validators.minLength(5),
           Validators.required
@@ -114,14 +109,9 @@ export class ChangePasswordPage implements OnInit {
   }
 
   resetPassword() {
-    console.log('Changed password:');
-    console.log(this.changePasswordForm.value);
-    if(this.role!=4){
-      this.email=this.changePasswordForm.value.email;
-    }
-    var pass = this.changePasswordForm.value;
-    if (pass.password == pass.password1) {
-      this.usersService.updateByEmail(this.resetParam, pass).subscribe(() => { // resetParam instead of email
+    var passwords = this.changePasswordForm.value;
+    if (passwords.password == passwords.password1) {
+      this.usersService.updateByEmail(this.resetParam, passwords).subscribe(() => { // resetParam instead of email
         console.log('Password changed');
         this.presentSToast();
         this.navCtrl.navigateRoot('login').catch(error => console.error(error));
@@ -144,34 +134,21 @@ export class ChangePasswordPage implements OnInit {
   }
 
   goBack() {
-    console.log('Navigate back to settings');
     this.navCtrl.back;
   }
-// http://localhost:8100/change-password/ZjhUTUhUdWw2aS9nUmhjemtzYVMvVVJqa25CdUcxZlk
+
   validateLink() {
     this.resetParam = this.route.snapshot.params['reset'];
-    console.log(this.usersService.getTokenId())
     if (this.resetParam != null && this.resetParam != '') {
       this.forgotPass = true;
-      console.log(this.resetParam);
-      let mail = this.usersService.decodeResetMail(this.resetParam);
-      console.log(mail);
-      let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      let success = regexp.test(mail);
-      if (!success) {
-        this.navCtrl.back;
-        this.navCtrl.navigateRoot('main').catch(error => console.error(error));
-      } else {
-        this.email = mail;
-      }
     } else {
+      if (this.role == 4) {
+        this.navCtrl.navigateRoot('main').catch(error => console.error(error));
+      }
       this.forgotPass = false;
-        if(this.role<=0 || this.role>3)
-        {
-          this.navCtrl.navigateRoot('main').catch(error => console.error(error));
-        }
     }
   }
+
   async presentSToast() {
     const toast = await this.toastCtrl.create({
       message: this.changePassChangedSuccess,

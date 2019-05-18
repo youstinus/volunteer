@@ -190,7 +190,7 @@ export class LoginPage implements OnInit {
   }
 
   goToRegister() {
-    this.navCtrl.navigateRoot('/registration');
+    this.navCtrl.navigateRoot('/registration').catch(error => console.log(error));
   }
 
   makeContent(linkParam: string) {

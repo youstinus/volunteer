@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Volunteer } from 'src/app/models/Volunteer';
-import { VolunteersService } from 'src/app/services/volunteers.service';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/Project';
 import { Strings } from 'src/app/constants/Strings';
 import { AlertController, LoadingController, ToastController, NavController, ModalController } from '@ionic/angular';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
-import { Objects } from 'src/app/constants/Objects';
 import { Language } from 'src/app/utilities/Language';
 
 @Component({
@@ -16,6 +14,7 @@ import { Language } from 'src/app/utilities/Language';
   styleUrls: ['./volunteers.page.scss'],
 })
 export class VolunteersPage implements OnInit {
+  
   volunteersHeader: string = Language.Lang.volunteersHeader;
   volunteersYourVolunteers: string = Language.Lang.volunteersYourVolunteers;
   volunteersAll: string = Language.Lang.volunteersAll;
@@ -31,7 +30,6 @@ export class VolunteersPage implements OnInit {
   sendName: string;
 
   constructor(
-    private organizationsService: VolunteersService,
     private route: ActivatedRoute,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
@@ -84,6 +82,5 @@ export class VolunteersPage implements OnInit {
 
   goToProjects() {
     this.navCtrl.back();
-  }
-  
+  }  
 }

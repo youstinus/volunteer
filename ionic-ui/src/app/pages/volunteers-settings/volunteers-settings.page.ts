@@ -85,6 +85,7 @@ export class VolunteersSettingsPage implements OnInit {
             this.presentSToast();
         }, error1 => {
             this.presentFToast();
+            console.log(error1);
         });
     }
 
@@ -230,7 +231,7 @@ export class VolunteersSettingsPage implements OnInit {
                     handler: data => {
                         {
                             console.log('Confirm');
-                            this.navCtrl.navigateRoot('main');
+                            this.navCtrl.navigateRoot('main').catch(reason => console.log(reason));
 
                         }
                     }
