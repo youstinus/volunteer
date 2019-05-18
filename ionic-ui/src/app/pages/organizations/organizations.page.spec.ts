@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
+import { HttpClientTestingModule,} from '@angular/common/http/testing';
 import { OrganizationsPage } from './organizations.page';
 
 describe('OrganizationsPage', () => {
@@ -25,8 +25,8 @@ describe('OrganizationsPage', () => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationsPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,
+    imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, /*HttpClientModule,*/HttpClientTestingModule],
+      providers: [Location, LocationStrategy,//HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 

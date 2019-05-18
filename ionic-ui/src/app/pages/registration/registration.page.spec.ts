@@ -26,7 +26,11 @@ describe('RegistrationPage', () => {
     TestBed.configureTestingModule({
       declarations: [RegistrationPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
+      imports: [
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+        
+        
+        ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, ],
       providers: [Location, LocationStrategy, HttpHandler,
         StreamingMedia, Language,
         { provide: LocationStrategy, useClass: PathLocationStrategy },

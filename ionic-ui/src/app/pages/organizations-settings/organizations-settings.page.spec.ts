@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { OrganizationsSettingsPage } from './organizations-settings.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('OrganizationsSettingsPage', () => {
   let component: OrganizationsSettingsPage;
@@ -24,8 +25,8 @@ describe('OrganizationsSettingsPage', () => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationsSettingsPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, /*HttpClientModule,*/ HttpClientTestingModule],
+      providers: [Location, LocationStrategy,//HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 

@@ -20,6 +20,10 @@ describe('NotFoundPage', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  afterEach(() => {
+    spyOn(component, 'ngOnDestroy').and.callFake(() => { });
+    fixture.destroy();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

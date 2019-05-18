@@ -14,6 +14,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
+import { HttpClientTestingModule,} from '@angular/common/http/testing';
 
 describe('OrganizationPage', () => {
   let component: OrganizationPage;
@@ -21,6 +22,9 @@ describe('OrganizationPage', () => {
   const fakeActivatedRoute = {
     snapshot: { data: { }, params: Observable.create({ type: 'all' }) }
   } as ActivatedRoute;
+
+
+  
   @Pipe({ name: 'safe' })
   class SafePipe implements PipeTransform {
 
@@ -33,8 +37,8 @@ describe('OrganizationPage', () => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationPage, SafePipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, HttpClientModule, RouterTestingModule, IonicModule],
-      providers: [Location, LocationStrategy,HttpHandler,
+      imports: [ReactiveFormsModule, /*HttpClientModule,*/ RouterTestingModule, IonicModule, HttpClientTestingModule],
+      providers: [Location, LocationStrategy,//HttpHandler,
         StreamingMedia,Language, CookieService,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 
@@ -53,4 +57,5 @@ describe('OrganizationPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
