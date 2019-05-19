@@ -4,21 +4,18 @@
 
     <form [formGroup]="onSaveForm" class="list-form">
         <ion-card>
-            <!--<img src='{{volunteer.imageUrl}}' style="height: 200px; width: 200px"/>
-            <ion-button  shape ="round" (click)="onChangePic()">Change picture </ion-button>
-                        <ion-label color="dark" position="floating">Your image url</ion-label>
-                <ion-input type="text" formControlName="imageUrl"></ion-input> -->
             <ion-card-header>
-                <ion-card  class="myCard" lines="none">
+                <ion-card class="myCard" lines="none">
 
-                    <div class="values col col-50"><img [src]="volunteer.imageUrl" (error)="updateUrl($event)" class="center"
-                        style="height: 200px; width: 400px;" /></div>
+                    <div class="values col col-50"><img [src]="volunteer.imageUrl" (error)="updateUrl($event)"
+                                                        class="center"
+                                                        style="height: 200px; width: 400px;"/></div>
 
                     <ion-card-content>
                         <ion-item lines="none">
                             <ion-label color="dark" position="floating">{{volSettingsImage}}</ion-label>
                             <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
-                                formControlName="imageUrl" value="{{volunteer.imageUrl}}"></ion-input>
+                                       formControlName="imageUrl" value="{{volunteer.imageUrl}}"></ion-input>
                         </ion-item>
                     </ion-card-content>
                 </ion-card>
@@ -72,11 +69,12 @@
         </ion-button>
         <ion-card-content>
 
-            <ion-button (click)="onChangePass()" style = "font-size: 12px" size="small" color="dark" shape="round" >
+            <ion-button (click)="onChangePass()" style="font-size: 12px" size="small" color="dark" shape="round">
                 {{volSettingsChangePass}}
             </ion-button>
 
-            <ion-button (click)="onDelete()" style=" float: right; font-size: 12px" size="small" color="dark" shape="round" >
+            <ion-button (click)="onDelete()" style=" float: right; font-size: 12px" size="small" color="dark"
+                        shape="round">
                 {{volSettingsDeleteAcc}}
             </ion-button>
 

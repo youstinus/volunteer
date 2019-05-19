@@ -1,159 +1,188 @@
 <app-header>{{orgsHeader}}</app-header>
 <ion-content padding>
 
-  <h1 class="h1" padding-horizontal text-center>{{organization.title}}</h1>
+    <h1 class="h1" padding-horizontal text-center>{{organization.title}}</h1>
 
 
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col size=50%>
-          <div class="ion-text-center img2">
-            <div *ngIf="(organization.imageUrl==null || organization.imageUrl=='')">
-              <img class="img" src="{{defaulUrl}}">
+    <ion-card>
+        <ion-grid>
+            <ion-row>
+                <ion-col size=50%>
+                    <div class="ion-text-center img2">
+                        <div *ngIf="(organization.imageUrl==null || organization.imageUrl=='')">
+                            <img class="img" src="{{defaulUrl}}">
+                        </div>
+
+                        <div *ngIf="(organization.imageUrl!='') ">
+                            <img class="img" [src]='organization.imageUrl' (error)="updateUrl($event)">
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div>
+                        <ion-card class="myCard">
+                            <ion-item lines="none" style="cursor:pointer"
+                                      (click)="onSourceClicked(organization.website)">
+                                <ion-icon name="link" slot="start"></ion-icon>
+                                <ion-label>
+                                    {{organization.website}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-card>
+                        <ion-card class="myCard phone-clip tooltip">
+                            <ion-item lines="none" (click)="onPhoneClicked(organization.phone)">
+                                <span class="tooltiptext">{{orgClipBoard}}</span>
+                                <ion-icon name="md-call" slot="start"></ion-icon>
+                                <ion-label>
+                                    {{organization.phone}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-card>
+                        <ion-card class="myCard email-clip tooltip">
+                            <ion-item lines="none" (click)="onEmailClicked(organization.email)">
+                                <span class="tooltiptext">{{orgClipBoard}}</span>
+                                <ion-icon name="ios-mail" slot="start"></ion-icon>
+                                <ion-label>
+                                    {{organization.email}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-card>
+                        <ion-card class="myCard">
+                            <ion-item lines="none">
+                                <ion-label>
+                                    <fieldset class="ratingAvg">
+                                        <input *ngIf="getAverage()>4.5" type="radio" id="stara5" name="rating" value="5"
+                                               checked aria-disabled="true"/><label class="full" for="stara5"></label>
+                                        <input *ngIf="getAverage()===4.5 " type="radio" id="star4half" name="rating"
+                                               value="4 and a half" checked aria-disabled="true"/><label class="half"
+                                                                                                         for="star4half"></label>
+                                        <input *ngIf="getAverage()>3.5 && getAverage()<=4" type="radio" id="star4a"
+                                               name="rating" value="4" checked aria-disabled="true"/><label class="full"
+                                                                                                            for="star4a"></label>
+                                        <input *ngIf="getAverage()===3.5" type="radio" id="star3half" name="rating"
+                                               value="3 and a half" checked aria-disabled="true"/><label class="half"
+                                                                                                         for="star3half"></label>
+                                        <input *ngIf="getAverage()>2.5 && getAverage()<=3" type="radio" id="star3a"
+                                               name="rating" value="3" checked aria-disabled="true"/><label class="full"
+                                                                                                            for="star3a"></label>
+                                        <input *ngIf="getAverage()===2.5" type="radio" id="star2half" name="rating"
+                                               value="2 and a half" checked aria-disabled="true"/><label class="half"
+                                                                                                         for="star2half"></label>
+                                        <input *ngIf="getAverage()>1.5 && getAverage()<=2" type="radio" id="star2a"
+                                               name="rating" value="2" checked aria-disabled="true"/><label class="full"
+                                                                                                            for="star2a"></label>
+                                        <input *ngIf="getAverage()===1.5" type="radio" id="star1half" name="rating"
+                                               value="1 and a half" checked aria-disabled="true"/><label class="half"
+                                                                                                         for="star1half"></label>
+                                        <input *ngIf="getAverage()>0.5 && getAverage()<=1" type="radio" id="starhalf"
+                                               name="rating" value="half" checked aria-disabled="true"/><label
+                                            class="half" for="starhalf"></label>
+                                        <input *ngIf="getAverage()===0.5" type="radio" id="star1a" name="rating"
+                                               value="1" checked aria-disabled="true"/><label class="full"
+                                                                                              for="star1a"></label>
+
+                                    </fieldset>
+
+                                </ion-label>
+                            </ion-item>
+                        </ion-card>
+
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        &nbsp;
+        <ion-item lines="none">
+            <h3 class="h3">
+                {{organization.description}} <br>
+            </h3>
+        </ion-item>
+    </ion-card>
+
+    <!--<ion-list>-->
+    <ion-card>
+        <ion-card-title style="margin-left: 20px;"> {{orgProjects}}
+        </ion-card-title>
+        <ion-item *ngFor="let project of projects">
+            <ion-label>{{ project.title }}</ion-label>
+            <ion-button (click)="onProjectClicked(project.id)" expand="full"
+                        shape="round">{{orgGoToProject}}</ion-button>
+        </ion-item>
+    </ion-card>
+
+    <ion-card style="height: auto; max-height: 500px">
+        <ion-card-header>
+            <ion-card-title class="label">{{orgFindUs}}
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div class="map-responsive">
+                <div class="gmap_canvas">
+                    <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
+                            [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0"
+                            marginwidth="0"></iframe>
+                </div>
+
             </div>
+        </ion-card-content>
+    </ion-card>
 
-            <div *ngIf="(organization.imageUrl!='') ">
-              <img class="img" [src]='organization.imageUrl' (error)="updateUrl($event)" >
-            </div>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div>
-            <ion-card class="myCard">
-              <ion-item lines="none" style ="cursor:pointer" (click)="onSourceClicked(organization.website)">
-                <ion-icon name="link" slot="start"></ion-icon>
-                <ion-label>
-                  {{organization.website}}
-                </ion-label>
-              </ion-item>
-            </ion-card>
-            <ion-card class="myCard phone-clip tooltip">
-              <ion-item lines="none" (click)="onPhoneClicked(organization.phone)">
-                <span class="tooltiptext">{{orgClipBoard}}</span>
-                <ion-icon name="md-call" slot="start"></ion-icon>
-                <ion-label>
-                  {{organization.phone}}
-                </ion-label>
-              </ion-item>
-            </ion-card>
-            <ion-card class="myCard email-clip tooltip">
-              <ion-item lines="none" (click)="onEmailClicked(organization.email)">
-                <span class="tooltiptext">{{orgClipBoard}}</span>
-                <ion-icon name="ios-mail" slot="start"></ion-icon>
-                <ion-label>
-                  {{organization.email}}
-                </ion-label>
-              </ion-item>
-            </ion-card>
-            <ion-card class="myCard">
-              <ion-item lines="none">
-                <ion-label >
-                  <fieldset  class="ratingAvg">
-                    <input *ngIf="getAverage()>4.5" type="radio" id="stara5" name="rating" value="5" checked aria-disabled="true"/><label class = "full" for="stara5" ></label>
-                    <input *ngIf="getAverage()===4.5 " type="radio" id="star4half" name="rating" value="4 and a half" checked aria-disabled="true"/><label class="half" for="star4half" ></label>
-                    <input  *ngIf="getAverage()>3.5 && getAverage()<=4" type="radio" id="star4a" name="rating" value="4" checked aria-disabled="true"/><label class = "full" for="star4a" ></label>
-                    <input *ngIf="getAverage()===3.5"type="radio" id="star3half" name="rating" value="3 and a half" checked aria-disabled="true"/><label class="half" for="star3half" ></label>
-                    <input  *ngIf="getAverage()>2.5 && getAverage()<=3" type="radio" id="star3a" name="rating" value="3" checked aria-disabled="true"/><label class = "full" for="star3a" ></label>
-                    <input *ngIf="getAverage()===2.5"type="radio" id="star2half" name="rating" value="2 and a half" checked aria-disabled="true" /><label class="half" for="star2half" ></label>
-                    <input  *ngIf="getAverage()>1.5 && getAverage()<=2" type="radio" id="star2a" name="rating" value="2" checked aria-disabled="true"/><label class = "full" for="star2a"></label>
-                    <input *ngIf="getAverage()===1.5"type="radio" id="star1half" name="rating" value="1 and a half" checked aria-disabled="true"/><label class="half" for="star1half" ></label>
-                    <input *ngIf="getAverage()>0.5 && getAverage()<=1"type="radio" id="starhalf" name="rating" value="half" checked aria-disabled="true"/><label class="half" for="starhalf"></label>
-                    <input  *ngIf="getAverage()===0.5" type="radio" id="star1a" name="rating" value="1" checked aria-disabled="true"/><label class = "full" for="star1a" ></label>
+    <ion-card>
+        <ion-card-title style="margin-left: 20px;"> {{orgComments}}
+        </ion-card-title>
+        <ion-item *ngFor="let review of reviews">
 
-                  </fieldset>
+            <ion-card-header>
+                <ion-card-title>
+                    {{review.title}}
 
-                </ion-label>
-              </ion-item>
-            </ion-card>
+                </ion-card-title>
 
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+            </ion-card-header>
 
-    &nbsp;
-    <ion-item lines="none">
-      <h3 class="h3">
-        {{organization.description}} <br>
-      </h3>
-    </ion-item>
-  </ion-card>
-
-  <!--<ion-list>-->
-  <ion-card>
-    <ion-card-title style="margin-left: 20px;" > {{orgProjects}}
-    </ion-card-title>
-    <ion-item *ngFor="let project of projects">
-      <ion-label>{{ project.title }}</ion-label>
-      <ion-button (click)="onProjectClicked(project.id)" expand="full" shape ="round">{{orgGoToProject}}</ion-button>
-    </ion-item>
-
-  </ion-card>
-
-
-  <ion-card style="height: auto; max-height: 500px">
-    <ion-card-header>
-      <ion-card-title class="label">{{orgFindUs}}
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="map-responsive">
-        <div class="gmap_canvas">
-          <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen id="gmap_canvas"
-                  [src]="newUrl | safe" allowfullscreen scrolling="no" marginheight="0" marginwidth="0"></iframe>
-        </div>
-
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-title style="margin-left: 20px;" > {{orgComments}}
-    </ion-card-title>
-  <ion-item *ngFor="let review of reviews" >
-
-    <ion-card-header >
-      <ion-card-title>
-        {{review.title}}
-
-      </ion-card-title>
-
-    </ion-card-header>
-
-      <ion-text style="height: auto">{{review.text}}</ion-text>
-    <ion-label>
-    </ion-label>
-    <ion-button [hidden]= "review.volunteerId != currentUser"  expand="full" shape ="round"  style=" float: right; font-size: 10px" (click)="delReview(review.id)">{{orgDelteComment}}</ion-button>
-  </ion-item>
+            <ion-text style="height: auto">{{review.text}}</ion-text>
+            <ion-label>
+            </ion-label>
+            <ion-button [hidden]="review.volunteerId != currentUser" expand="full" shape="round"
+                        style=" float: right; font-size: 10px"
+                        (click)="delReview(review.id)">{{orgDelteComment}}</ion-button>
+        </ion-item>
     </ion-card>
 
 
+    <ion-card>
 
-  <ion-card>
-
-    <ion-card-content>
+        <ion-card-content>
 
 
-      <form [formGroup]="onCreateForm" >
-        <ion-input formControlName="title" type="Title" placeholder="Title"   style="border-bottom: #1e2023 solid 2px"></ion-input>
+            <form [formGroup]="onCreateForm">
+                <ion-input formControlName="title" type="Title" placeholder="Title"
+                           style="border-bottom: #1e2023 solid 2px"></ion-input>
 
-        <ion-row style="height:20px">
-        </ion-row>
+                <ion-row style="height:20px">
+                </ion-row>
 
-        <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text" placeholder="Comment .... "></ion-textarea>
-        <ion-button   (click) = 'onCreate()' expand="50%" shape ="round" style="float: left" [disabled]="checkRole() == 1 || !onCreateForm.valid" >{{orgComment}}</ion-button>
-        <fieldset  class="rating">
-          <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-          <input  (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
-          <input  (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
-          <input  (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2"></label>
-          <input  (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
-        </fieldset>
+                <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text"
+                              placeholder="Comment .... "></ion-textarea>
+                <ion-button (click)='onCreate()' expand="50%" shape="round" style="float: left"
+                            [disabled]="checkRole() == 1 || !onCreateForm.valid">{{orgComment}}</ion-button>
+                <fieldset class="rating">
+                    <input (click)="on5StarClicked()" type="radio" id="star5" name="rating" value="5"/><label
+                        class="full" for="star5"></label>
+                    <input (click)="on4StarClicked()" type="radio" id="star4" name="rating" value="4"/><label
+                        class="full" for="star4"></label>
+                    <input (click)="on3StarClicked()" type="radio" id="star3" name="rating" value="3"/><label
+                        class="full" for="star3"></label>
+                    <input (click)="on2StarClicked()" type="radio" id="star2" name="rating" value="2"/><label
+                        class="full" for="star2"></label>
+                    <input (click)="on1StarClicked()" type="radio" id="star1" name="rating" value="1"/><label
+                        class="full" for="star1"></label>
+                </fieldset>
 
-      </form>
-    </ion-card-content>
+            </form>
+        </ion-card-content>
 
-  </ion-card>
+    </ion-card>
 
 </ion-content>

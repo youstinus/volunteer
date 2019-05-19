@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Volunteer } from '../../models/Volunteer';
-import { VolunteersService } from '../../services/volunteers.service';
-import { ActivatedRoute } from '@angular/router';
-import { User } from '../../models/User';
-import { UsersService } from '../../services/users.service';
-import { NavController, ToastController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Strings } from 'src/app/constants/Strings';
-import { Language } from 'src/app/utilities/Language';
+import {Component, OnInit} from '@angular/core';
+import {Volunteer} from '../../models/Volunteer';
+import {VolunteersService} from '../../services/volunteers.service';
+import {ActivatedRoute} from '@angular/router';
+import {UsersService} from '../../services/users.service';
+import {NavController, ToastController} from '@ionic/angular';
+import {AlertController} from '@ionic/angular';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {Language} from 'src/app/utilities/Language';
+import {User} from '../../models/User';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -35,8 +34,6 @@ export class VolunteersSettingsPage implements OnInit {
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
-
-
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
@@ -89,47 +86,12 @@ export class VolunteersSettingsPage implements OnInit {
         });
     }
 
-    onChangePic() {
-        console.log();
-        this.changePic();
-    }
-
-    async changePic() {
-        const alert = await this.alertCtrl.create({
-            header: 'Please enter the url of your image',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                    }
-                }, {
-                    text: 'Confirm',
-                    handler: data => {
-                        console.log('Confirm');
-                        this.volunteer.imageUrl = data.URL;
-                    }
-                }
-            ],
-            inputs: [
-                {
-                    name: 'URL',
-                    type: 'text',
-                    placeholder: ''
-                }
-            ]
-        });
-
-        await alert.present();
-    }
-
     onSearchChange(searchValue: string) {
         this.updateIMG(searchValue);
     }
 
     updateIMG(searchValue: string) {
-        this.volunteer.imageUrl = searchValue;//Strings.Default_Image_Url;//
+        this.volunteer.imageUrl = searchValue;
     }
 
     updateUrl(event) {
@@ -146,7 +108,7 @@ export class VolunteersSettingsPage implements OnInit {
             duration: 2500,
             position: 'bottom',
             color: 'success',
-            cssClass: "toast",
+            cssClass: 'toast',
             translucent: true,
             buttons: [
                 {
@@ -165,7 +127,7 @@ export class VolunteersSettingsPage implements OnInit {
         const toast = await this.toastCtrl.create({
             message: this.volSettingsAlertFail,
             duration: 2500,
-            cssClass: "toast",
+            cssClass: 'toast',
             position: 'bottom',
             color: 'danger',
             translucent: true,
@@ -200,7 +162,6 @@ export class VolunteersSettingsPage implements OnInit {
                         {
                             console.log('Confirm');
                             this.deleteUser();
-                            console.log(this.user);
                             this.conf();
                         }
                     }
@@ -217,12 +178,6 @@ export class VolunteersSettingsPage implements OnInit {
 
         await alert.present();
     }
-
-    Confirm() {
-        console.log();
-        this.conf();
-    }
-
     async conf() {
         const alert = await this.alertCtrl.create({
             header: this.orgSettingsDeleted,
@@ -233,9 +188,7 @@ export class VolunteersSettingsPage implements OnInit {
                     cssClass: 'btn',
                     handler: data => {
                         {
-                            console.log('Confirm');
                             this.navCtrl.navigateRoot('main').catch(reason => console.log(reason));
-
                         }
                     }
                 }
@@ -249,10 +202,10 @@ export class VolunteersSettingsPage implements OnInit {
 
     deleteUser() {
         this.usersService.delete(this.user).subscribe(value => {
-            console.log(value)
-
-        });
-
+            },
+            error1 => {
+                console.log(error1);
+            });
     }
 
 

@@ -4,14 +4,10 @@
 
     <form [formGroup]="onSaveForm" class="list-form">
         <ion-card>
-            <!--<img src='{{volunteer.imageUrl}}' style="height: 200px; width: 200px"/>
-            <ion-button  shape ="round" (click)="onChangePic()">Change picture </ion-button>
-                        <ion-label color="dark" position="floating">Your image url</ion-label>
-                <ion-input type="text" formControlName="imageUrl"></ion-input> -->
             <ion-card-header>
                 <ion-card class="myCard" lines="none">
                     <img [src]="organization.imageUrl" (error)="updateUrl($event)" class="center"
-                         style="height: 200px; width: 400px;" />
+                         style="height: 200px; width: 400px;"/>
                     <ion-card-content>
                         <ion-item lines="none">
                             <ion-label color="dark" position="floating">{{orgSettingsImage}}</ion-label>
@@ -71,11 +67,12 @@
         </ion-button>
         <ion-card-content>
 
-            <ion-button (click)="onChangePass()" style = "font-size: 12px" size="small" color="dark" shape="round" >
+            <ion-button (click)="onChangePass()" style="font-size: 12px" size="small" color="dark" shape="round">
                 {{orgSettingsChangePass}}
             </ion-button>
 
-            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round" (click)="onDelete()" >
+            <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round"
+                        (click)="onDelete()">
                 {{orgSettingsDeleteAcc}}
             </ion-button>
 

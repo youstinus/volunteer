@@ -4,7 +4,6 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-                <!--<ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()"></ion-searchbar>-->
             </ion-col>
             <ion-col>
 
@@ -13,18 +12,14 @@
     </ion-grid>
 
     <ion-card *ngFor="let organizations of organizations" (click)="onOrganizationClicked(organizations)">
-        <img class="img" [src]="organizations.imageUrl" (error)="updateUrl(organizations)" />
+        <img class="img" [src]="organizations.imageUrl" (error)="updateUrl(organizations)"/>
 
         <ion-card-title>
             {{organizations.title}}
         </ion-card-title>
 
-        <ion-card-subtitle style=" margin-top: 10px" >{{organizations.email}}</ion-card-subtitle>
-        <ion-card-subtitle style="margin-top: 10px" >{{organizations.phone}}</ion-card-subtitle>
-
-
-
-
+        <ion-card-subtitle style=" margin-top: 10px">{{organizations.email}}</ion-card-subtitle>
+        <ion-card-subtitle style="margin-top: 10px">{{organizations.phone}}</ion-card-subtitle>
 
     </ion-card>
 </ion-content>
