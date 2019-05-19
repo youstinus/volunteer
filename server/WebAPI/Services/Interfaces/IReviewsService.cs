@@ -11,5 +11,7 @@ namespace WebAPI.Services.Interfaces
     {
         Task<ICollection<ReviewDto>> GetByOrganizationId(long id);
         Task<ReviewDto> CreateByUser(ClaimsPrincipal user, ReviewDto entity);
+        Task DeleteByUser(ClaimsPrincipal user, long id);
+        Task UpdateByUser(ClaimsPrincipal user, long id, ReviewDto entity);
     }
 }

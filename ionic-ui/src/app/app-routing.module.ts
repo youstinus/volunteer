@@ -22,7 +22,6 @@ const routes: Routes = [
     },
     {
         path: 'volunteers', children: [
-            // { path: '', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' },
             { path: 'project/:id', loadChildren: './pages/volunteers/volunteers.module#VolunteersPageModule' }]
     },
     { path: 'new-project', loadChildren: './pages/new-project/new-project.module#NewProjectPageModule' },
@@ -36,7 +35,7 @@ const routes: Routes = [
     {
         path: 'project-edit',
         children: [
-            { path: ':id', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' /*'./pages/project/project.module#ProjectPageModule'*/ }
+            { path: ':id', loadChildren: './pages/project-edit/project-edit.module#ProjectEditPageModule' }
         ]
     },
     {
@@ -46,10 +45,7 @@ const routes: Routes = [
             { path: '', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' }
         ]
     },
- { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
-
-
-
+    { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule' }
 ];
 
 @NgModule({

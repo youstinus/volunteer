@@ -25,10 +25,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = nameof(UserType.Moderator) + "," + nameof(UserType.Admin))]
-        public override Task<IActionResult> Delete([FromRoute] long id)
+        [Authorize(Roles = nameof(UserType.Moderator) + "," + nameof(UserType.Admin) + "," + nameof(UserType.Volunteer))]
+        public override async Task<IActionResult> Delete([FromRoute] long id)
         {
-            return base.Delete(id);
+            try
+            {
+                await _reviewsService.DeleteByUser(User, id);
+                return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e);
+            }
         }
 
         [HttpGet]
@@ -88,8 +96,15 @@ namespace WebAPI.Controllers
         [Authorize(Roles = nameof(UserType.Volunteer))]
         public override async Task<IActionResult> Put([FromRoute] long id, [FromBody] ReviewDto entity)
         {
-            return await Task.Run(() => BadRequest("Not supported"));
-            //return base.Put(id, entity);
+            try
+            {
+                await _reviewsService.UpdateByUser(User, id, entity);
+                return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

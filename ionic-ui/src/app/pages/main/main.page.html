@@ -1,29 +1,26 @@
-<head>
-    <script type="text/javascript" src="bubble.js"></script>
-</head>
 <app-header>{{mainTitle}}</app-header>
-<ion-content padding class="bodis"> <!-- bodis2 -->
+
+<ion-content padding class="bodis">
 
     <h1 class="logo">
         <span class="word1">The</span>
         <span class="word2">Platypus</span>
     </h1>
-    &nbsp;
-    <!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKL_JWTkAzSlwHBbvKpzLlnyBaP_tklHwuUZTaYDpQcmiMFQQ0"-->
-    <img class="image"
-        src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
+
+    <img class="image" src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
 
     <h2>{{mainEvents}}</h2>
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)"
-                style="text-align: center;">
-                <img class="img" src="{{ project.imageUrl }}" />
+            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
+                <div clas="image-box">
+                    <img class="imga" src="{{ project.imageUrl }}" />
+                </div>
 
                 <ion-item>
                     <ion-icon name="calendar" slot="start"></ion-icon>
-                    <ion-label>{{mainStart}}: &nbsp;&nbsp;{{project.start | date : 'yyyy-MM-dd'}}</ion-label>
+                    <ion-label>{{mainStart}}: {{project.start | date : 'yyyy-MM-dd'}}</ion-label>
                 </ion-item>
 
                 <ion-card-content>
@@ -40,12 +37,21 @@
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)"
-                style="text-align: center;">
-                <ion-img src="{{ organization.imageUrl }}"></ion-img>
-                <ion-card-header>
-                    <ion-card-title>{{organization.title}}</ion-card-title>
-                </ion-card-header>
+            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)">
+                <div class="image-box">
+                    <img class="imga" src="{{ organization.imageUrl }}" />
+                </div>
+
+                <ion-item>
+                    <ion-icon name="mail" slot="start"></ion-icon>
+                    <ion-label>{{organization.email}}</ion-label>
+                </ion-item>
+
+                <ion-card-content>
+                    <ion-card-header>
+                        <ion-card-title>{{organization.title}}</ion-card-title>
+                    </ion-card-header>
+                </ion-card-content>
             </ion-card>
         </ion-item-group>
     </ion-item-divider>

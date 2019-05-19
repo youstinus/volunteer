@@ -14,8 +14,8 @@
     </ion-grid>
 
     <ion-card *ngFor="let project of projectsFiltered" (click)="onProjectClicked(project)">
-        <div class="values col col-50" [ngStyle]="{'background-image':' url(' + project?.imageUrl + ')'}">
-            <img class="img" src="{{ project.imageUrl }}" (error)="updateUrl(project)" />
+        <div class="image-box">
+            <img class="imga" src="{{ project.imageUrl }}" (error)="updateUrl(project)" />
         </div>
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
