@@ -249,6 +249,9 @@ export class En {
         orgClipBoard: 'Copied to clipboard',
         orgFindUs : 'Find us at',
         orgComment: 'Comment',
+        orgComments: "Comments",
+        orgDelComment: "Delete comment",
+        orgProjects: "Projects",
         // OrganizationS page
         orgsHeader: 'Organizations'
     }

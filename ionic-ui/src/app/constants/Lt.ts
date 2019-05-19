@@ -251,6 +251,9 @@ export class Lt {
         orgClipBoard: 'Nukopijuota į iškarpinę',
         orgFindUs : 'Mus galite rasti',
         orgComment: 'Komentuoti',
+        orgComments: "Komentarai",
+        orgDelComment: "Ištrinti komentarą",
+        orgProjects: "Projektai",
         // OrganizationS page
         orgsHeader: 'Organizacijos'
 

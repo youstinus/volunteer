@@ -31,7 +31,7 @@ export class VolunteersSettingsPage implements OnInit {
     volSettingsDeleteAcc: string = Language.Lang.volSettingsDeleteAcc;
     orgSettingsDeleteAalert: string = Language.Lang.orgSettingsDeleteAalert;
     orgSettingsDeleteConfirm: string = Language.Lang.orgSettingsDeleteConfirm;
-    orgSettingsDeleteButton:string = Language.Lang.orgSettingsDeleteButton;
+    orgSettingsDeleteButton: string = Language.Lang.orgSettingsDeleteButton;
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
@@ -92,6 +92,7 @@ export class VolunteersSettingsPage implements OnInit {
         console.log();
         this.changePic();
     }
+
     async changePic() {
         const alert = await this.alertCtrl.create({
             header: 'Please enter the url of your image',
@@ -125,9 +126,11 @@ export class VolunteersSettingsPage implements OnInit {
     onSearchChange(searchValue: string) {
         this.updateIMG(searchValue);
     }
+
     updateIMG(searchValue: string) {
         this.volunteer.imageUrl = searchValue;//Strings.Default_Image_Url;//
     }
+
     updateUrl(event) {
         this.volunteer.imageUrl = this.defaulUrl;
     }
@@ -189,13 +192,13 @@ export class VolunteersSettingsPage implements OnInit {
             message: this.orgSettingsDeleteConfirm,
             buttons: [
                 {
-                    text:  this.orgSettingsDeleteButton,
-                    role : 'delete',
+                    text: this.orgSettingsDeleteButton,
+                    role: 'delete',
                     cssClass: '',
                     handler: data => {
                         {
                             console.log('Confirm');
-                            this.usersService.delete(this.user);
+                            this.deleteUser();
                             console.log(this.user);
                             this.conf();
                         }
@@ -225,7 +228,7 @@ export class VolunteersSettingsPage implements OnInit {
             buttons: [
                 {
                     text: this.orgSettingsAlertConfirm,
-                    role : 'Ok',
+                    role: 'Ok',
                     cssClass: 'btn',
                     handler: data => {
                         {
@@ -241,5 +244,15 @@ export class VolunteersSettingsPage implements OnInit {
 
         await alert.present();
     }
+
+
+    deleteUser() {
+        this.usersService.delete(this.user).subscribe(value => {
+            console.log(value)
+
+        });
+
+    }
+
 
 }

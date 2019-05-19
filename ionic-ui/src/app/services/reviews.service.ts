@@ -25,7 +25,7 @@ export class ReviewsService extends BaseService<Review> {
     return this.http.get<Review[]>(this.api + '/' + id +  '/organization');
   }
   getVolunteerById(id: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.api + '/' + id + '/volunteers');
+    return this.http.get<Volunteer[]>(this.api + '/'+ id + `/volunteers`);
   }
 
 }

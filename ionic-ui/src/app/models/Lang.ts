@@ -245,6 +245,9 @@ export class Lang {
     public orgClipBoard: string;
     public orgFindUs: string;
     public orgComment: string;
+    public orgDelComment: string;
+    public orgComments : string;
+    public orgProjects : string;
     // OrganizationS page
     public orgsHeader: string;
 }

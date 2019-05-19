@@ -29,19 +29,24 @@ export class OrganizationPage implements OnInit {
   orgClipBoard: string = Language.Lang.orgClipBoard;
   orgFindUs: string = Language.Lang.orgFindUs;
   orgComment: string = Language.Lang.orgComment;
+  orgComments: string = Language.Lang.orgComments;
+  orgDelteComment : string = Language.Lang.orgDelComment;
+  orgProjects : string = Language.Lang.orgProjects;
 
-
-  userId : number;
-  id : number;
-  reviews: Review[] ;
+  userId: number;
+  id: number;
+  reviews: Review[];
   createReview: Review = new Review();
   sum: number;
   average: number;
+  names : string;
   volunteers: Volunteer[];
   projects: Project[];
   public onCreateForm: FormGroup;
   user: User = new User();
-  //volunteer: Volunteer = new Volunteer();
+  owner: boolean = false;
+  currentUser: number;
+  volunteer: Volunteer;
   organization: Organization = new Organization();
   newUrl = '';
   role: number = 4;
@@ -57,8 +62,8 @@ export class OrganizationPage implements OnInit {
       private volunteersService: VolunteersService,
       public alertCtrl: AlertController,
       public    projectService: ProjectsService,
-
-  ) {}
+  ) {
+  }
 
 
   stringparse() {
@@ -70,12 +75,13 @@ export class OrganizationPage implements OnInit {
     newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
     this.newUrl = newurl;
   }
+
   ngOnInit() {
     this.getRole();
-
+    this.getVolunteer(18);
+    console.log(this.volunteers);
     const id = this.route.snapshot.params['id'];
-
-
+    this.id = id;
 
 
     this.organizationsService.getById(id).subscribe(value => {
@@ -89,10 +95,14 @@ export class OrganizationPage implements OnInit {
 
     this.reviewsService.get().subscribe(value1 => {
 
-      this.reviews = value1;//.filter(val1 => val1.organizationId ===id);
+      this.reviews = value1;//.find(val1 => val1.organizationId ===this.id);
+      this.currentUser = this.usersService.getTokenId();
 
-      console.log( this.reviews);
-      console.log( id);
+      this.del();
+      this.isOwner();
+      console.log(this.owner);
+      console.log(this.reviews);
+      console.log(this.id);
     }, error1 => {
       console.log(error1);
     });
@@ -107,6 +117,7 @@ export class OrganizationPage implements OnInit {
     });
 
 
+
     this.onCreateForm = this.formBuilder.group({
 
       'text': [null, Validators.compose([
@@ -119,15 +130,16 @@ export class OrganizationPage implements OnInit {
         Validators.required
 
       ])],
-      'organizationId' : this.id,
+      'organizationId': this.id,
 
       'volunteerId': this.userId
 
 
-    } );
+    });
 
 
   }
+
   async onCreate() {
     console.log(this.onCreateForm.value);
     this.reviewsService.create(this.onCreateForm.value).subscribe(value => {
@@ -145,31 +157,25 @@ export class OrganizationPage implements OnInit {
   }
 
 
-
-
-  on5StarClicked()
-  {
+  on5StarClicked() {
     this.onCreateForm.controls['grade'].setValue(5);
   }
 
-  on4StarClicked()
-  {
+  on4StarClicked() {
     this.onCreateForm.controls['grade'].setValue(4);
   }
-  on3StarClicked()
-  {
+
+  on3StarClicked() {
     this.onCreateForm.controls['grade'].setValue(3);
   }
-  on2StarClicked()
-  {
+
+  on2StarClicked() {
     this.onCreateForm.controls['grade'].setValue(2);
   }
 
-  on1StarClicked()
-  {
+  on1StarClicked() {
     this.onCreateForm.controls['grade'].setValue(1);
   }
-
 
 
   onSourceClicked(source: string) {
@@ -202,6 +208,7 @@ export class OrganizationPage implements OnInit {
   updateUrl(event) {
     this.organization.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
   }
+
   getRole() {
     const role = this.usersService.getTokenRole();
     if (role === 'Volunteer') {
@@ -216,12 +223,11 @@ export class OrganizationPage implements OnInit {
       this.role = 4;
     }
   }
+
   checkRole() {
-    if( this.role === 4)
+    if (this.role === 4)
       return 1;
   }
-
-
 
 
   getAverage() {
@@ -234,13 +240,53 @@ export class OrganizationPage implements OnInit {
       var lngth = count.length;
       //console.log(sum);
       return sum / lngth;
+    } else {
+      return 0;
     }
-    else {return 0; }
   }
 
+  del() {
+    for (var i = 0; i < this.reviews.length; i++) {
+      if (this.reviews[i].organizationId != this.id) {
+        this.reviews.splice(i, 1);
+        i--;
+      }
+    }
+  }
+
+  isOwner() {
+
+    for (var i = 0; i < this.reviews.length; i++) {
+      if (this.reviews[i].volunteerId == this.currentUser) {
+        this.owner = true;
+        break;
+      }
+    }
+  }
+
+  delReview(id)
+  {
+    this.reviewsService.delete(id).subscribe(value => {
+      console.log(value);
+
+    },
+        error1 => {
+          console.log(error1);
+        });
+
+  }
+
+  getVolunteer(id)
+  {
 
 
+
+
+  }
 
 }
+
+
+
 
 

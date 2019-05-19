@@ -82,7 +82,7 @@
 
   <!--<ion-list>-->
   <ion-card>
-    <ion-card-title style="margin-left: 20px;" > Projektai
+    <ion-card-title style="margin-left: 20px;" > {{orgProjects}}
     </ion-card-title>
     <ion-item *ngFor="let project of projects">
       <ion-label>{{ project.title }}</ion-label>
@@ -109,20 +109,22 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-title style="margin-left: 20px;" > Komentarai
+    <ion-card-title style="margin-left: 20px;" > {{orgComments}}
     </ion-card-title>
-  <ion-item *ngFor="let review of reviews">
+  <ion-item *ngFor="let review of reviews" >
 
     <ion-card-header >
       <ion-card-title>
         {{review.title}}
+
       </ion-card-title>
 
     </ion-card-header>
-    <ion-card-content>
-      <ion-text style="height: auto">{{review.text}}</ion-text>
-    </ion-card-content>
 
+      <ion-text style="height: auto">{{review.text}}</ion-text>
+    <ion-label>
+    </ion-label>
+    <ion-button [hidden]= "review.volunteerId != currentUser"  expand="full" shape ="round"  style=" float: right; font-size: 10px" (click)="delReview(review.id)">{{orgDelteComment}}</ion-button>
   </ion-item>
     </ion-card>
 
