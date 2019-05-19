@@ -34,7 +34,7 @@ export class ChangePasswordPage implements OnInit {
   public matching_passwords_group: FormGroup;
   private email: string;
   private resetParam: string;
-  private forgotPass = false;
+  public  forgotPass = false;
 
   constructor(
     public toastCtrl: ToastController,
