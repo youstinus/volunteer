@@ -115,7 +115,7 @@ export class RegistrationPage implements OnInit {
   }
 
   goToLogin() {
-    this.navCtrl.navigateForward('login');
+    this.navCtrl.navigateForward('login').catch(reason => console.log(reason));
   }
 
   async presentSToast() {

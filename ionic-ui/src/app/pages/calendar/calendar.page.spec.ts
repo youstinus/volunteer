@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgCalendarModule  } from 'ionic2-calendar';
-
+import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { CalendarPage } from './calendar.page';
 
 describe('CalendarPage', () => {
@@ -25,8 +25,8 @@ describe('CalendarPage', () => {
     TestBed.configureTestingModule({
       declarations: [ CalendarPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, NgCalendarModule],
-      providers: [Location, LocationStrategy,HttpHandler,
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, NgCalendarModule,HttpClientTestingModule],
+      providers: [Location, LocationStrategy,//HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 

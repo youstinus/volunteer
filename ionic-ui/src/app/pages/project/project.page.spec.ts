@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ProjectPage } from './project.page';
 import { SafePipe } from 'src/app/shared/safe.pipe';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProjectPage', () => {
   let component: ProjectPage;
@@ -25,13 +26,14 @@ describe('ProjectPage', () => {
     TestBed.configureTestingModule({
       declarations: [ ProjectPage, SafePipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, //HttpClientModule,
+        HttpClientTestingModule],
+      providers: [Location, LocationStrategy,//HttpHandler,
         StreamingMedia,Language, 
       { provide: LocationStrategy, useClass: PathLocationStrategy },
       { provide: APP_BASE_HREF, useValue: '.'}, 
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
-      {provide: NavParams, useValue: NavParamsMock},
+      //{provide: NavParams, useValue: NavParamsMock},
       CookieService, RouterTestingModule,  NavController
           ]    })
     .compileComponents();

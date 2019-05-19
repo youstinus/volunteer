@@ -198,7 +198,7 @@ export class OrganizationsSettingsPage implements OnInit {
           handler: data => {
             {
               console.log('Confirm');
-              this.navCtrl.navigateRoot('main');
+              this.navCtrl.navigateRoot('main').catch(reason => console.log(reason));
 
             }
           }

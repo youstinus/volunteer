@@ -108,6 +108,8 @@ export class MenuPage implements OnInit {
         this.router.events.subscribe((event: RouterEvent) => {
             this.selectedPath = event.url;
             this.getRole();
+        }, (error) => {
+            console.log(error);
         });
     }
 
