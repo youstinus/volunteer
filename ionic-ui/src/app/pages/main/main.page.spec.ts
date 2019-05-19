@@ -45,4 +45,43 @@ describe('MainPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have a class member', () => {
+    expect(component.mainEvents).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.mainStart).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.mainTitle).toBeDefined();
+  });
+  /*it('should have a class member', () => {
+    expect(component.mainWantedOrganizations).toBeTruthy();
+  });
+  it('should have a class member', () => {
+    expect(component.threeOrganizations).toBeTruthy();
+  });
+  it('should have a class member', () => {
+    expect(component.threeProjects).toBeDefined();
+  });*/
+  it('should have a working function', () => {
+    expect(component.filterNewOrganizations).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.filterNewProjects).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.getOrganizations).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.getProjects).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.ngOnInit).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.onOrganizationClicked).toBeTruthy()
+  });
+  it('should have a working function', () => {
+    expect(component.onProjectClicked).toBeTruthy();
+  });
 });

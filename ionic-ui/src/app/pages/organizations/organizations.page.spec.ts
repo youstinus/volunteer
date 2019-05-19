@@ -45,5 +45,13 @@ describe('OrganizationsPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  it('should have a working function', () => {
+    expect(component.ngOnInit).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onOrganizationClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.updateUrl).toBeTruthy();
+  });
 });

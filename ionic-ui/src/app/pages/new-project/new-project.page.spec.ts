@@ -44,4 +44,62 @@ describe('NewProjectPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have a class member', () => {
+    expect(component.newPojectHeader).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectImage).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectTitle).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectEmail).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectPhone).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectWebsite).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectDescription).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectStart).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectEnd).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectLocation).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectCreate).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectAlertNotHeader).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectAlertNotMessage).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.newPojectAlertOk).toBeDefined();
+  });
+  it('should have a working function', () => {
+    expect(component.ngOnInit).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onCreate).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.NotCreated).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.getId).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onCreateForm).toBeDefined();
+  });
+
 });

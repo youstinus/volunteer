@@ -57,5 +57,20 @@ describe('ModalVolunteerPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have a class member', () => {
+    expect(component.modalClose).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.modalNone).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.modalVAnonymous).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.modalVContatInfo).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.modalVDescription).toBeDefined();
+  });
 });
 

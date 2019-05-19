@@ -61,4 +61,92 @@ describe('ProjectPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have a class member', () => {
+    expect(component.projectTitle).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectEdit).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectVolunteers).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectFind).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectSaved).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectsYouVolunteer).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectSave).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectsToVolunteer).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectStart).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectEnd).toBeDefined();
+  });
+   it('should have a class member', () => {
+    expect(component.projectGoBack).toBeDefined();
+  });
+  it('should have a working function', () =>{
+     expect(component.check).toBeTruthy();
+  });
+  it('should have a working function', () =>{
+    expect(component.checkForProjects).toBeTruthy();
+ });
+ it('should have a working function', () =>{
+  expect(component.getRole).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.goToProjects).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.isEmptyOrSpaces).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.isSelected).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.navigateToEdit).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.navigateToVolunteers).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.ngOnInit).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.onEmailClicked).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.onPhoneClicked).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.onSourceClicked).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.removeFromSaveList).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.removeFromSelectedProjectS).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.setVolunteer).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.updateUrl).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.addToSaveList).toBeTruthy();
+});
+it('should have a working function', () =>{
+  expect(component.addToSelecteDProjectS).toBeTruthy();
+});
+
 });

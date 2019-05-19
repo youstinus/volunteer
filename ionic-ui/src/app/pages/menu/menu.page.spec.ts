@@ -43,4 +43,29 @@ describe('MenuPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have a working function', () => {
+    expect(component.check).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.checkLogout).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.getRole).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.logout).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.ngOnInit).toBeTruthy();
+  });
+  it('should have a class memeber', () => {
+    expect(component.menuLogout).toBeDefined();
+  });
+  it('should have a working function', () => {
+    expect(component.pages).toBeDefined();
+  });
+  it('should have a working function', () => {
+    expect(component.menuMenu).toBeDefined();
+  });
+
 });

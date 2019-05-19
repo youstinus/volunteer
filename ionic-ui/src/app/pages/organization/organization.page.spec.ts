@@ -57,5 +57,119 @@ describe('OrganizationPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+  it('should have a class member', () => {
+    expect(component.orgsHeader).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgGoToProject).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgClipBoard).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgFindUs).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgComment).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgComments).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgDelteComment).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.orgProjects).toBeDefined();
+  });
+
+  /*it('should have a class member', () => {
+    expect(component.userId).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.id).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.reviews).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.sum).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.average).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.names).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.volunteers).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.projects).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.onCreateForm).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.currentUser).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.volunteer).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.role).toBeDefined();
+  });
+  it('should have a class member', () => {
+    expect(component.defaulUrl).toBeDefined();
+  });*/
+  it('should have a working function', () => {
+    expect(component.onEmailClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onPhoneClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onSourceClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.updateUrl).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.checkRole).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.del).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.delReview).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.getRole).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.getVolunteer).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.isOwner).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.ngOnInit).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.on1StarClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.on2StarClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.on3StarClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.on4StarClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.on5StarClicked).toBeTruthy();
+  });
+  it('should have a working function', () => {
+    expect(component.onCreate).toBeTruthy();
+  });
 });
