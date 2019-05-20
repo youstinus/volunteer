@@ -18,7 +18,8 @@ export class ProjectsPage implements OnInit, OnDestroy {
     projectsSearch: string = Language.Lang.projectsSearch;
     projectsArchive: string = Language.Lang.projectsArchive;
     projectsNew: string = Language.Lang.projectsNew;
-    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+
+    defaulUrl: string = Strings.Default_Image_Url3;
     public spin = true;
     public searchTerm = '';
     public archive = false;
@@ -33,7 +34,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.type = this.route.snapshot.params['type'];
         this.loadItemsByType();
-        //this.filterNewItems();
     }
 
     ngOnDestroy(): void {
@@ -71,7 +71,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
             this.filterNewItems();
             this.spin = false;
         }, error1 => {
-            console.log(error1);
             this.spin = false;
         });
     }
@@ -126,6 +125,6 @@ export class ProjectsPage implements OnInit, OnDestroy {
     }
 
     updateUrl(project: Project) {
-        project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+        project.imageUrl = Strings.Default_Image_Url;
     }
 }

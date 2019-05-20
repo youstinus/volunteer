@@ -15,7 +15,8 @@
             <ion-label>{{p.title}}</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-item lines="full" tappable routerLink="main" routerDirection="root" *ngIf="checkLogout()" (click)="logout()">
+        <ion-item lines="full" tappable routerLink="main" routerDirection="root" *ngIf="checkLogout()"
+          (click)="logout()">
           <ion-icon name="log-out" slot="start">{{menuLogout}}</ion-icon>
           <ion-label>{{menuLogout}}</ion-label>
         </ion-item>
@@ -23,6 +24,5 @@
     </ion-content>
     <app-footer></app-footer>
   </ion-menu>
-
   <ion-router-outlet id="content" main></ion-router-outlet>
 </ion-split-pane>

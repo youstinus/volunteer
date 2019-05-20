@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/User';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { NavController, MenuController, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { NavController, ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { PasswordValidator } from '../registration/password.validator';
 import { ActivatedRoute } from '@angular/router';
@@ -29,21 +28,15 @@ export class ChangePasswordPage implements OnInit {
   changePassPassDontMatch: string = Language.Lang.changePassPassDontMatch;
 
   role: number = 4;
-  user: User = new User();
   public changePasswordForm: FormGroup;
-  public matching_passwords_group: FormGroup;
-  private email: string;
   private resetParam: string;
-  public  forgotPass = false;
+  public forgotPass = false;
 
   constructor(
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public alertController: AlertController,
     private route: ActivatedRoute
   ) { }
 
@@ -51,38 +44,30 @@ export class ChangePasswordPage implements OnInit {
     this.getRole();
     this.validateLink();
 
+    let oldPassValidator: ValidatorFn;
+
     if (this.role == 4) {
-      this.changePasswordForm = this.formBuilder.group({
-        'oldPassword': [null, Validators.nullValidator],
-        'password1': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
-        ])],
-        'password': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
-        ])]
-      }, {
-          validator: PasswordValidator.MatchPassword
-        });
+      oldPassValidator = Validators.nullValidator;
     } else {
-      this.changePasswordForm = this.formBuilder.group({
-        'oldPassword': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
-        ])],
-        'password1': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
-        ])],
-        'password': [null, Validators.compose([
-          Validators.minLength(5),
-          Validators.required
-        ])]
-      }, {
-          validator: PasswordValidator.MatchPassword
-        });
+      oldPassValidator = Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ]);
     }
+
+    this.changePasswordForm = this.formBuilder.group({
+      'oldPassword': [null, oldPassValidator],
+      'password1': [null, Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])],
+      'password': [null, Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])]
+    }, {
+        validator: PasswordValidator.MatchPassword
+      });
   }
 
   static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
@@ -95,46 +80,44 @@ export class ChangePasswordPage implements OnInit {
 
   getRole() {
     const role = this.usersService.getTokenRole();
-    if (role == 'Volunteer') {
-      this.role = 2;
-    } else if (role == 'Organization') {
-      this.role = 3;
-    } else if (role == 'Moderator') {
-      this.role = 1;
-    } else if (role == 'Admin') {
-      this.role = 0;
-    } else {
-      this.role = 4;
+    switch (role) {
+      case 'Admin':
+        this.role = 0;
+        break;
+      case 'Moderator':
+        this.role = 1;
+        break;
+      case 'Volunteer':
+        this.role = 2;
+        break;
+      case 'Organization':
+        this.role = 3;
+        break;
+      default:
+        this.role = 4;
+        break;
     }
   }
 
   resetPassword() {
     var passwords = this.changePasswordForm.value;
     if (passwords.password == passwords.password1) {
-      this.usersService.updateByEmail(this.resetParam, passwords).subscribe(() => { // resetParam instead of email
-        console.log('Password changed');
+      this.usersService.updateByEmail(this.resetParam, passwords).subscribe(() => {
         this.presentSToast();
         this.navCtrl.navigateRoot('login').catch(error => console.error(error));
       }, error1 => {
         this.presentFToast();
-        console.log('password not changed', error1);
       });
     }
   }
 
   changePassword() {
     this.usersService.updateLoggedInUser(this.changePasswordForm.value).subscribe(() => {
-      console.log('Password changed');
       this.presentSToast();
-      this.navCtrl.back();
+      this.goBack();
     }, error1 => {
       this.presentFToast();
-      console.log('password not changed', error1);
     });
-  }
-
-  goBack() {
-    this.navCtrl.back;
   }
 
   validateLink() {
@@ -161,7 +144,6 @@ export class ChangePasswordPage implements OnInit {
           text: Language.Lang.toastClose,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -182,11 +164,14 @@ export class ChangePasswordPage implements OnInit {
           text: Language.Lang.toastClose,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
     });
     toast.present();
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 }
