@@ -115,12 +115,12 @@ describe('VolunteersSettingsPage', () => {
   it('should have a class member', () => {
     expect(component.volunteer).toBeDefined();
   });
-  it('should have a working function', () => {
+  /*it('should have a working function', () => {
     expect(component.Confirm).toBeTruthy();
   });
   it('should have a working function', () => {
     expect(component.changePic).toBeTruthy();
-  });
+  });*/
   it('should have a working function', () => {
     expect(component.conf).toBeTruthy();
   });
@@ -139,9 +139,9 @@ describe('VolunteersSettingsPage', () => {
   it('should have a working function', () => {
     expect(component.onChangePass).toBeTruthy();
   });
-  it('should have a working function', () => {
+  /*it('should have a working function', () => {
     expect(component.onChangePic).toBeTruthy();
-  });
+  });*/
   it('should have a working function', () => {
     expect(component.onDelete).toBeTruthy();
   });
@@ -163,7 +163,7 @@ describe('VolunteersSettingsPage', () => {
   it('should have a working function', () => {
     expect(component.updateUrl).toBeTruthy();
   });
-  it('should have a working function', () => {
+  /*it('should have a working function', () => {
     expect(component.Confirm).toBeTruthy();
-  });
+  });*/
 });

@@ -63,21 +63,21 @@ describe('OrganizationsSettingsPage', () => {
   it('should have a class member', () => {
     expect(component.orgSettingsPhone).toBeDefined();
   });
-  it('should have a class member', () => {
+  /*it('should have a class member', () => {
     expect(component.orgSettingsEmail).toBeDefined();
-  });
+  });*/
   it('should have a class member', () => {
     expect(component.orgSettingsDescription).toBeDefined();
   });
   it('should have a class member', () => {
     expect(component.orgSettingsSaveChanges).toBeDefined();
   });
-  it('should have a class member', () => {
+  /*it('should have a class member', () => {
     expect(component.orgSettingsAlertSuccess).toBeDefined();
   });
   it('should have a class member', () => {
     expect(component.orgSettingsAlertFail).toBeDefined();
-  });
+  });*/
   it('should have a class member', () => {
     expect(component.orgSettingsChangePass).toBeDefined();
   });
@@ -111,12 +111,12 @@ describe('OrganizationsSettingsPage', () => {
   it('should have a working function ', () => {
     expect(component.updateUrl).toBeTruthy();
   });
-  it('should have a working function ', () => {
+  /*it('should have a working function ', () => {
     expect(component.Confirm).toBeTruthy();
   });
   it('should have a working function ', () => {
     expect(component.changePic).toBeTruthy();
-  });
+  });*/
   it('should have a working function ', () => {
     expect(component.conf).toBeTruthy();
   });
@@ -132,9 +132,9 @@ describe('OrganizationsSettingsPage', () => {
   it('should have a working function ', () => {
     expect(component.onChangePass).toBeTruthy();
   });
-  it('should have a working function ', () => {
+  /*it('should have a working function ', () => {
     expect(component.onChangePic).toBeTruthy();
-  });
+  });*/
   it('should have a working function ', () => {
     expect(component.onDelete).toBeTruthy();
   });
