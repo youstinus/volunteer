@@ -24,6 +24,6 @@ export class OrganizationsService extends BaseService<Organization> {
 
   getByOrganizationId(id: number): Observable<Organization> {
     const headers = this.getHeaders();
-    return this.http.get<Organization>(this.api + '/Organizations/' + id, {headers: headers});
+    return this.http.get<Organization>(this.api + '/' + id, {headers: headers});
   }
 }

@@ -7,7 +7,7 @@
             <ion-card-header>
                 <ion-card class="myCard" lines="none">
 
-                    <div class="values col col-50"><img [src]="volunteer.imageUrl" (error)="updateUrl($event)"
+                    <div  class="values col col-50"><img [src]="volunteer.imageUrl" alt="" (error)="updateUrl($event)"
                                                         class="center"
                                                         style="height: 200px; width: 400px;"/></div>
 
@@ -15,7 +15,7 @@
                         <ion-item lines="none">
                             <ion-label color="dark" position="floating">{{volSettingsImage}}</ion-label>
                             <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
-                                       formControlName="imageUrl" value="{{volunteer.imageUrl}}"></ion-input>
+                                       formControlName="imageUrl"  value="{{volunteer.imageUrl}}"></ion-input>
                         </ion-item>
                     </ion-card-content>
                 </ion-card>

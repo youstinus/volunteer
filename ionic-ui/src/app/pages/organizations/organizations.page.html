@@ -14,12 +14,10 @@
     <ion-card *ngFor="let organizations of organizations" (click)="onOrganizationClicked(organizations)">
         <img class="img" [src]="organizations.imageUrl" (error)="updateUrl(organizations)"/>
 
-        <ion-card-title>
+        <ion-card-title style="float: bottom; text-align: center; margin-top: 10px">
             {{organizations.title}}
         </ion-card-title>
 
-        <ion-card-subtitle style=" margin-top: 10px">{{organizations.email}}</ion-card-subtitle>
-        <ion-card-subtitle style="margin-top: 10px">{{organizations.phone}}</ion-card-subtitle>
 
     </ion-card>
 </ion-content>

@@ -29,6 +29,8 @@ export class OrganizationPage implements OnInit {
     orgComments: string = Language.Lang.orgComments;
     orgDelteComment: string = Language.Lang.orgDelComment;
     orgProjects: string = Language.Lang.orgProjects;
+    orgNoComments : string = Language.Lang.orgNoComments;
+    orgNoProjects : string = Language.Lang.orgNoProjects;
 
     userId: number;
     id: number;
@@ -71,6 +73,7 @@ export class OrganizationPage implements OnInit {
         this.getRole();
         const id = this.route.snapshot.params['id'];
         this.id = id;
+        this.userId = this.usersService.getTokenId();
         this.organizationsService.getById(id).subscribe(value => {
                 this.organization = value;
                 this.userId = this.organization.userId;
@@ -229,15 +232,31 @@ export class OrganizationPage implements OnInit {
 
     delReview(id) {
         this.reviewsService.delete(id).subscribe(value => {
-                console.log(value);
-
             },
             error1 => {
                 console.log(error1);
             });
 
     }
+
+    reviewisEmpty() {
+        if (!this.reviews || !this.reviews.length) {
+            return false;
+        }
+        return true;
+    }
+
+
+    projectisEmpty() {
+        if (!this.projects || !this.projects.length) {
+            return false;
+        }
+        return true;
+    }
 }
+
+
+
 
 
 

@@ -252,6 +252,8 @@ export class En {
         orgComments: "Comments",
         orgDelComment: "Delete comment",
         orgProjects: "Projects",
+        orgNoComments: " No comments yet",
+        orgNoProjects: "No projects yet",
         // OrganizationS page
         orgsHeader: 'Organizations'
     }

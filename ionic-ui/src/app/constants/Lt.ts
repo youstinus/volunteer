@@ -254,6 +254,8 @@ export class Lt {
         orgComments: "Komentarai",
         orgDelComment: "Ištrinti komentarą",
         orgProjects: "Projektai",
+        orgNoComments: " Komentarų nėra",
+        orgNoProjects: "Projektų nėra",
         // OrganizationS page
         orgsHeader: 'Organizacijos'
 

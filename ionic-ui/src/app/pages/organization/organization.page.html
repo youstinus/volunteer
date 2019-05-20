@@ -104,7 +104,9 @@
     <ion-card>
         <ion-card-title style="margin-left: 20px;"> {{orgProjects}}
         </ion-card-title>
+        <ion-card-subtitle style="margin-left: 20px;" [hidden] = "projectisEmpty()==true" >{{orgNoProjects}}</ion-card-subtitle>
         <ion-item *ngFor="let project of projects">
+
             <ion-label>{{ project.title }}</ion-label>
             <ion-button (click)="onProjectClicked(project.id)" expand="full"
                         shape="round">{{orgGoToProject}}</ion-button>
@@ -131,6 +133,7 @@
     <ion-card>
         <ion-card-title style="margin-left: 20px;"> {{orgComments}}
         </ion-card-title>
+        <ion-card-subtitle style="margin-left: 20px;" [hidden] = "reviewisEmpty()==true" > {{orgNoComments}}</ion-card-subtitle>
         <ion-item *ngFor="let review of reviews">
 
             <ion-card-header>
@@ -151,12 +154,12 @@
     </ion-card>
 
 
-    <ion-card>
+    <ion-card [hidden]="role != 2 "  >
 
         <ion-card-content>
 
 
-            <form [formGroup]="onCreateForm">
+            <form  [formGroup]="onCreateForm">
                 <ion-input formControlName="title" type="Title" placeholder="Title"
                            style="border-bottom: #1e2023 solid 2px"></ion-input>
 

@@ -95,7 +95,7 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     onChangePass() {
-        this.navCtrl.navigateForward('/change-password/reset').catch(reason => console.log(reason));
+        this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
     }
 
     onDelete() {

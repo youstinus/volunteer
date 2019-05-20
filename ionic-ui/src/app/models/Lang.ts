@@ -248,6 +248,8 @@ export class Lang {
     public orgDelComment: string;
     public orgComments : string;
     public orgProjects : string;
+    public orgNoComments:string;
+    public orgNoProjects: string;
     // OrganizationS page
     public orgsHeader: string;
 }
