@@ -13,8 +13,9 @@ import { MenuPage } from './pages/menu/menu.page';
 import { ComponentsModule } from './shared/components.module';
 import { FooterPage } from './pages/footer/footer.page';
 import { CookieService } from 'ngx-cookie-service';
-import { StreamingMedia} from '@ionic-native/streaming-media/ngx';
+import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { JwtModule } from '@auth0/angular-jwt';
         SplashScreen,
         CookieService,
         StreamingMedia,
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })

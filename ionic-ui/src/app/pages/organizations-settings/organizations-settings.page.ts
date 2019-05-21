@@ -31,9 +31,8 @@ export class OrganizationsSettingsPage implements OnInit {
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
-    volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
+    orgSettingsEmail: string = Language.Lang.orgSettingsEmail; volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
     volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
-    
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
@@ -56,7 +55,8 @@ export class OrganizationsSettingsPage implements OnInit {
             'phone': [null, Validators.nullValidator],
             'website': [null, Validators.nullValidator],
             'description': [null, Validators.nullValidator],
-            'userId': this.usersService.getTokenId()
+            'userId': this.usersService.getTokenId(),
+            'email': [null, Validators.nullValidator],
         });
         this.user = this.usersService.getTokenId();
         if (this.user === null) {
@@ -77,8 +77,10 @@ export class OrganizationsSettingsPage implements OnInit {
     saveOrganization() {
         this.organizationService.update(this.organization.id, this.onSaveForm.value).subscribe(value => {
             console.log('Organization was updated successfully');
+            this.presentSToast();
 
         }, error1 => {
+            this.presentFToast();
             console.log('Organization was not updated', error1);
         });
     }
@@ -200,15 +202,3 @@ export class OrganizationsSettingsPage implements OnInit {
         toast.present();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

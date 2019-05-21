@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton, AlertController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { Language } from 'src/app/utilities/Language';
 
@@ -31,7 +31,6 @@ export class NewProjectPage implements OnInit {
 
   id: number;
   public onCreateForm: FormGroup;
-  private role: number = 0;
   constructor(
     private usersService: UsersService,
     private projectsService: ProjectsService,

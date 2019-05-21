@@ -239,6 +239,7 @@ export class Lang {
     public orgSettingsAlertConfirm: string;
     public orgSettingsDeleted: string;
 
+
     //Organization page
     public  orgHeader: string;
     public orgGoToProject: string;
