@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
 import { UsersService } from 'src/app/services/users.service';
 import { VolunteersService } from 'src/app/services/volunteers.service';
 import { Volunteer } from 'src/app/models/Volunteer';
 import { Organization } from 'src/app/models/Organization';
-import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-utils';
 import { User } from 'src/app/models/User';
-import { userInfo } from 'os';
 import { OrganizationsService } from 'src/app/services/organizations.service';
 import { Language } from 'src/app/utilities/Language';
 //import { Clipboard } from '@ionic-native/clipboard/ngx';
@@ -53,7 +51,6 @@ export class ProjectPage implements OnInit {
     private usersService: UsersService,
     private volunteersService: VolunteersService,
     private projectsService: ProjectsService,
-    private organizationService: OrganizationsService,
     private route: ActivatedRoute,
     public navCtrl: NavController
     //   private clipboard: Clipboard
