@@ -7,10 +7,6 @@
 
   <div *ngIf="role==2 && !saved">
     <ion-item lines="none">
-      <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
-        <ion-icon name="arrow-round-back"></ion-icon>
-        {{projectGoBack}}
-      </ion-button>
       <ion-button id="1" #first ion-button color="dark" (click)="addToSaveList()" slot="end">
         <ion-icon slot="start" name="star-outline"></ion-icon>
         {{projectSave}}
