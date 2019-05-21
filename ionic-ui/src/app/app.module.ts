@@ -35,8 +35,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         SplashScreen,
         CookieService,
         StreamingMedia,
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        //,{ provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })
