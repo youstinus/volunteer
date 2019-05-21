@@ -121,7 +121,7 @@ describe('OrganizationsSettingsPage', () => {
     expect(component.conf).toBeTruthy();
   });
   it('should have a working function ', () => {
-    expect(component.delete).toBeTruthy();
+    expect(component.onDelete).toBeTruthy();
   });
   it('should have a working function ', () => {
     expect(component.loadOrganization).toBeTruthy();

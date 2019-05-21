@@ -19,9 +19,9 @@ describe('ChangePasswordPage', () => {
   let component: ChangePasswordPage;
   let fixture: ComponentFixture<ChangePasswordPage>;
   const fakeActivatedRoute = {
-    snapshot: { data: { }, params: Observable.create({ reset: 'YzM0YWU4MTc5ODcwYTg3YjVhNTY3MjEzNGE0N2FhNGQyZDRlYjIwMGI4M2NmMmYwYzllMTM3MDg1YmUwNDhmYjNuVVVtSlVFeEhQclczaXFKdjM5emc9PQ==' }) }
+    snapshot: { data: {}, params: Observable.create({ reset: 'YzM0YWU4MTc5ODcwYTg3YjVhNTY3MjEzNGE0N2FhNGQyZDRlYjIwMGI4M2NmMmYwYzllMTM3MDg1YmUwNDhmYjNuVVVtSlVFeEhQclczaXFKdjM5emc9PQ==' }) }
   } as ActivatedRoute;
-  
+
   const routes: Routes = [
     {
       path: '',
@@ -31,18 +31,18 @@ describe('ChangePasswordPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChangePasswordPage ],
+      declarations: [ChangePasswordPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,CookieService,
-        StreamingMedia,Language, FormBuilder,
+      providers: [Location, LocationStrategy, HttpHandler, CookieService,
+        StreamingMedia, Language, FormBuilder,
         //{provide: NavController, useValue : routes },
-      { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
-      {provide: ActivatedRoute, useValue: fakeActivatedRoute}
-          ]
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
+        { provide: APP_BASE_HREF, useValue: '.' },
+        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -51,7 +51,7 @@ describe('ChangePasswordPage', () => {
     fixture.detectChanges();
   });
 
- it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -14,16 +14,17 @@ import { ComponentsModule } from './shared/components.module';
 import { FooterPage } from './pages/footer/footer.page';
 import { CookieService } from 'ngx-cookie-service';
 import { StreamingMedia} from '@ionic-native/streaming-media/ngx';
+import { JwtModule } from '@auth0/angular-jwt';
 
-//import { NotFoundPageModule } from './pages/not-found/not-found.module';
 @NgModule({
     declarations: [
-        AppComponent, MenuPage, FooterPage//,NotFoundPageModule
+        AppComponent, MenuPage, FooterPage
     ],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
+        //JwtModule.forRoot({}),
         AppRoutingModule,
         HttpClientModule,
         ComponentsModule
