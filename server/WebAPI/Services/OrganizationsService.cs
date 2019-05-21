@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using WebAPI.Base;
@@ -33,7 +34,7 @@ namespace WebAPI.Services
 
             return organization.Id == id;
         }
-        
+
         public async Task<bool> OrganizationExists(ProjectDto entity)
         {
             if (entity == null || entity.OrganizationId < 0)
@@ -41,6 +42,19 @@ namespace WebAPI.Services
 
             var organization = await _repository.GetSingleByPredicate(x => x.User.Id == entity.OrganizationId);
             return organization != null;
+        }
+
+        public async Task<OrganizationDto> GetByUser(ClaimsPrincipal user, long id)
+        {
+            if (!user.Identity.IsAuthenticated || user.Identity.Name != id.ToString())
+                throw new InvalidOperationException("Not authenticated");
+
+            var organization = await _repository.GetSingleByPredicate(x => x.User.Id == id);
+            if (organization == null)
+                throw new InvalidOperationException("Organization not found");
+
+            var mapped = _mapper.Map<OrganizationDto>(organization);
+            return mapped;
         }
 
         public override bool ValidateDto(OrganizationDto entity)

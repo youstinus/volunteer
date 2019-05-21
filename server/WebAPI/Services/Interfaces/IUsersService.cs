@@ -13,5 +13,6 @@ namespace WebAPI.Services.Interfaces
         Task<long> GetUsersRoleId(ClaimsPrincipal user);
         Task UpdateByEmail(string email, UserDto userDto);
         Task UpdateLoggedInUser(UserDto userDto, ClaimsPrincipal user);
+        Task Delete(ClaimsPrincipal tokenUser, long givenId);
     }
 }

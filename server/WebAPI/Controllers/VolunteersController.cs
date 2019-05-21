@@ -39,9 +39,7 @@ namespace WebAPI.Controllers
                 return NotFound(e.Message);
             }*/
         }
-
-        #region CRUD
-
+        
         [HttpDelete("{id}")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
         public override Task<IActionResult> Delete([FromRoute] long id)
@@ -97,11 +95,8 @@ namespace WebAPI.Controllers
         {
             if (!ModelState.IsValid || !await _volunteersService.ValidateUserByVolunteersId(User, id))
                 return Forbid();
-
-            //return await Task.Run(() => BadRequest("Not supported"));
+            
             return await base.Put(id, entity);
         }
-
-        #endregion
     }
 }

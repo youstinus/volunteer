@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Organization} from '../../models/Organization';
-import {Volunteer} from '../../models/Volunteer';
+import { Component, OnInit } from '@angular/core';
+import { Organization } from '../../models/Organization';
+import { Volunteer } from '../../models/Volunteer';
 
-import {ActivatedRoute} from '@angular/router';
-import {OrganizationsService} from '../../services/organizations.service';
-import {NavController} from '@ionic/angular';
-import {Review} from '../../models/Review';
-import {ReviewsService} from '../../services/reviews.service';
-import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
-import {UsersService} from 'src/app/services/users.service';
-import {User} from '../../models/User';
-import {Strings} from '../../constants/Strings';
-import {Language} from 'src/app/utilities/Language';
-import {Project} from 'src/app/models/Project';
-import {ProjectsService} from '../../services/projects.service';
+import { ActivatedRoute } from '@angular/router';
+import { OrganizationsService } from '../../services/organizations.service';
+import { NavController } from '@ionic/angular';
+import { Review } from '../../models/Review';
+import { ReviewsService } from '../../services/reviews.service';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from '../../models/User';
+import { Strings } from '../../constants/Strings';
+import { Language } from 'src/app/utilities/Language';
+import { Project } from 'src/app/models/Project';
+import { ProjectsService } from '../../services/projects.service';
 
 @Component({
     selector: 'app-organization',
@@ -29,8 +29,8 @@ export class OrganizationPage implements OnInit {
     orgComments: string = Language.Lang.orgComments;
     orgDelteComment: string = Language.Lang.orgDelComment;
     orgProjects: string = Language.Lang.orgProjects;
-    orgNoComments : string = Language.Lang.orgNoComments;
-    orgNoProjects : string = Language.Lang.orgNoProjects;
+    orgNoComments: string = Language.Lang.orgNoComments;
+    orgNoProjects: string = Language.Lang.orgNoProjects;
 
     userId: number;
     id: number;
@@ -54,7 +54,7 @@ export class OrganizationPage implements OnInit {
         private navCtrl: NavController,
         private reviewsService: ReviewsService,
         private formBuilder: FormBuilder,
-        public    projectService: ProjectsService,
+        public projectService: ProjectsService,
     ) {
     }
 
@@ -75,19 +75,19 @@ export class OrganizationPage implements OnInit {
         this.id = id;
         this.userId = this.usersService.getTokenId();
         this.organizationsService.getById(id).subscribe(value => {
-                this.organization = value;
-                this.userId = this.organization.userId;
-                this.stringparse();
-            },
+            this.organization = value;
+            this.userId = this.organization.userId;
+            this.stringparse();
+        },
             error1 => {
                 console.log(error1);
             });
 
         this.reviewsService.get().subscribe(value1 => {
-                this.reviews = value1;
-                this.currentUser = this.usersService.getTokenId();
-                this.del();
-            },
+            this.reviews = value1;
+            this.currentUser = this.usersService.getTokenId();
+            this.del();
+        },
             error1 => {
                 console.log(error1);
             });
@@ -122,10 +122,9 @@ export class OrganizationPage implements OnInit {
         console.log(this.onCreateForm.value);
         this.reviewsService.create(this.onCreateForm.value).subscribe(value => {
             this.createReview = value;
-
+            console.log("Review created");
         }, error1 => {
             console.log(error1);
-
         });
     }
 
@@ -232,11 +231,10 @@ export class OrganizationPage implements OnInit {
 
     delReview(id) {
         this.reviewsService.delete(id).subscribe(value => {
-            },
-            error1 => {
-                console.log(error1);
-            });
-
+            console.log("Review deleted");
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
     reviewisEmpty() {
@@ -245,7 +243,6 @@ export class OrganizationPage implements OnInit {
         }
         return true;
     }
-
 
     projectisEmpty() {
         if (!this.projects || !this.projects.length) {

@@ -22,8 +22,8 @@ export class OrganizationsService extends BaseService<Organization> {
     return this.http.get<Project[]>(this.api + '/' + id + '/projects');
   }
 
-  getByOrganizationId(id: number): Observable<Organization> {
+  getByUserId(id: number): Observable<Organization> {
     const headers = this.getHeaders();
-    return this.http.get<Organization>(this.api + '/' + id, {headers: headers});
+    return this.http.get<Organization>(this.api + '/user/' + id, {headers: headers});
   }
 }

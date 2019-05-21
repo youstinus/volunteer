@@ -163,7 +163,7 @@ namespace WebAPI.Controllers
 
             try
             {
-                await _usersService.Delete(id);
+                await _usersService.Delete(User, id);
                 return NoContent();
             }
             catch (InvalidOperationException e)

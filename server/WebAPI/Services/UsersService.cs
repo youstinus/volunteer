@@ -22,14 +22,21 @@ namespace WebAPI.Services
     {
         private readonly IUsersRepository _usersRepository;
         private readonly ITimeService _timeService;
+        private readonly IVolunteersService _volunteersService;
+        private readonly IOrganizationsService _organizationsService;
+
 
         public UsersService(
             IUsersRepository repository,
             IMapper mapper,
-            ITimeService timeService) : base(repository, mapper, timeService)
+            ITimeService timeService,
+            IVolunteersService volunteersService,
+            IOrganizationsService organizationsService) : base(repository, mapper, timeService)
         {
             _usersRepository = repository;
             _timeService = timeService;
+            _volunteersService = volunteersService;
+            _organizationsService = organizationsService;
         }
 
         // role based
@@ -189,7 +196,7 @@ namespace WebAPI.Services
         // old pass is in token
         public async Task UpdateLoggedInUser(UserDto userDto, ClaimsPrincipal user)
         {
-            if (user == null || user.Identity == null || !user.Identity.IsAuthenticated || !int.TryParse(user.Identity.Name, out var id))
+            if (user?.Identity == null || !user.Identity.IsAuthenticated || !int.TryParse(user.Identity.Name, out var id))
                 throw new InvalidOperationException("Cannot change password");
             
             var entity = await _repository.GetById(id);
@@ -210,6 +217,23 @@ namespace WebAPI.Services
             entity.Salt = passwordSalt;
 
             await _repository.Update(entity);
+        }
+
+        public async Task Delete(ClaimsPrincipal tokenUser, long givenId)
+        {
+            if (tokenUser?.Identity == null || !tokenUser.Identity.IsAuthenticated || !int.TryParse(tokenUser.Identity.Name, out var id) || id != givenId)
+                throw new InvalidOperationException("Cannot change password");
+
+            var user = await _repository.GetById(id);
+            var organization = user.Organization;
+            var volunteer = user.Volunteer;
+            if (organization != null)
+                await _organizationsService.Delete(organization.Id);
+            
+            if (volunteer != null)
+                await _volunteersService.Delete(volunteer.Id);
+            
+            await _usersRepository.Delete(user);
         }
 
         public override User CreatePoco(UserDto entityDto)

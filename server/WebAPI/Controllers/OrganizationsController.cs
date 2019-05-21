@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace WebAPI.Controllers
         [Authorize(Roles = nameof(UserType.Organization))]
         public override async Task<IActionResult> Delete([FromRoute] long id)
         {
-            return BadRequest("Endpoint not supported");//base.Delete(id));
+            return await Task.Run(() => BadRequest("Endpoint not supported"));//base.Delete(id));
         }
 
         [HttpGet]
@@ -42,6 +43,24 @@ namespace WebAPI.Controllers
         public override Task<IActionResult> GetById([FromRoute] long id)
         {
             return base.GetById(id);
+        }
+
+        [HttpGet("user/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetByUserId([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+                return Forbid();
+
+            try
+            {
+                var entity = await _organizationsService.GetByUser(User, id);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPatch("{id}")]
@@ -59,7 +78,7 @@ namespace WebAPI.Controllers
         [Authorize(Roles = nameof(UserType.Organization))]
         public override async Task<IActionResult> Post([FromBody] OrganizationDto entity)
         {
-            return BadRequest("Endpoint not supported");//base.Post(entity);
+            return await Task.Run(() => BadRequest("Endpoint not supported"));
         }
 
         [HttpPut("{id}")]

@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Volunteer} from '../../models/Volunteer';
-import {VolunteersService} from '../../services/volunteers.service';
-import {ActivatedRoute} from '@angular/router';
-import {UsersService} from '../../services/users.service';
-import {NavController, ToastController} from '@ionic/angular';
-import {AlertController} from '@ionic/angular';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {Language} from 'src/app/utilities/Language';
-import {User} from '../../models/User';
+import { Component, OnInit } from '@angular/core';
+import { Volunteer } from '../../models/Volunteer';
+import { VolunteersService } from '../../services/volunteers.service';
+import { ActivatedRoute } from '@angular/router';
+import { UsersService } from '../../services/users.service';
+import { NavController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Language } from 'src/app/utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -37,7 +37,7 @@ export class VolunteersSettingsPage implements OnInit {
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
-    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+    defaulUrl: string = Strings.Default_Image_Url3;
 
     constructor(
         public toastCtrl: ToastController,
@@ -144,12 +144,7 @@ export class VolunteersSettingsPage implements OnInit {
         toast.present();
     }
 
-    onDelete() {
-        console.log();
-        this.delete();
-    }
-
-    async delete() {
+    async onDelete() {
         const alert = await this.alertCtrl.create({
             header: this.orgSettingsDeleteAalert,
             message: this.orgSettingsDeleteConfirm,
@@ -178,6 +173,7 @@ export class VolunteersSettingsPage implements OnInit {
 
         await alert.present();
     }
+
     async conf() {
         const alert = await this.alertCtrl.create({
             header: this.orgSettingsDeleted,
@@ -199,14 +195,12 @@ export class VolunteersSettingsPage implements OnInit {
         await alert.present();
     }
 
-
     deleteUser() {
         this.usersService.delete(this.user).subscribe(value => {
-            },
-            error1 => {
-                console.log(error1);
-            });
+            this.usersService.logout();
+            console.log("Volunteer deleted");
+        }, error1 => {
+            console.log(error1);
+        });
     }
-
-
 }

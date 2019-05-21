@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Organization} from '../../models/Organization';
-import {OrganizationsService} from '../../services/organizations.service';
-import {ActivatedRoute} from '@angular/router';
-import {UsersService} from '../../services/users.service';
-import {AlertController, NavController} from '@ionic/angular';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Language} from '../../utilities/Language';
+import { Component, OnInit } from '@angular/core';
+import { Organization } from '../../models/Organization';
+import { OrganizationsService } from '../../services/organizations.service';
+import { UsersService } from '../../services/users.service';
+import { AlertController, NavController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Language } from '../../utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
     selector: 'app-organizations-settings',
@@ -35,15 +35,14 @@ export class OrganizationsSettingsPage implements OnInit {
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
-    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+    defaulUrl: string = Strings.Default_Image_Url3;
 
     constructor(
         private organizationService: OrganizationsService,
-        private route: ActivatedRoute,
         private usersService: UsersService,
         private navCtrl: NavController,
         private formBuilder: FormBuilder,
-        public alertCtrl: AlertController) {
+        private alertCtrl: AlertController) {
     }
 
     ngOnInit() {
@@ -65,7 +64,7 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     loadOrganization() {
-        this.organizationService.getByOrganizationId(this.user).subscribe(value => {
+        this.organizationService.getByUserId(this.user).subscribe(value => {
             this.organization = value;
         }, error1 => {
             console.log('Cannot get organization from database', error1);
@@ -73,7 +72,6 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     saveOrganization() {
-        console.log(this.onSaveForm.value);
         this.organizationService.update(this.organization.id, this.onSaveForm.value).subscribe(value => {
             console.log('Organization was updated successfully');
 
@@ -95,14 +93,10 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     onChangePass() {
-        this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
+        this.navCtrl.navigateForward('change-password').catch(reason => console.log(reason));
     }
 
-    onDelete() {
-        this.delete();
-    }
-
-    async delete() {
+    async onDelete() {
         const alert = await this.alertCtrl.create({
             header: this.orgSettingsDeleteAalert,
             message: this.orgSettingsDeleteConfirm,
@@ -130,6 +124,7 @@ export class OrganizationsSettingsPage implements OnInit {
 
         await alert.present();
     }
+
     async conf() {
         const alert = await this.alertCtrl.create({
             header: this.orgSettingsDeleted,
@@ -153,10 +148,11 @@ export class OrganizationsSettingsPage implements OnInit {
 
     deleteUser() {
         this.usersService.delete(this.user).subscribe(value => {
-            },
-            error1 => {
-                console.log(error1);
-            });
+            this.usersService.logout();
+            console.log("Organization deleted");
+        }, error1 => {
+            console.log(error1);
+        });
     }
 }
 
