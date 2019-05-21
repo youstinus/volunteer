@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Organization } from '../../models/Organization';
 import { OrganizationsService } from '../../services/organizations.service';
 import { UsersService } from '../../services/users.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Language } from '../../utilities/Language';
 import { Strings } from 'src/app/constants/Strings';
@@ -31,13 +31,16 @@ export class OrganizationsSettingsPage implements OnInit {
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
-
+    volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
+    volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
+    
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
     defaulUrl: string = Strings.Default_Image_Url3;
 
     constructor(
+        public toastCtrl: ToastController,
         private organizationService: OrganizationsService,
         private usersService: UsersService,
         private navCtrl: NavController,
@@ -153,6 +156,48 @@ export class OrganizationsSettingsPage implements OnInit {
         }, error1 => {
             console.log(error1);
         });
+    }
+
+    async presentSToast() {
+        const toast = await this.toastCtrl.create({
+            message: this.volSettingsAlertSuccess,
+            duration: 2500,
+            position: 'bottom',
+            color: 'success',
+            cssClass: 'toast',
+            translucent: true,
+            buttons: [
+                {
+                    text: Language.Lang.toastClose,
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        toast.present();
+    }
+
+    async presentFToast() {
+        const toast = await this.toastCtrl.create({
+            message: this.volSettingsAlertFail,
+            duration: 2500,
+            cssClass: 'toast',
+            position: 'bottom',
+            color: 'danger',
+            translucent: true,
+            buttons: [
+                {
+                    text: Language.Lang.toastClose,
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        toast.present();
     }
 }
 
