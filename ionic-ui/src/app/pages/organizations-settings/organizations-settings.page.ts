@@ -31,6 +31,7 @@ export class OrganizationsSettingsPage implements OnInit {
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
+    orgSettingsEmail: string = Language.Lang.orgSettingsEmail;
 
     user: number;
     public onSaveForm: FormGroup;
@@ -53,7 +54,8 @@ export class OrganizationsSettingsPage implements OnInit {
             'phone': [null, Validators.nullValidator],
             'website': [null, Validators.nullValidator],
             'description': [null, Validators.nullValidator],
-            'userId': this.usersService.getTokenId()
+            'userId': this.usersService.getTokenId(),
+            'email': [null, Validators.nullValidator],
         });
         this.user = this.usersService.getTokenId();
         if (this.user === null) {

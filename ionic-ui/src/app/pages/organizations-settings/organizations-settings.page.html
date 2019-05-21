@@ -40,6 +40,12 @@
                     </ion-label>
                     <ion-input formControlName="phone" clearInput value={{organization.phone}}></ion-input>
                 </ion-item>
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        {{orgSettingsEmail}}:
+                    </ion-label>
+                    <ion-input formControlName="email" clearInput value={{organization.email}}></ion-input>
+                </ion-item>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
@@ -54,6 +60,7 @@
                     </ion-label>
                 </ion-item>
                 <ion-textarea formControlName="description" value={{organization.description}}></ion-textarea>
+
 
                 <ion-item lines="none" [hidden]="true">
                     <ion-input formControlName="userId" type="text"></ion-input>

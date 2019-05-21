@@ -243,6 +243,7 @@ export class En {
         orgSettingsDeleteCancel: "Cancel",
         orgSettingsDeleted: "Account deleted",
 
+
         // Organization page
         orgHeader: 'Organization page',
         orgGoToProject: 'Go to project page',
