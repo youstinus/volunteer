@@ -43,6 +43,7 @@ export class ProjectEditPage implements OnInit {
   role: number = 1;
   owner: boolean = false;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+  
   constructor(private projectsService: ProjectsService,
     private location: Location,
     private route: ActivatedRoute,
@@ -68,6 +69,7 @@ export class ProjectEditPage implements OnInit {
         this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
       }
     }, error1 => {
+      this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
       console.log(error1);
     });
 
