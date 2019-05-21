@@ -56,7 +56,7 @@ export class AboutPage implements OnInit {
       errorCallback: () => { console.log() },
       orientation: 'landscape'
     }
-    this.streamingMediaOriginal.playVideo('https://drive.google.com/uc?authuser=0&id=1m1CcQUV15qzUJpdmG48rgsTMb-UKUjmN&export=download', options);
+    this.streamingMediaOriginal.playVideo('https://drive.google.com/uc?authuser=0&id=1daOiwLe6pPB1rt3uvl6c_ApJihMgPMS2&export=download', options);
 
   }
   ngOnInit() {
