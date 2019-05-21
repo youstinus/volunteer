@@ -105,6 +105,7 @@ export class ProjectPage implements OnInit {
       }
     }, error1 => {
       console.log(error1);
+      this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
     });
   }
 
