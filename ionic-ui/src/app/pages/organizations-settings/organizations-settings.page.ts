@@ -37,6 +37,7 @@ export class OrganizationsSettingsPage implements OnInit {
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
     defaulUrl: string = Strings.Default_Image_Url3;
+    role: number = 4;
 
     constructor(
         public toastCtrl: ToastController,
@@ -58,6 +59,12 @@ export class OrganizationsSettingsPage implements OnInit {
             'userId': this.usersService.getTokenId(),
             'email': [null, Validators.nullValidator],
         });
+
+        this.getRole();
+        if(this.role!=3){
+            this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+        }
+
         this.user = this.usersService.getTokenId();
         if (this.user === null) {
             this.navCtrl.navigateRoot('main').catch(e => console.log(e));
@@ -201,4 +208,19 @@ export class OrganizationsSettingsPage implements OnInit {
         });
         toast.present();
     }
+
+    getRole() {
+        const role = this.usersService.getTokenRole();
+        if (role == 'Volunteer') {
+          this.role = 2;
+        } else if (role == 'Organization') {
+          this.role = 3;
+        } else if (role == 'Moderator') {
+          this.role = 1;
+        } else if (role == 'Admin') {
+          this.role = 0;
+        } else {
+          this.role = 4;
+        }
+      }
 }

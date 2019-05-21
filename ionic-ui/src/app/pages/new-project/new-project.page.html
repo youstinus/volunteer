@@ -61,7 +61,7 @@
   </form>
   &nbsp;
  
-  <ion-button expand="block" type="submit" (click)='onCreate()'>{{newPojectCreate}}</ion-button>
+  <ion-button expand="block" type="submit" (click)='onCreate()' [disabled]="!onCreateForm.valid">{{newPojectCreate}}</ion-button>
   <ion-item lines="none">
   </ion-item>
 </ion-content>

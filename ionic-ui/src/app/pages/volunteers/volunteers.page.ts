@@ -7,6 +7,7 @@ import { AlertController, LoadingController, ToastController, NavController, Mod
 import { ProjectsService } from 'src/app/services/projects.service';
 import { ModalVolunteerPage } from '../modal-volunteer/modal-volunteer.page';
 import { Language } from 'src/app/utilities/Language';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-volunteers',
@@ -35,17 +36,24 @@ export class VolunteersPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private projectsService: ProjectsService,
+    private usersService: UsersService,
     private navCtrl: NavController,
     private modal: ModalController
   ) { }
 
   ngOnInit() {
-
+    const userId = this.usersService.getTokenId();
     const id = this.route.snapshot.params['id'];
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
+      if (userId == this.project.organizationId) {
+        console.log('Savininkas');
+      } else {
+        this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+      }
     }, error1 => {
       console.log(error1);
+      this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
     });
 
     this.projectsService.getVolunteers(id).subscribe(items => {

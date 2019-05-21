@@ -59,7 +59,7 @@ export class NewProjectPage implements OnInit {
       'start': [null, Validators.compose([
         Validators.required
       ])],
-      'end': [null, Validators.compose([])],
+      'end': [null, Validators.compose([Validators.required])],
       'organizationId': this.usersService.getTokenId(),
       'location': [null, Validators.compose([
       ])],
