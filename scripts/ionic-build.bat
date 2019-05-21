@@ -11,7 +11,9 @@ cd ionic-ui
 npm install
 #sudo npm install --unsafe-perm -g node-sass
 npm install node-sass@4.10.0 --no-save
-ng build --prod --base-href .
+#for simple server. Change www/index.html
+#ng build --prod --base-href .
+ng build --prod --base-href /
 
 tar -zcf ionic-ui.tar.gz ./www
 
