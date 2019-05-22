@@ -43,7 +43,7 @@ export class ProjectEditPage implements OnInit {
   role: number = 1;
   owner: boolean = false;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
-  
+
   constructor(private projectsService: ProjectsService,
     private location: Location,
     private route: ActivatedRoute,
@@ -52,47 +52,20 @@ export class ProjectEditPage implements OnInit {
     private usersService: UsersService,
     public alertCtrl: AlertController
   ) {
-     this.onEditForm = this.formBuilder.group({
 
-    'title': [null, Validators.compose([
-      Validators.minLength(5),
-      Validators.required,
-      Validators.maxLength(64)
-    ])],
-    'imageUrl': [null, Validators.compose([
-      Validators.nullValidator
-    ])],
-    'description': [null, Validators.compose([
-      Validators.minLength(4),
-      Validators.required
-    ])],
-
-    'start': [this.project.start, Validators.compose([
-      Validators.required
-    ])],
-    'end': [this.project.end, Validators.compose([Validators.required])],
-
-    'organizationId': this.usersService.getTokenId(),
-
-    'location': [null, Validators.compose([
-    ])],
-    'website': [null, Validators.compose([
-      Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
-    ])],
-    'email': ['', Validators.compose([
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-    ])],
-    'phone': [null, Validators.compose([
-      Validators.required,
-      Validators.pattern('^[+0-9. ()-]*$')
-    ])]
-  });
   }
-  
+
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+
+    this.editForm();
+    this.subscribeInfo();
+
+    /*this.onEditForm.get('start').setValue(this.project.start);
+    this.onEditForm.get('end').setValue(this.project.end);*/
+  }
+  subscribeInfo() {
     this.projectsService.getById(this.id).subscribe(value => {
       this.project = value;
       this.atsarginisUrl = this.project.imageUrl;
@@ -109,8 +82,41 @@ export class ProjectEditPage implements OnInit {
       this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
       console.log(error1);
     });
+  }
+  editForm() {
+    this.onEditForm = this.formBuilder.group({
 
-   
+      'title': [null, Validators.compose([
+        Validators.minLength(5),
+        Validators.required,
+        Validators.maxLength(64)
+      ])],
+      'imageUrl': [null, Validators.compose([
+        Validators.nullValidator
+      ])],
+      'description': [null, Validators.compose([
+        Validators.minLength(4),
+        Validators.required
+      ])],
+      'start': [null, Validators.compose([
+        Validators.required
+      ])],
+      'end': [null, Validators.compose([Validators.required])],
+      'organizationId': this.usersService.getTokenId(),
+      'location': [null, Validators.compose([
+      ])],
+      'website': [null, Validators.compose([
+        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+      ])],
+      'email': ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])],
+      'phone': [null, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[+0-9. ()-]*$')
+      ])]
+    });
   }
   getRole() {
     if (this.project.imageUrl == "" || this.project.imageUrl == null) {

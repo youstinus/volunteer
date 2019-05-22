@@ -12,13 +12,13 @@
       &nbsp;
       <div class="tools col col-50">
         <ion-item lines="none">
-          <img [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
+          <img *ngIf="atsarginisUrl != null" [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
             style="height: 200px; width: 400px" />
         </ion-item>
         <div>
           <ion-item lines="none">
             <ion-label color="primary" position="floating">{{newPojectImage}}</ion-label>
-            <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)"
+            <ion-input  type="text" class="form-control"  (ionChange)="onSearchChange($event.target.value)" debounce="2500"
               formControlName="imageUrl" value={{project.imageUrl}}></ion-input>
           </ion-item>
         </div>
@@ -60,7 +60,7 @@
       <ion-item>
         <ion-icon name="calendar" slot="start"></ion-icon>
         <ion-label stacked>{{editChangeStart}}</ion-label>
-        <ion-datetime min="2010" max="2030" formControlName="start" placeholder="Select Date" [(ngModel)]="project.start"></ion-datetime>
+        <ion-datetime min="2010" max="2030" formControlName="start" placeholder="Select Date" value={{project.start}}></ion-datetime>
       </ion-item>
 
       <ion-item>
@@ -68,7 +68,7 @@
         <ion-label stacked>{{editChangeEnd}}</ion-label>
 
         <ion-datetime min="2010" max="2030" formControlName="end" placeholder="Select Date"
-        [(ngModel)]="project.end"></ion-datetime>
+        value={{project.end}}></ion-datetime>
       </ion-item>
 
       <ion-item lines="">
