@@ -76,6 +76,17 @@
                 </ion-label>
               </ion-item>
             </ion-card>
+            <div *ngIf="isLocationNotEmpty">
+            <ion-card class="myCard phone-clip tooltip">
+              <ion-item lines="none" (click)="onPhoneClicked(project.location)">
+                <span class="tooltiptext">Copy to clipboard</span>
+                <ion-icon name="pin" slot="start"></ion-icon>
+                <ion-label>
+                  {{project.location}}
+                </ion-label>
+              </ion-item>
+            </ion-card>
+            </div>
             <ion-card class="myCard email-clip tooltip">
               <ion-item lines="none" (click)="onEmailClicked(project.email)">
                 <span class="tooltiptext">Copy to clipboard</span>

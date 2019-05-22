@@ -47,6 +47,7 @@ export class ProjectPage implements OnInit {
   id: number;
   projectLocation: boolean = false;
   isWebsiteNotEmpty: boolean = false;
+  isLocationNotEmpty: boolean = false;
   constructor(
     private events: Events,
     private usersService: UsersService,
@@ -87,6 +88,7 @@ export class ProjectPage implements OnInit {
     this.projectsService.getById(id).subscribe(value => {
       this.project = value;
       this.isWebsiteNotEmpty = !this.isEmptyOrSpaces(this.project.website);
+      this.isLocationNotEmpty = !this.isEmptyOrSpaces(this.project.location);
       this.projectLocation = !this.isEmptyOrSpaces(this.project.location);
       this.stringparse();
       this.getRole();
@@ -145,6 +147,7 @@ export class ProjectPage implements OnInit {
       this.project.start = onEditForm.start;
       this.project.end = onEditForm.end;
       this.project.location = onEditForm.location;
+      this.stringparse();
       this.project.website = onEditForm.website;
       this.project.email = onEditForm.email;
       this.project.phone = onEditForm.phone;
