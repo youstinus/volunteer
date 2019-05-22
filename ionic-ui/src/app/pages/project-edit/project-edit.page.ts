@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Directive } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton, AlertController } from '@ionic/angular';
+import { NavController, IonButton, AlertController, Events } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Location } from '@angular/common';
@@ -44,13 +44,15 @@ export class ProjectEditPage implements OnInit {
   owner: boolean = false;
   defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
 
-  constructor(private projectsService: ProjectsService,
+  constructor(
+    private events: Events,
+    private projectsService: ProjectsService,
     private location: Location,
     private route: ActivatedRoute,
-    public navCtrl: NavController,
+    private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public alertCtrl: AlertController
+    private alertCtrl: AlertController
   ) {
 
   }
@@ -131,10 +133,12 @@ export class ProjectEditPage implements OnInit {
       this.NotEdited();
       console.log(error1);
     });
-
+    
+    this.events.publish('user:updated', this.onEditForm.value);
   }
   goToProjects() {
     //this.navCtrl.pop();
+    this.events.publish('returnedFromEdit');
     this.navCtrl.back();
   }
   async OnSavePopUp() {

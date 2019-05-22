@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, Events } from '@ionic/angular';
 import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
 import { UsersService } from 'src/app/services/users.service';
@@ -48,11 +48,12 @@ export class ProjectPage implements OnInit {
   projectLocation: boolean = false;
   isWebsiteNotEmpty: boolean = false;
   constructor(
+    private events: Events,
     private usersService: UsersService,
     private volunteersService: VolunteersService,
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
-    public navCtrl: NavController
+    private navCtrl: NavController
     //   private clipboard: Clipboard
   ) { }
   check() {
@@ -87,7 +88,7 @@ export class ProjectPage implements OnInit {
       this.project = value;
       this.isWebsiteNotEmpty = !this.isEmptyOrSpaces(this.project.website);
       this.projectLocation = !this.isEmptyOrSpaces(this.project.location);
-       this.stringparse();
+      this.stringparse();
       this.getRole();
       if (this.role == 2) {
         this.setVolunteer();
@@ -135,8 +136,26 @@ export class ProjectPage implements OnInit {
   }
 
   navigateToEdit() {
+    this.events.subscribe('user:updated', (onEditForm) => {
+      // do something when updated data
+  
+      this.project.title = onEditForm.title;
+      this.project.imageUrl = onEditForm.imageUrl;
+      this.project.description = onEditForm.description;
+      this.project.start = onEditForm.start;
+      this.project.end = onEditForm.end;
+      this.project.location = onEditForm.location;
+      this.project.website = onEditForm.website;
+      this.project.email = onEditForm.email;
+      this.project.phone = onEditForm.phone;
+    });
+    this.events.subscribe('returnedFromEdit', () => {
+      this.events.unsubscribe('user:updated');
+      this.events.unsubscribe('returnedFromEdit');
+    });
     this.navCtrl.navigateForward('project-edit/' + this.project.id).catch(reason => console.log(reason));
   }
+
   navigateToVolunteers() {
     this.navCtrl.navigateForward('volunteers/project/' + this.project.id).catch(reason => console.log(reason));
   }
