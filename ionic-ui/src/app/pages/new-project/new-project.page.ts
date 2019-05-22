@@ -49,8 +49,9 @@ export class NewProjectPage implements OnInit {
       'imageUrl': [null, Validators.compose([
       ])],
       'title': [null, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
+        Validators.minLength(4),
+        Validators.required,
+        Validators.maxLength(64)
       ])],
       'description': [null, Validators.compose([
         Validators.minLength(5),

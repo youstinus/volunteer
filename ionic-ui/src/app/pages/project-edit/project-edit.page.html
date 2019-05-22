@@ -1,23 +1,23 @@
 <app-header>{{editHeader}}</app-header>
 
 <ion-content padding>
-    <ion-item lines="none">
-        <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
-          <ion-icon name="arrow-round-back"></ion-icon>
-          {{projectGoBack}}
-        </ion-button>
-      </ion-item>
+  <ion-item lines="none">
+    <ion-button ion-button color="dark" (click)="goToProjects()" slot="start">
+      <ion-icon name="arrow-round-back"></ion-icon>
+      {{projectGoBack}}
+    </ion-button>
+  </ion-item>
   <form [formGroup]="onEditForm" class="list-form">
     <ion-card lines="none">
-        &nbsp;
+      &nbsp;
       <div class="tools col col-50">
         <ion-item lines="none">
-          <img  [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
+          <img [src]="atsarginisUrl" (error)="updateUrl($event)" (!error)="updateUrl2($event)" class="center"
             style="height: 200px; width: 400px" />
         </ion-item>
         <div>
           <ion-item lines="none">
-            <ion-label color="primary" position="floating" >{{newPojectImage}}</ion-label>
+            <ion-label color="primary" position="floating">{{newPojectImage}}</ion-label>
             <ion-input type="text" class="form-control" (input)="onSearchChange($event.target.value)"
               formControlName="imageUrl" value={{project.imageUrl}}></ion-input>
           </ion-item>
@@ -60,14 +60,15 @@
       <ion-item>
         <ion-icon name="calendar" slot="start"></ion-icon>
         <ion-label stacked>{{editChangeStart}}</ion-label>
-        <ion-datetime formControlName="start" value={{project.start}}></ion-datetime>
+        <ion-datetime min="2010" max="2030" formControlName="start" placeholder="Select Date" [(ngModel)]="project.start"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-icon name="calendar" slot="start"></ion-icon>
         <ion-label stacked>{{editChangeEnd}}</ion-label>
 
-        <ion-datetime formControlName="end" value={{project.end}}></ion-datetime>
+        <ion-datetime min="2010" max="2030" formControlName="end" placeholder="Select Date"
+        [(ngModel)]="project.end"></ion-datetime>
       </ion-item>
 
       <ion-item lines="">
@@ -76,15 +77,17 @@
         <ion-input formControlName="location" type="text" value={{project.location}}></ion-input>
       </ion-item>
 
-    
+
     </ion-card>
 
     <ion-item lines="none" [hidden]="true">
       <ion-input formControlName="organizationId" type="text"></ion-input>
     </ion-item>
   </form>
-  <ion-button class="submit-btn" expand="block" type="submit" (click)='onSaved()' [disabled]="!onEditForm.valid">{{editSave}}</ion-button>
+  <ion-button class="submit-btn" expand="block" type="submit" (click)='onSaved()' [disabled]="!onEditForm.valid">
+    {{editSave}}</ion-button>
   <ion-item lines="none"></ion-item>
-  <ion-button class="submit-btn" expand="block" color="dark" type="submit" (click)='OnDeletePopUp()' >{{editProjectDelete}}</ion-button>
+  <ion-button class="submit-btn" expand="block" color="dark" type="submit" (click)='OnDeletePopUp()'>
+    {{editProjectDelete}}</ion-button>
   <ion-item lines="none"></ion-item>
 </ion-content>

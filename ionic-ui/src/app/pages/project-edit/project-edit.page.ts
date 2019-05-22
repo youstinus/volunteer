@@ -52,7 +52,44 @@ export class ProjectEditPage implements OnInit {
     private usersService: UsersService,
     public alertCtrl: AlertController
   ) {
+     this.onEditForm = this.formBuilder.group({
+
+    'title': [null, Validators.compose([
+      Validators.minLength(5),
+      Validators.required,
+      Validators.maxLength(64)
+    ])],
+    'imageUrl': [null, Validators.compose([
+      Validators.nullValidator
+    ])],
+    'description': [null, Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])],
+
+    'start': [this.project.start, Validators.compose([
+      Validators.required
+    ])],
+    'end': [this.project.end, Validators.compose([Validators.required])],
+
+    'organizationId': this.usersService.getTokenId(),
+
+    'location': [null, Validators.compose([
+    ])],
+    'website': [null, Validators.compose([
+      Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+    ])],
+    'email': ['', Validators.compose([
+      Validators.required,
+      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+    ])],
+    'phone': [null, Validators.compose([
+      Validators.required,
+      Validators.pattern('^[+0-9. ()-]*$')
+    ])]
+  });
   }
+  
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -73,39 +110,7 @@ export class ProjectEditPage implements OnInit {
       console.log(error1);
     });
 
-    this.onEditForm = this.formBuilder.group({
-
-      'title': [null, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])],
-      'imageUrl': [null, Validators.compose([
-        Validators.nullValidator
-      ])],
-      'description': [null, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])],
-
-      'start': '',
-      'end': '',
-
-      'organizationId': this.usersService.getTokenId(),
-
-      'location': [null, Validators.compose([
-      ])],
-      'website': [null, Validators.compose([
-        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
-      ])],
-      'email': ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])],
-      'phone': [null, Validators.compose([
-        Validators.required,
-        Validators.pattern('^[+0-9. ()-]*$')
-      ])]
-    });
+   
   }
   getRole() {
     if (this.project.imageUrl == "" || this.project.imageUrl == null) {
@@ -115,6 +120,7 @@ export class ProjectEditPage implements OnInit {
   onSaved() {
     this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
       this.OnSavePopUp();
+      console.log(this.onEditForm.value);
     }, error1 => {
       this.NotEdited();
       console.log(error1);
