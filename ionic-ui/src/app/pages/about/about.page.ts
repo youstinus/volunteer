@@ -50,6 +50,20 @@ export class AboutPage implements OnInit {
     private streamingMediaOriginal: StreamingMedia
   ) { }
 
+  isMobile = false;
+  getIsMobile(): boolean 
+   {
+    const w = document.documentElement.clientWidth;
+    const breakpoint = 981;
+    console.log(w);
+    if (w < breakpoint) 
+    {
+      return true;
+    } else 
+    {
+      return false;
+    }
+  }
   startVideo() {
     let options: StreamingVideoOptions = {
       successCallback: () => { console.log() },
@@ -57,10 +71,10 @@ export class AboutPage implements OnInit {
       orientation: 'landscape'
     }
     this.streamingMediaOriginal.playVideo('https://drive.google.com/uc?authuser=0&id=1oJOuOAgwUAi50_ZjShYiJR9Dh5ZPaTeK&export=download', options);
-
   }
+  
   ngOnInit() {
-    
+    this.isMobile = this.getIsMobile();
     this.commentForm = this.formBuilder.group({
       'email': [null, Validators.compose([
         Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')

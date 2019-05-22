@@ -8,7 +8,7 @@
       </h1>
     </div>
     <div>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark"(click)="startVideo()" tappable>
+      <ion-button *ngIf="isMobile == true" icon-left size="medium" expand="full" shape="round" color="dark"(click)="startVideo()" tappable>
         {{aboutButtonVideo}}
         <ion-icon name="arrow-dropright-circle"></ion-icon>
       </ion-button>
