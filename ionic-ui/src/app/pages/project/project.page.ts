@@ -243,6 +243,7 @@ export class ProjectPage implements OnInit {
 
   goToProjects() {
     // this.navCtrl.pop();
+    this.events.publish('returnedFromEdit');
     console.log(this.navCtrl);
     this.navCtrl.back({ animated: true });
   }
