@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Project } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Events } from '@ionic/angular';
 import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -28,7 +28,7 @@ export class ProjectsPage implements OnInit, OnDestroy {
     private dateNow = new Date();
     private type: String;
     private subscription: Subscription;
-    constructor(private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
+    constructor(private events: Events, private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -93,6 +93,18 @@ export class ProjectsPage implements OnInit, OnDestroy {
     }
 
     onProjectClicked(project: Project) {
+        this.events.subscribe('user:updated', (onEditForm) => {
+            // do something when updated data
+
+            project.title = onEditForm.title;
+            project.imageUrl = onEditForm.imageUrl;
+            project.start = onEditForm.start;
+            project.end = onEditForm.end;
+        });
+        this.events.subscribe('returnedFromEdit', () => {
+            this.events.unsubscribe('user:updated');
+            this.events.unsubscribe('returnedFromEdit');
+        });
         this.navCtrl.navigateForward('projects/' + project.id).catch(e => console.log(e));
     }
 
