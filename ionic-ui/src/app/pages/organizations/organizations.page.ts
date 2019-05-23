@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Organization} from '../../models/Organization';
-import {OrganizationsService} from '../../services/organizations.service';
-import {NavController} from '@ionic/angular';
+import { Component, OnInit, SkipSelf } from '@angular/core';
+import { Organization } from '../../models/Organization';
+import { OrganizationsService } from '../../services/organizations.service';
+import { NavController } from '@ionic/angular';
 
-import {Strings} from '../../constants/Strings';
-import {ReviewsService} from '../../services/reviews.service';
-import {Language} from '../../utilities/Language';
+import { Strings } from '../../constants/Strings';
+import { ReviewsService } from '../../services/reviews.service';
+import { Language } from '../../utilities/Language';
 
 @Component({
     selector: 'app-organizations',
@@ -14,7 +14,7 @@ import {Language} from '../../utilities/Language';
 })
 export class OrganizationsPage implements OnInit {
     orgsHeader: string = Language.Lang.orgsHeader;
-    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
     public spin = true;
     organizations: Organization[];
 
@@ -23,9 +23,13 @@ export class OrganizationsPage implements OnInit {
 
     ngOnInit() {
         this.organizationsService.get().subscribe(items => {
-            this.organizations = items;
+            this.organizations = items.filter(function (value) {
+                if (value.imageUrl != null && value.imageUrl != '' && value.email != null && value.title != null) {
+                    return true;
+                } else false;
+            }).map(function (value) { return value });
             this.spin = false;
-            },
+        },
             error1 => {
                 console.log(error1);
             });

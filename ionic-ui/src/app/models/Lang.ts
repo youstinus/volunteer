@@ -61,6 +61,7 @@ export class Lang {
     public loginUnSuccessfulEmail: string;
     public loginWrongHeader: string;
     public loginWrongMessage: string;
+    public loginSuccessLogin: string;
     //Registration page
     public registrationTitle: string;
     public registrationInformation: string;
@@ -243,7 +244,11 @@ export class Lang {
     public orgSettingsAlertConfirm: string;
     public orgSettingsDeleted: string;
     public orgSettingsCannotGetOrganization: string;
-
+    public orgRequiredField3: string;
+    public orgRequiredEmail: string;
+    public orgCaution: string;
+    public orgSuccessUpdate: string;
+    public orgFailUpdate: string;
     //Organization page
     public orgHeader: string;
     public orgGoToProject: string;

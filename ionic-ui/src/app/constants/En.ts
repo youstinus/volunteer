@@ -65,6 +65,7 @@ export class En {
         loginUnSuccessfulEmail: 'Email has not sent.',
         loginWrongHeader: 'Something went wrong',
         loginWrongMessage: 'Invalid username or password!',
+        loginSuccessLogin:'Successfuly signed in',
         //Registration page
         registrationTitle: 'Register to our page',
         registrationInformation: 'Your information',
@@ -247,7 +248,11 @@ export class En {
         orgSettingsDeleteCancel: 'Cancel',
         orgSettingsDeleted: 'Account deleted',
         orgSettingsCannotGetOrganization: 'Cannot get volunteer from database',
-
+        orgRequiredField3: 'This field is required and must contain at least 3 letters',
+        orgRequiredEmail: 'This field is required and valid email must be provided',
+        orgCaution: 'Title, imageUrl and yours organization email is required in order to show your organization in organizations list',
+        orgSuccessUpdate: 'Information updated successfully',
+        orgFailUpdate: 'Information update failed',
         // Organization page
         orgHeader: 'Organization page',
         orgGoToProject: 'Go to project page',

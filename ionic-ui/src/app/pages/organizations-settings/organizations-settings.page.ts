@@ -36,11 +36,19 @@ export class OrganizationsSettingsPage implements OnInit {
     orgSettingsCannotGetOrganization: string = Language.Lang.orgSettingsCannotGetOrganization;
     volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
     volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
+    orgRequiredField3: string = Language.Lang.orgRequiredField3;
+    orgRequiredEmail: string = Language.Lang.orgRequiredEmail;
+    orgCaution: string = Language.Lang.orgCaution;
+    orgSuccessUpdate: string = Language.Lang.orgSuccessUpdate;
+    orgFailUpdate: string = Language.Lang.orgFailUpdate;
+    
+    caution: string="Pavadinimo, nuotraukos ir jūsų organizacijos el-paštas yra privalomi norint, kad jūsų organizacija būtų matoma organizacijų sąraše";
 
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
-    defaulUrl: string = Strings.Default_Image_Url3;
+    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    backupImageUrl: string = this.defaulUrl;
     role: number = 4;
 
     constructor(
@@ -55,17 +63,6 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     ngOnInit() {
-        this.onSaveForm = this.formBuilder.group({
-            'imageUrl': [null, Validators.nullValidator],
-            'title': [null, Validators.nullValidator],
-            'address': [null, Validators.nullValidator],
-            'phone': [null, Validators.nullValidator],
-            'website': [null, Validators.nullValidator],
-            'description': [null, Validators.nullValidator],
-            'userId': this.usersService.getTokenId(),
-            'email': [null, Validators.nullValidator],
-        });
-
         this.getRole();
         if (this.role != 3) {
             this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
@@ -75,10 +72,26 @@ export class OrganizationsSettingsPage implements OnInit {
         if (this.user === null) {
             this.navCtrl.navigateRoot('main').catch(e => console.log(e));
         }
-
+        this.onSaveForm = this.formBuilder.group({
+            'imageUrl': [null, Validators.nullValidator],// gal reik det required, dar
+            'title': [null, Validators.compose([
+                Validators.minLength(3),
+                Validators.required,
+                Validators.maxLength(64)])],
+            'address': [null, Validators.nullValidator],
+            'phone': [null, Validators.nullValidator],
+            'website': [null, Validators.compose([
+                Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+              ])],
+            'description': [null, Validators.nullValidator],
+            'userId': this.usersService.getTokenId(),
+            'email': [null, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])]
+        });
         this.loadOrganization();
     }
-
+    
     loadOrganization() {
         this.organizationService.getByUserId(this.user).subscribe(value => {
             this.organization = value;
@@ -99,12 +112,17 @@ export class OrganizationsSettingsPage implements OnInit {
         this.updateIMG(searchValue);
     }
 
-    updateIMG(searchValue: string) {
-        this.organization.imageUrl = searchValue;
+    updateUrl() {
+        this.backupImageUrl = this.defaulUrl;
     }
 
-    updateUrl(event) {
-        this.organization.imageUrl = this.defaulUrl;
+    updateUrl2() {
+        this.backupImageUrl = this.organization.imageUrl;
+    }
+
+    updateIMG(searchValue: string) {
+        this.organization.imageUrl = searchValue;
+        this.backupImageUrl = searchValue;
     }
 
     onChangePass() {

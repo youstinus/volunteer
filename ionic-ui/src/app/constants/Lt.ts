@@ -65,6 +65,7 @@ export class Lt {
         loginUnSuccessfulEmail: 'Laiško nepavyko išsiųsti',
         loginWrongHeader: 'Prisijungti nepavyko',
         loginWrongMessage: 'Neteisingi prisijungimo vardas ir slaptažodis!',
+        loginSuccessLogin:'Sėkmingai prisijungėte svetainėje',
         //Registration page
         registrationTitle: 'Susikurkite vartotojo paskyrą',
         registrationInformation: 'Jūsų informacija',
@@ -144,7 +145,7 @@ export class Lt {
         changeLocation: 'Keisti vietovę',
         editSave: 'Išsaugoti pakeitimus',
         editSucesfull: 'Sėkmingai išsaugota',
-        editConfirmDelete: 'Ar tikrai norite ištrynti šį projektą?',
+        editConfirmDelete: 'Ar tikrai norite ištrinti šį projektą?',
         yes: 'Taip',
         no: 'Ne',
         //registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
@@ -248,7 +249,11 @@ export class Lt {
         orgSettingsDeleteCancel: 'Grįžti',
         orgSettingsDeleted: 'Paskyra ištrinta',
         orgSettingsCannotGetOrganization: 'Negalime užkrauti Jūsų duomenų iš duomenų bazės',
-
+        orgRequiredField3: 'Šis laukas yra privalomas ir turi būti sudarytas bent iš trijų simbolių',
+        orgRequiredEmail: 'Šis laukas yra privalomas ir validus el-pašto adresas turi būti pateiktas',
+        orgCaution: 'Pavadinimo, nuotraukos ir jūsų organizacijos el-paštas yra privalomi norint, kad jūsų organizacija būtų matoma organizacijų sąraše',
+        orgSuccessUpdate: 'Informacija sėkmingai atnaujinta',
+        orgFailUpdate: 'Informacijos atnaujinimas nepavyko',
         // Organization page
         orgHeader: 'Organizacijos puslapis',
         orgGoToProject: 'Eiti į projekto puslapį',
