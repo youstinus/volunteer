@@ -25,9 +25,9 @@ namespace WebAPI.Base
             return queryable;
         }
 
-        public virtual async Task<ICollection<T>> GetAll()
+        public virtual async Task<IQueryable<T>> GetAll()
         {
-            return await IncludeDependencies(ItemSet).ToArrayAsync();
+            return await Task.Run(() => IncludeDependencies(ItemSet));
         }
 
         public virtual async Task<T> GetById(long id)

@@ -3,23 +3,19 @@ import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, Events } from '@ionic/angular';
-import { Button } from 'protractor';
 import { Strings } from '../../constants/Strings';
 import { UsersService } from 'src/app/services/users.service';
 import { VolunteersService } from 'src/app/services/volunteers.service';
 import { Volunteer } from 'src/app/models/Volunteer';
 import { Organization } from 'src/app/models/Organization';
 import { User } from 'src/app/models/User';
-import { OrganizationsService } from 'src/app/services/organizations.service';
 import { Language } from 'src/app/utilities/Language';
-//import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.page.html',
   styleUrls: ['./project.page.scss'],
 })
-
 export class ProjectPage implements OnInit {
 
   projectTitle: string = Language.Lang.projectHeader;
@@ -35,12 +31,12 @@ export class ProjectPage implements OnInit {
   projectGoBack: string = Language.Lang.projectGoBack;
 
   user: User = new User();
-  project: Project = new Project();
+  project: Project;
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
   newUrl: string = '';
   role: number = 4;
-  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+  defaulUrl: string = Strings.Default_Image_Url3;
   owner: boolean = false;
   saved: boolean = false;
   selected: boolean = false;
@@ -48,6 +44,7 @@ export class ProjectPage implements OnInit {
   projectLocation: boolean = false;
   isWebsiteNotEmpty: boolean = false;
   isLocationNotEmpty: boolean = false;
+
   constructor(
     private events: Events,
     private usersService: UsersService,
@@ -55,32 +52,7 @@ export class ProjectPage implements OnInit {
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
     private navCtrl: NavController
-    //   private clipboard: Clipboard
   ) { }
-  check() {
-    return this.newUrl != '';
-  }
-  stringparse() {
-    let newurl: string = '';
-    newurl += 'https://maps.google.com/maps?q=';
-    if (this.project !== null && this.project.location !== null && this.project.location !== '') {
-      newurl += this.project.location.replace(' ', '%20').replace(',', '%2C');
-    }
-    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
-    this.newUrl = newurl;
-
-  }
-  isEmptyOrSpaces(str) {
-    return str === null || str.match(/^ *$/) !== null;
-  }
-  onSourceClicked(source: string) {
-    let url: string = '';
-    if (!/^http[s]?:\/\//.test(source)) {
-      url += 'http://';
-    }
-    url += source;
-    window.open(url, '_blank');
-  }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
@@ -107,6 +79,32 @@ export class ProjectPage implements OnInit {
       console.log(error1);
       this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
     });
+  }
+
+  check() {
+    return this.newUrl != '';
+  }
+
+  stringparse() {
+    let newurl: string = '';
+    newurl += 'https://maps.google.com/maps?q=';
+    if (this.project !== null && this.project.location !== null && this.project.location !== '') {
+      newurl += this.project.location.replace(' ', '%20').replace(',', '%2C');
+    }
+    newurl += '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+    this.newUrl = newurl;
+
+  }
+  isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+  }
+  onSourceClicked(source: string) {
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(source)) {
+      url += 'http://';
+    }
+    url += source;
+    window.open(url, '_blank');
   }
 
   checkForProjects() {

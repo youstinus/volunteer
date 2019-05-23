@@ -18,6 +18,11 @@ export class ProjectsService extends BaseService<Project> {
         super(http, usersService, cookieService);
     }
 
+    public getPopular(): Observable<Project[]> {
+        const headers = this.getHeaders();
+        return this.http.get<Project[]>(`${this.api}/popular`, { headers: headers });
+    }
+
     public getSavedItems(): Observable<Project[]> {
         const headers = this.getHeaders();
         return this.http.get<Project[]>(`${this.api}/saved`, { headers: headers });

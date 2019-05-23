@@ -7,13 +7,27 @@
         <span class="word2">Platypus</span>
     </h1>
 
-    <img class="image" src="https://chicagocounseling.org/wp-content/uploads/2014/10/volunteering-is-fun-painted-hands.jpg">
+    <h3>{{mainIntroVideo}}</h3>
+
+    <ion-item-divider (window:resize)="onResize()">
+        <ion-item-group class="video-item-group" *ngIf="isMobile">
+            <youtube-player class="video-player-mobile" [videoId]="videoId" (ready)="savePlayer($event)"
+                (change)="onStateChange($event)" [width]=310 [height]=240>
+            </youtube-player>
+        </ion-item-group>
+
+        <ion-item-group class="video-item-group" *ngIf="!isMobile">
+            <youtube-player class="video-player" [videoId]="videoId" (ready)="savePlayer($event)"
+                (change)="onStateChange($event)" [width]=1300 [height]=440>
+            </youtube-player>
+        </ion-item-group>
+    </ion-item-divider>
 
     <h2>{{mainEvents}}</h2>
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let project of threeProjects" (click)="onProjectClicked(project)">
+            <ion-card *ngFor="let project of popularProjects" (click)="onProjectClicked(project)">
                 <div clas="image-box">
                     <img class="imga" src="{{ project.imageUrl }}" />
                 </div>
@@ -37,7 +51,7 @@
 
     <ion-item-divider>
         <ion-item-group>
-            <ion-card *ngFor="let organization of threeOrganizations" (click)="onOrganizationClicked(organization)">
+            <ion-card *ngFor="let organization of popularOrganizations" (click)="onOrganizationClicked(organization)">
                 <div class="image-box">
                     <img class="imga" src="{{ organization.imageUrl }}" />
                 </div>

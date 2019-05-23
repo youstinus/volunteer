@@ -8,7 +8,6 @@ import {IonicModule} from '@ionic/angular';
 import {VolunteersPage} from './volunteers.page';
 import {ComponentsModule} from '../../shared/components.module';
 import { ModalVolunteerPageModule } from '../modal-volunteer/modal-volunteer.module';
-import { homedir } from 'os';
 
 const routes: Routes = [
     {

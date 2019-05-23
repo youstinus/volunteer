@@ -5,15 +5,14 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <ion-card>
-      <div *ngIf="volPic==null">
-            <img src="{{ defaulUrl }}">
-        </div>
-        <div *ngIf="volPic!=null">
-            <img src="{{volPic }}">
-        </div>
+    <div *ngIf="volPic==null">
+      <img src="{{ defaulUrl }}">
+    </div>
+    <div *ngIf="volPic!=null">
+      <img src="{{volPic }}">
+    </div>
     <ion-card-header>
       <ion-card-title class="label">{{modalVContatInfo}}:
       </ion-card-title>

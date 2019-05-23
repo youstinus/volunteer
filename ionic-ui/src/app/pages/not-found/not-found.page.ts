@@ -6,15 +6,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./not-found.page.scss'],
   providers: []
 })
-
 export class NotFoundPage implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
-  }
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+  }
 }

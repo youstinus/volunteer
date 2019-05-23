@@ -46,7 +46,10 @@ const routes: Routes = [
         ], data: { allowedRoles: [] }
     },
     { path: 'team', loadChildren: './pages/team/team.module#TeamPageModule', data: { allowedRoles: [] } },
+    { path: 'moderators-console', loadChildren: './pages/moderators-console/moderators-console.module#ModeratorsConsolePageModule' },
+    { path: 'admins-console', loadChildren: './pages/admins-console/admins-console.module#AdminsConsolePageModule' },
     { path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule', data: { allowedRoles: [] } }
+
 ];
 
 @NgModule({

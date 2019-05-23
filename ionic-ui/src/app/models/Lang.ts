@@ -20,6 +20,7 @@ export class Lang {
     public mainEvents: string;
     public mainWantedOrganizations: string;
     public mainStart: string;
+    public mainIntroVideo: string;
     //About us
     public aboutTitle: string;
     public aboutTitle2: string;
@@ -79,6 +80,8 @@ export class Lang {
     public registrationNotRegisteredHeader: string;
     public registrationNotRegisteredMessage: string;
     public registrationSuccess: string;
+    public registrationUsernameTaken: string;
+    public registrationEmailTaken: string;
     //Projects page
     public projectsSearch: string;
     public projectsArchive: string;
@@ -203,6 +206,7 @@ export class Lang {
     public volSettingsAlertFail: string;
     public volSettingsChangePass: string;
     public volSettingsDeleteAcc: string;
+    public volSettingsCannotGetVolunteer: string;
     // Change password page
     public changePassHeader: string;
     public changePassFieldSet: string;
@@ -238,19 +242,28 @@ export class Lang {
     public orgSettingsDeleteButton: string;
     public orgSettingsAlertConfirm: string;
     public orgSettingsDeleted: string;
-
+    public orgSettingsCannotGetOrganization: string;
 
     //Organization page
-    public  orgHeader: string;
+    public orgHeader: string;
     public orgGoToProject: string;
     public orgClipBoard: string;
     public orgFindUs: string;
     public orgComment: string;
     public orgDelComment: string;
-    public orgComments : string;
-    public orgProjects : string;
-    public orgNoComments:string;
+    public orgComments: string;
+    public orgProjects: string;
+    public orgNoComments: string;
     public orgNoProjects: string;
     // OrganizationS page
     public orgsHeader: string;
+
+
+    // Toast messages
+    public toastDeletedSuccessfuly: string;
+    public toastFailedToDelete: string;
+    public toastUpdatedSuccessfuly: string;
+    public toastFailedToUpdate: string;
+    public toastEmailWasNotSent: string;
+    public toastEmailWasSent: string;
 }

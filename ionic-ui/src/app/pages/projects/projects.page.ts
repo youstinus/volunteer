@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, DoCheck } from '@angular/core';
 import { Project } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { NavController, Events } from '@ionic/angular';
@@ -19,16 +19,22 @@ export class ProjectsPage implements OnInit, OnDestroy {
     projectsArchive: string = Language.Lang.projectsArchive;
     projectsNew: string = Language.Lang.projectsNew;
 
-    defaulUrl: string = Strings.Default_Image_Url3;
+    public defaulUrl: string = Strings.Default_Image_Url3;
     public spin = true;
     public searchTerm = '';
     public archive = false;
-    projects: Project[];
-    projectsFiltered: Project[] = this.projects;
-    private dateNow = new Date();
+    public projects: Project[];
+    public projectsFiltered: Project[] = this.projects;
+    private dateNow = new Date(Date.now());
     private type: String;
     private subscription: Subscription;
-    constructor(private events: Events, private projectsService: ProjectsService, private navCtrl: NavController, private route: ActivatedRoute) {
+
+    constructor(
+        private events: Events,
+        private projectsService: ProjectsService,
+        private navCtrl: NavController,
+        private route: ActivatedRoute
+        ) {
     }
 
     ngOnInit() {
@@ -138,5 +144,9 @@ export class ProjectsPage implements OnInit, OnDestroy {
 
     updateUrl(project: Project) {
         project.imageUrl = Strings.Default_Image_Url;
+    }
+
+    getDateStyle(project: Project) {
+        return project != null && new Date(project.start) < this.dateNow && new Date(project.end) > this.dateNow;
     }
 }

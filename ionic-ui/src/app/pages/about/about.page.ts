@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-about',
@@ -29,50 +31,26 @@ export class AboutPage implements OnInit {
   aboutFeelFree: string = Language.Lang.aboutFeelFree;
   aboutComment: string = Language.Lang.aboutComment;
   aboutRequired: string = Language.Lang.aboutRequired;
+  emailWasNotSent: string = Language.Lang.toastEmailWasNotSent;
 
-
+  imageSource: string = Strings.About_Page_Image;
   public commentForm: FormGroup;
-  sources: string[] = [
-    'https://www.gvi.co.uk/blog/17-excellent-reasons-to-volunteer/',
-    'https://buildabroad.org/2017/10/13/why-is-volunteering-important/',
-    'https://www.thebalancesmb.com/unexpected-benefits-of-volunteering-4132453'
+  public sources: string[] = [
+    Strings.About_Page_Source1,
+    Strings.About_Page_Source2,
+    Strings.About_Page_Source3
   ];
   public spin = true;
+  public isMobile = false;
 
   constructor(
-    public navCtrl: NavController,
-    public menuCtrl: MenuController,
-    public toastCtrl: ToastController,
-    public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private streamingMediaOriginal: StreamingMedia
+    private streamingMediaOriginal: StreamingMedia,
+    private toastService: ToastService
   ) { }
 
-  isMobile = false;
-  getIsMobile(): boolean 
-   {
-    const w = document.documentElement.clientWidth;
-    const breakpoint = 981;
-    console.log(w);
-    if (w < breakpoint) 
-    {
-      return true;
-    } else 
-    {
-      return false;
-    }
-  }
-  startVideo() {
-    let options: StreamingVideoOptions = {
-      successCallback: () => { console.log() },
-      errorCallback: () => { console.log() },
-      orientation: 'landscape'
-    }
-    this.streamingMediaOriginal.playVideo('https://drive.google.com/uc?authuser=0&id=1oJOuOAgwUAi50_ZjShYiJR9Dh5ZPaTeK&export=download', options);
-  }
-  
   ngOnInit() {
     this.isMobile = this.getIsMobile();
     this.commentForm = this.formBuilder.group({
@@ -84,6 +62,21 @@ export class AboutPage implements OnInit {
       ])]
     });
     this.spin = false;
+  }
+
+  getIsMobile(): boolean {
+    const w = document.documentElement.clientWidth;
+    const breakpoint = 981;
+    return w < breakpoint;
+  }
+
+  startVideo() {
+    let options: StreamingVideoOptions = {
+      successCallback: () => { },
+      errorCallback: () => { },
+      orientation: 'landscape'
+    }
+    this.streamingMediaOriginal.playVideo(Strings.Video_Url_Google_Drive, options);
   }
 
   leaveComment() {
@@ -128,11 +121,11 @@ export class AboutPage implements OnInit {
   }
 
   sendEmail() {
-    let url = `https://us-central1-volunteer-ui.cloudfunctions.net/sendMail`
+    let url = Strings.Send_Email_Address;
 
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     let params: object = {
-      to: 'volunteering.platypus@gmail.com',
+      to: Strings.Platypus_Email,
       subject: this.commentForm.value.email,
       content: this.commentForm.value.text
     };
@@ -144,7 +137,7 @@ export class AboutPage implements OnInit {
         this.commentForm.reset();
       })
       .catch(err => {
-        console.log(err) // error popup
+        this.toastService.presentToast(this.emailWasNotSent, Strings.Color_Danger);
       })
   }
 }

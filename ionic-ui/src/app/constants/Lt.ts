@@ -23,10 +23,11 @@ export class Lt {
         mainEvents: 'Artimiausi projektai',
         mainWantedOrganizations: 'Populiariausios organizacijos',
         mainStart: 'Pradžia',
+        mainIntroVideo: 'Apie sistemą',
         //About us page
         aboutTitle: 'Trumpai apie mus',
         aboutParag1: 'Platypus kiekvienam suteikia galimybę pasinerti į bendruomenę, dirbti kartu su vietos lyderiais ir spręsti svarbiausius iššūkius Lietuvoje. Mūsų misija - padėti organizacijoms visoje Lietuvoje, suteikiant jiems darbo jėgos ir lėšų, reikalingų kovoti su iššūkiais, su kuriais susiduria mūsų apskrities bendruomenės. Mes tikimės:',
-        aboutParag2: "padėti organizacijoms, kurios tiesiogiai ar netiesiogiai paveikė žmonių gyvenimus",
+        aboutParag2: 'padėti organizacijoms, kurios tiesiogiai ar netiesiogiai paveikė žmonių gyvenimus',
         aboutParag3: 'prisidėti prie kitų žmonių gyvenimo gerinimo',
         aboutParag4: 'padėti gerinti aplinką',
         aboutParag5: 'padėti mažiau pasisekusiems žmonėms ir mažumoms jaustis komandos dalimi ',
@@ -43,7 +44,7 @@ export class Lt {
         aboutAlertCommentHeader: 'Ačiū',
         aboutAlertCommentMessage: 'Jūsų laiškas sėkmingai išsiųstas',
         aboutSourceHeader: 'Norite sužinoti daugiau?',
-        aboutSourceMessage: 'Paspauskite "sutinku" ir nuoroda atsidarys naujame lange',
+        aboutSourceMessage: 'Paspauskite \'sutinku\' ir nuoroda atsidarys naujame lange',
 
         //Alert cancel and comfirm
         alertCancel: 'Atšaukti',
@@ -63,7 +64,7 @@ export class Lt {
         loginSuccessfulEmail: 'Laiškas buvo išsiųstas',
         loginUnSuccessfulEmail: 'Laiško nepavyko išsiųsti',
         loginWrongHeader: 'Prisijungti nepavyko',
-        loginWrongMessage: 'Patikrinkite ar suvesti duomenys yra teisingi, o gal jums reikia užsiregistruoti?',
+        loginWrongMessage: 'Neteisingi prisijungimo vardas ir slaptažodis!',
         //Registration page
         registrationTitle: 'Susikurkite vartotojo paskyrą',
         registrationInformation: 'Jūsų informacija',
@@ -81,8 +82,10 @@ export class Lt {
         registrationHaveAnAccount: 'Aš jau prisiregistravęs!',
         registrationValidEmail: 'Validus el-paštas yra būtinas',
         registrationNotRegisteredHeader: 'Registracija nesėkminga',
-        registrationNotRegisteredMessage: 'Prašome patikrinti informaciją ir bandyti dar kartą',
+        registrationNotRegisteredMessage: 'Įvesti duomenys neteisingi',
         registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
+        registrationEmailTaken: 'Šis el. paštas jau paimtas!',
+        registrationUsernameTaken: 'Šis vartotojo vardas jau paimtas!',
         //Projects page
         projectsSearch: 'Paieška',
         projectsArchive: 'ARCHYVAS',
@@ -205,9 +208,10 @@ export class Lt {
         volSettingsDescription: 'Aprašas apie jus',
         volSettingsSaveChanges: 'Išsaugoti pakeitimus',
         volSettingsAlertSuccess: 'Pakeitimai išsaugoti sėkmingai',
-        volSettingsAlertFail: "Pakeitimų išsaugoti nepavyko",
+        volSettingsAlertFail: 'Pakeitimų išsaugoti nepavyko',
         volSettingsChangePass: 'Pakeisti slaptažodį',
         volSettingsDeleteAcc: 'Ištrinti paskyrą',
+        volSettingsCannotGetVolunteer: 'Negalime užkrauti Jūsų duomenų iš duomenų bazės',
         //Change-password page
         changePassHeader: 'PASIKEISKITE SLAPTAŽODĮ',
         changePassFieldSet: 'Reikalinga informacija ',
@@ -218,7 +222,7 @@ export class Lt {
         changePassButton: 'Keisti slaptažodį',
         changePassGoBack: 'Persigalvojote? Grįžkite atgal',
         changePassChangedSuccess: 'Slaptažodis pakeistas sėkmingai',
-        changePassChangeFail: "Slaptažodžio pakeisti nepavyko",
+        changePassChangeFail: 'Slaptažodžio pakeisti nepavyko',
         changePassFielRequired: 'Šis laukas yra privalomas',
         changePassContain5: 'Šis laukas yra privalomas ir turi būti sudarytas bent iš 5 simbolių',
         changePassPassDontMatch: 'Slaptažodžiai nesutampa',
@@ -237,27 +241,35 @@ export class Lt {
         orgSettingsAlertFail: 'Pakeitimų išsaugoti nepavyko',
         orgSettingsChangePass: 'Pakeisti slaptažodį',
         orgSettingsDeleteAcc: 'Ištrinti paskyrą',
-        orgSettingsDeleteAalert: "Jūs pasirinkote ištrinti savo paskyrą",
-        orgSettingsDeleteConfirm: "Ar tikrai norite ją ištrinti?",
-        orgSettingsDeleteButton:"Taip",
-        orgSettingsAlertConfirm: "Gerai",
-        orgSettingsDeleteCancel: "Grįžti",
-        orgSettingsDeleted: "Paskyra ištrinta",
-
+        orgSettingsDeleteAalert: 'Jūs pasirinkote ištrinti savo paskyrą',
+        orgSettingsDeleteConfirm: 'Ar tikrai norite ją ištrinti?',
+        orgSettingsDeleteButton: 'Taip',
+        orgSettingsAlertConfirm: 'Gerai',
+        orgSettingsDeleteCancel: 'Grįžti',
+        orgSettingsDeleted: 'Paskyra ištrinta',
+        orgSettingsCannotGetOrganization: 'Negalime užkrauti Jūsų duomenų iš duomenų bazės',
 
         // Organization page
         orgHeader: 'Organizacijos puslapis',
         orgGoToProject: 'Eiti į projekto puslapį',
         orgClipBoard: 'Nukopijuota į iškarpinę',
-        orgFindUs : 'Mus galite rasti',
+        orgFindUs: 'Mus galite rasti',
         orgComment: 'Komentuoti',
-        orgComments: "Komentarai",
-        orgDelComment: "Ištrinti komentarą",
-        orgProjects: "Projektai",
-        orgNoComments: " Komentarų nėra",
-        orgNoProjects: "Projektų nėra",
+        orgComments: 'Komentarai',
+        orgDelComment: 'Ištrinti komentarą',
+        orgProjects: 'Projektai',
+        orgNoComments: ' Komentarų nėra',
+        orgNoProjects: 'Projektų nėra',
         // OrganizationS page
-        orgsHeader: 'Organizacijos'
+        orgsHeader: 'Organizacijos',
 
+
+        // Toast messages
+        toastDeletedSuccessfuly: 'Projektas sėkmingai pašalintas!',
+        toastFailedToDelete: 'Projekto nepavyko pašalinti!',
+        toastUpdatedSuccessfuly: 'Projektas sėkmingai atnaujintas!',
+        toastFailedToUpdate: 'Projekto atnaujinti nepavyko!',
+        toastEmailWasNotSent: 'Elektroninis laiškas nebuvo išsiųstas!',
+        toastEmailWasSent: 'Elektroninis laiškas sėkmingai išsiųstas!'
     }
 }

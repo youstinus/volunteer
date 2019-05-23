@@ -45,6 +45,21 @@ namespace WebAPI.Controllers
             return base.GetById(id);
         }
 
+        [HttpGet("popular")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPopularItems()
+        {
+            try
+            {
+                var entity = await _organizationsService.GetPopularItems();
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("user/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetByUserId([FromRoute] long id)

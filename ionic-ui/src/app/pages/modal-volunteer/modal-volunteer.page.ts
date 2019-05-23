@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { ViewController } from '@ionic/core/dist/types/components/nav/nav-interface';
-import { Volunteer } from 'src/app/models/Volunteer';
-import { validateConfig } from '@angular/router/src/config';
 import { Language } from 'src/app/utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
   selector: 'app-modal-volunteer',
@@ -11,34 +9,31 @@ import { Language } from 'src/app/utilities/Language';
   styleUrls: ['./modal-volunteer.page.scss'],
 })
 export class ModalVolunteerPage implements OnInit {
+
   @Input("volname") volname;
   @Input("volphone") volphone;
   @Input("volemail") volemail;
   @Input("voldescrip") voldescrip;
   @Input("volPic") volPic;
-  defaulUrl: string = 'https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png';
-  
+
+  defaulUrl: string = Strings.Default_Image_Url2;
+
   modalVAnonymous: string = Language.Lang.modalVAnonymous;
   modalVContatInfo: string = Language.Lang.modalVContatInfo;
   modalNone: string = Language.Lang.modalNone;
   modalVDescription: string = Language.Lang.modalVDescription;
-  modalClose: string = Language.Lang.modalClose; 
-  
+  modalClose: string = Language.Lang.modalClose;
+
   constructor(
-    private navParms: NavParams,
     private modalCtrl: ModalController
-  
+
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
+  ionViewWillLoad() { }
 
-  ionViewWillLoad(){
-
-  }
-
-  closeModal(){
+  closeModal() {
     this.modalCtrl.dismiss();
   }
 }

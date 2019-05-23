@@ -18,12 +18,17 @@ export class OrganizationsService extends BaseService<Organization> {
     super(http, usersService, cookieService);
   }
 
+  getPopular(): Observable<Organization[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Organization[]>(`${this.api}/popular`, {headers: headers});
+  }
+
   getProjectsByOrganizationId(id: number): Observable<Project[]> {
-    return this.http.get<Project[]>(this.api + '/' + id + '/projects');
+    return this.http.get<Project[]>(`${this.api}/${id}/projects`);
   }
 
   getByUserId(id: number): Observable<Organization> {
     const headers = this.getHeaders();
-    return this.http.get<Organization>(this.api + '/user/' + id, {headers: headers});
+    return this.http.get<Organization>(`${this.api}/user/${id}`, {headers: headers});
   }
 }

@@ -45,6 +45,21 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("popular")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPopularItems()
+        {
+            try
+            {
+                var entity = await _projectsService.GetPopularItems();
+                return Ok(entity);
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         [HttpGet("saved")]
         [Authorize(Roles = nameof(UserType.Volunteer))]
         public async Task<IActionResult> GetSavedItems()

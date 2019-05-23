@@ -99,7 +99,7 @@ describe('LoginPage', () => {
   it('should have a working function', () => {
     expect(component.onSignIn).toBeTruthy();
   });
-  it('should have a working function', () => {
+  /*it('should have a working function', () => {
     expect(component.presentFToast).toBeTruthy();
   });
   it('should have a working function', () => {
@@ -107,7 +107,7 @@ describe('LoginPage', () => {
   });
   it('should have a working function', () => {
     expect(component.presentSToast).toBeTruthy();
-  });
+  });*/
   it('should have a working function', () => {
     expect(component.sendEmail).toBeTruthy();
   });

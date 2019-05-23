@@ -34,7 +34,7 @@ h2 {
 	margin-bottom: 45px;
 	text-align: center;
   text-indent: 20px;
-  padding: 10px 10px 10px 10%;
+  padding: 10px 10px 10px 10px;
 	text-transform: uppercase;
 }
 
@@ -46,10 +46,10 @@ h3 {
 	font-weight: 700;
 	line-height: 40px;
 	letter-spacing: 1px;
-	margin-bottom: 45px;
+	margin-bottom: 15px;
 	text-align: center;
   text-indent: 20px;
-  padding: 10px 10px 10px 10%;
+  padding: 10px 10px 10px 10px;
 	text-transform: uppercase;
 }
 
@@ -60,7 +60,7 @@ ion-title{
 	position: relative;  
 	font-size: 170%;
 	line-height: 40px;
-	padding: 10px 15px 10px 10%;
+	padding: 10px 15px 10px 10px;
 	color: #000000;
 	box-shadow: 
 		inset 0 0 0 1px rgba(62, 129, 53, 0.4), 
@@ -166,7 +166,9 @@ ion-card-title {
   text-align: center;
 }
 
-
+.video-item-group {
+  margin: 10px auto 10px auto;
+}
 
 /////// pure css gradient anime
 

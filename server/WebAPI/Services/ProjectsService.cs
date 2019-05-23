@@ -58,6 +58,16 @@ namespace WebAPI.Services
             return user.Identity.IsAuthenticated && projects.Count > 0 && projects.Select(x => x.Id).Contains(id);
         }
 
+        public async Task<ICollection<ProjectDto>> GetPopularItems()
+        {
+            var items = await _repository.GetAll();
+            var sorted = items.Where(x => x.Start > DateTime.UtcNow).OrderBy(x => x.Start)
+                .ThenByDescending(x => x.ProjectVolunteers.Count + x.SavedVolunteers.Count)
+                .Take(4).ToList();
+            var mapped = _mapper.Map<ICollection<ProjectDto>>(sorted);
+            return mapped;
+        }
+
         public async Task<ICollection<ProjectDto>> GetSavedItems(ClaimsPrincipal user)
         {
             var id = await _usersService.GetUsersRoleId(user);

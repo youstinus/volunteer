@@ -148,12 +148,12 @@ describe('VolunteersSettingsPage', () => {
   it('should have a working function', () => {
     expect(component.onSearchChange).toBeTruthy();
   });
-  it('should have a working function', () => {
+  /*it('should have a working function', () => {
     expect(component.presentFToast).toBeTruthy();
   });
   it('should have a working function', () => {
     expect(component.presentSToast).toBeTruthy();
-  });
+  });*/
   it('should have a working function', () => {
     expect(component.saveVolunteer).toBeTruthy();
   });

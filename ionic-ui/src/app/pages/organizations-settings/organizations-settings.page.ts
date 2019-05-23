@@ -6,6 +6,7 @@ import { AlertController, NavController, ToastController } from '@ionic/angular'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Language } from '../../utilities/Language';
 import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
     selector: 'app-organizations-settings',
@@ -31,8 +32,11 @@ export class OrganizationsSettingsPage implements OnInit {
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
-    orgSettingsEmail: string = Language.Lang.orgSettingsEmail; volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
+    orgSettingsEmail: string = Language.Lang.orgSettingsEmail;
+    orgSettingsCannotGetOrganization: string = Language.Lang.orgSettingsCannotGetOrganization;
+    volSettingsAlertSuccess: string = Language.Lang.volSettingsAlertSuccess;
     volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
+
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
@@ -40,12 +44,14 @@ export class OrganizationsSettingsPage implements OnInit {
     role: number = 4;
 
     constructor(
-        public toastCtrl: ToastController,
+        private toastCtrl: ToastController,
         private organizationService: OrganizationsService,
         private usersService: UsersService,
         private navCtrl: NavController,
         private formBuilder: FormBuilder,
-        private alertCtrl: AlertController) {
+        private alertCtrl: AlertController,
+        private toastService: ToastService
+    ) {
     }
 
     ngOnInit() {
@@ -61,7 +67,7 @@ export class OrganizationsSettingsPage implements OnInit {
         });
 
         this.getRole();
-        if(this.role!=3){
+        if (this.role != 3) {
             this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
         }
 
@@ -77,18 +83,15 @@ export class OrganizationsSettingsPage implements OnInit {
         this.organizationService.getByUserId(this.user).subscribe(value => {
             this.organization = value;
         }, error1 => {
-            console.log('Cannot get organization from database', error1);
+            this.toastService.presentToast(this.orgSettingsCannotGetOrganization, Strings.Color_Success);
         });
     }
 
     saveOrganization() {
         this.organizationService.update(this.organization.id, this.onSaveForm.value).subscribe(value => {
-            console.log('Organization was updated successfully');
-            this.presentSToast();
-
+            this.toastService.presentToast(this.volSettingsAlertSuccess, Strings.Color_Success);
         }, error1 => {
-            this.presentFToast();
-            console.log('Organization was not updated', error1);
+            this.toastService.presentToast(this.volSettingsAlertFail, Strings.Color_Danger);
         });
     }
 
@@ -167,60 +170,18 @@ export class OrganizationsSettingsPage implements OnInit {
         });
     }
 
-    async presentSToast() {
-        const toast = await this.toastCtrl.create({
-            message: this.volSettingsAlertSuccess,
-            duration: 2500,
-            position: 'bottom',
-            color: 'success',
-            cssClass: 'toast',
-            translucent: true,
-            buttons: [
-                {
-                    text: Language.Lang.toastClose,
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        toast.present();
-    }
-
-    async presentFToast() {
-        const toast = await this.toastCtrl.create({
-            message: this.volSettingsAlertFail,
-            duration: 2500,
-            cssClass: 'toast',
-            position: 'bottom',
-            color: 'danger',
-            translucent: true,
-            buttons: [
-                {
-                    text: Language.Lang.toastClose,
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        toast.present();
-    }
-
     getRole() {
         const role = this.usersService.getTokenRole();
         if (role == 'Volunteer') {
-          this.role = 2;
+            this.role = 2;
         } else if (role == 'Organization') {
-          this.role = 3;
+            this.role = 3;
         } else if (role == 'Moderator') {
-          this.role = 1;
+            this.role = 1;
         } else if (role == 'Admin') {
-          this.role = 0;
+            this.role = 0;
         } else {
-          this.role = 4;
+            this.role = 4;
         }
-      }
+    }
 }

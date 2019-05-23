@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Volunteer } from '../../models/Volunteer';
 import { VolunteersService } from '../../services/volunteers.service';
-import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { NavController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Language } from 'src/app/utilities/Language';
 import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
     selector: 'app-volunteers-settings',
@@ -28,12 +28,14 @@ export class VolunteersSettingsPage implements OnInit {
     volSettingsAlertFail: string = Language.Lang.volSettingsAlertFail;
     volSettingsChangePass: string = Language.Lang.volSettingsChangePass;
     volSettingsDeleteAcc: string = Language.Lang.volSettingsDeleteAcc;
+    volSettingsCannotGetVolunteer: string = Language.Lang.volSettingsCannotGetVolunteer;
     orgSettingsDeleteAalert: string = Language.Lang.orgSettingsDeleteAalert;
     orgSettingsDeleteConfirm: string = Language.Lang.orgSettingsDeleteConfirm;
     orgSettingsDeleteButton: string = Language.Lang.orgSettingsDeleteButton;
     orgSettingsAlertConfirm: string = Language.Lang.orgSettingsAlertConfirm;
     orgSettingsDeleteCancel: string = Language.Lang.orgSettingsDeleteCancel;
     orgSettingsDeleted: string = Language.Lang.orgSettingsDeleted;
+
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
@@ -43,11 +45,12 @@ export class VolunteersSettingsPage implements OnInit {
     constructor(
         public toastCtrl: ToastController,
         private volunteersService: VolunteersService,
-        private route: ActivatedRoute,
         private usersService: UsersService,
         private navCtrl: NavController,
         private formBuilder: FormBuilder,
-        public alertCtrl: AlertController) {
+        private alertCtrl: AlertController,
+        private toastService: ToastService
+    ) {
     }
 
     ngOnInit() {
@@ -60,9 +63,9 @@ export class VolunteersSettingsPage implements OnInit {
             'description': [null, Validators.nullValidator],
             'userId': this.usersService.getTokenId()
         });
-        
+
         this.getRole();
-        if(this.role!=2){
+        if (this.role != 2) {
             this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
         }
 
@@ -78,18 +81,15 @@ export class VolunteersSettingsPage implements OnInit {
         this.volunteersService.getByUsersId(this.user).subscribe(value => {
             this.volunteer = value;
         }, error1 => {
-            console.log('Cannot get volunteer from database', error1);
+            this.toastService.presentToast(this.volSettingsCannotGetVolunteer, Strings.Color_Success);
         });
     }
 
     saveVolunteer() {
-        console.log(this.onSaveForm.value);
         this.volunteersService.update(this.volunteer.id, this.onSaveForm.value).subscribe(value => {
-            console.log(value);
-            this.presentSToast();
+            this.toastService.presentToast(this.volSettingsAlertSuccess, Strings.Color_Success);
         }, error1 => {
-            this.presentFToast();
-            console.log(error1);
+            this.toastService.presentToast(this.volSettingsAlertFail, Strings.Color_Danger);
         });
     }
 
@@ -107,48 +107,6 @@ export class VolunteersSettingsPage implements OnInit {
 
     onChangePass() {
         this.navCtrl.navigateForward('change-password/').catch(reason => console.log(reason));
-    }
-
-    async presentSToast() {
-        const toast = await this.toastCtrl.create({
-            message: this.volSettingsAlertSuccess,
-            duration: 2500,
-            position: 'bottom',
-            color: 'success',
-            cssClass: 'toast',
-            translucent: true,
-            buttons: [
-                {
-                    text: Language.Lang.toastClose,
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        toast.present();
-    }
-
-    async presentFToast() {
-        const toast = await this.toastCtrl.create({
-            message: this.volSettingsAlertFail,
-            duration: 2500,
-            cssClass: 'toast',
-            position: 'bottom',
-            color: 'danger',
-            translucent: true,
-            buttons: [
-                {
-                    text: Language.Lang.toastClose,
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        toast.present();
     }
 
     async onDelete() {
@@ -214,16 +172,15 @@ export class VolunteersSettingsPage implements OnInit {
     getRole() {
         const role = this.usersService.getTokenRole();
         if (role == 'Volunteer') {
-          this.role = 2;
+            this.role = 2;
         } else if (role == 'Organization') {
-          this.role = 3;
+            this.role = 3;
         } else if (role == 'Moderator') {
-          this.role = 1;
+            this.role = 1;
         } else if (role == 'Admin') {
-          this.role = 0;
+            this.role = 0;
         } else {
-          this.role = 4;
+            this.role = 4;
         }
-      }
-    
+    }
 }

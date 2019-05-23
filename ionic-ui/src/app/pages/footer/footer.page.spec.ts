@@ -8,6 +8,7 @@ import { HttpHandler } from '@angular/common/http';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { CookieService } from 'ngx-cookie-service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FooterPage', () => {
   let component: FooterPage;
@@ -21,6 +22,7 @@ describe('FooterPage', () => {
     TestBed.configureTestingModule({
       declarations: [FooterPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [RouterTestingModule],
       providers: [Location, LocationStrategy, HttpHandler,
         StreamingMedia, Language,
         { provide: LocationStrategy, useClass: PathLocationStrategy },

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MainPage } from './main.page';
 import {ComponentsModule} from '../../shared/components.module';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    NgxYoutubePlayerModule.forRoot(),
     ComponentsModule
   ],
   declarations: [MainPage]

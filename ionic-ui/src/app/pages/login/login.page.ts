@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators, EmailValidator } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/User';
-import { UserType } from '../../enums/UserType';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { async } from 'q';
 import { Language } from 'src/app/utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,41 +15,41 @@ import { Language } from 'src/app/utilities/Language';
 })
 export class LoginPage implements OnInit {
 
-  menuLogin: string=Language.Lang.menuLogin;
-  loginWelcome: string=Language.Lang.loginWelcome;
-  loginFieldset: string=Language.Lang.loginFieldset;
-  loginUsername: string=Language.Lang.loginUsername;
-  loginPassword: string=Language.Lang.loginPassword;
-  loginForgot: string=Language.Lang.loginForgot;
-  loginButton: string=Language.Lang.loginButton;
-  loginNewHere: string=Language.Lang.loginNewHere;
-  loginSignUp: string=Language.Lang.loginSignUp;
-  loginResetPasswordMessage: string=Language.Lang.loginResetPasswordMessage;
-  loginRequiredField: string=Language.Lang.loginRequiredField;
-  loginSuccessfulEmail: string=Language.Lang.loginSuccessfulEmail;
-  loginUnSuccessfulEmail: string=Language.Lang.loginUnSuccessfulEmail;
-  loginWrongHeader: string=Language.Lang.loginWrongHeader;
-  loginWrongMessage: string=Language.Lang.loginWrongMessage;
+  menuLogin: string = Language.Lang.menuLogin;
+  loginWelcome: string = Language.Lang.loginWelcome;
+  loginFieldset: string = Language.Lang.loginFieldset;
+  loginUsername: string = Language.Lang.loginUsername;
+  loginPassword: string = Language.Lang.loginPassword;
+  loginForgot: string = Language.Lang.loginForgot;
+  loginButton: string = Language.Lang.loginButton;
+  loginNewHere: string = Language.Lang.loginNewHere;
+  loginSignUp: string = Language.Lang.loginSignUp;
+  loginResetPasswordMessage: string = Language.Lang.loginResetPasswordMessage;
+  loginRequiredField: string = Language.Lang.loginRequiredField;
+  loginSuccessfulEmail: string = Language.Lang.loginSuccessfulEmail;
+  loginUnSuccessfulEmail: string = Language.Lang.loginUnSuccessfulEmail;
+  loginWrongHeader: string = Language.Lang.loginWrongHeader;
+  loginWrongMessage: string = Language.Lang.loginWrongMessage;
 
   public onLoginForm: FormGroup;
   private user: User;
-  private message: String;
   can: boolean = true;
 
   constructor(
-    public navCtrl: NavController,
-    public menuCtrl: MenuController,
-    public toastCtrl: ToastController,
-    public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
+    private navCtrl: NavController,
+    private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public alertController: AlertController,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastService: ToastService
   ) {
   }
 
   ngOnInit() {
+    this.initLoginForm();
+  }
+
+  initLoginForm() {
     this.onLoginForm = this.formBuilder.group({
       'username': [null, Validators.compose([
         Validators.minLength(5),
@@ -65,27 +65,16 @@ export class LoginPage implements OnInit {
   onSignIn() {
     this.usersService.login(this.onLoginForm.value).subscribe(user => {
       this.user = user;
-      // navigate to main page if user logged in. Should return User object with id, token and user type populated
       if (this.user != null && this.user.token != null) {
         this.usersService.setUser(user);
+        this.toastService.presentToast('Successfuly signed in', Strings.Color_Success);
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
       } else {
-        this.presentNotLoggedIn();
-        console.log('User was not validated');
+        this.toastService.presentToast(this.loginWrongMessage, Strings.Color_Danger);
       }
     }, error1 => {
-      this.presentNotLoggedIn();
-      console.log('Bad credentials', error1)
+      this.toastService.presentToast(this.loginWrongMessage, Strings.Color_Danger);
     });
-  }
-
-  async presentNotLoggedIn() {
-    const alert = await this.alertController.create({
-      header: this.loginWrongHeader,
-      message: this.loginWrongMessage,
-      buttons: ['OK']
-    });
-    await alert.present();
   }
 
   async forgotPass() {
@@ -122,55 +111,17 @@ export class LoginPage implements OnInit {
       await alert.present();
     }
   }
-  async presentSToast() {
-    const toast = await this.toastCtrl.create({
-      message: this.loginSuccessfulEmail,
-      duration: 2500,
-      position: 'bottom',
-      color: 'success',
-      translucent: true,
-      buttons: [
-        {
-          text: Language.Lang.toastClose,
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-  async presentFToast() {
-    const toast = await this.toastCtrl.create({
-      message: this.loginUnSuccessfulEmail,
-      duration: 2500,
-      position: 'bottom',
-      color: 'warning',
-      translucent: true,
-      buttons: [
-        {
-          text: Language.Lang.toastClose,
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
 
   sendEmail(email: string) {
 
-    let url = `https://us-central1-volunteer-ui.cloudfunctions.net/sendMail`
+    let url = Strings.Send_Email_Address;
     let linkParam = this.usersService.encodeResetMail(email);
     let content = this.makeContent(linkParam);
 
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     let params: object = {
       to: email,
-      subject: 'volunteering.platypus@gmail.com',
+      subject: Strings.Platypus_Email,
       content: content
     };
 
@@ -178,15 +129,13 @@ export class LoginPage implements OnInit {
       .toPromise()
       .then(res => {
         this.forgotPass();
-        this.presentSToast();
+        this.toastService.presentToast(this.loginSuccessfulEmail, Strings.Color_Success);
         this.can = true;
       })
       .catch(err => {
-        console.log(err) // error popup
-        this.presentFToast();
+        this.toastService.presentToast(this.loginUnSuccessfulEmail, Strings.Color_Danger);
         this.can = true;
       })
-
   }
 
   goToRegister() {

@@ -29,8 +29,8 @@ ion-card2 {
 
   ion-item  {
     //Some propertives
-    icon: "star-outline";
-    save: false;
+    //icon: "star-outline";
+    //save: false;
     --ion-background-color: rgba(107, 167, 127, 0);
     background:  rgba(107, 167, 127, 0);
   }
@@ -115,4 +115,12 @@ ion-card2 {
     display:block !important;
     max-width:100% !important;
     height:auto !important;
+  }
+
+  .spin {
+    margin: auto;
+    top: 50%;
+    left: 47%;
+    position: absolute;
+    transform: scale(6, 6);
   }

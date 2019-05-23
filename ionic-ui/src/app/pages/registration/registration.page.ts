@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/User';
-import { NavController, MenuController, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { PasswordValidator } from './password.validator';
 import { Language } from 'src/app/utilities/Language';
-import { Lang } from 'src/app/models/Lang';
+import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,44 +14,42 @@ import { Lang } from 'src/app/models/Lang';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
-  lang = new Lang();
-  register: string= Language.Lang.menuRegistration;
-  registrationTitle: string=Language.Lang.registrationTitle;
-  registrationInformation: string=Language.Lang.registrationInformation;
-  registrationUsername: string=Language.Lang.registrationUsername;
-  registrationEmail: string=Language.Lang.registrationEmail;
-  registrationType: string=Language.Lang.registrationType;
-  registrationVolunteer: string=Language.Lang.registrationVolunteer;
-  registrationOrganization: string=Language.Lang.registrationOrganization;
-  registrationPassword: string=Language.Lang.registrationPassword;
-  registrationConfirm: string=Language.Lang.registrationConfirm;
-  registrationTerms: string=Language.Lang.registrationTerms;
-  registrationSingUp: string=Language.Lang.registrationSingUp;
-  registrationRequiredMessage: string=Language.Lang.registrationRequiredMessage;
-  registrationPasswordMisMatch: string=Language.Lang.registrationPasswordMisMatch;
-  registrationHaveAnAccount: string=Language.Lang.registrationHaveAnAccount;
-  registrationValidEmail: string=Language.Lang.registrationValidEmail;
 
-  user: User = new User();
+  register: string = Language.Lang.menuRegistration;
+  registrationTitle: string = Language.Lang.registrationTitle;
+  registrationInformation: string = Language.Lang.registrationInformation;
+  registrationUsername: string = Language.Lang.registrationUsername;
+  registrationEmail: string = Language.Lang.registrationEmail;
+  registrationType: string = Language.Lang.registrationType;
+  registrationVolunteer: string = Language.Lang.registrationVolunteer;
+  registrationOrganization: string = Language.Lang.registrationOrganization;
+  registrationPassword: string = Language.Lang.registrationPassword;
+  registrationConfirm: string = Language.Lang.registrationConfirm;
+  registrationTerms: string = Language.Lang.registrationTerms;
+  registrationSingUp: string = Language.Lang.registrationSingUp;
+  registrationRequiredMessage: string = Language.Lang.registrationRequiredMessage;
+  registrationPasswordMisMatch: string = Language.Lang.registrationPasswordMisMatch;
+  registrationHaveAnAccount: string = Language.Lang.registrationHaveAnAccount;
+  registrationValidEmail: string = Language.Lang.registrationValidEmail;
+  registrationSuccess: string = Language.Lang.registrationSuccess;
+  registrationFailed: string = Language.Lang.registrationNotRegisteredMessage;
+  registrationUsernameTaken: string = Language.Lang.registrationUsernameTaken;
+  registrationEmailTaken: string = Language.Lang.registrationEmailTaken;
+  
+  public user: User = new User();
   public roleSelector = '2';
   public onRegisterForm: FormGroup;
   public matching_passwords_group: FormGroup;
 
   constructor(
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController,
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public alertController: AlertController
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
-
-    //https://forum.ionicframework.com/t/password-and-confirm-password-validation/67764/13
-    // https://github.com/yuyang041060120/ng2-validation#notequalto-1
-    //https://www.elite-corner.com/2018/09/match-password-validation-in-angular.html
     this.onRegisterForm = this.formBuilder.group({
       'username': [null, Validators.compose([
         Validators.minLength(5),
@@ -98,16 +97,25 @@ export class RegistrationPage implements OnInit {
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
         if (this.user != null) {
-          this.presentSToast();
+          this.toastService.presentToast(this.registrationSuccess, Strings.Color_Success);
           this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
         } else {
-          this.presentNotRegistered();
+          this.toastService.presentToast(this.registrationFailed, Strings.Color_Danger);
         }
       }, error1 => {
-        this.presentNotRegistered();
-        console.log(error1);
+        const reason = this.getReason(error1.error);
+        this.toastService.presentToast(this.registrationFailed + '. ' + reason, Strings.Color_Danger);
       });
     });
+  }
+
+  getReason(error: string) {
+    if(error.includes('Username')){
+      return this.registrationUsernameTaken;
+    }
+    if(error.includes('Email')){
+      return this.registrationEmailTaken;
+    }
   }
 
   conditions() {
@@ -116,35 +124,5 @@ export class RegistrationPage implements OnInit {
 
   goToLogin() {
     this.navCtrl.navigateForward('login').catch(reason => console.log(reason));
-  }
-
-  async presentSToast() {
-    const toast = await this.toastCtrl.create({
-      message: Language.Lang.registrationSuccess,
-      duration: 2500,
-      position: 'bottom',
-      color: 'success',
-      translucent: true,
-      buttons: [
-        {
-          text: Language.Lang.toastClose,
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-
-  async presentNotRegistered() {
-    const alert = await this.alertController.create({
-      header:  Language.Lang.registrationNotRegisteredHeader,
-      message: Language.Lang.registrationNotRegisteredMessage,
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 }

@@ -62,13 +62,13 @@ describe('MainPage', () => {
   });
   it('should have a class member', () => {
     expect(component.threeProjects).toBeDefined();
-  });*/
+  });
   it('should have a working function', () => {
     expect(component.filterNewOrganizations).toBeTruthy()
   });
   it('should have a working function', () => {
     expect(component.filterNewProjects).toBeTruthy()
-  });
+  });*/
   it('should have a working function', () => {
     expect(component.getOrganizations).toBeTruthy()
   });

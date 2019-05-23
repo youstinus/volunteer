@@ -176,3 +176,10 @@ body {
   cursor: url('https://ionicframework.com/img/finger.png'), auto;
 }
 
+.spin {
+  margin: auto;
+  top: 50%;
+  left: 47%;
+  position: absolute;
+  transform: scale(6, 6);
+}

@@ -1,90 +1,95 @@
 <app-header>{{menuAboutUs}}</app-header>
-<!--Inspired by legacy of John F. Kennedy, Robert Kennedy and       Ted Kennedy InTheKennedyFootsteps offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities.-->
+
 <ion-content padding>
-    <div padding-horizontal text-center>
-      <div class="logo"></div>
-      <h1>
-        {{aboutTitle}}
-      </h1>
-    </div>
-    <div>
-      <ion-button *ngIf="isMobile == true" icon-left size="medium" expand="full" shape="round" color="dark"(click)="startVideo()" tappable>
-        {{aboutButtonVideo}}
-        <ion-icon name="arrow-dropright-circle"></ion-icon>
-      </ion-button>
+  <div padding-horizontal text-center>
+    <div class="logo"></div>
+    <h1>
+      {{aboutTitle}}
+    </h1>
   </div>
-    <ion-item-divider>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{aboutParag1}}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag2}}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag3}}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag4}}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag5}}</p>
+  <div>
+    <ion-button *ngIf="isMobile == true" icon-left size="medium" expand="full" shape="round" color="dark"
+      (click)="startVideo()" tappable>
+      {{aboutButtonVideo}}
+      <ion-icon name="arrow-dropright-circle"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-item-divider>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{aboutParag1}}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag2}}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag3}}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag4}}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp; &#9830; {{aboutParag5}}</p>
   </ion-item-divider>
-    <ion-img class="img" src="https://broadviewthomsonpta.com/wp-content/uploads/2018/06/Volunteer.png">
-    </ion-img>
-    
-    <div padding-horizontal text-center>
-      <div class="logo"></div>
-      <h1>
-        {{aboutTitle2}}
-      </h1>
-    </div>
-    <ion-item-divider>
-      <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; {{aboutParag6}}</p>
-    </ion-item-divider>
-        &nbsp;
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title class="label">{{aboutVisit}}
-                <ion-icon name="arrow-dropright-circle"></ion-icon>            
-            </ion-card-title>
-        </ion-card-header>
-    <ion-card class="myCard" *ngFor="let source of sources"  (click)="onSourceClicked(source)"> 
-        <ion-card-content>
-            <ion-icon name="link" slot="start"></ion-icon>
-                {{source}}
-            </ion-card-content>
+  <ion-img class="img" [src]="imageSource">
+  </ion-img>
+
+  <div padding-horizontal text-center>
+    <div class="logo"></div>
+    <h1>
+      {{aboutTitle2}}
+    </h1>
+  </div>
+  <ion-item-divider>
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; {{aboutParag6}}</p>
+  </ion-item-divider>
+  &nbsp;
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="label">{{aboutVisit}}
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card class="myCard" *ngFor="let source of sources" (click)="onSourceClicked(source)">
+      <ion-card-content>
+        <ion-icon name="link" slot="start"></ion-icon>
+        {{source}}
+      </ion-card-content>
     </ion-card>
   </ion-card>
   &nbsp;
-      <!-- Comment form -->
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title>{{aboutOpinion}}</ion-card-title>      
-          </ion-card-header>
+  <!-- Comment form -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{aboutOpinion}}</ion-card-title>
+    </ion-card-header>
     <form [formGroup]="commentForm" class="list-form">
-        <ion-item no-padding class="animated fadeInUp">
-          <ion-label position="floating">
-            <ion-icon name="mail" item-start></ion-icon> <!--mail tai cia simboliukas-->
-            {{aboutEnterEmail}}
-          </ion-label>
-          <ion-input type="email" formControlName="email" placeholder="email@ .... "></ion-input>
-        </ion-item>
-        <p ion-text class="text08" *ngIf="commentForm.get('email').touched && commentForm.get('email').hasError('required')">
-          <ion-text class="error-message">
-           {{aboutRequired}}
-          </ion-text>
-        </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          <!--mail tai cia simboliukas-->
+          {{aboutEnterEmail}}
+        </ion-label>
+        <ion-input type="email" formControlName="email" placeholder="email@ .... "></ion-input>
+      </ion-item>
+      <p ion-text class="text08"
+        *ngIf="commentForm.get('email').touched && commentForm.get('email').hasError('required')">
+        <ion-text class="error-message">
+          {{aboutRequired}}
+        </ion-text>
+      </p>
       &nbsp;
 
-        <ion-item no-padding class="animated fadeInUp">
-          <ion-label position="floating">
-            <ion-icon name="happy" item-start></ion-icon>
-            {{aboutFeelFree}}
-          </ion-label>
-          <ion-textarea rows="4" type="text" placeholder="{{aboutComment}} " formControlName="text"></ion-textarea>
-        </ion-item>
-        <p ion-text color="warning" class="text08" *ngIf="commentForm.get('text').touched && commentForm.get('text').hasError('required')">
-          <ion-text class="error-message">
-            {{aboutRequired}}
-          </ion-text>
-          </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="happy" item-start></ion-icon>
+          {{aboutFeelFree}}
+        </ion-label>
+        <ion-textarea rows="4" type="text" placeholder="{{aboutComment}} " formControlName="text"></ion-textarea>
+      </ion-item>
+      <p ion-text color="warning" class="text08"
+        *ngIf="commentForm.get('text').touched && commentForm.get('text').hasError('required')">
+        <ion-text class="error-message">
+          {{aboutRequired}}
+        </ion-text>
+      </p>
     </form>
     <div>
-        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="leaveComment()" [disabled]="!commentForm.valid" tappable>
-          {{aboutButtonComment}}
-          <ion-icon name="arrow-dropright-circle"></ion-icon>
-        </ion-button>
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="leaveComment()"
+        [disabled]="!commentForm.valid" tappable>
+        {{aboutButtonComment}}
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+      </ion-button>
     </div>
   </ion-card>
   &nbsp;

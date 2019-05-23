@@ -19,6 +19,7 @@
         </div>
         <ion-item>
             <ion-icon name="calendar" slot="start"></ion-icon>
+            <ion-icon name="checkbox" slot="end" *ngIf="getDateStyle(project)"></ion-icon>
             <ion-label>{{project.start | date : 'yyyy-MM-dd'}} - {{project.end | date : 'yyyy-MM-dd'}}</ion-label>
         </ion-item>
 

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Base;
 using WebAPI.Models;
 using WebAPI.Models.DTO;
@@ -54,6 +57,14 @@ namespace WebAPI.Services
                 throw new InvalidOperationException("Organization not found");
 
             var mapped = _mapper.Map<OrganizationDto>(organization);
+            return mapped;
+        }
+
+        public async Task<ICollection<OrganizationDto>> GetPopularItems()
+        {
+            var items = await _repository.GetAll();
+            var sorted = items.OrderByDescending(x => x.Projects.Sum(y => y.ProjectVolunteers.Count + y.SavedVolunteers.Count)).Take(4).ToList();
+            var mapped = _mapper.Map<ICollection<OrganizationDto>>(sorted);
             return mapped;
         }
 

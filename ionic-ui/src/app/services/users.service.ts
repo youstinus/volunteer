@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelper } from '../utilities/JwtHelper';
 import { CookieService } from 'ngx-cookie-service';
 import SimpleCrypto from '../utilities/SimpleCrypto';
+import { Strings } from '../constants/Strings';
 //import SimpleCrypto from 'simple-crypto-js';
 
 @Injectable({
@@ -18,8 +19,8 @@ export class UsersService {
     private role: number;
     private id: number;
     private helper = new JwtHelper();
-    private secretPass = 's6v=e4d6%)2g.;5v/'; // todo put to environment variables
-    private simpleCrypto = new SimpleCrypto(this.secretPass);
+    //private secretPass = 's6v=e4d6%)2g.;5v/'; // todo put to environment variables
+    //private simpleCrypto = new SimpleCrypto(this.secretPass);
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
@@ -126,21 +127,13 @@ export class UsersService {
     }
 
     // remove. cannot be used inside front-end
-    public decodeResetMail(encrypted: string) {
-        let message = atob(encrypted);
-        // let decrypted = this.simpleCrypto.decrypt(message).toString(); // check date if valid    
+    /*public decodeResetMail(encrypted: string) {
+        let message = atob(encrypted);  
         let decrypted = this.decrypt2(message).toString();
         return decrypted;
-    }
+    }*/
 
     public encodeResetMail(email: string) {
-        // let encrypted = this.simpleCrypto.encrypt(email).toString();
-        // let message = btoa(encrypted); //todo insert date with duration
-        // console.log(message);        
-        // return message;
-
-        //return this.encrypt(email);
-
         return btoa(this.encrypt2(email).toString());
     }
 
@@ -154,7 +147,7 @@ export class UsersService {
         return this.http.put<User>(`${this.api}/signed`, { password: passwords.password, token: passwords.oldPassword }, { headers: headers });
     }
 
-    public encryptNodeJs(email: string) {
+    /*public encryptNodeJs(email: string) {
         var crypto = require('crypto-js');
         var key = 's7^(v(WMjOi.mI387OPfYTcy.SWbX7zy'; //replace with your key
         var iv = '#yH2*m14v8((5kBQ'; //replace with your IV
@@ -189,20 +182,20 @@ export class UsersService {
         decoded += decipher.final('ascii');
 
         return decoded;
-    }
+    }*/
 
 
     public encrypt2(text) {
         var CryptoJS = require("crypto-js");
-        var key = CryptoJS.enc.Utf8.parse('J0bg8HQ8InMZl&yZWFq18nMl');
-        var iv = CryptoJS.enc.Utf8.parse('giK0vwUC');
+        var key = CryptoJS.enc.Utf8.parse(Strings.Encryption_Key);
+        var iv = CryptoJS.enc.Utf8.parse(Strings.Encryption_Iv);
         var encoded = CryptoJS.enc.Utf8.parse(text);
         var ciphertext = CryptoJS.TripleDES.encrypt(encoded, key, { mode: CryptoJS.mode.CBC, iv: iv });
 
         return ciphertext.toString();
     }
 
-    public decrypt2(encryptedText) {
+    /*public decrypt2(encryptedText) {
         var CryptoJS = require("crypto-js");
         var key = CryptoJS.enc.Utf8.parse('J0bg8HQ8InMZl&yZWFq18nMl');
         var iv = CryptoJS.enc.Utf8.parse('giK0vwUC');
@@ -210,5 +203,5 @@ export class UsersService {
         var decryptedText = bytes.toString(CryptoJS.enc.Utf8);
 
         return decryptedText;
-    }
+    }*/
 }

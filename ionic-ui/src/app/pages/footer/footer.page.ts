@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-footer',
@@ -8,13 +9,17 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FooterPage implements OnInit {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
   flagClicked(lang: string) {
     this.cookieService.set('Lang', lang, 365, '/');
-    location.reload(); 
+    location.reload();
+  }
+
+  onTitleClick() {
+    this.navCtrl.navigateForward('team').catch(error => console.log(error));
   }
 }

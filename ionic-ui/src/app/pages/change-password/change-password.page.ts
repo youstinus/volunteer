@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { PasswordValidator } from '../registration/password.validator';
 import { ActivatedRoute } from '@angular/router';
 import { Language } from 'src/app/utilities/Language';
+import { ToastService } from 'src/app/shared/toast.service';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
   selector: 'app-change-password',
@@ -26,6 +28,8 @@ export class ChangePasswordPage implements OnInit {
   changePassFielRequired: string = Language.Lang.changePassFielRequired;
   changePassContain5: string = Language.Lang.changePassContain5;
   changePassPassDontMatch: string = Language.Lang.changePassPassDontMatch;
+  emailWasNotSent: string = Language.Lang.toastEmailWasNotSent;
+  emailWasSent: string = Language.Lang.toastEmailWasSent;
 
   role: number = 4;
   public changePasswordForm: FormGroup;
@@ -33,17 +37,20 @@ export class ChangePasswordPage implements OnInit {
   public forgotPass = false;
 
   constructor(
-    private toastCtrl: ToastController,
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
     this.getRole();
     this.validateLink();
+    this.initForm();
+  }
 
+  initForm() {
     let oldPassValidator: ValidatorFn;
 
     if (this.role == 4) {
@@ -103,20 +110,20 @@ export class ChangePasswordPage implements OnInit {
     var passwords = this.changePasswordForm.value;
     if (passwords.password == passwords.password1) {
       this.usersService.updateByEmail(this.resetParam, passwords).subscribe(() => {
-        this.presentSToast();
+        this.toastService.presentToast(this.changePassChangedSuccess, Strings.Color_Success);
         this.navCtrl.navigateRoot('login').catch(error => console.error(error));
       }, error1 => {
-        this.presentFToast();
+        this.toastService.presentToast(this.changePassChangeFail, Strings.Color_Danger);
       });
     }
   }
 
   changePassword() {
     this.usersService.updateLoggedInUser(this.changePasswordForm.value).subscribe(() => {
-      this.presentSToast();
+      this.toastService.presentToast(this.changePassChangedSuccess, Strings.Color_Success);
       this.goBack();
     }, error1 => {
-      this.presentFToast();
+      this.toastService.presentToast(this.changePassChangeFail, Strings.Color_Danger);
     });
   }
 
@@ -130,45 +137,6 @@ export class ChangePasswordPage implements OnInit {
       }
       this.forgotPass = false;
     }
-  }
-
-  async presentSToast() {
-    const toast = await this.toastCtrl.create({
-      message: this.changePassChangedSuccess,
-      duration: 2500,
-      position: 'bottom',
-      color: 'success',
-      translucent: true,
-      buttons: [
-        {
-          text: Language.Lang.toastClose,
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-
-  async presentFToast() {
-    const toast = await this.toastCtrl.create({
-      message: this.changePassChangeFail,
-      duration: 2500,
-      cssClass: "toast",
-      position: 'bottom',
-      color: 'danger',
-      translucent: true,
-      buttons: [
-        {
-          text: Language.Lang.toastClose,
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    toast.present();
   }
 
   goBack() {

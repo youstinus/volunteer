@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, Directive } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, IonButton, AlertController, Events } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { NavController, AlertController, Events } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
-import { Location } from '@angular/common';
 import { Language } from 'src/app/utilities/Language';
+import { Strings } from 'src/app/constants/Strings';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-project-edit',
@@ -35,171 +36,138 @@ export class ProjectEditPage implements OnInit {
   projectGoBack: string = Language.Lang.projectGoBack;
   eYes: string = Language.Lang.yes;
   eNo: string = Language.Lang.no;
-  project: Project = new Project();
-  atsarginisUrl: string = this.project.imageUrl;
-  id: number;
+  toastDeletedSuccessfuly = Language.Lang.toastDeletedSuccessfuly;
+  toastFailedToDelete = Language.Lang.toastFailedToDelete;
+  toastUpdatedSuccessfuly = Language.Lang.toastUpdatedSuccessfuly;
+  toastFailedToUpdate = Language.Lang.toastFailedToUpdate;
+
+  project: Project;
+  backupImageUrl: string = Strings.Default_Image_Url3;
   public onEditForm: FormGroup;
-  public imgForm: FormGroup;
-  role: number = 1;
-  owner: boolean = false;
-  defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+  defaulUrl: string = Strings.Default_Image_Url3;
 
   constructor(
     private events: Events,
     private projectsService: ProjectsService,
-    private location: Location,
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    private alertCtrl: AlertController
-  ) {
-
-  }
-
+    private alertCtrl: AlertController,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-
-    this.editForm();
-    this.subscribeInfo();
+    let id = this.route.snapshot.params['id'];
+    
+    this.getProject(id);
 
     /*this.onEditForm.get('start').setValue(this.project.start);
     this.onEditForm.get('end').setValue(this.project.end);*/
   }
-  subscribeInfo() {
-    this.projectsService.getById(this.id).subscribe(value => {
+
+  getProject(id: number) {
+    this.projectsService.getById(id).subscribe(value => {
+      this.editForm(value);
       this.project = value;
-      this.atsarginisUrl = this.project.imageUrl;
-      this.getRole();
+      this.backupImageUrl = this.project.imageUrl;
       const userId = this.usersService.getTokenId();
-      if (userId == this.project.organizationId) {
-        this.owner = true;
-        console.log('Savininkas');
-      } else {
-        this.owner = false;
+      if (userId != this.project.organizationId) {
         this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
       }
     }, error1 => {
       this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
-      console.log(error1);
     });
   }
-  editForm() {
-    this.onEditForm = this.formBuilder.group({
 
-      'title': [null, Validators.compose([
+  editForm(project: Project) {
+    this.onEditForm = this.formBuilder.group({
+      'title': [project.title, Validators.compose([
         Validators.minLength(5),
         Validators.required,
         Validators.maxLength(64)
       ])],
-      'imageUrl': [null, Validators.compose([
+      'imageUrl': [project.imageUrl, Validators.compose([
         Validators.nullValidator
       ])],
-      'description': [null, Validators.compose([
+      'description': [project.description, Validators.compose([
         Validators.minLength(4),
         Validators.required
       ])],
-      'start': [null, Validators.compose([
+      'start': [project.start, Validators.compose([
         Validators.required
       ])],
-      'end': [null, Validators.compose([Validators.required])],
-      'organizationId': this.usersService.getTokenId(),
-      'location': [null, Validators.compose([
+      'end': [project.end, Validators.compose([
+        Validators.required
       ])],
-      'website': [null, Validators.compose([
+      'organizationId': this.usersService.getTokenId(),
+      'location': [project.location, Validators.compose([
+      ])],
+      'website': [project.website, Validators.compose([
         Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
-      'email': ['', Validators.compose([
+      'email': [project.email, Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      'phone': [null, Validators.compose([
+      'phone': [project.phone, Validators.compose([
         Validators.required,
         Validators.pattern('^[+0-9. ()-]*$')
       ])]
     });
   }
-  getRole() {
-    if (this.project.imageUrl == "" || this.project.imageUrl == null) {
-      this.role = 0;
-    }
-  }
+
   onSaved() {
-    this.projectsService.update(this.id, this.onEditForm.value).subscribe(value => {
-      this.OnSavePopUp();
-      console.log(this.onEditForm.value);
+    this.projectsService.update(this.project.id, this.onEditForm.value).subscribe(value => {
+      this.toastService.presentToast(this.toastUpdatedSuccessfuly, Strings.Color_Success);
+      this.events.publish('user:updated', this.onEditForm.value);
     }, error1 => {
-      this.NotEdited();
-      console.log(error1);
+      this.toastService.presentToast(this.toastFailedToUpdate, Strings.Color_Danger);
     });
-    
-    this.events.publish('user:updated', this.onEditForm.value);
   }
+
   goToProjects() {
-    //this.navCtrl.pop();
     this.events.publish('returnedFromEdit');
     this.navCtrl.back();
   }
-  async OnSavePopUp() {
-    const alert = await this.alertCtrl.create({
-      header: this.editSuccesfull,
-      buttons: [{
-        text: this.projectGoBack, handler: () => {
-          alert.dismiss().then(() => {
-            this.navCtrl.back();
-          })
-        }
-      }, this.newPojectAlertOk]
-    });
-    await alert.present();
-  }
-  async OnDeletePopUp() {
+
+  async onDeleteConfirmation() {
     const alert = await this.alertCtrl.create({
       header: this.areYouSure,
       buttons: [{
         text: this.eYes, handler: () => {
           alert.dismiss().then(() => {
-            this.Delete();
-            this.navCtrl.back();
+            this.deleteProject();
           })
         }
       }, this.eNo]
     });
     await alert.present();
   }
-  Delete() {
-    this.projectsService.delete(this.id).subscribe(value => {
-      console.log(value);
-      location.assign('projects/type/created');
+
+  deleteProject() {
+    this.projectsService.delete(this.project.id).subscribe(value => {
+      this.toastService.presentToast(this.toastDeletedSuccessfuly, Strings.Color_Success);
+      this.navCtrl.navigateRoot('projects/type/created').catch(error => console.error(error));
     }, error1 => {
-      console.log(error1);
+      this.toastService.presentToast(this.toastFailedToDelete, Strings.Color_Danger);
     });
-    this.navCtrl.navigateForward('projects/').catch(e => console.log(e));
   }
 
-  async NotEdited() {
-    const alert = await this.alertCtrl.create({
-      header: this.editProjectAlertEditHeader,
-      message: this.editProjectAlertEditMessage,
-      buttons: [this.newPojectAlertOk]
-    });
-    await alert.present();
+  updateUrl() {
+    this.backupImageUrl = this.defaulUrl;
   }
 
-  updateUrl(event) {
-    this.atsarginisUrl = this.defaulUrl;
+  updateUrl2() {
+    this.backupImageUrl = this.project.imageUrl;
   }
-  updateUrl2(event) {
-    this.atsarginisUrl = this.project.imageUrl;
-  }
+
   updateIMG(searchValue: string) {
     this.project.imageUrl = searchValue;
-    this.atsarginisUrl = searchValue;
+    this.backupImageUrl = searchValue;
   }
 
   onSearchChange(searchValue: string) {
     this.updateIMG(searchValue);
   }
-
 }

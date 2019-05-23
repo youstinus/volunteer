@@ -11,6 +11,7 @@ namespace WebAPI.Services.Interfaces
     {
         Task<ICollection<VolunteerDto>> GetVolunteersByProjectId(long id);
         Task<bool> ValidateOrganizationByProjectId(ClaimsPrincipal user, long id);
+        Task<ICollection<ProjectDto>> GetPopularItems();
         Task<ICollection<ProjectDto>> GetSavedItems(ClaimsPrincipal user);
         Task<ICollection<ProjectDto>> GetSelectedItems(ClaimsPrincipal user);
         Task<ICollection<ProjectDto>> GetCreatedItems(ClaimsPrincipal user);

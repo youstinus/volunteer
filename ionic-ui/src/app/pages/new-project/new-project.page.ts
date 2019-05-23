@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { ActivatedRoute } from '@angular/router';
-import { NavController, AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { Language } from 'src/app/utilities/Language';
+import { ToastService } from 'src/app/shared/toast.service';
+import { Strings } from 'src/app/constants/Strings';
 
 @Component({
   selector: 'app-new-project',
@@ -31,20 +32,22 @@ export class NewProjectPage implements OnInit {
 
   id: number;
   public onCreateForm: FormGroup;
+  createProject: Project = new Project();
+
   constructor(
     private usersService: UsersService,
     private projectsService: ProjectsService,
-    private route: ActivatedRoute,
-    public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    public alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private toastService: ToastService,
+    private navCtrl: NavController
   ) { }
 
-  createProject: Project = new Project();
-
   ngOnInit() {
-    this.id === this.usersService.getTokenId();
-    console.log(this.id);
+    this.initForm();
+  }
+
+  initForm() {
     this.onCreateForm = this.formBuilder.group({
       'imageUrl': [null, Validators.compose([
       ])],
@@ -65,7 +68,6 @@ export class NewProjectPage implements OnInit {
       'location': [null, Validators.compose([
       ])],
       'website': [null, Validators.compose([
-
         Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
       ])],
       'email': ['', Validators.compose([
@@ -78,21 +80,22 @@ export class NewProjectPage implements OnInit {
       ])],
     });
   }
+  
   async onCreate() {
-    console.log(this.onCreateForm.value);
     this.projectsService.create(this.onCreateForm.value).subscribe(value => {
-      console.log(value);
       this.createProject = value;
-      location.assign('projects/type/created');
+      this.toastService.presentToast(this.newPojectAlertOk, Strings.Color_Success);
+      this.navCtrl.navigateRoot('projects/type/created').catch(reason => console.log(reason));
     }, error1 => {
-      console.log(error1);
-      this.NotCreated();
+      this.toastService.presentToast(this.newPojectAlertNotMessage, Strings.Color_Danger);
     });
   }
+
   getId() {
     const id = this.usersService.getTokenId();
     return id;
   }
+
   async NotCreated() {
     const alert = await this.alertCtrl.create({
       header: this.newPojectAlertNotHeader,

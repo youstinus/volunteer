@@ -17,85 +17,85 @@ export class MenuPage implements OnInit {
 
     public pages = [
         {
-            title: Language.Lang.menuMain,//,
+            title: Language.Lang.menuMain,
             url: '/main',
             icon: 'home',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuOrganizations, //'',
+            title: Language.Lang.menuOrganizations,
             url: '/organizations',
             icon: 'briefcase',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuProjects,//'',
+            title: Language.Lang.menuProjects,
             url: '/projects',
             icon: 'filing',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuSavedProjects,//'',
+            title: Language.Lang.menuSavedProjects,
             url: '/projects/type/saved',
             icon: 'bookmarks',
             roles: [0, 1, 2]
         },
         {
-            title: Language.Lang.menuSelectedProjects,//'',
+            title: Language.Lang.menuSelectedProjects,
             url: '/projects/type/selected',
             icon: 'checkmark-circle-outline',
             roles: [0, 1, 2]
         },
         {
-            title: Language.Lang.menuCreatedProjects,//'',
+            title: Language.Lang.menuCreatedProjects,
             url: '/projects/type/created',
             icon: 'checkmark-circle-outline',
             roles: [0, 1, 3]
         },
         {
-            title: Language.Lang.menuNewProject,//'',
+            title: Language.Lang.menuNewProject,
             url: '/new-project',
             icon: 'hand',
             roles: [0, 1, 3]
         },
         {
-            title: Language.Lang.menuCalendar,//'',
+            title: Language.Lang.menuCalendar,
             url: '/calendar',
             icon: 'calendar',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuAboutUs,//'',
+            title: Language.Lang.menuAboutUs,
             url: '/about',
             icon: 'help',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuPrivacyPolicy,//'',
+            title: Language.Lang.menuPrivacyPolicy,
             url: '/privacy',
             icon: 'at',
             roles: [0, 1, 2, 3, 4]
         },
         {
-            title: Language.Lang.menuLogin,//'',
+            title: Language.Lang.menuLogin,
             url: '/login',
             icon: 'log-in',
             roles: [4]
         },
         {
-            title: Language.Lang.menuRegistration,//'',
+            title: Language.Lang.menuRegistration,
             url: '/registration',
             icon: 'finger-print',
-            roles: [4] //list-box
+            roles: [4]
         },
         {
-            title: Language.Lang.menuSettings,//'',
+            title: Language.Lang.menuSettings,
             url: '/volunteers-settings',
             icon: 'settings',
             roles: [2]
         },
         {
-            title: Language.Lang.menuSettings,//'Settings',
+            title: Language.Lang.menuSettings,
             url: '/organizations-settings',
             icon: 'settings',
             roles: [3]
@@ -141,11 +141,8 @@ export class MenuPage implements OnInit {
     }
 
     logout() {
-        console.log('logged out');
         this.usersService.logout();
         this.getRole();
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error rerouting menu'));
-        //this.usersService.logout();
-        //location.reload();
     }
 }
