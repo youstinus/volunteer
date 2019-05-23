@@ -108,7 +108,7 @@ namespace WebAPI.Services
 
             // validation
             if (string.IsNullOrWhiteSpace(userDto.Password))
-                throw new ArgumentException("Password not entered");
+                throw new InvalidOperationException("Password not entered");
 
             var userCheck = await _usersRepository.GetByUsername(user.Username);
             if (userCheck != null)
