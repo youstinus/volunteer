@@ -132,7 +132,8 @@ export class En {
         newPojectCreate: 'Create',
         newPojectAlertNotHeader: 'Project was not created',
         newPojectAlertNotMessage: 'Please, fill in empty gaps',
-        newPojectAlertOk: 'OK',
+        newPojectAlertOk: 'Project created successfully',
+        newProjectFailedDates: 'Your end date is earlier than your start date',
         //Edit project
         editProjectDelete: 'DELETE',
         editProjectAlertEditHeader: 'Update failed',

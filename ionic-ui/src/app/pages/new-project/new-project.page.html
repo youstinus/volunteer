@@ -45,9 +45,15 @@
       <ion-item>
           <ion-icon name="calendar" slot="start"></ion-icon>
         <ion-label color="primary" stacked>{{newPojectEnd}}:</ion-label>
-
         <ion-datetime formControlName="end"></ion-datetime>
       </ion-item>
+      <p ion-text
+      *ngIf="onCreateForm.get('end').errors && onCreateForm.get('end').touched && onCreateForm.get('end').errors.EndDatesMissmatch">
+      <ion-text class="error-message">
+        {{newProjectFailedDates}}
+      </ion-text>
+    </p>
+
     <ion-item lines="">
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label color="primary" position="floating">{{newPojectLocation}}: </ion-label>

@@ -129,6 +129,7 @@ export class Lang {
     public newPojectAlertNotHeader: string;
     public newPojectAlertNotMessage: string;
     public newPojectAlertOk: string;
+    public newProjectFailedDates: string;
     //Edit project
     public editProjectDelete: string;
     public editProjectAlertEditHeader: string;

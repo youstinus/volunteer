@@ -35,7 +35,8 @@ export class RegistrationPage implements OnInit {
   registrationFailed: string = Language.Lang.registrationNotRegisteredMessage;
   registrationUsernameTaken: string = Language.Lang.registrationUsernameTaken;
   registrationEmailTaken: string = Language.Lang.registrationEmailTaken;
-  
+  toastClose: string = Language.Lang.toastClose;
+
   public user: User = new User();
   public roleSelector = '2';
   public onRegisterForm: FormGroup;
@@ -97,14 +98,14 @@ export class RegistrationPage implements OnInit {
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
         if (this.user != null) {
-          this.toastService.presentToast(this.registrationSuccess, Strings.Color_Success);
+          this.toastService.presentToastClose(this.registrationSuccess, Strings.Color_Success,this.toastClose);
           this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
         } else {
-          this.toastService.presentToast(this.registrationFailed, Strings.Color_Danger);
+          this.toastService.presentToastClose(this.registrationFailed, Strings.Color_Danger,this.toastClose);
         }
       }, error1 => {
         const reason = this.getReason(error1.error);
-        this.toastService.presentToast(this.registrationFailed + '. ' + reason, Strings.Color_Danger);
+        this.toastService.presentToastClose(this.registrationFailed + '. ' + reason, Strings.Color_Danger,this.toastClose);
       });
     });
   }

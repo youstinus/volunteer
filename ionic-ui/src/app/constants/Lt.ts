@@ -133,6 +133,7 @@ export class Lt {
         newPojectAlertNotHeader: 'Projektas nebuvo sukurtas',
         newPojectAlertNotMessage: 'Prašome užpildykite tuščius laukus',
         newPojectAlertOk: 'Gerai',
+        newProjectFailedDates: 'Jūsų projekto pabaigos data yra ankstesnė nei pradžios',
         //Edit project
         editProjectDelete: 'Ištrinti',
         editProjectAlertEditHeader: 'Atnaujinimas nepavyko',
