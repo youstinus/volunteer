@@ -21,7 +21,14 @@ export class ToastService {
             message: message,
             duration: 3000,
             color: color,
-            closeButtonText: buttonText
+            translucent: true,
+            buttons: [
+                {
+                    text: buttonText,
+                    role: 'cancel',
+                    handler: () => {}
+                }
+            ]
         });
         toast.present();
     }
