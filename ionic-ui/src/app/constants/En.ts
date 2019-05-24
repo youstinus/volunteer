@@ -65,7 +65,7 @@ export class En {
         loginUnSuccessfulEmail: 'Email has not sent.',
         loginWrongHeader: 'Something went wrong',
         loginWrongMessage: 'Invalid username or password!',
-        loginSuccessLogin:'Successfuly signed in',
+        loginSuccessLogin: 'Successfuly signed in',
         //Registration page
         registrationTitle: 'Register to our page',
         registrationInformation: 'Your information',
@@ -175,8 +175,8 @@ export class En {
         cr22: 'You have the right to request a copy of the information we hold about you. If you would like a copy of some or all your personal information, please follow the instructions at the end of this policy.',
         cr23: 'volunteering.ga user account information can be retrived by following these steps:',
         cr24: '1.Visit https://login.volunteering.ga/, and enter your username and password.',
-        cr25: '2.Go to account settings.',
-        cr26: '3.Click “Send me my data”',
+        cr25: '2. Go to account settings.',
+        cr26: '3. Click “Send me my data”',
         cr27: 'Retention of personal information',
         cr28: 'We will retain your personal information on our systems only for as long as we need to, for the success of the TeamPlatypus project and the programs that support volunteering.ga. We keep contact information (such as mailing list information) until a user unsubscribes or requests that we delete that information from our live systems. If you choose to unsubscribe from a mailing list, we may keep certain limited information about you so that we may honor your request.',
         cr29: 'volunteering.ga will not delete personal data from logs or records necessary to the operation, development, or archives of the TeamPlatypus project.',
@@ -184,7 +184,7 @@ export class En {
         cr31: 'When deletion is requested or otherwise required, we will anonymise the data of data subjects and/or remove their information from publicly accessible sites if the deletion of data would break essential systems or damage the logs or records necessary to the operation, development, or archival records of the TeamPlatypus project.',
         cr32: 'If you would like to request deletion of your account and associated data, please follow these steps:',
         cr33: '1.Visit https://volunteering.ga/.',
-        cr34: '2.Login and go to settings.',
+        cr34: '2. Login and go to settings.',
         cr35: '3.Click “Request Permanent Account Deletion”.',
         cr36: 'Rights in relation to your information',
         cr37: 'You may have certain rights under data protection law in relation to the personal information we hold about you. In particular, you may have a right to:',
@@ -200,6 +200,8 @@ export class En {
         cr47: 'Although most changes are likely to be minor, volunteering.ga may change its Privacy Policy from time to time, and at volunteering.ga’s sole discretion. volunteering.ga encourages visitors to frequently check this page for any changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.',
         cr48: 'Contact',
         cr49: 'Please contact us if you have any questions about our privacy policy or information we hold about you by emailing teamPlatypus@volunteering.ga.',
+        crVisit: '1. Visit',
+        crEnter: ', and enter your username and password.',
         // Volunteers settings page
         volSettingsHeader: 'Volunteer Settings',
         volSettingsImage: 'Your image url',
@@ -265,9 +267,11 @@ export class En {
         orgProjects: 'Projects',
         orgNoComments: ' No comments yet',
         orgNoProjects: 'No projects yet',
-        // OrganizationS page
         orgsHeader: 'Organizations',
-
+        //Not found page
+        notFoundh2: ' Page not found',
+        notFoundpar: 'The page you are looking for might have been removed, had its name changed or is temporarily unavailable',
+        notFoundGoMain: 'Go To Main Page',
 
         // Toast messages
         toastDeletedSuccessfuly: 'Project deleted successfuly!',

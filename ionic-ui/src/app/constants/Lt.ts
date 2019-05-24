@@ -184,8 +184,8 @@ export class Lt {
         cr31: 'Jei ištrinti prašoma ar kitaip reikalaujama, mes anonimizuosime duomenų subjektų duomenis ir / arba pašalinsime jų informaciją iš viešai prieinamų svetainių, jei duomenų ištrynimas nutrauktų esmines sistemas arba pažeistų žurnalus ar įrašus, reikalingus veiklai, plėtrai ar archyvavimui „TeamPlatypus“ projekto įrašai.',
         cr32: 'Jei norite prašyti ištrinti paskyrą ir susijusius duomenis, atlikite šiuos veiksmus:',
         cr33: '1.Apsilankykite https://volunteering.ga/.',
-        cr34: '2.Prisijunkite ir eikite į nustatymus.',
-        cr35: '3.Paspauskite „Prašyti paskyros ištrynimo“.',
+        cr34: '2. Prisijunkite ir eikite į nustatymus.',
+        cr35: '3. Paspauskite „Prašyti paskyros ištrynimo“.',
         cr36: 'Su jūsų informacija susijusios teisės',
         cr37: 'Jūs galite turėti tam tikras teises pagal duomenų apsaugos įstatymus dėl asmeninės informacijos, kurią mes laikome apie jus. Visų pirma, jūs galite turėti teisę:',
         cr38: 'prašyti asmeninės informacijos, kurią mes laikome, kopiją;',
@@ -200,6 +200,8 @@ export class Lt {
         cr47: 'Nors dauguma pakeitimų gali būti nedideli, volunteering.ga kartais gali keisti savo privatumo politiką ir volunteering.ga skatina lankytojus dažnai patikrinti šį puslapį dėl bet kokių jo privatumo politikos pakeitimų. Jūsų tęstinis šio tinklalapio naudojimas po bet kokių šios privatumo politikos pakeitimų bus jūsų pritarimas tokiems pakeitimams.',
         cr48: 'Kontaktai',
         cr49: 'Prašome susisiekti su mumis, jei turite kokių nors klausimų apie mūsų privatumo politiką ar informaciją, kurią mes laikome apie jus elektroniniu paštu teamPlatypus@volunteering.ga.',
+        crVisit: '1. Apsilankykite',
+        crEnter: ' ir įveskite savo vartotojo vardą ir slaptažodį',
         // Volunteers settings page
         volSettingsHeader: 'Savanario parametrų keitimas',
         volSettingsImage: 'Jūsų nuotraukos nuoroda',
@@ -218,7 +220,7 @@ export class Lt {
         changePassHeader: 'PASIKEISKITE SLAPTAŽODĮ',
         changePassFieldSet: 'Reikalinga informacija ',
         changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
-        changePassOldPassword: 'Senas password',
+        changePassOldPassword: 'Senas slaptažodis',
         changePassNewPassword: 'Naujas slaptažodis',
         changePassConfirmPassword: 'Patvirtinkite slaptažodį',
         changePassButton: 'Keisti slaptažodį',
@@ -266,9 +268,11 @@ export class Lt {
         orgProjects: 'Projektai',
         orgNoComments: ' Komentarų nėra',
         orgNoProjects: 'Projektų nėra',
-        // OrganizationS page
         orgsHeader: 'Organizacijos',
-
+        //Not found page
+        notFoundh2: ' Puslapis nerastas',
+        notFoundpar: 'Puslapis, kurio ieškote, nerastas. Galbūt jis buvo ištrintas, pasikeitė jo pavadinimas arba jis tapo laikinai neprieinamas',
+        notFoundGoMain: 'Grįžkite į pagrindinį puslapį',
 
         // Toast messages
         toastDeletedSuccessfuly: 'Projektas sėkmingai pašalintas!',

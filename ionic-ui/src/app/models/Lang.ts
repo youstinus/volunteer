@@ -195,6 +195,8 @@ export class Lang {
     public cr47: string;
     public cr48: string;
     public cr49: string;
+    public crVisit: string;
+    public crEnter: string;
     // Volunteers settings page
     public volSettingsHeader: string;
     public volSettingsImage: string;
@@ -261,10 +263,12 @@ export class Lang {
     public orgProjects: string;
     public orgNoComments: string;
     public orgNoProjects: string;
-    // OrganizationS page
     public orgsHeader: string;
-
-
+    //Not found page
+    public notFoundh2: string;
+    public notFoundpar: string;
+    public notFoundGoMain: string;
+    
     // Toast messages
     public toastDeletedSuccessfuly: string;
     public toastFailedToDelete: string;

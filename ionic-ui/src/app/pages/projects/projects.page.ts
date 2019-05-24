@@ -56,21 +56,18 @@ export class ProjectsPage implements OnInit, OnDestroy {
             case 'saved':
                 if (this.role != 2) {
                     this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
-                    break;
                 }
                 observable = this.projectsService.getSavedItems();
                 break;
             case 'selected':
                 if (this.role != 2) {
                     this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
-                    break;
                 }
                 observable = this.projectsService.getSelectedItems();
                 break;
             case 'created':
                 if (this.role != 3) {
                     this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
-                    break;
                 }
                 observable = this.projectsService.getCreatedItems();
                 break;
