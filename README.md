@@ -1,15 +1,15 @@
-<p align="center">
-    <img src="./ionic-ui/resources/icon.png" height="130">
+<p align="left">
+    <img src="./ionic-ui/resources/icon.png" height="80">
 </p>
 
-## Volunteering system
+<h1 align="center">Volunteering system</h1>
 
 <p align="center">
     <a href="https://github.com/youstinus/volunteer/graphs/contributors" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/youstinus/volunteer.svg" /></a>
     <a href="https://github.com/youstinus/volunteer/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/w/youstinus/volunteer.svg" alt="GitHub commit activity"></a>
-    <a href="https://travis-ci.org/youstinus/volunteer.svg?branch=v1.4">
+    <a href="https://travis-ci.org/youstinus/volunteer">
         <img src="https://img.shields.io/travis/youstinus/volunteer/v1.4.svg" alt="build status"></a>
     <a href="https://github.com/youstinus/volunteer/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/youstinus/volunteer.svg" alt="license"></a>
