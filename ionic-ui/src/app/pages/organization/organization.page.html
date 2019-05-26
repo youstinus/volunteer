@@ -137,19 +137,22 @@
         <ion-item *ngFor="let review of reviews">
 
             <ion-card-header>
-                <ion-card-title>
+                <ion-card-title style="font-size: 22px; margin-bottom: 30px">
                     {{review.title}}
 
                 </ion-card-title>
-
+                <ion-text style="max-height: 200px; float: top; margin-top: 20px ">{{review.text}}</ion-text>
+                <ion-card-subtitle>
+                    <ion-button [hidden]="review.volunteerId != currentUser" expand="full" shape="round"
+                                                style=" float: left; font-size: 11px;"
+                                                (click)="delReview(review.id)">{{orgDelteComment}}</ion-button>
+                </ion-card-subtitle>
             </ion-card-header>
 
-            <ion-text style="height: auto">{{review.text}}</ion-text>
+
             <ion-label>
             </ion-label>
-            <ion-button [hidden]="review.volunteerId != currentUser" expand="full" shape="round"
-                        style=" float: right; font-size: 10px"
-                        (click)="delReview(review.id)">{{orgDelteComment}}</ion-button>
+
         </ion-item>
     </ion-card>
 
@@ -162,12 +165,21 @@
             <form  [formGroup]="onCreateForm">
                 <ion-input formControlName="title" type="Title" placeholder="Title"
                            style="border-bottom: #1e2023 solid 2px"></ion-input>
-
+                <p ion-text *ngIf="onCreateForm.get('title').touched && onCreateForm.get('title').errors">
+                    <ion-text class="error-message">
+                        {{orgRequiredField3}}
+                    </ion-text>
+                </p>
                 <ion-row style="height:20px">
                 </ion-row>
 
                 <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text"
                               placeholder="Comment .... "></ion-textarea>
+                <p ion-text *ngIf="onCreateForm.get('text').touched && onCreateForm.get('text').errors">
+                    <ion-text class="error-message">
+                        {{orgRequiredField3}}
+                    </ion-text>
+                </p>
                 <ion-button (click)='onCreate()' expand="50%" shape="round" style="float: left"
                             [disabled]="checkRole() == 1 || !onCreateForm.valid">{{orgComment}}</ion-button>
                 <fieldset class="rating">

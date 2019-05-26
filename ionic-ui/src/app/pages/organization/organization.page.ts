@@ -31,7 +31,7 @@ export class OrganizationPage implements OnInit {
     orgProjects: string = Language.Lang.orgProjects;
     orgNoComments: string = Language.Lang.orgNoComments;
     orgNoProjects: string = Language.Lang.orgNoProjects;
-
+    orgRequiredField3: string = Language.Lang.orgRequiredField3;
     userId: number;
     id: number;
     reviews: Review[];
@@ -102,10 +102,12 @@ export class OrganizationPage implements OnInit {
         this.onCreateForm = this.formBuilder.group({
 
             'text': [null, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(3),
             ])],
             'title': [null, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(3),
             ])],
             'grade': [null, Validators.compose([
                 Validators.required

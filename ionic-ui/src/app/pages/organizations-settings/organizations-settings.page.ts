@@ -79,7 +79,10 @@ export class OrganizationsSettingsPage implements OnInit {
                 Validators.required,
                 Validators.maxLength(64)])],
             'address': [null, Validators.nullValidator],
-            'phone': [null, Validators.nullValidator],
+            'phone': [null, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[+0-9. ()-]*$')
+            ])],
             'website': [null, Validators.compose([
                 Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
               ])],

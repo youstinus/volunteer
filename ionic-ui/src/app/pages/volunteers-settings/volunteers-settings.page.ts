@@ -39,7 +39,8 @@ export class VolunteersSettingsPage implements OnInit {
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
-    defaulUrl: string = Strings.Default_Image_Url3;
+    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    backupImageUrl: string = this.defaulUrl;
     role: number = 4;
 
     constructor(
@@ -56,10 +57,16 @@ export class VolunteersSettingsPage implements OnInit {
     ngOnInit() {
         this.onSaveForm = this.formBuilder.group({
             'imageUrl': [null, Validators.nullValidator],
-            'firstName': [null, Validators.nullValidator],
+            'firstName': [null, Validators.compose([
+                Validators.required])],
             'lastName': [null, Validators.nullValidator],
-            'phone': [null, Validators.nullValidator],
-            'email': [null, Validators.nullValidator],
+            'phone': [null, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[+0-9. ()-]*$')
+            ])],
+            'email': [null, Validators.compose([
+                Validators.required,
+                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
             'description': [null, Validators.nullValidator],
             'userId': this.usersService.getTokenId()
         });
@@ -97,12 +104,17 @@ export class VolunteersSettingsPage implements OnInit {
         this.updateIMG(searchValue);
     }
 
-    updateIMG(searchValue: string) {
-        this.volunteer.imageUrl = searchValue;
+    updateUrl() {
+        this.backupImageUrl = this.defaulUrl;
     }
 
-    updateUrl(event) {
-        this.volunteer.imageUrl = this.defaulUrl;
+    updateUrl2() {
+        this.backupImageUrl = this.volunteer.imageUrl;
+    }
+
+    updateIMG(searchValue: string) {
+        this.volunteer.imageUrl = searchValue;
+        this.backupImageUrl = searchValue;
     }
 
     onChangePass() {
