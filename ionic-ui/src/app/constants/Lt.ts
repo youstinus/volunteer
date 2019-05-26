@@ -176,7 +176,7 @@ export class Lt {
         cr21: 'Prieiga prie duomenų',
         cr22: 'Jūs turite teisę prašyti informacijos, kurią mes laikome apie jus. Jei norite kopijuoti kai kurias ar visas savo asmeninę informaciją, vadovaukitės šios politikos pabaigoje pateiktomis instrukcijomis',
         cr23: 'savanoriškos informacijos apie naudotojo paskyros informaciją galima atgauti atlikus šiuos veiksmus:',
-        cr24: '1.Apsilankant https://login.volunteering.ga/ ir įveskite savo vartotojo vardą ir slaptažodį.',
+        cr24: '1.Apsilankant https://volunteering.ga/login ir įveskite savo vartotojo vardą ir slaptažodį.',
         cr25: '2.Prisijunkite prie paskyros nustatymų.',
         cr26: '3. Spustelėkite „Siųsti man mano duomenis“',
         cr27: 'Asmens informacijos saugojimas',

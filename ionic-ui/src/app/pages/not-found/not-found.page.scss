@@ -41,6 +41,7 @@ body {
     background: url('../../../assets/background1.jpg') no-repeat;
 
     -webkit-background-clip: text;
+    background-clip: inherit;
     -webkit-text-fill-color: transparent;
     background-size: cover;
     background-position: center;

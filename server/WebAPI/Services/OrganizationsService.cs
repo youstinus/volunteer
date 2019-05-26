@@ -63,7 +63,7 @@ namespace WebAPI.Services
         public async Task<ICollection<OrganizationDto>> GetPopularItems()
         {
             var items = await _repository.GetAll();
-            var sorted = items.OrderByDescending(x => x.Projects.Sum(y => y.ProjectVolunteers.Count + y.SavedVolunteers.Count)).Take(4).ToList();
+            var sorted = items.Where(x => !string.IsNullOrWhiteSpace(x.Title) && !string.IsNullOrWhiteSpace(x.Description) && !string.IsNullOrWhiteSpace(x.Email) && !string.IsNullOrWhiteSpace(x.Phone)).OrderByDescending(x => x.Projects.Sum(y => y.ProjectVolunteers.Count + y.SavedVolunteers.Count)).Take(4).ToList();
             var mapped = _mapper.Map<ICollection<OrganizationDto>>(sorted);
             return mapped;
         }

@@ -137,10 +137,10 @@
         <ion-item *ngFor="let review of reviews">
 
             <ion-card-header>
-                <ion-card-title style="font-size: 22px; margin-bottom: 30px">
+                <!-- <ion-card-title style="font-size: 22px; margin-bottom: 30px">
                     {{review.title}}
 
-                </ion-card-title>
+                </ion-card-title> -->
                 <ion-text style="max-height: 200px; float: top; margin-top: 20px ">{{review.text}}</ion-text>
                 <ion-card-subtitle>
                     <ion-button [hidden]="review.volunteerId != currentUser" expand="full" shape="round"
@@ -163,7 +163,7 @@
 
 
             <form  [formGroup]="onCreateForm">
-                <ion-input formControlName="title" type="Title" placeholder="Title"
+                <!-- <ion-input formControlName="title" type="Title" placeholder="Title"
                            style="border-bottom: #1e2023 solid 2px"></ion-input>
                 <p ion-text *ngIf="onCreateForm.get('title').touched && onCreateForm.get('title').errors">
                     <ion-text class="error-message">
@@ -171,7 +171,7 @@
                     </ion-text>
                 </p>
                 <ion-row style="height:20px">
-                </ion-row>
+                </ion-row> -->
 
                 <ion-textarea style="border-bottom: #1e2023 solid 2px" formControlName="text" rows="4" type="text"
                               placeholder="Comment .... "></ion-textarea>

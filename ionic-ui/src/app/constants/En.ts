@@ -176,7 +176,7 @@ export class En {
         cr21: 'Access to data',
         cr22: 'You have the right to request a copy of the information we hold about you. If you would like a copy of some or all your personal information, please follow the instructions at the end of this policy.',
         cr23: 'volunteering.ga user account information can be retrived by following these steps:',
-        cr24: '1.Visit https://login.volunteering.ga/, and enter your username and password.',
+        cr24: '1.Visit https://volunteering.ga/login, and enter your username and password.',
         cr25: '2. Go to account settings.',
         cr26: '3. Click “Send me my data”',
         cr27: 'Retention of personal information',
