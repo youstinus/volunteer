@@ -1,20 +1,20 @@
-## Volunteering system
-
 <p align="center">
     <img src="./ionic-ui/resources/icon.png" height="130">
 </p>
-    [![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=v1.4)](https://travis-ci.org/youstinus/volunteer)
-    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Volunteering system
 
 <p align="center">
     <a href="https://github.com/youstinus/volunteer/graphs/contributors" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/youstinus/volunteer.svg" /></a>
     <a href="https://github.com/youstinus/volunteer/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/w/youstinus/volunteer.svg" /></a>
+        <img src="https://img.shields.io/github/commit-activity/w/youstinus/volunteer.svg" alt="GitHub commit activity"></a>
     <a href="https://travis-ci.org/youstinus/volunteer.svg?branch=v1.4">
         <img src="https://img.shields.io/travis/youstinus/volunteer/v1.4.svg" alt="build status"></a>
     <a href="https://github.com/youstinus/volunteer/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/youstinus/volunteer.svg" alt="license"></a>    
+        <img src="https://img.shields.io/github/license/youstinus/volunteer.svg" alt="license"></a>
+    <a href="https://github.com/youstinus/volunteer/releases">
+        <img src="https://img.shields.io/github/downloads/youstinus/volunteer/total.svg" alt="GitHub All Releases"></a>
 </p>
 
 ## Content
