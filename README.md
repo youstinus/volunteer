@@ -1,8 +1,7 @@
-<p align="left">
+<div>
     <img src="./ionic-ui/resources/icon.png" height="80">
-</p>
-
-<h1 align="center">Volunteering system</h1>
+    <h1 align="center">Volunteering system</h1>
+</div>
 
 <p align="center">
     <a href="https://github.com/youstinus/volunteer/graphs/contributors" alt="Contributors">
