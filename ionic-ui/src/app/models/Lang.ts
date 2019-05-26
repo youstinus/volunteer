@@ -100,6 +100,9 @@ export class Lang {
     public projectEnd: string;
     public projectGoBack: string;
     public projectHeader: string;
+    public projectClipBoard: string;
+    public projectOpenInNewTab: string;
+
     //Volunteers page
     public volunteersHeader: string;
     public volunteersYourVolunteers: string;
@@ -268,7 +271,7 @@ export class Lang {
     public notFoundh2: string;
     public notFoundpar: string;
     public notFoundGoMain: string;
-    
+
     // Toast messages
     public toastDeletedSuccessfuly: string;
     public toastFailedToDelete: string;
@@ -276,4 +279,9 @@ export class Lang {
     public toastFailedToUpdate: string;
     public toastEmailWasNotSent: string;
     public toastEmailWasSent: string;
+
+    // Calendar page
+    public calFrom: string;
+    public calTo: string;
+    public calToday: string;
 }

@@ -104,6 +104,8 @@ export class En {
         projectEnd: 'Project ends',
         projectGoBack: 'Go back',
         projectHeader: 'Project page',
+        projectOpenInNewTab: 'Open in new tab',
+        projectClipBoard: 'Copy to clipboard',
         //Volunteers page
         volunteersHeader: 'Volunteers page',
         volunteersYourVolunteers: 'Your project volunteers',
@@ -279,6 +281,11 @@ export class En {
         toastUpdatedSuccessfuly: 'Project updated successfuly!',
         toastFailedToUpdate: 'Failed to update project!',
         toastEmailWasNotSent: 'Email was not sent!',
-        toastEmailWasSent: 'Email was sent!'
+        toastEmailWasSent: 'Email was sent!',
+
+        // Calendar page
+        calFrom: 'From',
+        calTo: 'To',
+        calToday: 'Today'
     }
 }

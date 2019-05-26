@@ -29,7 +29,9 @@ export class ProjectPage implements OnInit {
   projectStart: string = Language.Lang.projectStart;
   projectEnd: string = Language.Lang.projectEnd;
   projectGoBack: string = Language.Lang.projectGoBack;
-
+  ClipBoard: string = Language.Lang.projectClipBoard;
+  NewTab: string = Language.Lang.projectOpenInNewTab;
+  
   user: User = new User();
   project: Project;
   volunteer: Volunteer = new Volunteer();

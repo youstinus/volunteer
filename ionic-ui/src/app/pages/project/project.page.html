@@ -57,7 +57,7 @@
               <div *ngIf="isWebsiteNotEmpty">
                 <ion-card class="myCard web-clip tooltip">
                   <ion-item lines="none" (click)="onSourceClicked(project.website)">
-                    <span class="tooltiptext">Open in new page</span>
+                    <span class="tooltiptext">{{NewTab}}</span>
                     <ion-icon name="link" slot="start"></ion-icon>
                     <ion-label>
                       {{project.website}}
@@ -67,7 +67,7 @@
               </div>
               <ion-card class="myCard phone-clip tooltip">
                 <ion-item lines="none" (click)="onPhoneClicked(project.phone)">
-                  <span class="tooltiptext">Copy to clipboard</span>
+                  <span class="tooltiptext">{{ClipBoard}}</span>
                   <ion-icon name="md-call" slot="start"></ion-icon>
                   <ion-label>
                     {{project.phone}}
@@ -77,7 +77,7 @@
               <div *ngIf="isLocationNotEmpty">
                 <ion-card class="myCard phone-clip tooltip">
                   <ion-item lines="none" (click)="onPhoneClicked(project.location)">
-                    <span class="tooltiptext">Copy to clipboard</span>
+                    <span class="tooltiptext">{{ClipBoard}}</span>
                     <ion-icon name="pin" slot="start"></ion-icon>
                     <ion-label>
                       {{project.location}}
@@ -87,7 +87,7 @@
               </div>
               <ion-card class="myCard email-clip tooltip">
                 <ion-item lines="none" (click)="onEmailClicked(project.email)">
-                  <span class="tooltiptext">Copy to clipboard</span>
+                  <span class="tooltiptext">{{ClipBoard}}</span>
                   <ion-icon name="ios-mail" slot="start"></ion-icon>
                   <ion-label>
                     {{project.email}}

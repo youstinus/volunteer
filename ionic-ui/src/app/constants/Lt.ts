@@ -104,6 +104,8 @@ export class Lt {
         projectEnd: 'Projektas baigsis',
         projectGoBack: 'Grįžti',
         projectHeader: 'Projekto puslapis',
+        projectOpenInNewTab: 'Atidaryti naujame lange',
+        projectClipBoard: 'Nukopijuoti į iškarpinę',
         //Volunteers page
         volunteersHeader: 'Savanorių puslpapis',
         volunteersYourVolunteers: 'Jūsų projekto savanoriai',
@@ -280,6 +282,11 @@ export class Lt {
         toastUpdatedSuccessfuly: 'Projektas sėkmingai atnaujintas!',
         toastFailedToUpdate: 'Projekto atnaujinti nepavyko!',
         toastEmailWasNotSent: 'Elektroninis laiškas nebuvo išsiųstas!',
-        toastEmailWasSent: 'Elektroninis laiškas sėkmingai išsiųstas!'
+        toastEmailWasSent: 'Elektroninis laiškas sėkmingai išsiųstas!',
+
+        // Calendar page
+        calFrom: 'Nuo',
+        calTo: 'Iki',
+        calToday: 'Šiandien'
     }
 }
