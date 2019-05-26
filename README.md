@@ -1,5 +1,5 @@
 <p>
-    <img src="./ionic-ui/resources/icon.png" height="80" align="middle"><h1 align="center">Volunteering system</h1></img>    
+    <img src="./ionic-ui/resources/icon.png" height="80" align="middle">Volunteering system</img>    
 </p>
 
 <p align="center">
