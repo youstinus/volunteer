@@ -1,6 +1,12 @@
 ## Volunteering system
-[![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=v1.4)](https://travis-ci.org/youstinus/volunteer)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<p align="center">
+    <img src="./ionic-ui/resources/icon.png" height="130">
+</p>
+<p align="center">
+    [![Build Status](https://travis-ci.org/youstinus/volunteer.svg?branch=v1.4)](https://travis-ci.org/youstinus/volunteer)
+    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</p>
 
 ## Content
 - [Technologies](#technologies)
@@ -10,6 +16,7 @@
 - [Use and start MSSQL database with SSMS](#use-mssql-database)
 - [Use Heroku registry to publish .NET Core as Docker container](#use-heroku)
 - [How to use Docker](#use-docker)
+- [Continous integration using Travis-CI](#continous-integration)
 
 ***
 ***
