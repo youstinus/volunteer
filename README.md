@@ -17,6 +17,8 @@
         <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/youstinus/volunteer.svg"></a>
     <a href="https://github.com/youstinus/volunteer/issues">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/youstinus/volunteer.svg"></a>
+    <a href="https://github.com/youstinus/volunteer/wiki/Titulinis">
+        <img src="https://img.shields.io/badge/wiki-docs-blue.svg"></a>
 </p>
 
 ## Content
