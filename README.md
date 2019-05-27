@@ -3,21 +3,27 @@
 </h1>
 
 <p align="center">
-    <a href="https://github.com/youstinus/volunteer/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/youstinus/volunteer.svg" /></a>
-    <a href="https://github.com/youstinus/volunteer/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/w/youstinus/volunteer.svg" alt="GitHub commit activity"></a>
     <a href="https://travis-ci.org/youstinus/volunteer">
         <img src="https://img.shields.io/travis/youstinus/volunteer/v1.4.svg" alt="build status"></a>
     <a href="https://github.com/youstinus/volunteer/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/youstinus/volunteer.svg" alt="license"></a>
+    <a href="https://volunteering.ga">
+        <img alt="Website" src="https://img.shields.io/website/https/volunteering.ga.svg"></a>
     <a href="https://github.com/youstinus/volunteer/releases">
         <img src="https://img.shields.io/github/downloads/youstinus/volunteer/total.svg" alt="GitHub All Releases"></a>
+    <a href="https://github.com/youstinus/volunteer/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/youstinus/volunteer.svg" /></a>
+    <a href="https://github.com/youstinus/volunteer/commits/master">
+        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/youstinus/volunteer.svg"></a>
+    <a href="https://github.com/youstinus/volunteer/issues">
+        <img alt="GitHub issues" src="https://img.shields.io/github/issues/youstinus/volunteer.svg"></a>
+    <a href="https://github.com/youstinus/volunteer/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/w/youstinus/volunteer.svg" alt="GitHub commit activity"></a>
 </p>
 
 ## Content
 - [Technologies](#technologies)
-- [Build .NET Core as Docker container](#run-webapi)
+- [Build .NET Core as Docker container](#use-net-core)
 - [Build Ionic 4 Framework as Android, iOS or Web App](#use-ionic-4)
 - [Use swagger with back-end services](#use-swagger)
 - [Use and start MSSQL database with SSMS](#use-mssql-database)
@@ -25,27 +31,27 @@
 - [How to use Docker](#use-docker)
 - [Continous integration using Travis-CI](#continous-integration)
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Technologies
-- .NET Core
-- Entity Framework
-- Swagger
-- JWT
-- Ionic 4 Framework
-- Angular 7
-- Heroku
-- Travis-CI
-- Firebase
-- PostgreSQL
-
-&nbsp;
+- [.NET Core](https://dotnet.microsoft.com/download)
+- [Entity Framework](https://docs.microsoft.com/en-us/ef/)
+- [Swagger](https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio)
+- [JWT](https://jwt.io/)
+- [Ionic 4 Framework](https://ionicframework.com/)
+- [Angular 7](https://angular.io/)
+- [Heroku](https://www.heroku.com/)
+- [Travis-CI](https://travis-ci.org/)
+- [Firebase](https://firebase.google.com/)
+- [PostgreSQL](https://firebase.google.com/)
 
 ***
 
-## Run WebAPI
+&nbsp;
+
+## Use .NET Core
 
 #### Create Dockerfile from ./server/WebAPI/   
 ```
@@ -69,9 +75,9 @@ docker build
 docker run -p 80:80 <IMAGE_TAG>
 ```
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Use Ionic 4
 
@@ -124,9 +130,9 @@ Alternatively add browser and build using cordova
 To run localy   
 `ionic serve`   
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Use Swagger
 
@@ -137,9 +143,9 @@ Press authenticate button at the top
 Paste token value like that: `Bearer <BEARER_TOKEN>`   
 Use all api while authenticated   
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Use MSSQL database
 
@@ -167,9 +173,9 @@ Run WebAPI projects with IIS Express
 Browser should open with swagger on url:   
 `https://localhost:44300/swagger`   
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Use Heroku
 
@@ -192,9 +198,9 @@ heroku container:push web -a <APP_NAME>
 heroku container:release web -a <APP_NAME>
 ```
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Use docker   
 
@@ -225,9 +231,9 @@ Stop container:
 Start existing container:   
 `docker start <CONTAINER_TAG>`   
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 # Continous integration
 
@@ -236,9 +242,9 @@ Start existing container:
 Travis.yml can be found inside root directory  
 All scripts that build, test, deploy and perform other actions stored inside scripts directory   
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Base configurations
 
@@ -285,9 +291,9 @@ matrix:
   include:
 ```
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## .NET Core WebAPI build pipeline
 
@@ -321,9 +327,9 @@ matrix:
 - publishing to heroku as container
 - releasing container publicly
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Ionic Framework 4 website build pipeline
 
@@ -370,9 +376,9 @@ matrix:
 - publishes to firebase
 - adds static website to github as release zipped
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Ionic Framework 4 Android build pipeline
 
@@ -443,9 +449,9 @@ matrix:
 - signs apk with given key
 - publish release on github as signed apk
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 ## Ionic Framework 4 iOS build pipeline
 
@@ -492,8 +498,8 @@ matrix:
 - build iOS application using cordova
 - publish app zipped on github releases page
 
-&nbsp;
-
 ***
+
+&nbsp;
 
 Platypus (c) 2019
