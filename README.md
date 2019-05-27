@@ -25,7 +25,8 @@
 - [How to use Docker](#use-docker)
 - [Continous integration using Travis-CI](#continous-integration)
 
-***
+&nbsp;
+
 ***
 
 ## Technologies
@@ -40,12 +41,13 @@
 - Firebase
 - PostgreSQL
 
-***
+&nbsp;
+
 ***
 
 ## Run WebAPI
 
-Create Dockerfile from ./server/WebAPI/   
+#### Create Dockerfile from ./server/WebAPI/   
 ```
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /app
@@ -54,42 +56,45 @@ ENV ASPNETCORE_ENVIRONMENT docker
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebAPI.dll
 ```
 
-Build and test .NET Core project from ./server/   
+#### Build and test .NET Core project from ./server/   
 ```
 dotnet build
 dotnet test
 dotnet publish ./WebAPI -c Release -o ./bin/Docker
 ```
 
-Create docker image from ./server/WebAPI/   
-`docker build`  
-Run docker image:  
-`docker run -p 80:80 <IMAGE_TAG>`  
+#### Run docker image from ./server/WebAPI/   
+```
+docker build
+docker run -p 80:80 <IMAGE_TAG>
+```
 
-***
+&nbsp;
+
 ***
 
 ## Use Ionic 4
 
 ### Test
-Unit tests:   
-`ng test`   
-or   
-`npm run test`   
-e2e tests:   
+Run unit tests:   
+`ng test` or `npm run test`   
+Run e2e tests:   
 ```
 ionic serve
 npm run e2e
 ```
 
+&nbsp;
+
 ### Build android
-Add android platform and build apk:   
+
+#### Add android platform and build apk:   
 ```
 ionic cordova add android
 ionic cordova build android --prod --release
 ```
 
-Sign apk:   
+#### Sign apk:   
 Generate keystore   
 `keytool -genkey -v -keystore key.keystore -alias alias -keyalg RSA -keysize 2048 -validity 10000`   
 Sign   
@@ -99,12 +104,17 @@ Pack APK
 Verify APK   
 `%LocalAppData%\Android\Sdk\build-tools\28.0.3\apksigner verify app-release-signed.apk`   
 
+&nbsp;
+
 ### Build iOS
-Add iOS platform and build:   
+
+#### Add iOS platform and build:   
 ```
 ionic cordova add ios
 ionic cordova build ios --prod --release
 ```
+
+&nbsp;
 
 ### Build web app to ./ionic-ui/www/
 `ng build --prod --base-href .`   
@@ -114,7 +124,8 @@ Alternatively add browser and build using cordova
 To run localy   
 `ionic serve`   
 
-***
+&nbsp;
+
 ***
 
 ## Use Swagger
@@ -126,15 +137,19 @@ Press authenticate button at the top
 Paste token value like that: `Bearer <BEARER_TOKEN>`   
 Use all api while authenticated   
 
-***
+&nbsp;
+
 ***
 
 ## Use MSSQL database
+
 ### Prepare MSSQL server database   
 Using Entity Framework with migrations from models   
 Download and install MSSQL Express database (remember connections at the end of installation)   
 Download SSMS (Microsoft SQL Server Management Studio)   
 Connect to database using SSMS by providing server name   
+
+&nbsp;
 
 ### Prepare back-end service
 Open appsettings.json and edit connection string to match your current database    
@@ -152,17 +167,21 @@ Run WebAPI projects with IIS Express
 Browser should open with swagger on url:   
 `https://localhost:44300/swagger`   
 
-***
+&nbsp;
+
 ***
 
 ## Use Heroku
-Login    
+
+#### Login    
 Open CMD   
 `heroku container:login`  
 `heroku login`  
 `docker login`  
 
-Build and deploy server   
+&nbsp;
+
+#### Build and deploy server   
 ```
 cd ./server/WebAPI
 dotnet publish -c Release
@@ -173,12 +192,13 @@ heroku container:push web -a <APP_NAME>
 heroku container:release web -a <APP_NAME>
 ```
 
-***
+&nbsp;
+
 ***
 
 ## Use docker   
 
-Preparation:   
+#### Preparation:   
 Install docker, docker-compose, configure docker-compose.yml and separate Dockerfile files
 Build docker images with docker-compose:   
 `docker-compose build`   
@@ -193,7 +213,9 @@ Stop docker container with:
 And start again docker image with:   
 `docker start`   
 
-Docker commands to maintain images and containers:   
+&nbsp;
+
+#### Docker commands to maintain images and containers:   
 Check running containers:   
 `docker ps`   
 Check all containers:   
@@ -203,24 +225,24 @@ Stop container:
 Start existing container:   
 `docker start <CONTAINER_TAG>`   
 
+&nbsp;
 
 ***
-***
-***
 
+# Continous integration
 
-## Continous integration
-
-### Using Travis-CI with projects
+## Using Travis-CI with projects
 
 Travis.yml can be found inside root directory  
 All scripts that build, test, deploy and perform other actions stored inside scripts directory   
 
+&nbsp;
+
 ***
 
-### Base configurations
-Define what branches to build:  
+## Base configurations
 
+#### Define what branches to build
 ```
 branches:   
   only:   
@@ -228,18 +250,26 @@ branches:
   - /^v.*$/
 ```
 
+&nbsp;
+
 Using branches only: deploy and git tags that match v letter and any symbols example: v1.0  
+#### Define main language:  
+`language: node_js`
 
-Defined main language:  
-`language: node_js`  
+&nbsp;
 
-Defined NodeJS version:  
+#### Define NodeJS version:
 `node_js:  
-    - "10.9.0"`  
+    - "10.9.0"`
 
-Defined `sudo: false`  
+&nbsp;
 
-Define notifications:  
+#### Define privileges
+`sudo: false`
+
+&nbsp;
+
+#### Define notifications:
 ```
 notifications:
   email:
@@ -247,11 +277,19 @@ notifications:
     on_failure: never
 ```
 
-Defined matrix for building separately back-end, front-end for web, android and ios.  
+&nbsp;
+
+#### Define matrix for building separately back-end, front-end for web, android and ios.
+```
+matrix:
+  include:
+```
+
+&nbsp;
 
 ***
 
-### .NET Core WebAPI build pipeline
+## .NET Core WebAPI build pipeline
 
 ```
   - 
@@ -272,7 +310,10 @@ Defined matrix for building separately back-end, front-end for web, android and 
     after_success:
     - "./scripts/after-success.bat"
 ```
-What scripts do:
+
+&nbsp;
+
+#### What scripts do:
 - building solution
 - testing
 - building as publish/release binary
@@ -280,9 +321,11 @@ What scripts do:
 - publishing to heroku as container
 - releasing container publicly
 
+&nbsp;
+
 ***
 
-### Ionic Framework 4 website build pipeline
+## Ionic Framework 4 website build pipeline
 
 ```
   -
@@ -316,7 +359,10 @@ What scripts do:
         branch: deploy
         tags: true
 ```
-What scripts do:
+
+&nbsp;
+
+#### What scripts do:
 - define environment
 - install angular and firebase
 - build static website
@@ -324,9 +370,11 @@ What scripts do:
 - publishes to firebase
 - adds static website to github as release zipped
 
+&nbsp;
+
 ***
 
-### Ionic Framework 4 Android build pipeline
+## Ionic Framework 4 Android build pipeline
 
 ```
   -
@@ -384,7 +432,10 @@ What scripts do:
         branch: deploy
         tags: true
 ```
-What scripts do:
+
+&nbsp;
+
+#### What scripts do:
 - define environment
 - accept lissences
 - install dependencies
@@ -392,9 +443,11 @@ What scripts do:
 - signs apk with given key
 - publish release on github as signed apk
 
+&nbsp;
+
 ***
 
-### Ionic Framework 4 iOS build pipeline
+## Ionic Framework 4 iOS build pipeline
 
 ```
   -
@@ -431,11 +484,15 @@ What scripts do:
         tags: true
 ```
 
-What scripts do:
+&nbsp;
+
+#### What scripts do:
 - define environment
 - installs dependencies
 - build iOS application using cordova
 - publish app zipped on github releases page
+
+&nbsp;
 
 ***
 
