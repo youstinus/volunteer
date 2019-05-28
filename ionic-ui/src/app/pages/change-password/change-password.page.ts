@@ -106,6 +106,14 @@ export class ChangePasswordPage implements OnInit {
     }
   }
 
+  onSubmit() {
+    if(this.forgotPass){
+      this.resetPassword();
+    } else {
+      this.changePassword();
+    }
+  }
+
   resetPassword() {
     var passwords = this.changePasswordForm.value;
     if (passwords.password == passwords.password1) {

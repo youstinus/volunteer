@@ -6,6 +6,8 @@ ion-content {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
 .input {
   position: absolute;
   max-width: 100%;
@@ -86,7 +88,7 @@ ion-item {
 
 ion-label{
   font-family: "Georgia", serif;
- // margin-left: 10px;
+  // margin-left: 10px;
   font-size: 20px;
 }
 
@@ -101,30 +103,14 @@ ion-button {
   cursor: pointer;
   text-transform: uppercase;
 }
-.col img {
-  max-height: 100%;
-  max-width: 100%;
-  display: block;
-  margin: auto;
-}
-body {
-  cursor: url('https://ionicframework.com/img/finger.png'), auto;
+
+.error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
-img{
-  display:block !important;
-  max-width:100% !important;
-  height:auto !important;
-}
-body {
-  cursor: url('https://ionicframework.com/img/finger.png'), auto;
-}
 
-img{
-  display:block !important;
-  height:auto !important;
-}
 
-.toast{
-  --max-width: 1400px;
-}

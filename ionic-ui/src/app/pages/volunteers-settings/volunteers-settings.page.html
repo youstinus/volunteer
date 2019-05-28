@@ -7,17 +7,20 @@
             <ion-card-header>
                 <ion-card class="myCard" lines="none">
 
-                    <div  class="values col col-50"><img [src]="volunteer.imageUrl" alt="" (error)="updateUrl($event)"
-                                                        class="center"
-                                                        style="height: 200px; width: 400px;"/></div>
-
-                    <ion-card-content>
+                    <div class="tools col col-50">
                         <ion-item lines="none">
-                            <ion-label color="dark" position="floating">{{volSettingsImage}}</ion-label>
-                            <ion-input class="myInput" type="text" (input)="onSearchChange($event.target.value)"
-                                       formControlName="imageUrl"  value="{{volunteer.imageUrl}}"></ion-input>
+                            <img *ngIf="backupImageUrl" [src]="backupImageUrl" (error)="updateUrl()" 
+                                 (!error)="updateUrl2()" class="center" style="height: 200px; width: 400px" />
                         </ion-item>
-                    </ion-card-content>
+                        <div>
+                            <ion-item lines="none">
+                                <ion-label color="black" position="floating">{{volSettingsImage}}</ion-label>
+                                <ion-input type="text" class="form-control"
+                                           (ionChange)="onSearchChange($event.target.value)" debounce="1000"
+                                           formControlName="imageUrl" value={{volunteer.imageUrl}}></ion-input>
+                            </ion-item>
+                        </div>
+                    </div>
                 </ion-card>
             </ion-card-header>
 
@@ -28,6 +31,7 @@
                     </ion-label>
                     <ion-input formControlName="firstName" clearInput value={{volunteer.firstName}}></ion-input>
                 </ion-item>
+
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
@@ -50,6 +54,7 @@
                     <ion-input clearInput formControlName="email" value={{volunteer.email}}></ion-input>
                 </ion-item>
 
+
                 <ion-item lines="none">
                     <ion-label>
                         <h1>{{volSettingsDescription}}:</h1>
@@ -62,18 +67,19 @@
                 </ion-item>
 
             </ion-card-content>
+
         </ion-card>
 
-        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveVolunteer()">
+        <ion-button [disabled]="!onSaveForm.valid" icon-left size="medium" expand="full" shape="round" color="dark " (click)="saveVolunteer()">
             {{volSettingsSaveChanges}}
         </ion-button>
         <ion-card-content>
 
-            <ion-button (click)="onChangePass()" style="font-size: 12px" size="small" color="dark" shape="round">
+            <ion-button (click)="onChangePass()" style="font-size: 11px" size="small" color="dark" shape="round">
                 {{volSettingsChangePass}}
             </ion-button>
 
-            <ion-button (click)="onDelete()" style=" float: right; font-size: 12px" size="small" color="dark"
+            <ion-button (click)="onDelete()" style=" float: right; font-size: 11px" size="small" color="dark"
                         shape="round">
                 {{volSettingsDeleteAcc}}
             </ion-button>

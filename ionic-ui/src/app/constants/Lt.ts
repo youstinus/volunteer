@@ -65,6 +65,7 @@ export class Lt {
         loginUnSuccessfulEmail: 'Laiško nepavyko išsiųsti',
         loginWrongHeader: 'Prisijungti nepavyko',
         loginWrongMessage: 'Neteisingi prisijungimo vardas ir slaptažodis!',
+        loginSuccessLogin:'Sėkmingai prisijungėte svetainėje',
         //Registration page
         registrationTitle: 'Susikurkite vartotojo paskyrą',
         registrationInformation: 'Jūsų informacija',
@@ -103,6 +104,8 @@ export class Lt {
         projectEnd: 'Projektas baigsis',
         projectGoBack: 'Grįžti',
         projectHeader: 'Projekto puslapis',
+        projectOpenInNewTab: 'Atidaryti naujame lange',
+        projectClipBoard: 'Nukopijuoti į iškarpinę',
         //Volunteers page
         volunteersHeader: 'Savanorių puslpapis',
         volunteersYourVolunteers: 'Jūsų projekto savanoriai',
@@ -132,6 +135,7 @@ export class Lt {
         newPojectAlertNotHeader: 'Projektas nebuvo sukurtas',
         newPojectAlertNotMessage: 'Prašome užpildykite tuščius laukus',
         newPojectAlertOk: 'Gerai',
+        newProjectFailedDates: 'Jūsų projekto pabaigos data yra ankstesnė nei pradžios',
         //Edit project
         editProjectDelete: 'Ištrinti',
         editProjectAlertEditHeader: 'Atnaujinimas nepavyko',
@@ -144,7 +148,7 @@ export class Lt {
         changeLocation: 'Keisti vietovę',
         editSave: 'Išsaugoti pakeitimus',
         editSucesfull: 'Sėkmingai išsaugota',
-        editConfirmDelete: 'Ar tikrai norite ištrynti šį projektą?',
+        editConfirmDelete: 'Ar tikrai norite ištrinti šį projektą?',
         yes: 'Taip',
         no: 'Ne',
         //registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
@@ -172,7 +176,7 @@ export class Lt {
         cr21: 'Prieiga prie duomenų',
         cr22: 'Jūs turite teisę prašyti informacijos, kurią mes laikome apie jus. Jei norite kopijuoti kai kurias ar visas savo asmeninę informaciją, vadovaukitės šios politikos pabaigoje pateiktomis instrukcijomis',
         cr23: 'savanoriškos informacijos apie naudotojo paskyros informaciją galima atgauti atlikus šiuos veiksmus:',
-        cr24: '1.Apsilankant https://login.volunteering.ga/ ir įveskite savo vartotojo vardą ir slaptažodį.',
+        cr24: '1.Apsilankant https://volunteering.ga/login ir įveskite savo vartotojo vardą ir slaptažodį.',
         cr25: '2.Prisijunkite prie paskyros nustatymų.',
         cr26: '3. Spustelėkite „Siųsti man mano duomenis“',
         cr27: 'Asmens informacijos saugojimas',
@@ -182,8 +186,8 @@ export class Lt {
         cr31: 'Jei ištrinti prašoma ar kitaip reikalaujama, mes anonimizuosime duomenų subjektų duomenis ir / arba pašalinsime jų informaciją iš viešai prieinamų svetainių, jei duomenų ištrynimas nutrauktų esmines sistemas arba pažeistų žurnalus ar įrašus, reikalingus veiklai, plėtrai ar archyvavimui „TeamPlatypus“ projekto įrašai.',
         cr32: 'Jei norite prašyti ištrinti paskyrą ir susijusius duomenis, atlikite šiuos veiksmus:',
         cr33: '1.Apsilankykite https://volunteering.ga/.',
-        cr34: '2.Prisijunkite ir eikite į nustatymus.',
-        cr35: '3.Paspauskite „Prašyti paskyros ištrynimo“.',
+        cr34: '2. Prisijunkite ir eikite į nustatymus.',
+        cr35: '3. Paspauskite „Prašyti paskyros ištrynimo“.',
         cr36: 'Su jūsų informacija susijusios teisės',
         cr37: 'Jūs galite turėti tam tikras teises pagal duomenų apsaugos įstatymus dėl asmeninės informacijos, kurią mes laikome apie jus. Visų pirma, jūs galite turėti teisę:',
         cr38: 'prašyti asmeninės informacijos, kurią mes laikome, kopiją;',
@@ -198,6 +202,8 @@ export class Lt {
         cr47: 'Nors dauguma pakeitimų gali būti nedideli, volunteering.ga kartais gali keisti savo privatumo politiką ir volunteering.ga skatina lankytojus dažnai patikrinti šį puslapį dėl bet kokių jo privatumo politikos pakeitimų. Jūsų tęstinis šio tinklalapio naudojimas po bet kokių šios privatumo politikos pakeitimų bus jūsų pritarimas tokiems pakeitimams.',
         cr48: 'Kontaktai',
         cr49: 'Prašome susisiekti su mumis, jei turite kokių nors klausimų apie mūsų privatumo politiką ar informaciją, kurią mes laikome apie jus elektroniniu paštu teamPlatypus@volunteering.ga.',
+        crVisit: '1. Apsilankykite',
+        crEnter: ' ir įveskite savo vartotojo vardą ir slaptažodį',
         // Volunteers settings page
         volSettingsHeader: 'Savanario parametrų keitimas',
         volSettingsImage: 'Jūsų nuotraukos nuoroda',
@@ -216,7 +222,7 @@ export class Lt {
         changePassHeader: 'PASIKEISKITE SLAPTAŽODĮ',
         changePassFieldSet: 'Reikalinga informacija ',
         changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
-        changePassOldPassword: 'Senas password',
+        changePassOldPassword: 'Senas slaptažodis',
         changePassNewPassword: 'Naujas slaptažodis',
         changePassConfirmPassword: 'Patvirtinkite slaptažodį',
         changePassButton: 'Keisti slaptažodį',
@@ -248,7 +254,11 @@ export class Lt {
         orgSettingsDeleteCancel: 'Grįžti',
         orgSettingsDeleted: 'Paskyra ištrinta',
         orgSettingsCannotGetOrganization: 'Negalime užkrauti Jūsų duomenų iš duomenų bazės',
-
+        orgRequiredField3: 'Šis laukas yra privalomas ir turi būti sudarytas bent iš trijų simbolių',
+        orgRequiredEmail: 'Šis laukas yra privalomas ir validus el-pašto adresas turi būti pateiktas',
+        orgCaution: 'Pavadinimo, nuotraukos ir jūsų organizacijos el-paštas yra privalomi norint, kad jūsų organizacija būtų matoma organizacijų sąraše',
+        orgSuccessUpdate: 'Informacija sėkmingai atnaujinta',
+        orgFailUpdate: 'Informacijos atnaujinimas nepavyko',
         // Organization page
         orgHeader: 'Organizacijos puslapis',
         orgGoToProject: 'Eiti į projekto puslapį',
@@ -260,9 +270,11 @@ export class Lt {
         orgProjects: 'Projektai',
         orgNoComments: ' Komentarų nėra',
         orgNoProjects: 'Projektų nėra',
-        // OrganizationS page
         orgsHeader: 'Organizacijos',
-
+        //Not found page
+        notFoundh2: ' Puslapis nerastas',
+        notFoundpar: 'Puslapis, kurio ieškote, nerastas. Galbūt jis buvo ištrintas, pasikeitė jo pavadinimas arba jis tapo laikinai neprieinamas',
+        notFoundGoMain: 'Grįžkite į pagrindinį puslapį',
 
         // Toast messages
         toastDeletedSuccessfuly: 'Projektas sėkmingai pašalintas!',
@@ -270,6 +282,11 @@ export class Lt {
         toastUpdatedSuccessfuly: 'Projektas sėkmingai atnaujintas!',
         toastFailedToUpdate: 'Projekto atnaujinti nepavyko!',
         toastEmailWasNotSent: 'Elektroninis laiškas nebuvo išsiųstas!',
-        toastEmailWasSent: 'Elektroninis laiškas sėkmingai išsiųstas!'
+        toastEmailWasSent: 'Elektroninis laiškas sėkmingai išsiųstas!',
+
+        // Calendar page
+        calFrom: 'Nuo',
+        calTo: 'Iki',
+        calToday: 'Šiandien'
     }
 }

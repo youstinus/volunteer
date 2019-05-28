@@ -30,6 +30,8 @@ export class LoginPage implements OnInit {
   loginUnSuccessfulEmail: string = Language.Lang.loginUnSuccessfulEmail;
   loginWrongHeader: string = Language.Lang.loginWrongHeader;
   loginWrongMessage: string = Language.Lang.loginWrongMessage;
+  loginSuccessLogin: string = Language.Lang.loginSuccessLogin;
+  toastClose: string = Language.Lang.toastClose;
 
   public onLoginForm: FormGroup;
   private user: User;
@@ -67,13 +69,13 @@ export class LoginPage implements OnInit {
       this.user = user;
       if (this.user != null && this.user.token != null) {
         this.usersService.setUser(user);
-        this.toastService.presentToast('Successfuly signed in', Strings.Color_Success);
+        this.toastService.presentToastClose(this.loginSuccessLogin, Strings.Color_Success, this.toastClose);
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
       } else {
-        this.toastService.presentToast(this.loginWrongMessage, Strings.Color_Danger);
+        this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger,this.toastClose);
       }
     }, error1 => {
-      this.toastService.presentToast(this.loginWrongMessage, Strings.Color_Danger);
+      this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger,this.toastClose);
     });
   }
 

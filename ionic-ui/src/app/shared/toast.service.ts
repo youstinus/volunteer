@@ -15,4 +15,21 @@ export class ToastService {
         });
         toast.present();
     }
+
+    public async presentToastClose(message: string, color: string, buttonText: string) {
+        const toast = await this.toastController.create({
+            message: message,
+            duration: 3000,
+            color: color,
+            translucent: true,
+            buttons: [
+                {
+                    text: buttonText,
+                    role: 'cancel',
+                    handler: () => {}
+                }
+            ]
+        });
+        toast.present();
+    }
 }

@@ -57,7 +57,9 @@ export class PrivacyPage implements OnInit {
   cr47: string=Language.Lang.cr47;
   cr48: string=Language.Lang.cr48;
   cr49: string=Language.Lang.cr49;
-
+  crVisit: string =Language.Lang.crVisit;
+  crEnter: string = Language.Lang.crEnter;
+  title: string = Language.Lang.menuPrivacyPolicy;
   constructor() { }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-not-found',
@@ -8,6 +9,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class NotFoundPage implements OnInit, OnDestroy {
 
+  notFoundh2: string = Language.Lang.notFoundh2;
+  notFoundpar: string = Language.Lang.notFoundpar;
+  notFoundGoMain: string = Language.Lang.notFoundGoMain;
   constructor() { }
 
   ngOnInit() {

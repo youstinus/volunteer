@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Project } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ActivatedRoute } from '@angular/router';
+import { Language } from 'src/app/utilities/Language';
 
 @Component({
   selector: 'app-calendar',
@@ -14,13 +15,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
+  calfrom: string = Language.Lang.calFrom;
+  calto: string = Language.Lang.calTo;
+  calToday: string = Language.Lang.calToday;
   projects: Project[];
   events3: Project[];
   private subscription: Subscription;
   private type: String;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
-  eventSource: { title: string, startTime: Date, endTime: Date, id: number }[] = [];
+  eventSource: { title: string, startTime: Date, endTime: Date, endTime2: Date, id: number }[] = [];
   constructor(public navCtrl: NavController, private projectsService: ProjectsService, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute) { }
   ngOnInit() {
     this.type = this.route.snapshot.params['type'];
@@ -39,11 +43,11 @@ export class CalendarPage implements OnInit {
   async onEventSelected(event) {
     // Use Angular date pipe for conversion
     let start = formatDate(event.startTime, 'medium', this.locale);
-    let end = formatDate(event.endTime, 'medium', this.locale);
+    let end = formatDate(event.endTime2, 'medium', this.locale);
     const alert = await this.alertCtrl.create({
       header: event.title,
       subHeader: event.desc,
-      message: 'Nuo: ' + start + '<br><br>Iki: ' + end,
+      message: this.calfrom + ': ' + start + '<br><br>' + this.calto + ': ' + end,
       buttons: [{
         text: "Details",
         handler: () => {
@@ -90,7 +94,8 @@ export class CalendarPage implements OnInit {
           title: value.title,
           startTime: new Date(value.start),
           endTime: new Date(value.start), // #EDITED TO START BECAUSE THERE IS TOO MUCH OF SPAM IN CALENDAR
-          id: value.id
+          id: value.id,
+          endTime2: new Date(value.end)
         });
       });
       this.myCal.loadEvents();

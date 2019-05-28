@@ -6,16 +6,22 @@
         <ion-card>
             <ion-card-header>
                 <ion-card class="myCard" lines="none">
-                    <img [src]="organization.imageUrl" (error)="updateUrl($event)" class="center"
-                         style="height: 200px; width: 400px;"/>
-                    <ion-card-content>
+                    &nbsp;
+                    <div class="tools col col-50">
                         <ion-item lines="none">
-                            <ion-label color="dark" position="floating">{{orgSettingsImage}}</ion-label>
-                            <ion-input class="myInput" type="text"
-                                       (input)="onSearchChange($event.target.value)"
-                                       formControlName="imageUrl" value="{{organization.imageUrl}}"></ion-input>
+                            <img *ngIf="backupImageUrl" [src]="backupImageUrl" (error)="updateUrl()"
+                                (!error)="updateUrl2()" class="center" style="height: 200px; width: 400px" />
                         </ion-item>
-                    </ion-card-content>
+                        <div>
+                            <ion-item lines="none">
+                                <ion-label color="black" position="floating">{{orgSettingsImage}}</ion-label>
+                                <ion-input type="text" class="form-control"
+                                    (ionChange)="onSearchChange($event.target.value)" debounce="1000"
+                                    formControlName="imageUrl" value={{organization.imageUrl}}></ion-input>
+                            </ion-item>
+                        </div>
+                    </div>
+
                 </ion-card>
             </ion-card-header>
 
@@ -26,6 +32,11 @@
                     </ion-label>
                     <ion-input formControlName="title" clearInput value={{organization.title}}></ion-input>
                 </ion-item>
+                <p ion-text *ngIf="onSaveForm.get('title').touched && onSaveForm.get('title').errors">
+                    <ion-text class="error-message">
+                        {{orgRequiredField3}}
+                    </ion-text>
+                </p>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
@@ -46,6 +57,10 @@
                     </ion-label>
                     <ion-input formControlName="email" clearInput value={{organization.email}}></ion-input>
                 </ion-item>
+                <p ion-text *ngIf="onSaveForm.get('email').touched && onSaveForm.get('email').errors">
+                    <ion-text class="error-message">
+                        {{orgRequiredEmail}} </ion-text>
+                </p>
 
                 <ion-item no-padding class="animated fadeInUp">
                     <ion-label position="floating">
@@ -68,8 +83,15 @@
 
             </ion-card-content>
         </ion-card>
-
-        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveOrganization()">
+        <p ion-text
+            *ngIf="((onSaveForm.get('email').touched && onSaveForm.get('email').errors)||(onSaveForm.get('title').touched && onSaveForm.get('title').errors) ||
+        (onSaveForm.get('imageUrl').touched && onSaveForm.get('imageUrl').errors) || organization.imageUrl=== null || organization.imageUrl=== '' )">
+            <ion-text class="caution-message">
+                {{orgCaution}}
+            </ion-text>
+        </p>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" [disabled]="!onSaveForm.valid"
+            (click)="saveOrganization()">
             {{orgSettingsSaveChanges}}
         </ion-button>
         <ion-card-content>
@@ -79,7 +101,7 @@
             </ion-button>
 
             <ion-button style=" float: right; font-size: 12px" size="small" color="dark" shape="round"
-                        (click)="onDelete()">
+                (click)="onDelete()">
                 {{orgSettingsDeleteAcc}}
             </ion-button>
 

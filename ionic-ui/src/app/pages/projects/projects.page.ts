@@ -6,6 +6,7 @@ import { Strings } from '../../constants/Strings';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Language } from 'src/app/utilities/Language';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
     selector: 'app-projects',
@@ -28,16 +29,19 @@ export class ProjectsPage implements OnInit, OnDestroy {
     private dateNow = new Date(Date.now());
     private type: String;
     private subscription: Subscription;
+    private role: number = 4;
 
     constructor(
+        private usersService: UsersService,
         private events: Events,
         private projectsService: ProjectsService,
         private navCtrl: NavController,
         private route: ActivatedRoute
-        ) {
+    ) {
     }
 
     ngOnInit() {
+        this.getRole();
         this.type = this.route.snapshot.params['type'];
         this.loadItemsByType();
     }
@@ -50,12 +54,21 @@ export class ProjectsPage implements OnInit, OnDestroy {
         let observable: Observable<Project[]>;
         switch (this.type) {
             case 'saved':
+                if (this.role != 2) {
+                    this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+                }
                 observable = this.projectsService.getSavedItems();
                 break;
             case 'selected':
+                if (this.role != 2) {
+                    this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+                }
                 observable = this.projectsService.getSelectedItems();
                 break;
             case 'created':
+                if (this.role != 3) {
+                    this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
+                }
                 observable = this.projectsService.getCreatedItems();
                 break;
             default:
@@ -148,5 +161,20 @@ export class ProjectsPage implements OnInit, OnDestroy {
 
     getDateStyle(project: Project) {
         return project != null && new Date(project.start) < this.dateNow && new Date(project.end) > this.dateNow;
+    }
+
+    getRole() {
+        const role = this.usersService.getTokenRole();
+        if (role == 'Volunteer') {
+            this.role = 2;
+        } else if (role == 'Organization') {
+            this.role = 3;
+        } else if (role == 'Moderator') {
+            this.role = 1;
+        } else if (role == 'Admin') {
+            this.role = 0;
+        } else {
+            this.role = 4;
+        }
     }
 }

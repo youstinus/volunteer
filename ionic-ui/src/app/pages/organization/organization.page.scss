@@ -160,7 +160,13 @@ img {
   max-height: 350px !important;
   width: auto;
 }
-
+.error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
 img{
   display:block !important;
   max-width:100% !important;

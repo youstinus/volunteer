@@ -61,6 +61,7 @@ export class Lang {
     public loginUnSuccessfulEmail: string;
     public loginWrongHeader: string;
     public loginWrongMessage: string;
+    public loginSuccessLogin: string;
     //Registration page
     public registrationTitle: string;
     public registrationInformation: string;
@@ -99,6 +100,9 @@ export class Lang {
     public projectEnd: string;
     public projectGoBack: string;
     public projectHeader: string;
+    public projectClipBoard: string;
+    public projectOpenInNewTab: string;
+
     //Volunteers page
     public volunteersHeader: string;
     public volunteersYourVolunteers: string;
@@ -128,6 +132,7 @@ export class Lang {
     public newPojectAlertNotHeader: string;
     public newPojectAlertNotMessage: string;
     public newPojectAlertOk: string;
+    public newProjectFailedDates: string;
     //Edit project
     public editProjectDelete: string;
     public editProjectAlertEditHeader: string;
@@ -193,6 +198,8 @@ export class Lang {
     public cr47: string;
     public cr48: string;
     public cr49: string;
+    public crVisit: string;
+    public crEnter: string;
     // Volunteers settings page
     public volSettingsHeader: string;
     public volSettingsImage: string;
@@ -243,7 +250,11 @@ export class Lang {
     public orgSettingsAlertConfirm: string;
     public orgSettingsDeleted: string;
     public orgSettingsCannotGetOrganization: string;
-
+    public orgRequiredField3: string;
+    public orgRequiredEmail: string;
+    public orgCaution: string;
+    public orgSuccessUpdate: string;
+    public orgFailUpdate: string;
     //Organization page
     public orgHeader: string;
     public orgGoToProject: string;
@@ -255,9 +266,11 @@ export class Lang {
     public orgProjects: string;
     public orgNoComments: string;
     public orgNoProjects: string;
-    // OrganizationS page
     public orgsHeader: string;
-
+    //Not found page
+    public notFoundh2: string;
+    public notFoundpar: string;
+    public notFoundGoMain: string;
 
     // Toast messages
     public toastDeletedSuccessfuly: string;
@@ -266,4 +279,9 @@ export class Lang {
     public toastFailedToUpdate: string;
     public toastEmailWasNotSent: string;
     public toastEmailWasSent: string;
+
+    // Calendar page
+    public calFrom: string;
+    public calTo: string;
+    public calToday: string;
 }

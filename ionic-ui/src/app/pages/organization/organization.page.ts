@@ -7,7 +7,7 @@ import { OrganizationsService } from '../../services/organizations.service';
 import { NavController } from '@ionic/angular';
 import { Review } from '../../models/Review';
 import { ReviewsService } from '../../services/reviews.service';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from '../../models/User';
 import { Strings } from '../../constants/Strings';
@@ -31,7 +31,7 @@ export class OrganizationPage implements OnInit {
     orgProjects: string = Language.Lang.orgProjects;
     orgNoComments: string = Language.Lang.orgNoComments;
     orgNoProjects: string = Language.Lang.orgNoProjects;
-
+    orgRequiredField3: string = Language.Lang.orgRequiredField3;
     userId: number;
     id: number;
     reviews: Review[];
@@ -80,7 +80,7 @@ export class OrganizationPage implements OnInit {
             this.stringparse();
         },
             error1 => {
-                console.log(error1);
+                //console.log(error1);
             });
 
         this.reviewsService.get().subscribe(value1 => {
@@ -89,23 +89,21 @@ export class OrganizationPage implements OnInit {
             this.del();
         },
             error1 => {
-                console.log(error1);
+                //console.log(error1);
             });
 
         this.projectService.get().subscribe(value => {
             this.projects = value.filter(val => val.organizationId === this.userId);
 
         }, error1 => {
-            console.log(error1);
+            //console.log(error1);
         });
 
         this.onCreateForm = this.formBuilder.group({
 
             'text': [null, Validators.compose([
-                Validators.required
-            ])],
-            'title': [null, Validators.compose([
-                Validators.required
+                Validators.required,
+                Validators.minLength(3),
             ])],
             'grade': [null, Validators.compose([
                 Validators.required
@@ -119,12 +117,12 @@ export class OrganizationPage implements OnInit {
     }
 
     async onCreate() {
-        console.log(this.onCreateForm.value);
+        //console.log(this.onCreateForm.value);
         this.reviewsService.create(this.onCreateForm.value).subscribe(value => {
             this.createReview = value;
-            console.log("Review created");
+            //console.log("Review created");
         }, error1 => {
-            console.log(error1);
+            //console.log(error1);
         });
     }
 
@@ -231,9 +229,9 @@ export class OrganizationPage implements OnInit {
 
     delReview(id) {
         this.reviewsService.delete(id).subscribe(value => {
-            console.log("Review deleted");
+            //console.log("Review deleted");
         }, error1 => {
-            console.log(error1);
+            //console.log(error1);
         });
     }
 

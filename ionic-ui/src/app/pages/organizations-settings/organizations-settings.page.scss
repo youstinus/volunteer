@@ -104,3 +104,25 @@ ion-button {
   text-transform: uppercase;
 }
 
+.error-message
+{
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.caution-message{
+  font-family: "Georgia", serif;
+  color: rgb(8, 8, 8);
+  font-size: 18px;
+  text-align: center;
+  border-bottom: 5px solid #791e1e;
+  background: #c512455b !important;
+  padding: 10px !important;
+  border-radius: 10px !important;
+  position: relative; 
+  display: inline-block !important;
+  box-shadow: 1px 1px 1px #aaaaaa;
+  margin-top: 10px;
+}

@@ -11,14 +11,21 @@
         </ion-row>
     </ion-grid>
 
-    <ion-card *ngFor="let organizations of organizations" (click)="onOrganizationClicked(organizations)">
-        <img class="img" [src]="organizations.imageUrl" (error)="updateUrl(organizations)"/>
+    <ion-card *ngFor="let organization of organizations" (click)="onOrganizationClicked(organization)">
+        <div class="image-box">
+            <img class="imga" src="{{ organization.imageUrl }}" />
+        </div>
 
-        <ion-card-title style="float: bottom; text-align: center; margin-top: 10px">
-            {{organizations.title}}
-        </ion-card-title>
+        <ion-item>
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-label>{{organization.email}}</ion-label>
+        </ion-item>
 
-
+        <ion-card-content>
+            <ion-card-header>
+                <ion-card-title>{{organization.title}}</ion-card-title>
+            </ion-card-header>
+        </ion-card-content>
     </ion-card>
 </ion-content>
 
