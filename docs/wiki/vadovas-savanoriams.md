@@ -1,0 +1,1 @@
+Norėdami prisijungti ir dalyvauti organizacijų kuriamuose projektuose jūs kaip vartotojas turi prisiregistruoti į platypus programėlę internetinėje arba mobilioje erdvėje

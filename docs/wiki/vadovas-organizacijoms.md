@@ -1,0 +1,1 @@
+Norėdamas kurti projektus, pirmiausia vartotojas turi sukurti savo anketą kaip organizacija 
