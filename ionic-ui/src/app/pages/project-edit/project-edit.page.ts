@@ -104,15 +104,15 @@ export class ProjectEditPage implements OnInit {
       'location': [project.location, Validators.compose([
       ])],
       'website': [project.website, Validators.compose([
-        Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+        Validators.pattern(Strings.Website_Pattern)
       ])],
       'email': [project.email, Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern(Strings.Email_Pattern)
       ])],
       'phone': [project.phone, Validators.compose([
         Validators.required,
-        Validators.pattern('^[+0-9. ()-]*$')
+        Validators.pattern(Strings.Phone_Number_Pattern)
       ])]
     });
   }

@@ -18,6 +18,7 @@ export class Lt {
         menuSettings: 'Parametrai',
         menuMenu: 'Meniu',
         menuLogout: 'Atsijungti',
+        menuExit: 'Išeiti',
         // Main page
         mainTitle: 'Savanoriavimo sistema',
         mainEvents: 'Artimiausi projektai',

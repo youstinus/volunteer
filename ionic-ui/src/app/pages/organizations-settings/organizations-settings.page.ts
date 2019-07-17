@@ -63,7 +63,7 @@ export class OrganizationsSettingsPage implements OnInit {
     }
 
     ngOnInit() {
-        this.getRole();
+        this.role = this.usersService.getTokenRoleIndex();
         if (this.role != 3) {
             this.navCtrl.navigateRoot('not-found').catch(error => console.error(error));
         }
@@ -81,16 +81,16 @@ export class OrganizationsSettingsPage implements OnInit {
             'address': [null, Validators.nullValidator],
             'phone': [null, Validators.compose([
                 Validators.required,
-                Validators.pattern('^[+0-9. ()-]*$')
+                Validators.pattern(Strings.Phone_Number_Pattern)
             ])],
             'website': [null, Validators.compose([
-                Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+                Validators.pattern(Strings.Website_Pattern)
               ])],
             'description': [null, Validators.nullValidator],
             'userId': this.usersService.getTokenId(),
             'email': [null, Validators.compose([
                 Validators.required,
-                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])]
+                Validators.pattern(Strings.Email_Pattern)])]
         });
         this.loadOrganization();
     }
@@ -189,20 +189,5 @@ export class OrganizationsSettingsPage implements OnInit {
         }, error1 => {
             console.log(error1);
         });
-    }
-
-    getRole() {
-        const role = this.usersService.getTokenRole();
-        if (role == 'Volunteer') {
-            this.role = 2;
-        } else if (role == 'Organization') {
-            this.role = 3;
-        } else if (role == 'Moderator') {
-            this.role = 1;
-        } else if (role == 'Admin') {
-            this.role = 0;
-        } else {
-            this.role = 4;
-        }
     }
 }

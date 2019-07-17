@@ -12,12 +12,16 @@ export class ModeratorsConsolePage implements OnInit {
   constructor(
     private usersService: UsersService,
     private navCtrl: NavController
-    ) { }
+  ) { }
 
   ngOnInit() {
-    const role = this.usersService.getTokenRole();
-    if(role != 1){
+    this.checkRole();
+  }
+
+  checkRole() {
+    /*const role = this.usersService.getTokenRole();
+    if (role != 1) {
       this.navCtrl.navigateRoot('not-found');
-    }
+    }*/
   }
 }

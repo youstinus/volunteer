@@ -107,7 +107,7 @@ export class ChangePasswordPage implements OnInit {
   }
 
   onSubmit() {
-    if(this.forgotPass){
+    if (this.forgotPass) {
       this.resetPassword();
     } else {
       this.changePassword();
@@ -149,5 +149,11 @@ export class ChangePasswordPage implements OnInit {
 
   goBack() {
     this.navCtrl.back();
+  }
+
+  checkErrors(): boolean {
+    return this.changePasswordForm.get('password').touched &&
+      this.changePasswordForm.get('password').errors &&
+      this.changePasswordForm.get('password').errors.ConfirmPassword;
   }
 }

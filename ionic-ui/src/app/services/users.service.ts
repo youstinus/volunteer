@@ -43,6 +43,21 @@ export class UsersService {
         return decoded.role;
     }
 
+    getTokenRoleIndex() {
+        const role = this.getTokenRole();
+        if (role == 'Volunteer') {
+            return 2;
+        } else if (role == 'Organization') {
+            return 3;
+        } else if (role == 'Moderator') {
+            return 1;
+        } else if (role == 'Admin') {
+            return 0;
+        } else {
+            return 4;
+        }
+    }
+
     public getTokenId() {
         const cookieValue = this.cookieService.get('Bearer');
         const decoded = this.helper.decodeToken(cookieValue);

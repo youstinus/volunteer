@@ -15,6 +15,7 @@ export class Lang {
     public menuSettings: string;
     public menuMenu: string;
     public menuLogout: string;
+    public menuExit: string;
     // Main page
     public mainTitle: string;
     public mainEvents: string;

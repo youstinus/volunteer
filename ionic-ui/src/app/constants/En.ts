@@ -18,6 +18,7 @@ export class En {
         menuSettings: 'Settings',
         menuMenu: 'Menu',
         menuLogout: 'Logout',
+        menuExit: 'Exit',
         // Main page
         mainTitle: 'Volunteering system',
         mainEvents: 'Upcoming events',

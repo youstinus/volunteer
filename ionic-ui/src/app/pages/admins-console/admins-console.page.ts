@@ -12,11 +12,15 @@ export class AdminsConsolePage implements OnInit {
   constructor(
     private usersService: UsersService,
     private navCtrl: NavController
-    ) { }
+  ) { }
 
   ngOnInit() {
+    this.checkRole();
+  }
+
+  checkRole() {
     const role = this.usersService.getTokenRole();
-    if(role != 0){
+    if (role != 0) {
       this.navCtrl.navigateRoot('not-found');
     }
   }

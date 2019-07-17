@@ -15,4 +15,7 @@ export class Strings {
     public static About_Page_Source3 = 'https://www.thebalancesmb.com/unexpected-benefits-of-volunteering-4132453';
     public static Video_Url_Google_Drive = 'https://drive.google.com/uc?authuser=0&id=1TuyGvPsiR63ybSS4Lxabt3pE9qiyQL64&export=download';
     public static About_Page_Image = 'https://broadviewthomsonpta.com/wp-content/uploads/2018/06/Volunteer.png';
+    public static Email_Pattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
+    public static Website_Pattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    public static Phone_Number_Pattern = '^[+0-9. ()-]*$';
 }

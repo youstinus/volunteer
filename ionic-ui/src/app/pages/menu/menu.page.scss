@@ -4,7 +4,6 @@ ion-menu {
   --min-width: 250px;
 }
 
-
 .split-pane-md.split-pane-visible>.split-pane-side {
   min-width: 250px;
   max-width: 250px;
@@ -13,6 +12,7 @@ ion-menu {
 ion-header.header-md ion-toolbar:first-child {
   padding-top: 0;
 }
+
 ion-item{
   --background:rgba(221, 231, 223, 0.26);
   --color: black;

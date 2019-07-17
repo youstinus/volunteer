@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { UsersService } from '../../services/users.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { Language } from 'src/app/utilities/Language';
 
 @Component({
@@ -14,6 +14,8 @@ export class MenuPage implements OnInit {
     private role: number = 4;
     menuMenu: string = Language.Lang.menuMenu;
     menuLogout: string = Language.Lang.menuLogout;
+    menuExit: string = Language.Lang.menuExit;
+    desktop: boolean = true;
 
     public pages = [
         {
@@ -104,7 +106,7 @@ export class MenuPage implements OnInit {
 
     selectedPath = '';
 
-    constructor(private router: Router, private usersService: UsersService, private navCtrl: NavController) {
+    constructor(private router: Router, private usersService: UsersService, private navCtrl: NavController, private platform: Platform) {
         this.router.events.subscribe((event: RouterEvent) => {
             this.selectedPath = event.url;
             this.getRole();
@@ -115,6 +117,7 @@ export class MenuPage implements OnInit {
 
     ngOnInit() {
         this.getRole();
+        this.getPlatform();
     }
 
     getRole() {
@@ -144,5 +147,17 @@ export class MenuPage implements OnInit {
         this.usersService.logout();
         this.getRole();
         this.navCtrl.navigateRoot('main').catch(reason => console.log('Error rerouting menu'));
+    }
+
+    getPlatform() {
+        if (this.platform.is('desktop')) {
+            this.desktop = true;
+        } else if (this.platform.is('ios') || this.platform.is('android')) {
+            this.desktop = false;
+        }
+    }
+
+    exitApp() {
+        navigator['app'].exitApp();
     }
 }

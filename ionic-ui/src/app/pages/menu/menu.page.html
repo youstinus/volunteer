@@ -1,5 +1,5 @@
-<ion-split-pane>
-  <ion-menu contentId="content" class="sidenav" enable-menu-with-back-views="true">
+<ion-split-pane disabled="true">
+  <ion-menu contentId="content">
     <ion-header>
       <ion-toolbar color="success">
         <ion-title>
@@ -19,6 +19,10 @@
           (click)="logout()">
           <ion-icon name="log-out" slot="start">{{menuLogout}}</ion-icon>
           <ion-label>{{menuLogout}}</ion-label>
+        </ion-item>
+        <ion-item lines="full" tappable routerLink="main" routerDirection="root" *ngIf="!desktop" (click)="exitApp()">
+          <ion-icon name="exit" slot="start">{{menuExit}}</ion-icon>
+          <ion-label>{{menuExit}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

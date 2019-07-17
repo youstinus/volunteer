@@ -52,10 +52,14 @@ export class AboutPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initialise();
+  }
+
+  initialise() {
     this.isMobile = this.getIsMobile();
     this.commentForm = this.formBuilder.group({
       'email': [null, Validators.compose([
-        Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.required, Validators.pattern(Strings.Email_Pattern)
       ])],
       'text': [null, Validators.compose([
         Validators.required

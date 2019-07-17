@@ -54,28 +54,27 @@
       <ion-card-title>{{aboutOpinion}}</ion-card-title>
     </ion-card-header>
     <form [formGroup]="commentForm" class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
+      <ion-item no-padding class="animated fadeInUp field1">
+        <ion-label position="floating" class="field2">
           <ion-icon name="mail" item-start></ion-icon>
           <!--mail tai cia simboliukas-->
           {{aboutEnterEmail}}
         </ion-label>
-        <ion-input type="email" formControlName="email" placeholder="email@ .... "></ion-input>
+        <ion-input type="email" formControlName="email" placeholder="info@example.com" class="field2"></ion-input>
       </ion-item>
-      <p ion-text class="text08"
-        *ngIf="commentForm.get('email').touched && commentForm.get('email').hasError('required')">
+      <p ion-text *ngIf="commentForm.get('email').touched && commentForm.get('email').hasError('required')">
         <ion-text class="error-message">
           {{aboutRequired}}
         </ion-text>
       </p>
-      &nbsp;
 
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
+      <ion-item no-padding class="animated fadeInUp field1">
+        <ion-label position="floating" class="field2">
           <ion-icon name="happy" item-start></ion-icon>
           {{aboutFeelFree}}
         </ion-label>
-        <ion-textarea rows="4" type="text" placeholder="{{aboutComment}} " formControlName="text"></ion-textarea>
+        <ion-textarea rows="4" type="text" placeholder="{{aboutComment}} " formControlName="text" class="field2">
+        </ion-textarea>
       </ion-item>
       <p ion-text color="warning" class="text08"
         *ngIf="commentForm.get('text').touched && commentForm.get('text').hasError('required')">
@@ -92,6 +91,5 @@
       </ion-button>
     </div>
   </ion-card>
-  &nbsp;
 </ion-content>
 <ion-spinner name="bubbles" class="spin" *ngIf="spin" color="secondary"></ion-spinner>
