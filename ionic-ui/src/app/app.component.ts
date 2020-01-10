@@ -31,8 +31,8 @@ export class AppComponent {
     });
   }
 
-  getLanguage() {        
-    let lang = this.cookieService.get('Lang');
+  getLanguage() {
+    const lang = this.cookieService.get('Lang');
     switch (lang) {
         case 'lt':
           Language.Lang = Lt.Lt;
@@ -43,6 +43,6 @@ export class AppComponent {
         default:
           Language.Lang = Lt.Lt;
           break;
-      }   
+      }
 }
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ToastService {
-    constructor(private toastController: ToastController){}
+    constructor(private toastController: ToastController) {}
 
     public async presentToast(message: string, color: string) {
         const toast = await this.toastController.create({

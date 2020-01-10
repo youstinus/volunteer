@@ -21,11 +21,11 @@ describe('ProjectsPage', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [HttpClientModule],
       providers: [
-        CookieService, 
+        CookieService,
         Location,
-        LocationStrategy, 
-        { provide: LocationStrategy, useClass: PathLocationStrategy }, 
-        { provide: APP_BASE_HREF, useValue: '.'}, 
+        LocationStrategy,
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
+        { provide: APP_BASE_HREF, useValue: '.'},
         {provide: ActivatedRoute, useValue: fakeActivatedRoute}
       ]
     })

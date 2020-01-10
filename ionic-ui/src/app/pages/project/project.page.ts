@@ -31,21 +31,21 @@ export class ProjectPage implements OnInit {
   projectGoBack: string = Language.Lang.projectGoBack;
   ClipBoard: string = Language.Lang.projectClipBoard;
   NewTab: string = Language.Lang.projectOpenInNewTab;
-  
+
   user: User = new User();
   project: Project;
   volunteer: Volunteer = new Volunteer();
   organization: Organization = new Organization();
-  newUrl: string = '';
-  role: number = 4;
+  newUrl = '';
+  role = 4;
   defaulUrl: string = Strings.Default_Image_Url3;
-  owner: boolean = false;
-  saved: boolean = false;
-  selected: boolean = false;
+  owner = false;
+  saved = false;
+  selected = false;
   id: number;
-  projectLocation: boolean = false;
-  isWebsiteNotEmpty: boolean = false;
-  isLocationNotEmpty: boolean = false;
+  projectLocation = false;
+  isWebsiteNotEmpty = false;
+  isLocationNotEmpty = false;
 
   constructor(
     private events: Events,
@@ -88,7 +88,7 @@ export class ProjectPage implements OnInit {
   }
 
   stringparse() {
-    let newurl: string = '';
+    let newurl = '';
     newurl += 'https://maps.google.com/maps?q=';
     if (this.project !== null && this.project.location !== null && this.project.location !== '') {
       newurl += this.project.location.replace(' ', '%20').replace(',', '%2C');
@@ -101,7 +101,7 @@ export class ProjectPage implements OnInit {
     return str === null || str.match(/^ *$/) !== null;
   }
   onSourceClicked(source: string) {
-    let url: string = '';
+    let url = '';
     if (!/^http[s]?:\/\//.test(source)) {
       url += 'http://';
     }
@@ -110,7 +110,7 @@ export class ProjectPage implements OnInit {
   }
 
   checkForProjects() {
-    //turetu patikrint ar jau pasirinkes projekta ar pridejes prie saved, kad matytusi lange
+    // turetu patikrint ar jau pasirinkes projekta ar pridejes prie saved, kad matytusi lange
     this.selected = false;
     this.saved = false;
     const id = this.usersService.getTokenId();
@@ -123,12 +123,13 @@ export class ProjectPage implements OnInit {
   }
 
   btnActivate(ionicButton) {
-    if (ionicButton.color === 'dark')
+    if (ionicButton.color === 'dark') {
       ionicButton.color = 'success';
-    else if (ionicButton.color == 'success')
+    } else if (ionicButton.color == 'success') {
       ionicButton.color = 'dark';
-    else
-      ionicButton.color = "success";
+         } else {
+      ionicButton.color = 'success';
+         }
   }
 
   isSelected(event) {
@@ -140,7 +141,7 @@ export class ProjectPage implements OnInit {
   navigateToEdit() {
     this.events.subscribe('user:updated', (onEditForm) => {
       // do something when updated data
-  
+
       this.project.title = onEditForm.title;
       this.project.imageUrl = onEditForm.imageUrl;
       this.project.description = onEditForm.description;
@@ -197,7 +198,7 @@ export class ProjectPage implements OnInit {
   }
 
   addToSaveList() {
-    //const userId = this.usersService.getTokenId();
+    // const userId = this.usersService.getTokenId();
     this.projectsService.addSavedProject(this.id).subscribe(value => {
       this.saved = true;
     }, error => {
@@ -238,7 +239,7 @@ export class ProjectPage implements OnInit {
     });
   }
   updateUrl(event) {
-    this.project.imageUrl = Strings.Default_Image_Url;//this.defaulUrl;
+    this.project.imageUrl = Strings.Default_Image_Url; // this.defaulUrl;
   }
 
   goToProjects() {

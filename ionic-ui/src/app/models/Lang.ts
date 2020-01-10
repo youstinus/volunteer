@@ -22,7 +22,7 @@ export class Lang {
     public mainWantedOrganizations: string;
     public mainStart: string;
     public mainIntroVideo: string;
-    //About us
+    // About us
     public aboutTitle: string;
     public aboutTitle2: string;
     public aboutParag1: string;
@@ -43,11 +43,11 @@ export class Lang {
     public aboutAlertCommentMessage: string;
     public aboutSourceHeader: string;
     public aboutSourceMessage: string;
-    //Alert cancel and comfirm
+    // Alert cancel and comfirm
     public alertCancel: string;
     public alertConfirm: string;
     public toastClose: string;
-    //Login page
+    // Login page
     public loginWelcome: string;
     public loginFieldset: string;
     public loginUsername: string;
@@ -63,7 +63,7 @@ export class Lang {
     public loginWrongHeader: string;
     public loginWrongMessage: string;
     public loginSuccessLogin: string;
-    //Registration page
+    // Registration page
     public registrationTitle: string;
     public registrationInformation: string;
     public registrationUsername: string;
@@ -84,12 +84,12 @@ export class Lang {
     public registrationSuccess: string;
     public registrationUsernameTaken: string;
     public registrationEmailTaken: string;
-    //Projects page
+    // Projects page
     public projectsSearch: string;
     public projectsArchive: string;
     public projectsNew: string;
     public projectsUntil: string;
-    //Project page
+    // Project page
     public projectEdit: string;
     public projectVolunteers: string;
     public projectFind: string;
@@ -104,7 +104,7 @@ export class Lang {
     public projectClipBoard: string;
     public projectOpenInNewTab: string;
 
-    //Volunteers page
+    // Volunteers page
     public volunteersHeader: string;
     public volunteersYourVolunteers: string;
     public volunteersAll: string;
@@ -112,13 +112,13 @@ export class Lang {
     public volunteersAnonymousName: string;
     public volunteersAnonymousLast: string;
     public volunteersGoBack: string;
-    //Modal volunteer
+    // Modal volunteer
     public modalVAnonymous: string;
     public modalVContatInfo: string;
     public modalNone: string;
     public modalVDescription: string;
     public modalClose: string;
-    //New project
+    // New project
     public newPojectHeader: string;
     public newPojectImage: string;
     public newPojectTitle: string;
@@ -134,7 +134,7 @@ export class Lang {
     public newPojectAlertNotMessage: string;
     public newPojectAlertOk: string;
     public newProjectFailedDates: string;
-    //Edit project
+    // Edit project
     public editProjectDelete: string;
     public editProjectAlertEditHeader: string;
     public editProjectAlertEditMessage: string;
@@ -149,7 +149,7 @@ export class Lang {
     public editConfirmDelete: string;
     public yes: string;
     public no: string;
-    //Copyright page
+    // Copyright page
     public cr1: string;
     public cr2: string;
     public cr3: string;
@@ -230,7 +230,7 @@ export class Lang {
     public changePassContain5: string;
     public changePassPassDontMatch: string;
 
-    //Organization settings page
+    // Organization settings page
     public orgSettingsHeader: string;
     public orgSettingsWebsite: string;
     public orgSettingsImage: string;
@@ -256,7 +256,7 @@ export class Lang {
     public orgCaution: string;
     public orgSuccessUpdate: string;
     public orgFailUpdate: string;
-    //Organization page
+    // Organization page
     public orgHeader: string;
     public orgGoToProject: string;
     public orgClipBoard: string;
@@ -268,7 +268,7 @@ export class Lang {
     public orgNoComments: string;
     public orgNoProjects: string;
     public orgsHeader: string;
-    //Not found page
+    // Not found page
     public notFoundh2: string;
     public notFoundpar: string;
     public notFoundGoMain: string;

@@ -10,11 +10,11 @@ import { Strings } from 'src/app/constants/Strings';
 })
 export class ModalVolunteerPage implements OnInit {
 
-  @Input("volname") volname;
-  @Input("volphone") volphone;
-  @Input("volemail") volemail;
-  @Input("voldescrip") voldescrip;
-  @Input("volPic") volPic;
+  @Input('volname') volname;
+  @Input('volphone') volphone;
+  @Input('volemail') volemail;
+  @Input('voldescrip') voldescrip;
+  @Input('volPic') volPic;
 
   defaulUrl: string = Strings.Default_Image_Url2;
 

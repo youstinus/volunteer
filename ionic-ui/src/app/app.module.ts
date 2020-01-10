@@ -25,7 +25,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
-        //JwtModule.forRoot({}),
+        // JwtModule.forRoot({}),
         AppRoutingModule,
         HttpClientModule,
         ComponentsModule
@@ -36,7 +36,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         CookieService,
         StreamingMedia,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-        //,{ provide: LocationStrategy, useClass: HashLocationStrategy }
+        // ,{ provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })

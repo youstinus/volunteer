@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-//import { safe} from './../../shared/safe.pipe';
+// import { safe} from './../../shared/safe.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Pipe, PipeTransform} from '@angular/core';
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule, HttpHandler } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
-import { HttpClientTestingModule,} from '@angular/common/http/testing';
+import { HttpClientTestingModule, } from '@angular/common/http/testing';
 
 describe('OrganizationPage', () => {
   let component: OrganizationPage;
@@ -24,7 +24,7 @@ describe('OrganizationPage', () => {
   } as ActivatedRoute;
 
 
-  
+
   @Pipe({ name: 'safe' })
   class SafePipe implements PipeTransform {
 
@@ -38,10 +38,10 @@ describe('OrganizationPage', () => {
       declarations: [ OrganizationPage, SafePipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, /*HttpClientModule,*/ RouterTestingModule, IonicModule, HttpClientTestingModule],
-      providers: [Location, LocationStrategy,//HttpHandler,
-        StreamingMedia,Language, CookieService,
+      providers: [Location, LocationStrategy, // HttpHandler,
+        StreamingMedia, Language, CookieService,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
+      { provide: APP_BASE_HREF, useValue: '.'},
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
      ]
     })

@@ -39,9 +39,9 @@ export class VolunteersSettingsPage implements OnInit {
     user: number;
     public onSaveForm: FormGroup;
     volunteer: Volunteer = new Volunteer();
-    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    defaulUrl = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
     backupImageUrl: string = this.defaulUrl;
-    role: number = 4;
+    role = 4;
 
     constructor(
         public toastCtrl: ToastController,
@@ -175,7 +175,7 @@ export class VolunteersSettingsPage implements OnInit {
     deleteUser() {
         this.usersService.delete(this.user).subscribe(value => {
             this.usersService.logout();
-            console.log("Volunteer deleted");
+            console.log('Volunteer deleted');
         }, error1 => {
             console.log(error1);
         });

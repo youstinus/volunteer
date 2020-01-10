@@ -44,8 +44,8 @@ export class OrganizationPage implements OnInit {
     volunteer: Volunteer;
     organization: Organization = new Organization();
     newUrl = '';
-    role: number = 4;
-    defaulUrl: string = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
+    role = 4;
+    defaulUrl = 'https://cdn.80000hours.org/wp-content/uploads/2012/11/AAEAAQAAAAAAAAUbAAAAJDZiMjcxZmViLTNkMzItNDhlNi1hZDg4LWM5NzI3MzA4NjMxYg.jpg';
 
     constructor(
         private organizationsService: OrganizationsService,
@@ -60,7 +60,7 @@ export class OrganizationPage implements OnInit {
 
 
     stringparse() {
-        let newurl: string = '';
+        let newurl = '';
         newurl += 'https://maps.google.com/maps?q=';
         if (this.organization !== null && this.organization.address !== null && this.organization.address !== '') {
             newurl += this.organization.address.replace(' ', '%20').replace(',', '%2C');
@@ -80,7 +80,7 @@ export class OrganizationPage implements OnInit {
             this.stringparse();
         },
             error1 => {
-                //console.log(error1);
+                // console.log(error1);
             });
 
         this.reviewsService.get().subscribe(value1 => {
@@ -89,14 +89,14 @@ export class OrganizationPage implements OnInit {
             this.del();
         },
             error1 => {
-                //console.log(error1);
+                // console.log(error1);
             });
 
         this.projectService.get().subscribe(value => {
             this.projects = value.filter(val => val.organizationId === this.userId);
 
         }, error1 => {
-            //console.log(error1);
+            // console.log(error1);
         });
 
         this.onCreateForm = this.formBuilder.group({
@@ -117,12 +117,12 @@ export class OrganizationPage implements OnInit {
     }
 
     async onCreate() {
-        //console.log(this.onCreateForm.value);
+        // console.log(this.onCreateForm.value);
         this.reviewsService.create(this.onCreateForm.value).subscribe(value => {
             this.createReview = value;
-            //console.log("Review created");
+            // console.log("Review created");
         }, error1 => {
-            //console.log(error1);
+            // console.log(error1);
         });
     }
 
@@ -153,7 +153,7 @@ export class OrganizationPage implements OnInit {
 
 
     onSourceClicked(source: string) {
-        let url: string = '';
+        let url = '';
         if (!/^http[s]?:\/\//.test(source)) {
             url += 'http://';
         }
@@ -211,7 +211,7 @@ export class OrganizationPage implements OnInit {
             const count = this.reviews.filter((x) => {
                 return x.organizationId === this.organization.id;
             });
-            var lngth = count.length;
+            const lngth = count.length;
             return sum / lngth;
         } else {
             return 0;
@@ -219,7 +219,7 @@ export class OrganizationPage implements OnInit {
     }
 
     del() {
-        for (var i = 0; i < this.reviews.length; i++) {
+        for (let i = 0; i < this.reviews.length; i++) {
             if (this.reviews[i].organizationId != this.id) {
                 this.reviews.splice(i, 1);
                 i--;
@@ -229,9 +229,9 @@ export class OrganizationPage implements OnInit {
 
     delReview(id) {
         this.reviewsService.delete(id).subscribe(value => {
-            //console.log("Review deleted");
+            // console.log("Review deleted");
         }, error1 => {
-            //console.log(error1);
+            // console.log(error1);
         });
     }
 

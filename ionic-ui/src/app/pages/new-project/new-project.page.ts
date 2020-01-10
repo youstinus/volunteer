@@ -31,7 +31,7 @@ export class NewProjectPage implements OnInit {
   newPojectAlertNotMessage: string = Language.Lang.newPojectAlertNotMessage;
   newPojectAlertOk: string = Language.Lang.newPojectAlertOk;
   newProjectFailedDates: string = Language.Lang.newProjectFailedDates;
-  toastClose: string= Language.Lang.toastClose;
+  toastClose: string = Language.Lang.toastClose;
 
   id: number;
   public onCreateForm: FormGroup;
@@ -81,7 +81,7 @@ export class NewProjectPage implements OnInit {
         Validators.required,
         Validators.pattern('^[+0-9. ()-]*$')
       ])],
-    },{
+    }, {
       validator: DateValidator.CheckDates
     });
   }

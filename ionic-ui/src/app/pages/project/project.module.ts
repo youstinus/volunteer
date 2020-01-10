@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProjectPage } from './project.page';
 import {ComponentsModule} from '../../shared/components.module';
-//import { Clipboard } from '@ionic-native/clipboard/ngx';
+// import { Clipboard } from '@ionic-native/clipboard/ngx';
 const routes: Routes = [
   {
     path: '',

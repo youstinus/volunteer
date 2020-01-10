@@ -28,6 +28,6 @@ const routes: Routes = [
     ComponentsModule
   ],
   declarations: [CalendarPage],
-  
+
 })
 export class CalendarPageModule {}

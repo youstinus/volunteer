@@ -41,15 +41,15 @@ export class OrganizationsSettingsPage implements OnInit {
     orgCaution: string = Language.Lang.orgCaution;
     orgSuccessUpdate: string = Language.Lang.orgSuccessUpdate;
     orgFailUpdate: string = Language.Lang.orgFailUpdate;
-    
-    caution: string="Pavadinimo, nuotraukos ir jūsų organizacijos el-paštas yra privalomi norint, kad jūsų organizacija būtų matoma organizacijų sąraše";
+
+    caution = 'Pavadinimo, nuotraukos ir jūsų organizacijos el-paštas yra privalomi norint, kad jūsų organizacija būtų matoma organizacijų sąraše';
 
     user: number;
     public onSaveForm: FormGroup;
     organization: Organization = new Organization();
-    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    defaulUrl = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
     backupImageUrl: string = this.defaulUrl;
-    role: number = 4;
+    role = 4;
 
     constructor(
         private toastCtrl: ToastController,
@@ -73,7 +73,7 @@ export class OrganizationsSettingsPage implements OnInit {
             this.navCtrl.navigateRoot('main').catch(e => console.log(e));
         }
         this.onSaveForm = this.formBuilder.group({
-            'imageUrl': [null, Validators.nullValidator],// gal reik det required, dar
+            'imageUrl': [null, Validators.nullValidator], // gal reik det required, dar
             'title': [null, Validators.compose([
                 Validators.minLength(3),
                 Validators.required,
@@ -94,7 +94,7 @@ export class OrganizationsSettingsPage implements OnInit {
         });
         this.loadOrganization();
     }
-    
+
     loadOrganization() {
         this.organizationService.getByUserId(this.user).subscribe(value => {
             this.organization = value;
@@ -185,7 +185,7 @@ export class OrganizationsSettingsPage implements OnInit {
     deleteUser() {
         this.usersService.delete(this.user).subscribe(value => {
             this.usersService.logout();
-            console.log("Organization deleted");
+            console.log('Organization deleted');
         }, error1 => {
             console.log(error1);
         });

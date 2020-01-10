@@ -75,11 +75,11 @@ export class AboutPage implements OnInit {
   }
 
   startVideo() {
-    let options: StreamingVideoOptions = {
+    const options: StreamingVideoOptions = {
       successCallback: () => { },
       errorCallback: () => { },
       orientation: 'landscape'
-    }
+    };
     this.streamingMediaOriginal.playVideo(Strings.Video_Url_Google_Drive, options);
   }
 
@@ -116,7 +116,7 @@ export class AboutPage implements OnInit {
         }, {
           text: Language.Lang.alertConfirm,
           handler: () => {
-            window.open(source, '_system')
+            window.open(source, '_system');
           }
         }
       ]
@@ -125,10 +125,10 @@ export class AboutPage implements OnInit {
   }
 
   sendEmail() {
-    let url = Strings.Send_Email_Address;
+    const url = Strings.Send_Email_Address;
 
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    let params: object = {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    const params: object = {
       to: Strings.Platypus_Email,
       subject: this.commentForm.value.email,
       content: this.commentForm.value.text
@@ -142,6 +142,6 @@ export class AboutPage implements OnInit {
       })
       .catch(err => {
         this.toastService.presentToast(this.emailWasNotSent, Strings.Color_Danger);
-      })
+      });
   }
 }

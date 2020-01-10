@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClientTestingModule,} from '@angular/common/http/testing';
+import { HttpClientTestingModule, } from '@angular/common/http/testing';
 import { VolunteersSettingsPage } from './volunteers-settings.page';
 
 describe('VolunteersSettingsPage', () => {
@@ -30,10 +30,10 @@ describe('VolunteersSettingsPage', () => {
       declarations: [ VolunteersSettingsPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, /*HttpClientModule,*/HttpClientTestingModule],
-      providers: [Location, LocationStrategy,//HttpHandler,
-        StreamingMedia,Language, 
+      providers: [Location, LocationStrategy, // HttpHandler,
+        StreamingMedia, Language,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
+      { provide: APP_BASE_HREF, useValue: '.'},
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
       CookieService, RouterTestingModule
           ]    })

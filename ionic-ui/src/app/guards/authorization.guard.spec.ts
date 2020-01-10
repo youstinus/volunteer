@@ -29,7 +29,7 @@ describe('AuthorizationGuard', () => {
         JwtHelper,
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: LocationStrategy, useClass: PathLocationStrategy },
-        { provide: APP_BASE_HREF, useValue: '.' },],
+        { provide: APP_BASE_HREF, useValue: '.' }, ],
       imports: [RouterTestingModule, IonicModule, HttpClientTestingModule]
     });
   });

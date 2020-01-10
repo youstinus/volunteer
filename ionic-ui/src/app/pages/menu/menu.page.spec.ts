@@ -24,10 +24,10 @@ describe('MenuPage', () => {
       declarations: [ MenuPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,
-        StreamingMedia,Language, 
+      providers: [Location, LocationStrategy, HttpHandler,
+        StreamingMedia, Language,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
+      { provide: APP_BASE_HREF, useValue: '.'},
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
       CookieService, RouterTestingModule
           ]    })

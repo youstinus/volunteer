@@ -58,8 +58,8 @@ export class ProjectEditPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    
+    const id = this.route.snapshot.params['id'];
+
     this.getProject(id);
 
     /*this.onEditForm.get('start').setValue(this.project.start);
@@ -138,7 +138,7 @@ export class ProjectEditPage implements OnInit {
         text: this.eYes, handler: () => {
           alert.dismiss().then(() => {
             this.deleteProject();
-          })
+          });
         }
       }, this.eNo]
     });

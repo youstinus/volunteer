@@ -1,152 +1,152 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../../services/users.service';
-import { User } from '../../models/User';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Language } from 'src/app/utilities/Language';
-import { Strings } from 'src/app/constants/Strings';
-import { ToastService } from 'src/app/shared/toast.service';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, NavController} from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UsersService} from '../../services/users.service';
+import {User} from '../../models/User';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {Language} from 'src/app/utilities/Language';
+import {Strings} from 'src/app/constants/Strings';
+import {ToastService} from 'src/app/shared/toast.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
 
-  menuLogin: string = Language.Lang.menuLogin;
-  loginWelcome: string = Language.Lang.loginWelcome;
-  loginFieldset: string = Language.Lang.loginFieldset;
-  loginUsername: string = Language.Lang.loginUsername;
-  loginPassword: string = Language.Lang.loginPassword;
-  loginForgot: string = Language.Lang.loginForgot;
-  loginButton: string = Language.Lang.loginButton;
-  loginNewHere: string = Language.Lang.loginNewHere;
-  loginSignUp: string = Language.Lang.loginSignUp;
-  loginResetPasswordMessage: string = Language.Lang.loginResetPasswordMessage;
-  loginRequiredField: string = Language.Lang.loginRequiredField;
-  loginSuccessfulEmail: string = Language.Lang.loginSuccessfulEmail;
-  loginUnSuccessfulEmail: string = Language.Lang.loginUnSuccessfulEmail;
-  loginWrongHeader: string = Language.Lang.loginWrongHeader;
-  loginWrongMessage: string = Language.Lang.loginWrongMessage;
-  loginSuccessLogin: string = Language.Lang.loginSuccessLogin;
-  toastClose: string = Language.Lang.toastClose;
+    menuLogin: string = Language.Lang.menuLogin;
+    loginWelcome: string = Language.Lang.loginWelcome;
+    loginFieldset: string = Language.Lang.loginFieldset;
+    loginUsername: string = Language.Lang.loginUsername;
+    loginPassword: string = Language.Lang.loginPassword;
+    loginForgot: string = Language.Lang.loginForgot;
+    loginButton: string = Language.Lang.loginButton;
+    loginNewHere: string = Language.Lang.loginNewHere;
+    loginSignUp: string = Language.Lang.loginSignUp;
+    loginResetPasswordMessage: string = Language.Lang.loginResetPasswordMessage;
+    loginRequiredField: string = Language.Lang.loginRequiredField;
+    loginSuccessfulEmail: string = Language.Lang.loginSuccessfulEmail;
+    loginUnSuccessfulEmail: string = Language.Lang.loginUnSuccessfulEmail;
+    loginWrongHeader: string = Language.Lang.loginWrongHeader;
+    loginWrongMessage: string = Language.Lang.loginWrongMessage;
+    loginSuccessLogin: string = Language.Lang.loginSuccessLogin;
+    toastClose: string = Language.Lang.toastClose;
 
-  public onLoginForm: FormGroup;
-  private user: User;
-  can: boolean = true;
+    public onLoginForm: FormGroup;
+    private user: User;
+    can = true;
 
-  constructor(
-    private navCtrl: NavController,
-    private alertCtrl: AlertController,
-    private formBuilder: FormBuilder,
-    private usersService: UsersService,
-    private http: HttpClient,
-    private toastService: ToastService
-  ) {
-  }
-
-  ngOnInit() {
-    this.initLoginForm();
-  }
-
-  initLoginForm() {
-    this.onLoginForm = this.formBuilder.group({
-      'username': [null, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])],
-      'password': [null, Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])]
-    });
-  }
-
-  onSignIn() {
-    this.usersService.login(this.onLoginForm.value).subscribe(user => {
-      this.user = user;
-      if (this.user != null && this.user.token != null) {
-        this.usersService.setUser(user);
-        this.toastService.presentToastClose(this.loginSuccessLogin, Strings.Color_Success, this.toastClose);
-        this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
-      } else {
-        this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger,this.toastClose);
-      }
-    }, error1 => {
-      this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger,this.toastClose);
-    });
-  }
-
-  async forgotPass() {
-    if (this.can) {
-      this.can = false;
-      const alert = await this.alertCtrl.create({
-        header: this.loginForgot,
-        message: this.loginResetPasswordMessage,
-        inputs: [
-          {
-            name: 'email',
-            type: 'email',
-            placeholder: 'Email'
-          }
-        ],
-        buttons: [
-          {
-            text: Language.Lang.alertCancel,
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {
-              console.log('Confirm Cancel');
-              this.can = true;
-            }
-          }, {
-            text: Language.Lang.alertConfirm,
-            handler: (data) => {
-              console.log(data.email);
-              this.sendEmail(data.email);
-            }
-          }
-        ]
-      });
-      await alert.present();
+    constructor(
+        private navCtrl: NavController,
+        private alertCtrl: AlertController,
+        private formBuilder: FormBuilder,
+        private usersService: UsersService,
+        private http: HttpClient,
+        private toastService: ToastService
+    ) {
     }
-  }
 
-  sendEmail(email: string) {
+    ngOnInit() {
+        this.initLoginForm();
+    }
 
-    let url = Strings.Send_Email_Address;
-    let linkParam = this.usersService.encodeResetMail(email);
-    let content = this.makeContent(linkParam);
+    initLoginForm() {
+        this.onLoginForm = this.formBuilder.group({
+            'username': [null, Validators.compose([
+                Validators.minLength(5),
+                Validators.required
+            ])],
+            'password': [null, Validators.compose([
+                Validators.minLength(5),
+                Validators.required
+            ])]
+        });
+    }
 
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    let params: object = {
-      to: email,
-      subject: Strings.Platypus_Email,
-      content: content
-    };
+    onSignIn() {
+        this.usersService.login(this.onLoginForm.value).subscribe(user => {
+            this.user = user;
+            if (this.user != null && this.user.token != null) {
+                this.usersService.setUser(user);
+                this.toastService.presentToastClose(this.loginSuccessLogin, Strings.Color_Success, this.toastClose);
+                this.navCtrl.navigateRoot('main').catch(reason => console.log('Error while signing in'));
+            } else {
+                this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger, this.toastClose);
+            }
+        }, error1 => {
+            this.toastService.presentToastClose(this.loginWrongMessage, Strings.Color_Danger, this.toastClose);
+        });
+    }
 
-    return this.http.post(url, params, { headers: headers })
-      .toPromise()
-      .then(res => {
-        this.forgotPass();
-        this.toastService.presentToast(this.loginSuccessfulEmail, Strings.Color_Success);
-        this.can = true;
-      })
-      .catch(err => {
-        this.toastService.presentToast(this.loginUnSuccessfulEmail, Strings.Color_Danger);
-        this.can = true;
-      })
-  }
+    async forgotPass() {
+        if (this.can) {
+            this.can = false;
+            const alert = await this.alertCtrl.create({
+                header: this.loginForgot,
+                message: this.loginResetPasswordMessage,
+                inputs: [
+                    {
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'Email'
+                    }
+                ],
+                buttons: [
+                    {
+                        text: Language.Lang.alertCancel,
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                            this.can = true;
+                        }
+                    }, {
+                        text: Language.Lang.alertConfirm,
+                        handler: (data) => {
+                            console.log(data.email);
+                            this.sendEmail(data.email);
+                        }
+                    }
+                ]
+            });
+            await alert.present();
+        }
+    }
 
-  goToRegister() {
-    this.navCtrl.navigateRoot('/registration').catch(error => console.log(error));
-  }
+    sendEmail(email: string) {
 
-  makeContent(linkParam: string) {
+        const url = Strings.Send_Email_Address;
+        const linkParam = this.usersService.encodeResetMail(email);
+        const content = this.makeContent(linkParam);
 
-    let template = `<!doctype html>
+        const headers = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        const params: object = {
+            to: email,
+            subject: Strings.Platypus_Email,
+            content: content
+        };
+
+        return this.http.post(url, params, {headers: headers})
+            .toPromise()
+            .then(res => {
+                this.forgotPass();
+                this.toastService.presentToast(this.loginSuccessfulEmail, Strings.Color_Success);
+                this.can = true;
+            })
+            .catch(err => {
+                this.toastService.presentToast(this.loginUnSuccessfulEmail, Strings.Color_Danger);
+                this.can = true;
+            });
+    }
+
+    goToRegister() {
+        this.navCtrl.navigateRoot('/registration').catch(error => console.log(error));
+    }
+
+    makeContent(linkParam: string) {
+
+        const template = `<!doctype html>
         <html>
           <head>
             <meta name="viewport" content="width=device-width" />
@@ -156,15 +156,15 @@ export class LoginPage implements OnInit {
               /* -------------------------------------
                   GLOBAL RESETS
               ------------------------------------- */
-              
+
               /*All the styling goes here*/
-              
+
               img {
                 border: none;
                 -ms-interpolation-mode: bicubic;
-                max-width: 100%; 
+                max-width: 100%;
               }
-        
+
               body {
                 background-color: #f6f6f6;
                 font-family: sans-serif;
@@ -174,9 +174,9 @@ export class LoginPage implements OnInit {
                 margin: 0;
                 padding: 0;
                 -ms-text-size-adjust: 100%;
-                -webkit-text-size-adjust: 100%; 
+                -webkit-text-size-adjust: 100%;
               }
-        
+
               table {
                 border-collapse: separate;
                 mso-table-lspace: 0pt;
@@ -185,61 +185,62 @@ export class LoginPage implements OnInit {
                 table td {
                   font-family: sans-serif;
                   font-size: 14px;
-                  vertical-align: top; 
+                  vertical-align: top;
               }
-        
+
               /* -------------------------------------
                   BODY & CONTAINER
               ------------------------------------- */
-        
+
               .body {
                 background-color: #f6f6f6;
-                width: 100%; 
+                width: 100%;
               }
-        
-              /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+
+              /* Set a max-width, and make it display as block so it will automatically
+              stretch to that width, but will also shrink down on a phone or something */
               .container {
                 display: block;
                 margin: 0 auto !important;
                 /* makes it centered */
                 max-width: 580px;
                 padding: 10px;
-                width: 580px; 
+                width: 580px;
               }
-        
+
               /* This should also be a block element, so that it will fill 100% of the .container */
               .content {
                 box-sizing: border-box;
                 display: block;
                 margin: 0 auto;
                 max-width: 580px;
-                padding: 10px; 
+                padding: 10px;
               }
-        
+
               /* -------------------------------------
                   HEADER, FOOTER, MAIN
               ------------------------------------- */
               .main {
                 background: #ffffff;
                 border-radius: 3px;
-                width: 100%; 
+                width: 100%;
               }
-        
+
               .wrapper {
                 box-sizing: border-box;
-                padding: 20px; 
+                padding: 20px;
               }
-        
+
               .content-block {
                 padding-bottom: 10px;
                 padding-top: 10px;
               }
-        
+
               .footer {
                 clear: both;
                 margin-top: 10px;
                 text-align: center;
-                width: 100%; 
+                width: 100%;
               }
                 .footer td,
                 .footer p,
@@ -247,9 +248,9 @@ export class LoginPage implements OnInit {
                 .footer a {
                   color: #999999;
                   font-size: 12px;
-                  text-align: center; 
+                  text-align: center;
               }
-        
+
               /* -------------------------------------
                   TYPOGRAPHY
               ------------------------------------- */
@@ -262,16 +263,16 @@ export class LoginPage implements OnInit {
                 font-weight: 400;
                 line-height: 1.4;
                 margin: 0;
-                margin-bottom: 30px; 
+                margin-bottom: 30px;
               }
-        
+
               h1 {
                 font-size: 35px;
                 font-weight: 300;
                 text-align: center;
-                text-transform: capitalize; 
+                text-transform: capitalize;
               }
-        
+
               p,
               ul,
               ol {
@@ -279,20 +280,20 @@ export class LoginPage implements OnInit {
                 font-size: 14px;
                 font-weight: normal;
                 margin: 0;
-                margin-bottom: 15px; 
+                margin-bottom: 15px;
               }
                 p li,
                 ul li,
                 ol li {
                   list-style-position: inside;
-                  margin-left: 5px; 
+                  margin-left: 5px;
               }
-        
+
               a {
                 color: #3498db;
-                text-decoration: underline; 
+                text-decoration: underline;
               }
-        
+
               /* -------------------------------------
                   BUTTONS
               ------------------------------------- */
@@ -302,12 +303,12 @@ export class LoginPage implements OnInit {
                 .btn > tbody > tr > td {
                   padding-bottom: 15px; }
                 .btn table {
-                  width: auto; 
+                  width: auto;
               }
                 .btn table td {
                   background-color: #ffffff;
                   border-radius: 5px;
-                  text-align: center; 
+                  text-align: center;
               }
                 .btn a {
                   background-color: #ffffff;
@@ -322,54 +323,54 @@ export class LoginPage implements OnInit {
                   margin: 0;
                   padding: 12px 25px;
                   text-decoration: none;
-                  text-transform: capitalize; 
+                  text-transform: capitalize;
               }
-        
+
               .btn-primary table td {
-                background-color: #3498db; 
+                background-color: #3498db;
               }
-        
+
               .btn-primary a {
                 background-color: #3498db;
                 border-color: #3498db;
-                color: #ffffff; 
+                color: #ffffff;
               }
-        
+
               /* -------------------------------------
                   OTHER STYLES THAT MIGHT BE USEFUL
               ------------------------------------- */
               .last {
-                margin-bottom: 0; 
+                margin-bottom: 0;
               }
-        
+
               .first {
-                margin-top: 0; 
+                margin-top: 0;
               }
-        
+
               .align-center {
-                text-align: center; 
+                text-align: center;
               }
-        
+
               .align-right {
-                text-align: right; 
+                text-align: right;
               }
-        
+
               .align-left {
-                text-align: left; 
+                text-align: left;
               }
-        
+
               .clear {
-                clear: both; 
+                clear: both;
               }
-        
+
               .mt0 {
-                margin-top: 0; 
+                margin-top: 0;
               }
-        
+
               .mb0 {
-                margin-bottom: 0; 
+                margin-bottom: 0;
               }
-        
+
               .preheader {
                 color: transparent;
                 display: none;
@@ -380,26 +381,26 @@ export class LoginPage implements OnInit {
                 overflow: hidden;
                 mso-hide: all;
                 visibility: hidden;
-                width: 0; 
+                width: 0;
               }
-        
+
               .powered-by a {
-                text-decoration: none; 
+                text-decoration: none;
               }
-        
+
               hr {
                 border: 0;
                 border-bottom: 1px solid #f6f6f6;
-                margin: 20px 0; 
+                margin: 20px 0;
               }
-        
+
               /* -------------------------------------
                   RESPONSIVE AND MOBILE FRIENDLY STYLES
               ------------------------------------- */
               @media only screen and (max-width: 620px) {
                 table[class=body] h1 {
                   font-size: 28px !important;
-                  margin-bottom: 10px !important; 
+                  margin-bottom: 10px !important;
                 }
                 table[class=body] p,
                 table[class=body] ul,
@@ -407,43 +408,43 @@ export class LoginPage implements OnInit {
                 table[class=body] td,
                 table[class=body] span,
                 table[class=body] a {
-                  font-size: 16px !important; 
+                  font-size: 16px !important;
                 }
                 table[class=body] .wrapper,
                 table[class=body] .article {
-                  padding: 10px !important; 
+                  padding: 10px !important;
                 }
                 table[class=body] .content {
-                  padding: 0 !important; 
+                  padding: 0 !important;
                 }
                 table[class=body] .container {
                   padding: 0 !important;
-                  width: 100% !important; 
+                  width: 100% !important;
                 }
                 table[class=body] .main {
                   border-left-width: 0 !important;
                   border-radius: 0 !important;
-                  border-right-width: 0 !important; 
+                  border-right-width: 0 !important;
                 }
                 table[class=body] .btn table {
-                  width: 100% !important; 
+                  width: 100% !important;
                 }
                 table[class=body] .btn a {
-                  width: 100% !important; 
+                  width: 100% !important;
                 }
                 table[class=body] .img-responsive {
                   height: auto !important;
                   max-width: 100% !important;
-                  width: auto !important; 
+                  width: auto !important;
                 }
               }
-        
+
               /* -------------------------------------
                   PRESERVE THESE STYLES IN THE HEAD
               ------------------------------------- */
               @media all {
                 .ExternalClass {
-                  width: 100%; 
+                  width: 100%;
                 }
                 .ExternalClass,
                 .ExternalClass p,
@@ -451,7 +452,7 @@ export class LoginPage implements OnInit {
                 .ExternalClass font,
                 .ExternalClass td,
                 .ExternalClass div {
-                  line-height: 100%; 
+                  line-height: 100%;
                 }
                 .apple-link a {
                   color: inherit !important;
@@ -459,17 +460,17 @@ export class LoginPage implements OnInit {
                   font-size: inherit !important;
                   font-weight: inherit !important;
                   line-height: inherit !important;
-                  text-decoration: none !important; 
+                  text-decoration: none !important;
                 }
                 .btn-primary table td:hover {
-                  background-color: #34495e !important; 
+                  background-color: #34495e !important;
                 }
                 .btn-primary a:hover {
                   background-color: #34495e !important;
-                  border-color: #34495e !important; 
-                } 
+                  border-color: #34495e !important;
+                }
               }
-        
+
             </style>
           </head>
           <body class="">
@@ -479,10 +480,10 @@ export class LoginPage implements OnInit {
                 <td>&nbsp;</td>
                 <td class="container">
                   <div class="content">
-        
+
                     <!-- START CENTERED WHITE CONTAINER -->
                     <table role="presentation" class="main">
-        
+
                       <!-- START MAIN CONTENT AREA -->
                       <tr>
                         <td class="wrapper">
@@ -498,7 +499,11 @@ export class LoginPage implements OnInit {
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                           <tbody>
                                             <tr>
-                                              <td> <a href="http://volunteering.ga/change-password/${linkParam}" target="_blank">Set new password</a> </td>
+                                              <td>
+                                              <a href="http://volunteering.ga/change-password/${linkParam}" target="_blank">
+                                              Set new password
+                                              </a>
+                                              </td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -512,11 +517,11 @@ export class LoginPage implements OnInit {
                           </table>
                         </td>
                       </tr>
-        
+
                     <!-- END MAIN CONTENT AREA -->
                     </table>
                     <!-- END CENTERED WHITE CONTAINER -->
-        
+
                     <!-- START FOOTER -->
                     <div class="footer">
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0">
@@ -533,7 +538,7 @@ export class LoginPage implements OnInit {
                       </table>
                     </div>
                     <!-- END FOOTER -->
-        
+
                   </div>
                 </td>
                 <td>&nbsp;</td>
@@ -542,6 +547,6 @@ export class LoginPage implements OnInit {
           </body>
         </html>
         `;
-    return template;
-  }
+        return template;
+    }
 }

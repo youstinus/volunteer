@@ -14,7 +14,7 @@ import { Language } from '../../utilities/Language';
 })
 export class OrganizationsPage implements OnInit {
     orgsHeader: string = Language.Lang.orgsHeader;
-    defaulUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+    defaulUrl = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
     public spin = true;
     organizations: Organization[];
 
@@ -26,8 +26,8 @@ export class OrganizationsPage implements OnInit {
             this.organizations = items.filter(function (value) {
                 if (value.imageUrl != null && value.imageUrl != '' && value.email != null && value.title != null) {
                     return true;
-                } else false;
-            }).map(function (value) { return value });
+                } else { false; }
+            }).map(function (value) { return value; });
             this.spin = false;
         },
             error1 => {

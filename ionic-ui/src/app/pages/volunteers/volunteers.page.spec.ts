@@ -11,7 +11,7 @@ import { ModalController, AngularDelegate, IonicModule } from '@ionic/angular';
 import { VolunteersService } from '../../services/volunteers.service';
 import { UsersService } from '../../services/users.service';
 import { Observable } from 'rxjs';
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder } from '@angular/forms';
 
 import { BaseService } from '../../services/base.service';
 import { ProjectsService } from 'src/app/services/projects.service';
@@ -29,7 +29,7 @@ describe('VolunteersPage', () => {
     TestBed.configureTestingModule({
       declarations: [VolunteersPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [HttpClientModule, RouterTestingModule, IonicModule,],
+      imports: [HttpClientModule, RouterTestingModule, IonicModule, ],
       providers: [CookieService, ModalController, AngularDelegate, VolunteersService, UsersService, BaseService, NavController,
         FormBuilder, NavController,
         { provide: ActivatedRoute, useValue: fakeActivatedRoute }, Location,

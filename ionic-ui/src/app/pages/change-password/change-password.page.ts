@@ -15,6 +15,14 @@ import { Strings } from 'src/app/constants/Strings';
 })
 export class ChangePasswordPage implements OnInit {
 
+  constructor(
+    private navCtrl: NavController,
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) { }
+
   changePassHeader: string = Language.Lang.changePassHeader;
   changePassFieldSet: string = Language.Lang.changePassFieldSet;
   changePassEnterUserEmail: string = Language.Lang.changePassEnterUserEmail;
@@ -31,18 +39,18 @@ export class ChangePasswordPage implements OnInit {
   emailWasNotSent: string = Language.Lang.toastEmailWasNotSent;
   emailWasSent: string = Language.Lang.toastEmailWasSent;
 
-  role: number = 4;
+  role = 4;
   public changePasswordForm: FormGroup;
   private resetParam: string;
   public forgotPass = false;
 
-  constructor(
-    private navCtrl: NavController,
-    private formBuilder: FormBuilder,
-    private usersService: UsersService,
-    private route: ActivatedRoute,
-    private toastService: ToastService
-  ) { }
+  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
+    const rv: { [key: string]: boolean } = {};
+    if (!c.value) {
+      rv['notChecked'] = true;
+    }
+    return rv;
+  }
 
   ngOnInit() {
     this.getRole();
@@ -77,14 +85,6 @@ export class ChangePasswordPage implements OnInit {
       });
   }
 
-  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
-    let rv: { [key: string]: boolean } = {};
-    if (!c.value) {
-      rv['notChecked'] = true;
-    }
-    return rv;
-  }
-
   getRole() {
     const role = this.usersService.getTokenRole();
     switch (role) {
@@ -115,7 +115,7 @@ export class ChangePasswordPage implements OnInit {
   }
 
   resetPassword() {
-    var passwords = this.changePasswordForm.value;
+    const passwords = this.changePasswordForm.value;
     if (passwords.password == passwords.password1) {
       this.usersService.updateByEmail(this.resetParam, passwords).subscribe(() => {
         this.toastService.presentToast(this.changePassChangedSuccess, Strings.Color_Success);

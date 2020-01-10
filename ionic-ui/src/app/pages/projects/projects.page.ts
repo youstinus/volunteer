@@ -29,7 +29,7 @@ export class ProjectsPage implements OnInit, OnDestroy {
     private dateNow = new Date(Date.now());
     private type: String;
     private subscription: Subscription;
-    private role: number = 4;
+    private role = 4;
 
     constructor(
         private usersService: UsersService,

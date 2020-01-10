@@ -15,7 +15,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./volunteers.page.scss'],
 })
 export class VolunteersPage implements OnInit {
-  
+
   volunteersHeader: string = Language.Lang.volunteersHeader;
   volunteersYourVolunteers: string = Language.Lang.volunteersYourVolunteers;
   volunteersAll: string = Language.Lang.volunteersAll;
@@ -69,16 +69,16 @@ export class VolunteersPage implements OnInit {
       });
     }, error1 => {
       console.log(error1);
-    })
+    });
   }
 
-  //https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
+  // https://www.youtube.com/watch?v=ACYu94hLg4I&fbclid=IwAR3gn6h6aPtArq1OhPTQMLIuB-NiPrgfAuGomAjara2oEvl3RxG1sj3Q--Y
   async onVolunteerClicked(volunteer: Volunteer) {
     console.log(volunteer);
     const myModal = await this.modal.create({
       component: ModalVolunteerPage,
       componentProps: {
-        volname: volunteer.firstName + " " + volunteer.lastName,
+        volname: volunteer.firstName + ' ' + volunteer.lastName,
         volphone: volunteer.phone,
         volemail: volunteer.email,
         voldescrip: volunteer.description,
@@ -90,5 +90,5 @@ export class VolunteersPage implements OnInit {
 
   goToProjects() {
     this.navCtrl.back();
-  }  
+  }
 }

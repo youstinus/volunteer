@@ -6,5 +6,5 @@ export class Language {
     public static Lang: Lang = Lt.Lt;
 
     constructor() {
-    }    
+    }
 }

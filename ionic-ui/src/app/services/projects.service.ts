@@ -44,7 +44,7 @@ export class ProjectsService extends BaseService<Project> {
     }
 
     public addSavedProject(id: number): Observable<any> {
-        const headers = this.getHeaders();        
+        const headers = this.getHeaders();
         return this.http.post<any>(`${this.api}/saved/add/${id}`, null, { headers: headers });
     }
 

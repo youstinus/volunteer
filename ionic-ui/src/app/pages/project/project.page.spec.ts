@@ -8,7 +8,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CookieService } from 'ngx-cookie-service';
-import { IonicModule,NavController, NavParams } from '@ionic/angular';
+import { IonicModule, NavController, NavParams } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -26,14 +26,14 @@ describe('ProjectPage', () => {
     TestBed.configureTestingModule({
       declarations: [ ProjectPage, SafePipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, //HttpClientModule,
+      imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, // HttpClientModule,
         HttpClientTestingModule],
-      providers: [Location, LocationStrategy,//HttpHandler,
-        StreamingMedia,Language, 
+      providers: [Location, LocationStrategy, // HttpHandler,
+        StreamingMedia, Language,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
+      { provide: APP_BASE_HREF, useValue: '.'},
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
-      //{provide: NavParams, useValue: NavParamsMock},
+      // {provide: NavParams, useValue: NavParamsMock},
       CookieService, RouterTestingModule,  NavController
           ]    })
     .compileComponents();
@@ -41,14 +41,14 @@ describe('ProjectPage', () => {
 
   class NavParamsMock {
     static returnParam = null;
+    static setParams(value) {
+      NavParamsMock.returnParam = value;
+    }
     public get(key): any {
       if (NavParamsMock.returnParam) {
-         return NavParamsMock.returnParam
+         return NavParamsMock.returnParam;
       }
       return 'default';
-    }
-    static setParams(value){
-      NavParamsMock.returnParam = value;
     }
   }
 
@@ -94,58 +94,58 @@ describe('ProjectPage', () => {
    it('should have a class member', () => {
     expect(component.projectGoBack).toBeDefined();
   });
-  it('should have a working function', () =>{
+  it('should have a working function', () => {
      expect(component.check).toBeTruthy();
   });
-  it('should have a working function', () =>{
+  it('should have a working function', () => {
     expect(component.checkForProjects).toBeTruthy();
  });
- it('should have a working function', () =>{
+ it('should have a working function', () => {
   expect(component.getRole).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.goToProjects).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.isEmptyOrSpaces).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.isSelected).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.navigateToEdit).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.navigateToVolunteers).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.ngOnInit).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.onEmailClicked).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.onPhoneClicked).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.onSourceClicked).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.removeFromSaveList).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.removeFromSelectedProjectS).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.setVolunteer).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.updateUrl).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.addToSaveList).toBeTruthy();
 });
-it('should have a working function', () =>{
+it('should have a working function', () => {
   expect(component.addToSelecteDProjectS).toBeTruthy();
 });
 

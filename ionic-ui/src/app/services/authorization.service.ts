@@ -17,10 +17,10 @@ export class AuthorizationService {
     }*/
 
     // get token from local storage or state management
-    //const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
     // decode token to read the payload details
-    //const decodeToken = this.jwtHelperService.decodeToken(token);
+    // const decodeToken = this.jwtHelperService.decodeToken(token);
 
     // check if it was decoded successfully, if not the token is not valid, deny access
     /*if (!decodeToken) {
@@ -29,6 +29,6 @@ export class AuthorizationService {
     }*/
 
     // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
-    //return allowedRoles.includes(decodeToken['role']);
+    // return allowedRoles.includes(decodeToken['role']);
   }
 }

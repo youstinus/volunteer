@@ -36,7 +36,7 @@ describe('ChangePasswordPage', () => {
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
       providers: [Location, LocationStrategy, HttpHandler, CookieService,
         StreamingMedia, Language, FormBuilder,
-        //{provide: NavController, useValue : routes },
+        // {provide: NavController, useValue : routes },
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         { provide: APP_BASE_HREF, useValue: '.' },
         { provide: ActivatedRoute, useValue: fakeActivatedRoute }

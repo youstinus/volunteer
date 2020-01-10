@@ -7,7 +7,7 @@ import { JwtHelper } from '../utilities/JwtHelper';
 import { CookieService } from 'ngx-cookie-service';
 import SimpleCrypto from '../utilities/SimpleCrypto';
 import { Strings } from '../constants/Strings';
-//import SimpleCrypto from 'simple-crypto-js';
+// import SimpleCrypto from 'simple-crypto-js';
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +19,8 @@ export class UsersService {
     private role: number;
     private id: number;
     private helper = new JwtHelper();
-    //private secretPass = 's6v=e4d6%)2g.;5v/'; // todo put to environment variables
-    //private simpleCrypto = new SimpleCrypto(this.secretPass);
+    // private secretPass = 's6v=e4d6%)2g.;5v/'; // todo put to environment variables
+    // private simpleCrypto = new SimpleCrypto(this.secretPass);
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
@@ -143,7 +143,7 @@ export class UsersService {
 
     // remove. cannot be used inside front-end
     /*public decodeResetMail(encrypted: string) {
-        let message = atob(encrypted);  
+        let message = atob(encrypted);
         let decrypted = this.decrypt2(message).toString();
         return decrypted;
     }*/
@@ -201,11 +201,11 @@ export class UsersService {
 
 
     public encrypt2(text) {
-        var CryptoJS = require("crypto-js");
-        var key = CryptoJS.enc.Utf8.parse(Strings.Encryption_Key);
-        var iv = CryptoJS.enc.Utf8.parse(Strings.Encryption_Iv);
-        var encoded = CryptoJS.enc.Utf8.parse(text);
-        var ciphertext = CryptoJS.TripleDES.encrypt(encoded, key, { mode: CryptoJS.mode.CBC, iv: iv });
+        const CryptoJS = require('crypto-js');
+        const key = CryptoJS.enc.Utf8.parse(Strings.Encryption_Key);
+        const iv = CryptoJS.enc.Utf8.parse(Strings.Encryption_Iv);
+        const encoded = CryptoJS.enc.Utf8.parse(text);
+        const ciphertext = CryptoJS.TripleDES.encrypt(encoded, key, { mode: CryptoJS.mode.CBC, iv: iv });
 
         return ciphertext.toString();
     }

@@ -15,6 +15,14 @@ import { ToastService } from 'src/app/shared/toast.service';
 })
 export class RegistrationPage implements OnInit {
 
+  constructor(
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private toastService: ToastService
+  ) { }
+
   register: string = Language.Lang.menuRegistration;
   registrationTitle: string = Language.Lang.registrationTitle;
   registrationInformation: string = Language.Lang.registrationInformation;
@@ -42,13 +50,13 @@ export class RegistrationPage implements OnInit {
   public onRegisterForm: FormGroup;
   public matching_passwords_group: FormGroup;
 
-  constructor(
-    private navCtrl: NavController,
-    private loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder,
-    private usersService: UsersService,
-    private toastService: ToastService
-  ) { }
+  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
+    const rv: { [key: string]: boolean } = {};
+    if (!c.value) {
+      rv['notChecked'] = true;
+    }
+    return rv;
+  }
 
   ngOnInit() {
     this.onRegisterForm = this.formBuilder.group({
@@ -79,14 +87,6 @@ export class RegistrationPage implements OnInit {
       });
   }
 
-  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
-    let rv: { [key: string]: boolean } = {};
-    if (!c.value) {
-      rv['notChecked'] = true;
-    }
-    return rv;
-  }
-
   async signUp() {
 
     const loader = await this.loadingCtrl.create({
@@ -98,29 +98,29 @@ export class RegistrationPage implements OnInit {
       this.usersService.register(this.onRegisterForm.value).subscribe(user => {
         this.user = user;
         if (this.user != null) {
-          this.toastService.presentToastClose(this.registrationSuccess, Strings.Color_Success,this.toastClose);
+          this.toastService.presentToastClose(this.registrationSuccess, Strings.Color_Success, this.toastClose);
           this.navCtrl.navigateForward('login').catch(reason => console.log('Failed to move to login page'));
         } else {
-          this.toastService.presentToastClose(this.registrationFailed, Strings.Color_Danger,this.toastClose);
+          this.toastService.presentToastClose(this.registrationFailed, Strings.Color_Danger, this.toastClose);
         }
       }, error1 => {
         const reason = this.getReason(error1.error);
-        this.toastService.presentToastClose(this.registrationFailed + '. ' + reason, Strings.Color_Danger,this.toastClose);
+        this.toastService.presentToastClose(this.registrationFailed + '. ' + reason, Strings.Color_Danger, this.toastClose);
       });
     });
   }
 
   getReason(error: string) {
-    if(error.includes('Username')){
+    if (error.includes('Username')) {
       return this.registrationUsernameTaken;
     }
-    if(error.includes('Email')){
+    if (error.includes('Email')) {
       return this.registrationEmailTaken;
     }
   }
 
   conditions() {
-    window.open('privacy', '_system')
+    window.open('privacy', '_system');
   }
 
   goToLogin() {

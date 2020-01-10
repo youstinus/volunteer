@@ -28,8 +28,8 @@ describe('RegistrationPage', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
         ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-        
-        
+
+
         ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule, ],
       providers: [Location, LocationStrategy, HttpHandler,
         StreamingMedia, Language,

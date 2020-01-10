@@ -11,11 +11,11 @@ import { Language } from 'src/app/utilities/Language';
 })
 export class MenuPage implements OnInit {
 
-    private role: number = 4;
+    private role = 4;
     menuMenu: string = Language.Lang.menuMenu;
     menuLogout: string = Language.Lang.menuLogout;
     menuExit: string = Language.Lang.menuExit;
-    desktop: boolean = true;
+    desktop = true;
 
     public pages = [
         {

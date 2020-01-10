@@ -25,7 +25,7 @@ export class Lt {
         mainWantedOrganizations: 'Populiariausios organizacijos',
         mainStart: 'Pradžia',
         mainIntroVideo: 'Apie sistemą',
-        //About us page
+        // About us page
         aboutTitle: 'Trumpai apie mus',
         aboutParag1: 'Platypus kiekvienam suteikia galimybę pasinerti į bendruomenę, dirbti kartu su vietos lyderiais ir spręsti svarbiausius iššūkius Lietuvoje. Mūsų misija - padėti organizacijoms visoje Lietuvoje, suteikiant jiems darbo jėgos ir lėšų, reikalingų kovoti su iššūkiais, su kuriais susiduria mūsų apskrities bendruomenės. Mes tikimės:',
         aboutParag2: 'padėti organizacijoms, kurios tiesiogiai ar netiesiogiai paveikė žmonių gyvenimus',
@@ -47,11 +47,11 @@ export class Lt {
         aboutSourceHeader: 'Norite sužinoti daugiau?',
         aboutSourceMessage: 'Paspauskite \'sutinku\' ir nuoroda atsidarys naujame lange',
 
-        //Alert cancel and comfirm
+        // Alert cancel and comfirm
         alertCancel: 'Atšaukti',
         alertConfirm: 'Sutikti',
         toastClose: 'Uždaryti',
-        //Login page
+        // Login page
         loginWelcome: 'Sveiki!',
         loginFieldset: 'Prisijunkite',
         loginUsername: 'Vartotojo vardas',
@@ -66,8 +66,8 @@ export class Lt {
         loginUnSuccessfulEmail: 'Laiško nepavyko išsiųsti',
         loginWrongHeader: 'Prisijungti nepavyko',
         loginWrongMessage: 'Neteisingi prisijungimo vardas ir slaptažodis!',
-        loginSuccessLogin:'Sėkmingai prisijungėte svetainėje',
-        //Registration page
+        loginSuccessLogin: 'Sėkmingai prisijungėte svetainėje',
+        // Registration page
         registrationTitle: 'Susikurkite vartotojo paskyrą',
         registrationInformation: 'Jūsų informacija',
         registrationUsername: 'Vartotojo vardas',
@@ -88,12 +88,12 @@ export class Lt {
         registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
         registrationEmailTaken: 'Šis el. paštas jau paimtas!',
         registrationUsernameTaken: 'Šis vartotojo vardas jau paimtas!',
-        //Projects page
+        // Projects page
         projectsSearch: 'Paieška',
         projectsArchive: 'ARCHYVAS',
         projectsNew: 'NAUJI PROJEKTAI',
         projectsUntil: 'until',
-        //Project page
+        // Project page
         projectEdit: 'Redaguoti projektą',
         projectVolunteers: 'Savanoriai',
         projectFind: 'Mus rasite',
@@ -107,7 +107,7 @@ export class Lt {
         projectHeader: 'Projekto puslapis',
         projectOpenInNewTab: 'Atidaryti naujame lange',
         projectClipBoard: 'Nukopijuoti į iškarpinę',
-        //Volunteers page
+        // Volunteers page
         volunteersHeader: 'Savanorių puslpapis',
         volunteersYourVolunteers: 'Jūsų projekto savanoriai',
         volunteersAll: 'Visi užsiregistravę vartotojai',
@@ -115,13 +115,13 @@ export class Lt {
         volunteersAnonymousName: 'Anoniminis ',
         volunteersAnonymousLast: 'vartotojas',
         volunteersGoBack: 'Grįžti',
-        //Modal volunteer
+        // Modal volunteer
         modalVAnonymous: 'Anoniminis vartotojas',
         modalVContatInfo: 'Kontaktinė informacija',
         modalNone: 'Nėra informacijos',
         modalVDescription: 'Aprašymas apie veiklas',
         modalClose: 'Uždaryti',
-        //New project
+        // New project
         newPojectHeader: 'Naujas projektas',
         newPojectImage: 'Projekto paveikslėlis',
         newPojectTitle: 'Pavadinimas',
@@ -137,7 +137,7 @@ export class Lt {
         newPojectAlertNotMessage: 'Prašome užpildykite tuščius laukus',
         newPojectAlertOk: 'Gerai',
         newProjectFailedDates: 'Jūsų projekto pabaigos data yra ankstesnė nei pradžios',
-        //Edit project
+        // Edit project
         editProjectDelete: 'Ištrinti',
         editProjectAlertEditHeader: 'Atnaujinimas nepavyko',
         editProjectAlertEditMessage: 'Prašome užpildyti tuščius laukelius',
@@ -152,8 +152,8 @@ export class Lt {
         editConfirmDelete: 'Ar tikrai norite ištrinti šį projektą?',
         yes: 'Taip',
         no: 'Ne',
-        //registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
-        //Copyright
+        // registrationSuccess: 'Vartotojas sėkmingai priregistruotas',
+        // Copyright
         cr1: 'Privatumo politika',
         cr2: 'Ši privatumo politika apibūdina, kaip volunteering.ga naudoja ir saugo bet kokią mums suteiktą informaciją. Esame įsipareigoję užtikrinti, kad jūsų privatumas būtų apsaugotas. Jei pateikiate mums asmeninę informaciją per volunteering.ga, galite būti tikri, kad ji bus naudojama tik pagal šį privatumo pareiškimą.',
         cr3: 'Svetainės lankytojai',
@@ -219,7 +219,7 @@ export class Lt {
         volSettingsChangePass: 'Pakeisti slaptažodį',
         volSettingsDeleteAcc: 'Ištrinti paskyrą',
         volSettingsCannotGetVolunteer: 'Negalime užkrauti Jūsų duomenų iš duomenų bazės',
-        //Change-password page
+        // Change-password page
         changePassHeader: 'PASIKEISKITE SLAPTAŽODĮ',
         changePassFieldSet: 'Reikalinga informacija ',
         changePassEnterUserEmail: 'Įveskite vartotojo el-paštą',
@@ -272,7 +272,7 @@ export class Lt {
         orgNoComments: ' Komentarų nėra',
         orgNoProjects: 'Projektų nėra',
         orgsHeader: 'Organizacijos',
-        //Not found page
+        // Not found page
         notFoundh2: ' Puslapis nerastas',
         notFoundpar: 'Puslapis, kurio ieškote, nerastas. Galbūt jis buvo ištrintas, pasikeitė jo pavadinimas arba jis tapo laikinai neprieinamas',
         notFoundGoMain: 'Grįžkite į pagrindinį puslapį',
@@ -289,5 +289,5 @@ export class Lt {
         calFrom: 'Nuo',
         calTo: 'Iki',
         calToday: 'Šiandien'
-    }
+    };
 }

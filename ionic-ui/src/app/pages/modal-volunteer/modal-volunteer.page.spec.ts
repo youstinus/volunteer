@@ -8,7 +8,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { Language } from 'src/app/utilities/Language';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CookieService } from 'ngx-cookie-service';
-import { IonicModule,NavController, NavParams } from '@ionic/angular';
+import { IonicModule, NavController, NavParams } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ModalVolunteerPage } from './modal-volunteer.page';
@@ -25,10 +25,10 @@ describe('ModalVolunteerPage', () => {
       declarations: [ ModalVolunteerPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ReactiveFormsModule, RouterTestingModule, IonicModule, HttpClientModule],
-      providers: [Location, LocationStrategy,HttpHandler,
-        StreamingMedia,Language, 
+      providers: [Location, LocationStrategy, HttpHandler,
+        StreamingMedia, Language,
       { provide: LocationStrategy, useClass: PathLocationStrategy },
-      { provide: APP_BASE_HREF, useValue: '.'}, 
+      { provide: APP_BASE_HREF, useValue: '.'},
       {provide: ActivatedRoute, useValue: fakeActivatedRoute},
       {provide: NavParams, useValue: NavParamsMock},
       CookieService, RouterTestingModule,  NavController
@@ -38,14 +38,14 @@ describe('ModalVolunteerPage', () => {
 
   class NavParamsMock {
     static returnParam = null;
+    static setParams(value) {
+      NavParamsMock.returnParam = value;
+    }
     public get(key): any {
       if (NavParamsMock.returnParam) {
-         return NavParamsMock.returnParam
+         return NavParamsMock.returnParam;
       }
       return 'default';
-    }
-    static setParams(value){
-      NavParamsMock.returnParam = value;
     }
   }
   beforeEach(() => {

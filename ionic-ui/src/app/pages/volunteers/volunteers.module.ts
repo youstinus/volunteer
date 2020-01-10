@@ -22,7 +22,7 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        ComponentsModule, 
+        ComponentsModule,
         ModalVolunteerPageModule,
         RouterModule.forChild([{path: '', component: VolunteersPage}])
     ],

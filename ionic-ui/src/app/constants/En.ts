@@ -25,7 +25,7 @@ export class En {
         mainWantedOrganizations: 'Most wanted organizations',
         mainStart: 'Starts',
         mainIntroVideo: 'About system',
-        //About us page
+        // About us page
         aboutTitle: 'Shortly about us',
         aboutParag1: 'Platypus offers anyone an opportunity to immerse themselves in a community, working side by side with local leaders and tackle the most pressing challenges in Lithuania. Our mission is to help organizations all over Lithuania by providing them with manpower and funds needed in order to combat challenges facing our county‘s communities. We hope:',
         aboutParag2: 'give something back to an organisation that has impacted on a person\'s life, either directly or indirectly',
@@ -47,11 +47,11 @@ export class En {
         aboutSourceHeader: 'Want to know more?',
         aboutSourceMessage: 'Click confirm if you want to navigate to this page in a new tab',
 
-        //Alert cancel and comfirm
+        // Alert cancel and comfirm
         alertCancel: 'Cancel',
         alertConfirm: 'Confirm',
         toastClose: 'Close',
-        //Login page
+        // Login page
         loginWelcome: 'Welcome!',
         loginFieldset: 'Log in',
         loginUsername: 'Username',
@@ -67,7 +67,7 @@ export class En {
         loginWrongHeader: 'Something went wrong',
         loginWrongMessage: 'Invalid username or password!',
         loginSuccessLogin: 'Successfuly signed in',
-        //Registration page
+        // Registration page
         registrationTitle: 'Register to our page',
         registrationInformation: 'Your information',
         registrationUsername: 'Username',
@@ -88,12 +88,12 @@ export class En {
         registrationSuccess: 'User was registered successfully',
         registrationEmailTaken: 'This email is already taken!',
         registrationUsernameTaken: 'This username is already taken!',
-        //Projects page
+        // Projects page
         projectsSearch: 'Search',
         projectsArchive: 'ARCHIVE',
         projectsNew: 'NEW PROJECTS',
         projectsUntil: 'until',
-        //Project page
+        // Project page
         projectEdit: 'Edit project',
         projectVolunteers: 'Volunteers',
         projectFind: 'Find us at',
@@ -107,7 +107,7 @@ export class En {
         projectHeader: 'Project page',
         projectOpenInNewTab: 'Open in new tab',
         projectClipBoard: 'Copy to clipboard',
-        //Volunteers page
+        // Volunteers page
         volunteersHeader: 'Volunteers page',
         volunteersYourVolunteers: 'Your project volunteers',
         volunteersAll: 'All registered users',
@@ -115,13 +115,13 @@ export class En {
         volunteersAnonymousName: 'Anonymous',
         volunteersAnonymousLast: 'user',
         volunteersGoBack: 'Go back',
-        //Modal volunteer
+        // Modal volunteer
         modalVAnonymous: 'Anonymous user',
         modalVContatInfo: 'Contact information',
         modalNone: 'None',
         modalVDescription: 'Description about activities',
         modalClose: 'Close',
-        //New project
+        // New project
         newPojectHeader: 'New project',
         newPojectImage: 'Project image',
         newPojectTitle: 'Title',
@@ -137,7 +137,7 @@ export class En {
         newPojectAlertNotMessage: 'Please, fill in empty gaps',
         newPojectAlertOk: 'Project created successfully',
         newProjectFailedDates: 'Your end date is earlier than your start date',
-        //Edit project
+        // Edit project
         editProjectDelete: 'DELETE',
         editProjectAlertEditHeader: 'Update failed',
         editProjectAlertEditMessage: 'Please, fill in an empty gaps',
@@ -152,8 +152,8 @@ export class En {
         editConfirmDelete: 'Are you sure want to delete this project?',
         yes: 'Yes',
         no: 'No',
-        //registrationSuccess: 'User was registered successfully',
-        //copyright
+        // registrationSuccess: 'User was registered successfully',
+        // copyright
         cr1: 'Privacy Policy',
         cr2: 'volunteering.ga website refers to site hosted on the volunteering.ga. This privacy policy describes how volunteering.ga uses and protects any information that you give us. We are committed to ensuring that your privacy is protected. If you provide us with personal information through volunteering.ga, you can be assured that it will only be used in accordance with this privacy statement.',
         cr3: 'Website Visitors',
@@ -219,7 +219,7 @@ export class En {
         volSettingsChangePass: 'Change password',
         volSettingsDeleteAcc: 'Delete account',
         volSettingsCannotGetVolunteer: 'Cannot get volunteer from database',
-        //Change-password page
+        // Change-password page
         changePassHeader: 'RESET YOUR PASSWORD',
         changePassFieldSet: 'Needed information',
         changePassEnterUserEmail: 'Enter user email',
@@ -271,7 +271,7 @@ export class En {
         orgNoComments: ' No comments yet',
         orgNoProjects: 'No projects yet',
         orgsHeader: 'Organizations',
-        //Not found page
+        // Not found page
         notFoundh2: ' Page not found',
         notFoundpar: 'The page you are looking for might have been removed, had its name changed or is temporarily unavailable',
         notFoundGoMain: 'Go To Main Page',
@@ -288,5 +288,5 @@ export class En {
         calFrom: 'From',
         calTo: 'To',
         calToday: 'Today'
-    }
+    };
 }
