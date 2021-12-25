@@ -82,7 +82,7 @@
   "devDependencies": {
     "@angular/cli": "7.2.4",
     "@types/crypto-js": "^3.1.43",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.1"
   },
   "description": "Volunteering platform",
   "cordova": {
